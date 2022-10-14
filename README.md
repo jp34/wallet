@@ -25,10 +25,6 @@ and provide uniform and complete medical documents to disease state researchers.
 
   > Listens to events from decentralized services supporting Ethereum and IPFS
 
-### System Design
-
-![System Design](https://github.com/Healthcare-Wallet/wallet/main/system.png)
-
 ### Developers
 * Joe Kadlic
 * Nathan Sivak

@@ -1,68 +1,86 @@
 
-CREATE DATABASE HealthcareWallet OWNER postgres;
+drop database if exists HealthcareWallet;
 
-/*  DOMAIN: Accounts
-    PURPOSE: Groups JustBe account with Ethereum account used to conduct transactions.
+create database HealthcareWallet owner postgres;
 
-*/
+-- Providers Table
+create table Providers (
+	ProviderID		SERIAL			primary key
+,	ProviderName	VARCHAR(255)	not null
+,	phone			VARCHAR(25)		not null
+);	
 
-CREATE TABLE Accounts (
-    AccountID           VARCHAR(20)     PRIMARY KEY,
-    EthAccountAddress   VARCHAR(50)     NOT NULL        UNIQUE,
-    Email               VARCHAR(50)     NOT NULL        UNIQUE,
-    Password            VARCHAR(50)     NOT NULL
+-- Patients Table
+create table Patients (
+	PatientID	BIGSERIAL 		primary key
+,	FirstName	VARCHAR(255)	NOT NULL
+,	MiddleName	VARCHAR(255)	
+,	LastName	VARCHAR(255)	not null
+,	Phone		VARCHAR(25)		
+,	BirthDate	DATE			not null
+, 	ProviderID	SERIAL			not null	
+,	foreign key (ProviderID) references Providers (ProviderID)
 );
 
-/*  DOMAIN: Patients
-    PURPOSE: 
-*/
-
-CREATE TABLE Patients (
-    AccountID           VARCHAR(20)     PRIMARY KEY     REFERENCES Accounts,
-    FirstName           VARCHAR(20)     NOT NULL,
-    MiddleName          VARCHAR(20)     NOT NULL,
-    LastName            VARCHAR(20)     NOT NULL,
-    Phone               VARCHAR(12)     NOT NULL        UNIQUE,
-    Birthdate           DATE            NOT NULL,
-    ProviderID          VARCHAR(20)     NOT NULL        REFERENCES Providers
+-- Accounts Table
+create table Accounts (
+	AccountID	BIGSERIAL 		primary key
+,	PatientID	BIGSERIAL		not null
+,	ENS_Account	VARCHAR(100)	not null
+,	Email		VARCHAR(255)	not null
+,	Password	VARCHAR(255)	not null
+,	foreign key (PatientID) references Patients (PatientID)
 );
 
-CREATE TABLE PatientDiagnoses (
-    AccountID           VARCHAR(20)     NOT NULL        REFERENCES Patients,
-    ICD10               VARCHAR(20)     NOT NULL        REFERENCES Diagnoses,
-    DateDiagnosed       DATE            NOT NULL,
-    PRIMARY KEY         (AccountID, ICD10, DateDiagnosed)
+-- Transactions Table
+create table Transactions (
+	TransactionID	BIGSERIAL	primary key
+,	AccountID		BIGSERIAL	not null
+,	DateCreated		DATE		not null
+, 	foreign key (AccountID) references Accounts (AccountID)
 );
 
-/*  DOMAIN: Diagnoses
-    PURPOSE: Stores a record of a specific diagnosis identified by an ICD-10-CM or
-             ICD-10-PCS code
-*/
-
-CREATE TABLE Diagnoses (
-    ICD10               VARCHAR(20)     PRIMARY KEY,
-    DRG                 VARCHAR(20)     NOT NULL,
-    Name                TEXT            NOT NULL,
-    Description         TEXT            NOT NULL
+-- Documents Table
+create table Documents (
+	DocumentID		BIGSERIAL	primary key
+,	AccountID		BIGSERIAL	not null
+,	DateCreated		DATE		not null
+,	foreign key (AccountID) references Accounts (AccountID)
 );
 
-/*  DOMAIN: Transactions
-    PURPOSE: Stores a record of each transaction conducted by a patient over Ethereum
-*/
-
-CREATE TABLE Transactions (
-    TransactionID       VARCHAR(20)     PRIMARY KEY,
-    OwnerID             VARCHAR(20)     NOT NULL        REFERENCES Accounts,
-    DateCreated         DATE            NOT NULL
+-- RequiredInfo Table
+create table RequiredInfo (
+	ProviderID 		BIGSERIAL		not null
+,	DRG_CODE		VARCHAR(50)		not null
+,	RequiredInfo	VARCHAR(255)	not null
+, 	primary key (ProviderID, DRG_CODE)
 );
 
-/*  DOMAIN: Documents
-    PURPOSE: Stores a record of documents generated from patient information.
-             Should also include information about the NFT created with the document
-*/
-
-CREATE TABLE Documents (
-    DocumentID          VARCHAR(20)     PRIMARY KEY,
-    OwnerID             VARCHAR(20)     NOT NULL        REFERENCES Accounts,
-    DateCreated         DATE            NOT NULL
+-- Visits Table
+create table Visits (
+	VisitID		BIGSERIAL		primary key
+,	PatientID	BIGSERIAL		not null
+,	ICD10CM		VARCHAR(50)		not null
+,	ICD10PCS	VARCHAR(50)		not null
+,	DRG_CODE	VARCHAR(50)		not null
+,	Symptoms	VARCHAR(255)	not null
+,	DateOfVisit	DATE			not null
+,	Doctor		VARCHAR(255)	not null
+,	foreign key (PatientID) references Patients (PatientID)
 );
+
+-- Diseases Table
+create table Diseases (
+	DiseaseID		BIGSERIAL		primary key
+,	Name			VARCHAR(255)	not null
+,	PatientID		BIGSERIAL		not null
+,	VisitDiagnosed	BIGSERIAL		not null
+,	DateDiagnosed	DATE			not null
+,	DateCured		DATE
+,	foreign key (PatientID) references Patients (PatientID)
+,	foreign key (VisitDiagnosed) references Visits (VisitID)
+);
+
+
+
+

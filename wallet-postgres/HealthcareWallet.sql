@@ -1,7 +1,7 @@
 
-drop database if exists HealthcareWallet;
+drop database if exists wallet;
 
-create database HealthcareWallet owner postgres;
+create database wallet owner postgres;
 
 -- Providers Table
 create table Providers (

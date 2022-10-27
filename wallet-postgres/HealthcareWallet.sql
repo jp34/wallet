@@ -1,7 +1,25 @@
 
-drop database if exists HealthcareWallet;
+drop database if exists wallet;
+create database wallet with owner postgres;
 
-create database HealthcareWallet owner postgres;
+-- Providers Table
+create table Providers (
+	ProviderID		serial			primary key
+,	ProviderName	varchar(255)	not null
+,	phone			varchar(25)		not null
+);
+
+-- Patients Table
+create table Patients (
+	PatientID		bigserial 		primary key
+,	FirstName		varchar(255)	not null
+,	MiddleName		varchar(255)	
+,	LastName		varchar(255)	not null
+,	Phone			varchar(25)		
+,	BirthDate		date			not null
+, 	ProviderID		serial			not null	
+,	foreign key (ProviderID) references Providers (ProviderID)
+);
 
 -- Accounts Table
 create table Accounts (
@@ -11,25 +29,6 @@ create table Accounts (
 ,	Email			varchar(255)	not null
 ,	Password		varchar(255)	not null
 ,	foreign key (PatientID) references Patients (PatientID)
-);
-
--- Providers Table
-create table Providers (
-	ProviderID		serial			primary key
-,	ProviderName	varchar(255)	not null
-,	phone			varchar(25)		not null
-);	
-
--- Patients Table
-create table Patients (
-	PatientID		bigserial 		primary key
-,	FirstName		varchar(255)	NOT NULL
-,	MiddleName		varchar(255)	
-,	LastName		varchar(255)	not null
-,	Phone			varchar(25)		
-,	BirthDate		date			not null
-, 	ProviderID		serial			not null	
-,	foreign key (ProviderID) references Providers (ProviderID)
 );
 
 -- Transactions Table

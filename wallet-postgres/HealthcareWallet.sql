@@ -1,6 +1,6 @@
 
 drop database if exists wallet;
-create database wallet with owner postgres;
+create database wallet with owner = postgres;
 
 -- Providers Table
 create table Providers (

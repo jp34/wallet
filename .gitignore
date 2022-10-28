@@ -1,8 +1,12 @@
+
 # Node
 node_modules/
-.expo/
 package-lock.json
 babel.config.js
+
+# Expo
+.expo/
+.expo-shared/
 
 # macOS
 .DS_Store

@@ -8,5 +8,13 @@ babel.config.js
 .expo/
 .expo-shared/
 
+# Strapi
+dist/
+.editorconfig
+.env
+.env.example
+.strapi-updater.json
+favicon.png
+
 # macOS
 .DS_Store

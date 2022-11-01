@@ -7,16 +7,16 @@ create database wallet owner postgres;
 create table Providers (
 	ProviderID		SERIAL			primary key
 ,	ProviderName	VARCHAR(255)	not null
-,	phone			VARCHAR(25)		not null
+,	ProviderPhone	VARCHAR(25)		not null
 );	
 
 -- Patients Table
 create table Patients (
-	PatientID	BIGSERIAL 		primary key
-,	FirstName	VARCHAR(255)	NOT NULL
-,	MiddleName	VARCHAR(255)	
-,	LastName	VARCHAR(255)	not null
-,	Phone		VARCHAR(25)		
+	PatientID		BIGSERIAL 		primary key
+,	FirstName		VARCHAR(255)	NOT NULL
+,	MiddleName		VARCHAR(255)	
+,	LastName		VARCHAR(255)	not null
+,	Phone			VARCHAR(25)		
 ,	BirthDate	DATE			not null
 , 	ProviderID	SERIAL			not null	
 ,	foreign key (ProviderID) references Providers (ProviderID)
@@ -52,7 +52,7 @@ create table Documents (
 create table RequiredInfo (
 	ProviderID 		BIGSERIAL		not null
 ,	DRG_CODE		VARCHAR(50)		not null
-,	RequiredInfo	VARCHAR(255)	not null
+,	RequiredInfo	JSON			not null
 , 	primary key (ProviderID, DRG_CODE)
 );
 

@@ -12,16 +12,13 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "diagnosis_id": {
-      "type": "biginteger"
-    },
     "name": {
       "type": "string"
     },
-    "icd10": {
+    "code_icd10": {
       "type": "string"
     },
-    "drg": {
+    "code_drg": {
       "type": "string"
     },
     "patients": {

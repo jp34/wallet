@@ -4,6 +4,9 @@ node_modules/
 package-lock.json
 babel.config.js
 
+# Yarn
+.cache/
+
 # Expo
 .expo/
 .expo-shared/
@@ -14,7 +17,6 @@ dist/
 .env
 .env.example
 .strapi-updater.json
-favicon.png
 
 # macOS
 .DS_Store

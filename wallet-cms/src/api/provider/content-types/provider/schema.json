@@ -12,9 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "provider_id": {
-      "type": "biginteger"
-    },
     "name": {
       "type": "string"
     },

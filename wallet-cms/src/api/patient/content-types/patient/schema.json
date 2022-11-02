@@ -12,9 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "patient_id": {
-      "type": "biginteger"
-    },
     "first_name": {
       "type": "string"
     },
@@ -36,17 +33,23 @@
       "target": "api::provider.provider",
       "inversedBy": "patients"
     },
-    "account_id": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::account.account",
-      "inversedBy": "patient_id"
-    },
     "diagnoses": {
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::diagnosis.diagnosis",
       "inversedBy": "patients"
+    },
+    "transactions": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::transaction.transaction",
+      "mappedBy": "patient_id"
+    },
+    "documents": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::document.document",
+      "mappedBy": "patient_id"
     }
   }
 }

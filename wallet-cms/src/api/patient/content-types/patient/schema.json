@@ -50,6 +50,15 @@
       "relation": "oneToMany",
       "target": "api::document.document",
       "mappedBy": "patient_id"
+    },
+    "username": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "patient_id"
+    },
+    "nhs": {
+      "type": "string"
     }
   }
 }

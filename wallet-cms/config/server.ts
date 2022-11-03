@@ -6,7 +6,7 @@ module.exports = ({ env }) => {
 	return {
 		host, port, url,
 		app: {
-			keys: env.array('APP_KEYS', ["key1", "key2"]),
+			keys: env.array('APP_KEYS', ["MQoSOwxYik2B5ouRR5pbYKciAow3zMJe", "uxpQjaXwQJB2HPdbAOyoJU4gS2zlsejN"]),
 		},
 	}
 }

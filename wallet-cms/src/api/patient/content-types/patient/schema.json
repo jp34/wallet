@@ -1,0 +1,55 @@
+{
+  "kind": "collectionType",
+  "collectionName": "patients",
+  "info": {
+    "singularName": "patient",
+    "pluralName": "patients",
+    "displayName": "Patient",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "first_name": {
+      "type": "string"
+    },
+    "middle_name": {
+      "type": "string"
+    },
+    "last_name": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "dob": {
+      "type": "date"
+    },
+    "provider_id": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::provider.provider",
+      "inversedBy": "patients"
+    },
+    "diagnoses": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::diagnosis.diagnosis",
+      "inversedBy": "patients"
+    },
+    "transactions": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::transaction.transaction",
+      "mappedBy": "patient_id"
+    },
+    "documents": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::document.document",
+      "mappedBy": "patient_id"
+    }
+  }
+}

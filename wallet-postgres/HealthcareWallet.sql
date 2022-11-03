@@ -5,7 +5,7 @@ create database wallet with owner = postgres;
 -- Providers Table
 create table Providers (
 	ProviderID		serial			primary key
-,	ProviderName	varchar(255)	not null
+,	name	varchar(255)	not null
 ,	phone			varchar(25)		not null
 );
 
@@ -52,7 +52,7 @@ create table RequiredInfo (
 	ProviderID 		bigserial		not null
 ,	DRG_CODE		varchar(50)		not null
 ,	RequiredInfo	varchar(255)	not null
-, 	primary key (ProviderID, DRG_CODE)
+, primary key (ProviderID, DRG_CODE)
 );
 
 -- Visits Table

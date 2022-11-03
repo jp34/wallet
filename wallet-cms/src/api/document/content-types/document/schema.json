@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "documents",
+  "info": {
+    "singularName": "document",
+    "pluralName": "documents",
+    "displayName": "Document",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "transaction_id": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::transaction.transaction",
+      "inversedBy": "document_id"
+    },
+    "content": {
+      "type": "json"
+    },
+    "patient_id": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::patient.patient",
+      "inversedBy": "documents"
+    }
+  }
+}

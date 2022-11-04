@@ -12,13 +12,10 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "name": {
+    "icd10": {
       "type": "string"
     },
-    "code_icd10": {
-      "type": "string"
-    },
-    "code_drg": {
+    "drg": {
       "type": "string"
     },
     "patients": {
@@ -26,6 +23,12 @@
       "relation": "manyToMany",
       "target": "api::patient.patient",
       "mappedBy": "diagnoses"
+    },
+    "description": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
     }
   }
 }

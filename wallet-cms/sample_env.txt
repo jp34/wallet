@@ -1,0 +1,15 @@
+# -- Server Config
+HOST="0.0.0.0"
+PORT=8080
+URL="http://localhost:8080"
+# App keys are only for dev environment!
+APP_KEY_1="MQoSOwxYik2B5ouRR5pbYKciAow3zMJe"
+APP_KEY_2="uxpQjaXwQJB2HPdbAOyoJU4gS2zlsejN"
+
+# -- Database Config
+DB_HOST="<Public DB Endpoint>"
+DB_PORT=5432
+DB_NAME="wallet"
+DB_USER="<DB User>"
+DB_PASS="<DB Password>"
+DB_SCHEMA="public"

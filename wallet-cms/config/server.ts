@@ -1,12 +1,13 @@
+require('dotenv').config();
 
 module.exports = ({ env }) => {
-	const host = env('HOST', '0.0.0.0');
-	const port = env.int('PORT', 1337);
-	const url = env('URL', `http://localhost${port !== '80' ? ':'+ port : ''}`);
+	const host = env('HOST', process.env.HOST);
+	const port = env.int('PORT', process.env.HOST);
+	const url = env('URL', process.env.URL);
 	return {
 		host, port, url,
 		app: {
-			keys: env.array('APP_KEYS', ["MQoSOwxYik2B5ouRR5pbYKciAow3zMJe", "uxpQjaXwQJB2HPdbAOyoJU4gS2zlsejN"]),
+			keys: env.array('APP_KEYS', [process.env.APP_KEY_1, process.env.APP_KEY_2]),
 		},
 	}
 }

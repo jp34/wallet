@@ -17,6 +17,7 @@ dist/
 .env
 .env.example
 .strapi-updater.json
+ecosystem.config.js
 
 # macOS
 .DS_Store

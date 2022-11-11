@@ -1,39 +1,41 @@
 import React from "react";
-import { View, Text, TextInput, StyleSheet } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
+import {
+  View,
+  Text,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  TouchableOpacity,
+  Image,
+  TextInput,
+  StyleSheet
+} from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
+import LoginButton from './Button';
 
-class Login extends React.Component {
+const Login = ({ navigation }) => {
+  const [showPassword, setShowPassword] = React.useState(false);
 
-    render() {
-        return (
-            <View style={styles.page}>
-                <LinearGradient colors={['#2B1360', '#6030D9']}>
-                    <View style={styles.container}>
-                        
-                        <LinearGradient 
-                            colors={['#6030D9', '#2B1360']}
-                            style={styles.logo}>
-                            <Text style={styles.logo_title}>JustBe</Text>
-                        </LinearGradient>
-
-                        <View style={styles.input_container}>
-                            <Text style={styles.login_title}>Sign In</Text>
-                            <View style={styles.input_group}>
-                                <Text style={styles.input_label}>Email</Text>
-                                <TextInput style={styles.input} defaultValue="name@example.com"/>
-                            </View>
-                            <View style={styles.input_group}>
-                                <Text style={styles.input_label}>Password</Text>
-                                <TextInput style={styles.input} secureTextEntry={true} defaultValue="Password"/>
-                            </View>
-                        </View>
+    return (
+        <View style={styles.page}>
+            <LinearGradient colors={['#2B1360', '#6030D9']}>
+                <View style={styles.container}>
                     
-                    </View>
-                </LinearGradient>
-            </View>
-        );
-    }
-}
+                    <LinearGradient 
+                        colors={['#6030D9', '#2B1360']}
+                        style={styles.logo}>
+                        <Text style={styles.logo_title}>JustBe</Text>
+                    </LinearGradient>
+
+                    <Text style={styles.login_title}>Sign In</Text>
+
+                    <LoginButton text='Login with MetaMask' onPress={() => navigation.navigate('Homescreen')}/> 
+                
+                </View>
+            </LinearGradient>
+        </View>
+    );
+};
 
 const styles = StyleSheet.create({
     page: {
@@ -63,7 +65,7 @@ const styles = StyleSheet.create({
         letterSpacing: 1,
     },
     login_title: {
-        paddingTop: 75,
+        paddingTop: 50,
         paddingBottom: 20,
         color: '#eff1f9',
         fontFamily: 'Roboto',
@@ -92,5 +94,4 @@ const styles = StyleSheet.create({
         opacity: 0.2,
     }
 });
-
 export default Login;

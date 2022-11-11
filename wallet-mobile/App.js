@@ -1,30 +1,23 @@
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { NativeRouter, Routes, Route } from 'react-router-native';
-import Login from './views/Login';
+import React from "react";
+import { createStackNavigator } from "@react-navigation/stack";
+import { NavigationContainer } from "@react-navigation/native";
+import Login from "./src/views/Login";
+import Homescreen from "./src/views/Homescreen";
 
-class App extends React.Component {
-	
-	render() {
-		return (
-			<NativeRouter>
-				<View style={styles.container}>
-					<Routes>
-						<Route exact path='/' element={<Login />} />
-					</Routes>
-				</View>
-			</NativeRouter>
-		);
-	}
-}
+const Stack = createStackNavigator();
 
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: '#fff',
-		alignItems: 'center',
-		justifyContent: 'center',
-	},
-});
+const App = () => {
+	return (
+		<NavigationContainer>
+			<Stack.Navigator
+			screenOptions={{ headerShown: false, gestureEnabled: false }}
+			initialRouteName={Login}
+			>
+				<Stack.Screen name="Login" component={Login} />
+				<Stack.Screen name="Homescreen" component={Homescreen} />
+			</Stack.Navigator>
+		</NavigationContainer>
+	);
+};
 
 export default App;

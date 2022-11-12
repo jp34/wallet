@@ -1,10 +1,12 @@
 import React from "react";
-import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Login from "./src/views/Login";
-import Homescreen from "./src/views/Homescreen";
+import Dashboard from "./src/views/Dashboard";
+import Profile from "./src/views/Profile";
+import MyHealth from "./src/views/MyHealth";
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 const App = () => {
 	return (
@@ -14,7 +16,9 @@ const App = () => {
 			initialRouteName={Login}
 			>
 				<Stack.Screen name="Login" component={Login} />
-				<Stack.Screen name="Homescreen" component={Homescreen} />
+				<Stack.Screen name="Dashboard" component={Dashboard} />
+				<Stack.Screen name="Profile" component={Profile} />
+				<Stack.Screen name="MyHealth" component={MyHealth} />
 			</Stack.Navigator>
 		</NavigationContainer>
 	);

@@ -3,6 +3,8 @@ import { View, StyleSheet, TouchableOpacity, Image, Text } from "react-native";
 
 const MyHealth = ({ navigation }) => {
   // Renders Profile Header
+  // Commented out to add back button for demo until swipe gestures work -- TODO: will still need to relocate proile button to make room for back button (swipe isnt always intuitive)
+  /*
   function renderProfileHeader() {
     return (
       <TouchableOpacity
@@ -16,7 +18,22 @@ const MyHealth = ({ navigation }) => {
       </TouchableOpacity>
     );
   }
+*/
 
+// Renders back button
+function renderBackButton() {
+  return (
+    <TouchableOpacity
+      onPress={() => navigation.goBack()}
+      style={styles.backHeader}
+    >
+      <Image
+        source={require("../../assets/chevron-left.png")}
+        style={styles.backImage}
+      />
+    </TouchableOpacity>
+  );
+}
   // Render Title
   function renderTitle() {
     return (
@@ -83,7 +100,8 @@ const MyHealth = ({ navigation }) => {
   return (
     <View style={styles.page}>
       <View style={styles.container}>
-        {renderProfileHeader()}
+        {renderBackButton()}
+        {/*{renderProfileHeader()}*/}
         {renderTitle()}
         {renderDiagnoses()}
         {renderMedications()}
@@ -131,6 +149,17 @@ const styles = StyleSheet.create({
     marginTop: 40,
     marginHorizontal: 30,
     borderTopWidth: 1,
+  },
+  backHeader: {
+    marginTop: 65,
+    paddingHorizontal: 20,
+    justifyContent: "flex-start",
+  },
+  backImage: {
+    width: 25,
+    height: 25,
+    tintColor: "#000",
+    resizeMode: "contain",
   },
 });
 

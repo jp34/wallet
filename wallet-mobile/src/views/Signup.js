@@ -11,18 +11,18 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
-const Login = ({ navigation }) => {
+const Signup = ({ navigation }) => {
     // Boolean control for SecureText
     const [showPassword, setShowPassword] = React.useState(false);
 
-    // Renders Sign Up Header
-    function renderSignUpHeader() {
+    // Renders Login Header
+    function renderLoginHeader() {
         return (
             <TouchableOpacity
                 style={styles.header}
-                onPress={() => navigation.navigate("Signup")}
+                onPress={() => navigation.navigate("Login")}
             >
-                <Text style={styles.headerText}>Sign Up</Text>
+                <Text style={styles.headerText}>Login</Text>
                 <Image
                     style={styles.headerImage}
                     source={require("../../assets/chevron-right.png")}
@@ -31,24 +31,13 @@ const Login = ({ navigation }) => {
         );
     }
 
-    // Renders Logo
-    function renderLogo() {
-        return (
-            <LinearGradient
-                colors={constants.colors.gradient2}
-                style={styles.logoGradient}
-            >
-                <Text style={styles.logoText}>JustBe</Text>
-            </LinearGradient>
-        );
-    }
-
-    // Renders Login Form
-    function renderLoginForm() {
+    // Renders Signup Form
+    function renderSignupForm() {
         return (
             <View>
                 {/* Title */}
-                <Text style={styles.titleText}>Log In</Text>
+                <Text style={styles.titleText}>Sign Up</Text>
+
                 {/* Form */}
                 <View style={styles.formGroup}>
                     {/* Email */}
@@ -60,9 +49,50 @@ const Login = ({ navigation }) => {
                             placeholderTextColor="#fff"
                         />
                     </View>
+
+                    {/* First */}
+                    <View style={styles.inputGroup}>
+                        <Text style={styles.inputHeader}>First</Text>
+                        <TextInput
+                            style={styles.input}
+                            placeholder="John"
+                            placeholderTextColor="#fff"
+                        />
+                    </View>
+
+                    {/* Last */}
+                    <View style={styles.inputGroup}>
+                        <Text style={styles.inputHeader}>Last</Text>
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Doe"
+                            placeholderTextColor="#fff"
+                        />
+                    </View>
+
                     {/* Password */}
                     <View style={styles.inputGroup}>
                         <Text style={styles.inputHeader}>Password</Text>
+                        <TextInput
+                            style={styles.input}
+                            placeholderTextColor="#fff"
+                            placeholder="12345"
+                            secureTextEntry={!showPassword}
+                        />
+                        <TouchableOpacity
+                            style={styles.passwordImageArea}
+                            onPress={() => setShowPassword(!showPassword)}
+                        >
+                            <Image
+                                style={styles.passwordImage}
+                                source={require("../../assets/unlock.png")}
+                            />
+                        </TouchableOpacity>
+                    </View>
+
+                    {/* Confirm Password */}
+                    <View style={styles.inputGroup}>
+                        <Text style={styles.inputHeader}>Confirm Password</Text>
                         <TextInput
                             style={styles.input}
                             placeholderTextColor="#fff"
@@ -85,13 +115,13 @@ const Login = ({ navigation }) => {
     }
 
     // Renders Login Button
-    function renderLoginButton() {
+    function renderSignupButton() {
         return (
             <TouchableOpacity
-                style={styles.loginButton}
+                style={styles.signupButton}
                 onPress={() => navigation.navigate("Dashboard")}
             >
-                <Text style={styles.loginButtonText}>Log In</Text>
+                <Text style={styles.signupButtonText}>Sign Up</Text>
             </TouchableOpacity>
         );
     }
@@ -103,10 +133,9 @@ const Login = ({ navigation }) => {
                 style={styles.container}
             >
                 <ScrollView>
-                    {renderSignUpHeader()}
-                    {renderLogo()}
-                    {renderLoginForm()}
-                    {renderLoginButton()}
+                    {renderLoginHeader()}
+                    {renderSignupForm()}
+                    {renderSignupButton()}
                 </ScrollView>
             </LinearGradient>
         </KeyboardAvoidingView>
@@ -204,7 +233,7 @@ const styles = StyleSheet.create({
         width: 20,
         tintColor: "#fff",
     },
-    loginButton: {
+    signupButton: {
         height: 60,
         backgroundColor: "#fff",
         borderRadius: 20,
@@ -212,10 +241,11 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         margin: 30,
     },
-    loginButtonText: {
+    signupButtonText: {
         color: constants.colors.primary,
         fontSize: 16,
         fontWeight: "bold",
     },
 });
-export default Login;
+
+export default Signup;

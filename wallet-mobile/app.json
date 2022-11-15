@@ -1,12 +1,10 @@
 {
-	"expo": {
-		"name": "wallet-mobile",
-		"slug": "wallet-mobile",
-		"owner": "HealthcareWallet",
-		"version": "1.0.0",
-		"assetBundlePatterns": [
-			"**/*"
-		]
-	},
-	"name": "wallet-mobile"
+    "expo": {
+        "name": "wallet-mobile",
+        "slug": "wallet-mobile",
+        "owner": "HealthcareWallet",
+        "version": "1.0.0",
+        "assetBundlePatterns": ["**/*"]
+    },
+    "name": "wallet-mobile"
 }

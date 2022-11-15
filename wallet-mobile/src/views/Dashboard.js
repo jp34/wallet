@@ -26,15 +26,42 @@ const Dashboard = ({ navigation }) => {
     );
   }
 
-  // Renders myHealth Panel
-  function renderPanel() {
+  // Renders all Panels
+  function renderPanels() {
     return (
-      <TouchableOpacity
-        style={styles.panelView}
-        onPress={() => navigation.navigate("MyHealth")}
-      >
-        <Text style={styles.panelText}>myHealth</Text>
-      </TouchableOpacity>
+      <View style={styles.panelContainer}>
+        {/*myHealth Panel*/}
+        <TouchableOpacity
+          style={styles.panelView}
+          onPress={() => navigation.navigate("MyHealth")}
+        >
+          <Text style={styles.panelText}>myHealth</Text>
+        </TouchableOpacity>
+
+        {/*Import Records Panel -- Currently links to healkth page as wallet hasnt been built yet*/}
+        <TouchableOpacity
+          style={styles.panelView}
+          onPress={() => navigation.navigate("MyHealth")}
+        >
+          <Text style={styles.panelText}>Import Records </Text>
+        </TouchableOpacity>
+
+        {/*Research Panel*/}
+        <TouchableOpacity
+          style={styles.panelView}
+          onPress={() => navigation.navigate("Research")}
+        >
+          <Text style={styles.panelText}>Research</Text>
+        </TouchableOpacity>
+
+        {/*Wallet Panel -- Currently links to healkth page as wallet hasnt been built yet*/}
+        <TouchableOpacity
+          style={styles.panelView}
+          onPress={() => navigation.navigate("MyHealth")}
+        >
+          <Text style={styles.panelText}>My Wallet</Text>
+        </TouchableOpacity>
+      </View>
     );
   }
 
@@ -43,7 +70,7 @@ const Dashboard = ({ navigation }) => {
       <View style={styles.container}>
         {renderProfileHeader()}
         {renderTitle()}
-        {renderPanel()}
+        {renderPanels()}
       </View>
     </View>
   );
@@ -81,7 +108,7 @@ const styles = StyleSheet.create({
   },
   panelView: {
     marginTop: 30,
-    marginHorizontal: 30,
+    marginHorizontal: 10,
     width: "43%",
     height: 140,
     borderRadius: 20,
@@ -90,6 +117,13 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   panelText: { fontSize: 26, fontWeight: "bold" },
+  panelContainer: {
+    width: '100%',
+    height: '50%',
+    padding: 5,
+    flexDirection: 'row',
+    flexWrap: 'wrap'
+  }
 });
 
 export default Dashboard;

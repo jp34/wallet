@@ -3,95 +3,216 @@ import {
   View,
   Text,
   KeyboardAvoidingView,
-  Platform,
   ScrollView,
   TouchableOpacity,
   Image,
   TextInput,
-  StyleSheet
+  StyleSheet,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import LoginButton from './Button';
 
 const Login = ({ navigation }) => {
+  // Boolean control for SecureText
   const [showPassword, setShowPassword] = React.useState(false);
 
+  // Renders Sign Up Header
+  function renderSignUpHeader() {
     return (
-        <View style={styles.page}>
-            <LinearGradient colors={['#2B1360', '#6030D9']}>
-                <View style={styles.container}>
-                    
-                    <LinearGradient 
-                        colors={['#6030D9', '#2B1360']}
-                        style={styles.logo}>
-                        <Text style={styles.logo_title}>JustBe</Text>
-                    </LinearGradient>
-
-                    <Text style={styles.login_title}>Sign In</Text>
-
-                    <LoginButton text='Login with MetaMask' onPress={() => navigation.navigate('Homescreen')}/> 
-                
-                </View>
-            </LinearGradient>
-        </View>
+      <TouchableOpacity style={styles.header}>
+        <Text style={styles.headerText}>Sign Up</Text>
+        <Image
+          style={styles.headerImage}
+          source={require("../../assets/chevron-right.png")}
+        />
+      </TouchableOpacity>
     );
+  }
+
+  // Renders Logo
+  function renderLogo() {
+    return (
+      <LinearGradient
+        colors={constants.colors.gradient2}
+        style={styles.logoGradient}
+      >
+        <Text style={styles.logoText}>JustBe</Text>
+      </LinearGradient>
+    );
+  }
+
+  // Renders Login Form
+  function renderLoginForm() {
+    return (
+      <View>
+        {/* Title */}
+        <Text style={styles.titleText}>Log In</Text>
+        {/* Form */}
+        <View style={styles.formGroup}>
+          {/* Email */}
+          <View style={styles.inputGroup}>
+            <Text style={styles.inputHeader}>Email</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="myemail@gmail.com"
+              placeholderTextColor="#fff"
+            />
+          </View>
+          {/* Password */}
+          <View style={styles.inputGroup}>
+            <Text style={styles.inputHeader}>Password</Text>
+            <TextInput
+              style={styles.input}
+              placeholderTextColor="#fff"
+              placeholder="12345"
+              secureTextEntry={!showPassword}
+            />
+            <TouchableOpacity
+              style={styles.passwordImageArea}
+              onPress={() => setShowPassword(!showPassword)}
+            >
+              <Image
+                style={styles.passwordImage}
+                source={require("../../assets/unlock.png")}
+              />
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
+    );
+  }
+
+  // Renders Login Button
+  function renderLoginButton() {
+    return (
+      <TouchableOpacity
+        style={styles.loginButton}
+        onPress={() => navigation.navigate("Dashboard")}
+      >
+        <Text style={styles.loginButtonText}>Log In</Text>
+      </TouchableOpacity>
+    );
+  }
+
+  return (
+    <KeyboardAvoidingView style={styles.page}>
+      <LinearGradient
+        colors={constants.colors.gradient1}
+        style={styles.container}
+      >
+        <ScrollView>
+          {renderSignUpHeader()}
+          {renderLogo()}
+          {renderLoginForm()}
+          {renderLoginButton()}
+        </ScrollView>
+      </LinearGradient>
+    </KeyboardAvoidingView>
+  );
 };
 
+const constants = StyleSheet.create({
+  colors: {
+    primary: "#6030D9",
+    secondary: "#2B1360",
+    gradient1: ["#2B1360", "#6030D9"],
+    gradient2: ["#6030D9", "#2B1360"],
+  },
+});
+
 const styles = StyleSheet.create({
-    page: {
-        display: 'flex',
-        width: '100%',
-        height: '100%',
-    },
-    container: {
-        width: '100%',
-        height: '100%',
-        paddingTop: 140,
-        alignItems: 'center',
-    },
-    logo: {
-        width: 160,
-        height: 160,
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 30,
-    },
-    logo_title: {
-        color: '#ffffff',
-        fontFamily: 'Roboto',
-        fontSize: 26,
-        fontWeight: "bold",
-        letterSpacing: 1,
-    },
-    login_title: {
-        paddingTop: 50,
-        paddingBottom: 20,
-        color: '#eff1f9',
-        fontFamily: 'Roboto',
-        fontSize: 30,
-        fontWeight: "700",
-        letterSpacing: 0.8,
-    },
-    input_container: {
-    },
-    input_group: {
-        paddingBottom: 10,
-    },
-    input_label: {
-        marginLeft: 5,
-        marginBottom: 5,
-        color: '#eff1f9',
-        fontFamily: 'Roboto',
-        fontSize: 16,
-        fontWeight: "700",
-    },
-    input: {
-        paddingLeft: 5,
-        height: 45,
-        width: 280,
-        backgroundColor: '#eff1f9',
-        opacity: 0.2,
-    }
+  page: {
+    display: "flex",
+    width: "100%",
+    height: "100%",
+  },
+  container: {
+    width: "100%",
+    height: "100%",
+  },
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 65,
+    paddingHorizontal: 20,
+    justifyContent: "flex-end",
+  },
+  headerText: {
+    marginRight: 15,
+    color: "#fff",
+    fontSize: 18,
+  },
+  headerImage: {
+    width: 20,
+    height: 20,
+    tintColor: "#fff",
+    resizeMode: "contain",
+  },
+  logoGradient: {
+    width: 160,
+    height: 160,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 30,
+    marginTop: 50,
+    alignSelf: "center",
+  },
+  logoText: {
+    color: "#fff",
+    fontSize: 30,
+    fontWeight: "bold",
+    letterSpacing: 1,
+  },
+  titleText: {
+    color: "#fff",
+    fontSize: 30,
+    fontWeight: "bold",
+    marginTop: 30,
+    marginLeft: 30,
+  },
+  formGroup: {
+    marginTop: 10,
+    marginHorizontal: 30,
+  },
+  inputGroup: {
+    marginTop: 20,
+  },
+  inputHeader: {
+    fontSize: 20,
+    color: "#fff",
+  },
+  input: {
+    marginVertical: 10,
+    borderBottomColor: "#fff",
+    borderBottomWidth: 1,
+    height: 40,
+    color: "#fff",
+    fontSize: 20,
+  },
+  passwordImageArea: {
+    position: "absolute",
+    right: 0,
+    bottom: 10,
+    height: 30,
+    width: 30,
+  },
+  passwordImage: {
+    height: 20,
+    width: 20,
+    tintColor: "#fff",
+  },
+  loginButton: {
+    height: 60,
+    backgroundColor: "#fff",
+    borderRadius: 20,
+    alignItems: "center",
+    justifyContent: "center",
+    margin: 30,
+  },
+  loginButtonText: {
+    color: constants.colors.primary,
+    fontSize: 16,
+    fontWeight: "bold",
+  },
 });
 export default Login;

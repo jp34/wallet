@@ -1,6 +1,8 @@
 
 # Node
 node_modules/
+dist/
+build/
 package-lock.json
 
 # Yarn
@@ -11,7 +13,6 @@ package-lock.json
 .expo-shared/
 
 # Strapi
-dist/
 .editorconfig
 .env
 .env.example

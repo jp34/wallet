@@ -1,27 +1,30 @@
-import express, { Express, Request, Response } from "express";
-import dotenv from "dotenv";
-import { listDocument, mintDocument } from "./services";
+import express from "express";
+import morgan from "morgan";
+import ApiController from "./api.controller";
 
-// Configure environment
-dotenv.config();
+export default class App {
+    public app: express.Application;
+    public port: number;
 
-// Configure express
-const app: Express = express();
-const port = 8080;
+    constructor(port: number) {
+        this.app = express();
+        this.port = port;
+        this.initMiddleware();
+        this.initControllers();
+    }
 
-// Define endpoints
+    private initMiddleware() {
+        this.app.use(express.json());
+        this.app.use(morgan("combined"));
+    }
 
-app.get("/list", (req: Request, res: Response) => {
-    res.send("This is an endpoint for listing json docs!");
-    listDocument();
-});
+    private initControllers() {
+        this.app.use("/api", new ApiController().router);
+    }
 
-app.get("/mint", (req: Request, res: Response) => {
-    res.send("This is an endpoint for minting json docs!");
-    mintDocument();
-});
-
-// Start server
-app.listen(port, () => {
-    console.log(`Listening on port ${port}...`);
-});
+    public listen() {
+        this.app.listen(this.port, () => {
+            console.log(`Listening on port ${this.port}...`);
+        });
+    }
+}

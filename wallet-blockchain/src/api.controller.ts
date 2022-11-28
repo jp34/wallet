@@ -1,6 +1,6 @@
 import { Router } from "express";
-import IpfsController from "./ipfs/ipfs.controller";
-import BlockController from "./block/block.controller";
+import StorageController from "./storage/storage.controller";
+import MintController from "./mint/mint.controller";
 
 export default class ApiController {
     public router: Router;
@@ -11,7 +11,7 @@ export default class ApiController {
     }
 
     private init() {
-        this.router.use("/ipfs", new IpfsController().router);
-        this.router.use("/block", new BlockController().router);
+        this.router.use("/storage", new StorageController().router);
+        this.router.use("/mint", new MintController().router);
     }
 }

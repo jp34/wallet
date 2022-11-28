@@ -4,8 +4,7 @@ export interface Payload {
 }
 
 export interface PayloadMeta {
-    id: number;
-    size: number;
+    id: string;
 }
 
 export interface PayloadContent {

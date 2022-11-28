@@ -1,7 +1,11 @@
 import { Router, Request, Response } from "express";
-import { Payload, PayloadMeta, PayloadContent } from "./payload.interface";
+import {
+    Payload,
+    PayloadMeta,
+    PayloadContent,
+} from "../storage/storage.interface";
 
-export default class BlockController {
+export default class MintController {
     public router: Router;
     private token: string;
     private valid_token: Boolean;

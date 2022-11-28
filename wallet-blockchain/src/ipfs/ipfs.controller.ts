@@ -26,9 +26,9 @@ export default class IpfsController {
     }
 
     private init() {
-        this.router.get("/", this.getAll);
+        this.router.get("/api/ipfs/", this.getAll);
         this.router.get("/:id", this.getOne);
-        this.router.post("/", this.store);
+        this.router.post("/", this.create);
     }
 
     // ENDPOINTS
@@ -55,7 +55,7 @@ export default class IpfsController {
             content: {}
         }
     */
-    public store = (request: Request, response: Response) => {
+    public create = (request: Request, response: Response) => {
         if (!this.valid_token) {
             response.send(500);
         }

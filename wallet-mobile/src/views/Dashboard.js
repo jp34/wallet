@@ -38,12 +38,12 @@ const Dashboard = ({ navigation }) => {
                     <Text style={styles.panelText}>myHealth</Text>
                 </TouchableOpacity>
 
-                {/*Import Records Panel -- Currently links to healkth page as wallet hasnt been built yet*/}
+                {/*Import Records Panel -- Currently links to health page as wallet hasnt been built yet*/}
                 <TouchableOpacity
                     style={styles.panelView}
                     onPress={() => navigation.navigate("MyHealth")}
                 >
-                    <Text style={styles.panelText}>Import Records </Text>
+                    <Text style={styles.panelText}>Import Records</Text>
                 </TouchableOpacity>
 
                 {/*Research Panel*/}

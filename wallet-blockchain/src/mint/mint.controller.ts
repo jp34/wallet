@@ -4,16 +4,19 @@ import {
     PayloadMeta,
     PayloadContent,
 } from "../storage/storage.interface";
+import MintService from "./mint.service";
 
 export default class MintController {
     public router: Router;
     private token: string;
     private valid_token: Boolean;
+    private service: MintService;
 
     constructor() {
         this.router = Router();
         this.token = process.env.API_TOKEN_IPFS ?? "Undefined";
         this.valid_token = false;
+        this.service = new MintService();
         this.init();
     }
 
@@ -40,14 +43,9 @@ export default class MintController {
         response.status(200).json({ status: "success", id: id });
     };
 
-    public create = (request: Request, response: Response) => {
-        let payload: Payload = request.body.payload;
-        let meta: PayloadMeta = payload.meta;
-        let content: PayloadContent = payload.content;
-
-        // Store payload on ipfs
-
-        // Start lazy minting process
+    public create = async (request: Request, response: Response) => {
+        
+        await this.service.deploy("initial.sol");
 
         response.status(200).json({ status: "success" });
     };

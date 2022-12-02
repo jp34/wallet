@@ -17,7 +17,7 @@
         "express": "^4.18.2",
         "fs": "^0.0.1-security",
         "morgan": "^1.10.0",
-        "solc": "^0.8.17",
+        "solc-typed-ast": "^11.0.2",
         "web3": "^1.8.1",
         "web3.storage": "^4.4.0"
     },

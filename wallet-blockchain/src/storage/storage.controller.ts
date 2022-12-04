@@ -1,5 +1,5 @@
 import { Router, Request, Response } from "express";
-import { Payload } from "./storage.interface";
+import { Payload } from "../payload/payload.interface";
 import StorageService from "./storage.service";
 
 export default class StorageController {

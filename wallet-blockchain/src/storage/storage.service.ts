@@ -1,5 +1,5 @@
 import { Web3Storage, File } from "web3.storage";
-import { Payload } from "./storage.interface";
+import { Payload } from "../payload/payload.interface";
 
 export default class StorageService {
     private api_token: string;
@@ -16,7 +16,7 @@ export default class StorageService {
         let files: File[] = [];
         for (let doc of documents) {
             let buffer = Buffer.from(JSON.stringify(doc));
-            files.push(new File([buffer], doc.meta.id));
+            files.push(new File([buffer], doc.from));
         }
         return files;
     };

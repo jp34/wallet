@@ -1,10 +1,6 @@
 import { Router, Request, Response } from "express";
-import {
-    Payload,
-    PayloadMeta,
-    PayloadContent,
-} from "../storage/storage.interface";
-import MintService from "./mint.service";
+import MintService from "./web3.service";
+import { Payload } from "../payload/payload.interface";
 
 export default class MintController {
     public router: Router;
@@ -44,9 +40,20 @@ export default class MintController {
     };
 
     public create = async (request: Request, response: Response) => {
-        
-        await this.service.deploy("initial.sol");
+        let payload = request.body.payload;
+        if (payload == undefined) response.status(400).json({
+            status: "failed",
+            error: "Missing payload"
+        });
 
-        response.status(200).json({ status: "success" });
+        console.log(`Storing payload: ${JSON.stringify(payload)}`);
+
+        console.log(`Deploying new payload: ${JSON.stringify(payload)}`);
+        await this.service.deployPayload(payload.from, payload.data);
+
+        response.status(200).json({
+            status: "success",
+            transaction: ""
+        });
     };
 }

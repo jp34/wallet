@@ -31,20 +31,13 @@ export default class MintService {
         if (this.transactContract === "undefined") throw Error("Environment variable not found: WEB3_TRANSACT_CONTRACT");
     }
 
-    async deployPayload(fromAddress: string, data: string) {
+    async deploy(payload: Payload) {
         let path = `${this.contractDir}\\${this.payloadContract}`;
         let compiled = await compileSol(path, "auto");
-        let abi = compiled.data.contracts[path].initial.abi;
-        let bytecode = compiled.data.contracts[path].initial.evm.bytecode.object;
+        let abi = compiled.data.contracts[path].payload.abi;
+        let bytecode = compiled.data.contracts[path].payload.evm.bytecode.object;
         return await new this.web3.eth.Contract(abi)
             .deploy({ data : bytecode })
-            .send({ from: fromAddress, gas: 870000 });
-    }
-
-    async call() {
-        // myContract = new web3.eth.Contract(ABI, '0x94B64632Fac4A0D79F17FC1a0f968E37F2D571b3');
-        // myContract.methods.set("Hello").send({from: account});
-        // data = myContract.methods.get().call();
-        // console.log(data);
+            .send({ from: payload.from, gas: 870000 });
     }
 }

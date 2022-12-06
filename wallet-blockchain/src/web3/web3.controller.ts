@@ -1,18 +1,19 @@
 import { Router, Request, Response } from "express";
 import MintService from "./web3.service";
 import { Payload } from "../payload/payload.interface";
+import StorageService from "../storage/storage.service";
 
 export default class MintController {
     public router: Router;
-    private token: string;
     private valid_token: Boolean;
-    private service: MintService;
+    private web3Service: MintService;
+    private storageService: StorageService;
 
     constructor() {
         this.router = Router();
-        this.token = process.env.API_TOKEN_IPFS ?? "Undefined";
         this.valid_token = false;
-        this.service = new MintService();
+        this.web3Service = new MintService();
+        this.storageService = new StorageService();
         this.init();
     }
 
@@ -40,20 +41,33 @@ export default class MintController {
     };
 
     public create = async (request: Request, response: Response) => {
-        let payload = request.body.payload;
-        if (payload == undefined) response.status(400).json({
-            status: "failed",
-            error: "Missing payload"
-        });
+        let payload: Payload = request.body.payload;
+        if (payload == undefined) {
+            response.status(400).json({
+                status: "failed",
+                error: "Missing payload"
+            });
+            return;
+        }
 
+        // Store payload data on IPFS
         console.log(`Storing payload: ${JSON.stringify(payload)}`);
+        let cid = await this.storageService.upload([payload]);
 
+        // Deploy payload to ethereum
         console.log(`Deploying new payload: ${JSON.stringify(payload)}`);
-        await this.service.deployPayload(payload.from, payload.data);
+        let result = await this.web3Service.deploy(payload);
 
         response.status(200).json({
             status: "success",
-            transaction: ""
+            transaction: {
+                storage: {
+                    cid: cid
+                },
+                deploy: {
+                    address: result.options.address
+                }
+            }
         });
     };
 }

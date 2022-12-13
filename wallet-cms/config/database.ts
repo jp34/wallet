@@ -9,10 +9,7 @@ export default ({ env }) => ({
 			database: env('DATABASE_NAME', process.env.DB_NAME),
 			user: env('DATABASE_USERNAME', process.env.DB_USER),
 			password: env('DATABASE_PASSWORD', process.env.DB_PASS),
-			schema: env('DATABASE_SCHEMA', process.env.DB_SCHEMA),
-			ssl: {
-				rejectUnauthorized: env.bool('DATABASE_SSL_SELF', false),
-			},
+			schema: env('DATABASE_SCHEMA', process.env.DB_SCHEMA)
 		},
 		debug: false,
 	},

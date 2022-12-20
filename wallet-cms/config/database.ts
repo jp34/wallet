@@ -1,12 +1,12 @@
 require('dotenv').config();
 
 export default ({ env }) => {
-	strapi.log.info(`DATABASE_HOST: ${process.env.DB_HOST}`);
-	strapi.log.info(`DATABASE_PORT: ${process.env.DB_PORT}`);
-	strapi.log.info(`DATABASE_NAME: ${process.env.DB_NAME}`);
-	strapi.log.info(`DATABASE_USERNAME: ${process.env.DB_USER}`);
-	strapi.log.info(`DATABASE_PASSWORD: ${process.env.DB_PASSWORD}`);
-	strapi.log.info(`DATABASE_SCHEMA: ${process.env.DB_SCHEMA}`);
+	console.log(`DATABASE_HOST: ${process.env.DB_HOST}`);
+	console.log(`DATABASE_PORT: ${process.env.DB_PORT}`);
+	console.log(`DATABASE_NAME: ${process.env.DB_NAME}`);
+	console.log(`DATABASE_USERNAME: ${process.env.DB_USER}`);
+	console.log(`DATABASE_PASSWORD: ${process.env.DB_PASSWORD}`);
+	console.log(`DATABASE_SCHEMA: ${process.env.DB_SCHEMA}`);
 	
 	return {
 		connection: {

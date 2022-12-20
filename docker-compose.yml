@@ -11,8 +11,8 @@ services:
       SERVER_URL: ${WALLET_CMS_SERVER_URL}
       SERVER_KEY_1: ${WALLET_CMS_SERVER_KEY_1}
       SERVER_KEY_2: ${WALLET_CMS_SERVER_KEY_2}
-      DB_HOST: wallet.capstone.csi.miamioh.edu
-      DB_PORT: 8432
+      DB_HOST: ${WALLET_CMS_DB_HOST}
+      DB_PORT: ${WALLET_CMS_DB_PORT}
       DB_NAME: ${WALLET_CMS_DB_NAME}
       DB_USER: ${WALLET_CMS_DB_USER}
       DB_PASS: ${WALLET_CMS_DB_PASS}

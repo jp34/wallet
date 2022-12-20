@@ -5,7 +5,7 @@ export default ({ env }) => {
 	console.log(`DATABASE_PORT: ${process.env.DB_PORT}`);
 	console.log(`DATABASE_NAME: ${process.env.DB_NAME}`);
 	console.log(`DATABASE_USERNAME: ${process.env.DB_USER}`);
-	console.log(`DATABASE_PASSWORD: ${process.env.DB_PASSWORD}`);
+	console.log(`DATABASE_PASSWORD: ${process.env.DB_PASS}`);
 	console.log(`DATABASE_SCHEMA: ${process.env.DB_SCHEMA}`);
 	
 	return {
@@ -16,7 +16,7 @@ export default ({ env }) => {
 				port: env.int('DATABASE_PORT', process.env.DB_PORT),
 				database: env('DATABASE_NAME', process.env.DB_NAME),
 				user: env('DATABASE_USERNAME', process.env.DB_USER),
-				password: env('DATABASE_PASSWORD', process.env.DB_PASSWORD),
+				password: env('DATABASE_PASSWORD', process.env.DB_PASS),
 				schema: env('DATABASE_SCHEMA', process.env.DB_SCHEMA),
 				ssl: env('DATABASE_SSL', false)
 			},

@@ -4,13 +4,18 @@ services:
 
   wallet-db:
     image: postgres
+    container_name: wallet-db
+    env_file:
+     - ./config/db.env
     ports:
      - "8432:5432"
 
   wallet-cms:
     build: ./wallet-cms
     container_name: wallet-cms
-    ports:
-     - "8000:8080"
+    depends_on:
+     - "wallet-db"
     env_file:
      - ./config/cms.env
+    ports:
+    - "8000:8080"

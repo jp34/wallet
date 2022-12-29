@@ -9,6 +9,7 @@ services:
 
   wallet-cms:
     build: ./wallet-cms
+    container_name: wallet-cms
     ports:
      - "8000:8080"
     env_file:

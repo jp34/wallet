@@ -24,7 +24,11 @@ const MyHealth = ({ navigation }) => {
     const [data, setData] = useState("Loading...");
 
     const getData = () => {
-        axios.get("https://meowfacts.herokuapp.com/?count=4")
+        axios({
+            method: 'get',
+            mode: 'no-cors',
+            url: 'wallet.capstone.csi.miamioh.edu:8000/patients/:1',
+          })
         .then(response => {
             console.log(response.data);
             setData(response.data);

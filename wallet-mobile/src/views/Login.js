@@ -15,7 +15,7 @@ import { login } from "../api/strapi-client";
 const Login = ({ navigation }) => {
     // Boolean control for SecureText
     const [showPassword, setShowPassword] = React.useState(false);
-    const [email, setEmail] = React.useState();
+    const [identifier, setIdentifier] = React.useState();
     const [password, setPassword] = React.useState();
 
     // Renders Sign Up Header
@@ -56,13 +56,14 @@ const Login = ({ navigation }) => {
                 <View style={styles.formGroup}>
                     {/* Email */}
                     <View style={styles.inputGroup}>
-                        <Text style={styles.inputHeader}>Email</Text>
+                        <Text style={styles.inputHeader}>Email / Username</Text>
                         <TextInput
                             id="user-identifier"
                             style={styles.input}
                             placeholder="myemail@gmail.com"
                             placeholderTextColor="#fff"
-                            onChangeText={(text) => setEmail(text)}
+                            onChangeText={(text) => setIdentifier(text)}
+                            require
                         />
                     </View>
                     {/* Password */}
@@ -75,6 +76,7 @@ const Login = ({ navigation }) => {
                             placeholder="12345"
                             secureTextEntry={!showPassword}
                             onChangeText={(text) => setPassword(text)}
+                            require
                         />
                         <TouchableOpacity
                             style={styles.passwordImageArea}
@@ -92,8 +94,7 @@ const Login = ({ navigation }) => {
     }
 
     async function attemptLogin() {
-        if (email == undefined || password == undefined) return;
-        let result = await login(email, password);
+        const result = await login(identifier, password);
         if (result != false) {
             navigation.navigate("Dashboard");
         } else {

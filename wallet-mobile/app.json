@@ -1,10 +1,16 @@
 {
-    "expo": {
-        "name": "wallet-mobile",
-        "slug": "wallet-mobile",
-        "owner": "HealthcareWallet",
-        "version": "1.0.0",
-        "assetBundlePatterns": ["**/*"]
-    },
-    "name": "wallet-mobile"
+  "expo": {
+    "name": "wallet-mobile",
+    "slug": "wallet-mobile",
+    "owner": "HealthcareWallet",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "bundleIdentifier": "edu.miamioh.csi.capstone.wallet",
+      "buildNumber": "1.0.0"
+    }
+  },
+  "name": "wallet-mobile"
 }

@@ -77,11 +77,21 @@ const query = async (method, url) => {
     }
 }
 
+/**
+ * This method returns the user data that was received at login
+ * @returns User data
+ */
 export const getUserData = () => {
     if (user == undefined) throw Error("Not logged in");
     return user;
 }
 
-export const getPatientData = () => {
+/**
+ * This method makes a get request to the server, and returns patient info for the current
+ * logged in user
+ * @returns Patient data
+ */
+export const getPatientData = async () => {
     if (user == undefined) throw Error("Not logged in");
+    return await query('get', `patients/${user.id}/`);
 }

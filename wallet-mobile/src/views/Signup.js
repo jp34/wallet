@@ -10,10 +10,15 @@ import {
     StyleSheet,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { signup } from "../api/strapi-client";
 
 const Signup = ({ navigation }) => {
     // Boolean control for SecureText
     const [showPassword, setShowPassword] = React.useState(false);
+    const [email, setEmail] = React.useState();
+    const [username, setUsername] = React.useState();
+    const [password, setPassword] = React.useState();
+    const [passConfirm, setPassConfirm] = React.useState();
 
     // Renders Login Header
     function renderLoginHeader() {
@@ -40,6 +45,7 @@ const Signup = ({ navigation }) => {
 
                 {/* Form */}
                 <View style={styles.formGroup}>
+                    
                     {/* Email */}
                     <View style={styles.inputGroup}>
                         <Text style={styles.inputHeader}>Email</Text>
@@ -47,26 +53,20 @@ const Signup = ({ navigation }) => {
                             style={styles.input}
                             placeholder="myemail@gmail.com"
                             placeholderTextColor="#fff"
+                            onChangeText={(text) => setEmail(text)}
+                            require
                         />
                     </View>
 
-                    {/* First */}
+                    {/* Email */}
                     <View style={styles.inputGroup}>
-                        <Text style={styles.inputHeader}>First</Text>
+                        <Text style={styles.inputHeader}>Username</Text>
                         <TextInput
                             style={styles.input}
-                            placeholder="John"
+                            placeholder="username"
                             placeholderTextColor="#fff"
-                        />
-                    </View>
-
-                    {/* Last */}
-                    <View style={styles.inputGroup}>
-                        <Text style={styles.inputHeader}>Last</Text>
-                        <TextInput
-                            style={styles.input}
-                            placeholder="Doe"
-                            placeholderTextColor="#fff"
+                            onChangeText={(text) => setUsername(text)}
+                            require
                         />
                     </View>
 
@@ -78,6 +78,8 @@ const Signup = ({ navigation }) => {
                             placeholderTextColor="#fff"
                             placeholder="12345"
                             secureTextEntry={!showPassword}
+                            onChangeText={(text) => setPassword(text)}
+                            require
                         />
                         <TouchableOpacity
                             style={styles.passwordImageArea}
@@ -98,6 +100,8 @@ const Signup = ({ navigation }) => {
                             placeholderTextColor="#fff"
                             placeholder="12345"
                             secureTextEntry={!showPassword}
+                            onChangeText={(text) => setPassConfirm(text)}
+                            require
                         />
                         <TouchableOpacity
                             style={styles.passwordImageArea}
@@ -114,12 +118,21 @@ const Signup = ({ navigation }) => {
         );
     }
 
+    async function attemptSignup() {
+        if (password != passConfirm) {
+            // Handle for non matching password and confirmation
+            return;
+        }
+        const response = await signup(username, email, password);
+        navigation.navigate("Dashboard");
+    }
+
     // Renders Login Button
     function renderSignupButton() {
         return (
             <TouchableOpacity
                 style={styles.signupButton}
-                onPress={() => navigation.navigate("Dashboard")}
+                onPress={() => attemptSignup()}
             >
                 <Text style={styles.signupButtonText}>Sign Up</Text>
             </TouchableOpacity>

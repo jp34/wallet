@@ -1,5 +1,7 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import { View, StyleSheet, TouchableOpacity, Image, Text } from "react-native";
+import axios from "axios";
 
 const MyHealth = ({ navigation }) => {
     // Renders Profile Header
@@ -19,6 +21,23 @@ const MyHealth = ({ navigation }) => {
     );
   }
 */
+    const [data, setData] = useState("Loading...");
+
+    const getData = () => {
+        axios({
+            method: 'get',
+            mode: 'no-cors',
+            url: 'wallet.capstone.csi.miamioh.edu:8000/patients/:1',
+          })
+        .then(response => {
+            console.log(response.data);
+            setData(response.data);
+      })
+    }
+
+    useEffect(() => {
+        getData();
+    }, []);
 
     // Renders back button
     function renderBackButton() {
@@ -48,10 +67,10 @@ const MyHealth = ({ navigation }) => {
             <View style={styles.descTitle}>
                 <Text style={styles.descText}>Current Diagnoses</Text>
                 <View>
-                    <Text>[Diagnoses 1]</Text>
-                    <Text>[Diagnoses 2]</Text>
-                    <Text>[Diagnoses 3]</Text>
-                    <Text>[Diagnoses 4]</Text>
+                    <Text>[{data.data?.[0]}]</Text>
+                    <Text>[{data.data?.[1]}]</Text>
+                    <Text>[{data.data?.[2]}]</Text>
+                    <Text>[{data.data?.[3]}]</Text>
                 </View>
             </View>
         );

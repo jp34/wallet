@@ -10,10 +10,13 @@ import {
     StyleSheet,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { login } from "../api/strapi-client";
 
 const Login = ({ navigation }) => {
     // Boolean control for SecureText
     const [showPassword, setShowPassword] = React.useState(false);
+    const [email, setEmail] = React.useState();
+    const [password, setPassword] = React.useState();
 
     // Renders Sign Up Header
     function renderSignUpHeader() {
@@ -55,19 +58,23 @@ const Login = ({ navigation }) => {
                     <View style={styles.inputGroup}>
                         <Text style={styles.inputHeader}>Email</Text>
                         <TextInput
+                            id="user-identifier"
                             style={styles.input}
                             placeholder="myemail@gmail.com"
                             placeholderTextColor="#fff"
+                            onChangeText={(text) => setEmail(text)}
                         />
                     </View>
                     {/* Password */}
                     <View style={styles.inputGroup}>
                         <Text style={styles.inputHeader}>Password</Text>
                         <TextInput
+                            id="user-password"
                             style={styles.input}
                             placeholderTextColor="#fff"
                             placeholder="12345"
                             secureTextEntry={!showPassword}
+                            onChangeText={(text) => setPassword(text)}
                         />
                         <TouchableOpacity
                             style={styles.passwordImageArea}
@@ -84,12 +91,23 @@ const Login = ({ navigation }) => {
         );
     }
 
+    async function attemptLogin() {
+        if (email == undefined || password == undefined) return;
+        let result = await login(email, password);
+        if (result != false) {
+            navigation.navigate("Dashboard");
+        } else {
+            // Invalid login provided, should notify user
+            console.log("Login failed");
+        }
+    }
+
     // Renders Login Button
     function renderLoginButton() {
         return (
             <TouchableOpacity
                 style={styles.loginButton}
-                onPress={() => navigation.navigate("Dashboard")}
+                onPress={() => attemptLogin()}
             >
                 <Text style={styles.loginButtonText}>Log In</Text>
             </TouchableOpacity>

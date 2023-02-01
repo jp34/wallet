@@ -1,19 +1,19 @@
 import { Router, Request, Response } from "express";
-import MintService from "./web3.service";
-import { Payload } from "../payload/payload.interface";
-import StorageService from "../storage/storage.service";
+import { Payload } from "../model/payload.interface";
+import IpfsService from "../service/ipfs.service";
+import Web3Service from "../service/web3.service";
 
-export default class MintController {
+export default class Web3Controller {
     public router: Router;
     private valid_token: Boolean;
-    private web3Service: MintService;
-    private storageService: StorageService;
+    private web3Service: Web3Service;
+    private ipfsService: IpfsService;
 
     constructor() {
         this.router = Router();
         this.valid_token = false;
-        this.web3Service = new MintService();
-        this.storageService = new StorageService();
+        this.web3Service = new Web3Service();
+        this.ipfsService = new IpfsService();
         this.init();
     }
 
@@ -52,7 +52,7 @@ export default class MintController {
 
         // Store payload data on IPFS
         console.log(`Storing payload: ${JSON.stringify(payload)}`);
-        let cid = await this.storageService.upload([payload]);
+        let cid = await this.ipfsService.upload([payload]);
 
         // Deploy payload to ethereum
         console.log(`Deploying new payload: ${JSON.stringify(payload)}`);

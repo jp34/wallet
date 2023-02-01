@@ -1,7 +1,7 @@
 import { Web3Storage, File } from "web3.storage";
-import { Payload } from "../payload/payload.interface";
+import { Payload } from "../model/payload.interface";
 
-export default class StorageService {
+export default class IpfsService {
     private api_token: string;
     private client: Web3Storage;
 

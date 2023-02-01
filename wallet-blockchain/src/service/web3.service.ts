@@ -1,9 +1,9 @@
 import Web3 from "web3";
 import { compileSol } from "solc-typed-ast";
 import { HttpProvider } from "web3-core";
-import { Payload } from "../payload/payload.interface";
+import { Payload } from "../model/payload.interface";
 
-export default class MintService {
+export default class Web3Service {
     private providerHost: string;
     private providerPort: string;
     private provider: HttpProvider;

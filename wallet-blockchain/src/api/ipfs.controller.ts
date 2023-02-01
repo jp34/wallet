@@ -56,8 +56,8 @@ export default class IpfsController {
      */
     public getOne = async (request: Request, response: Response, next: NextFunction) => {
         try {
-            const cid = request.params.cid.toString();
-            const file = await this.service.getOne(cid);
+            const id = request.params.id.toString();
+            const file = await this.service.getOne(id);
             return response.status(200).json({ file: file });
         } catch (error: any) {
             console.log(`Failed to fetch ipfs document `);

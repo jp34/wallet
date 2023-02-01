@@ -2,14 +2,15 @@ import { Web3Storage, File } from "web3.storage";
 import { Payload } from "../model/payload.interface";
 
 export default class IpfsService {
-    private api_token: string;
+    
+    private token: string;
     private client: Web3Storage;
 
     constructor() {
-        this.api_token = process.env.API_TOKEN_IPFS ?? "undefined";
-        if (this.api_token === "undefined")
-            throw "API_TOKEN_IPFS is not defined in .env!";
-        this.client = new Web3Storage({ token: this.api_token });
+        this.token = process.env.WEB3_IPFS_TOKEN ?? "undefined";
+        if (this.token === "undefined")
+            throw new Error("IPFS_JWT_TOKEN is not defined in .env!");
+        this.client = new Web3Storage({ token: this.token });
     }
 
     private buildFileBuffers = (documents: Payload[]) => {

@@ -4,15 +4,15 @@
   "version": "0.1.0",
   "description": "A Strapi application",
   "scripts": {
-    "develop": "strapi develop",
-    "start": "strapi start",
     "build": "strapi build",
-    "strapi": "strapi"
+    "start": "strapi start",
+    "develop": "strapi develop"
   },
   "dependencies": {
     "@strapi/plugin-i18n": "4.4.5",
     "@strapi/plugin-users-permissions": "4.4.5",
     "@strapi/strapi": "4.4.5",
+    "dotenv": "^16.0.3",
     "pg": "8.6.0"
   },
   "author": {

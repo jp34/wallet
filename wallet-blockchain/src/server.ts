@@ -1,10 +1,5 @@
-// Configure environment before imports
 import dotenv from "dotenv";
-import { configureEnvironment } from "./config";
-export var environment = configureEnvironment();
-dotenv.config({ path: environment.file });
-
-// Import modules
+dotenv.config();
 import express, { Request, Response, NextFunction} from "express";
 import morgan from "morgan";
 import apiRouter from "./api/router";

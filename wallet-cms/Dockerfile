@@ -1,7 +1,7 @@
-FROM node:18.12.0
+FROM node:14.21.1
 
 # Copy source files
-WORKDIR usr/src/wallet
+WORKDIR /usr/src/wallet
 COPY . .
 
 # Build wallet-cms

@@ -1,17 +1,17 @@
 require('dotenv').config();
 
 export default ({ env }) => {
-	let user = env('DATABASE_USER', process.env.DATABASE_USER);
-	let pass = env('DATABASE_PASS', process.env.DATABASE_PASS);
-	let host = env('DATABASE_HOST', process.env.DATABASE_HOST);
-	let port = env('DATABASE_PORT', process.env.DATABASE_PORT);
-	let database = env('DATABASE_NAME', process.env.DATABASE_NAME);
-	
+	const user = env('STRAPI_DB_USER', process.env.STRAPI_DB_USER);
+	const pass = env('STRAPI_DB_PASS', process.env.STRAPI_DB_PASS);
+	const host = env('STRAPI_DB_HOST', process.env.STRAPI_DB_HOST);
+	const port = env('STRAPI_DB_PORT', process.env.STRAPI_DB_PORT);
+	const name = env('STRAPI_DB_NAME', process.env.STRAPI_DB_NAME);
+	const connectionString = `postgres://${user}:${pass}@${host}:${port}/${name}`;
 	return {
 		connection: {
 			client: 'postgres',
 			connection: {
-				connectionString: `postgres://${user}:${pass}@${host}:${port}/${database}`,
+				connectionString: connectionString,
 				ssl: env('DATABASE_SSL', false)
 			},
 			debug: false,

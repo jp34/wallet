@@ -29,6 +29,12 @@
     },
     "type": {
       "type": "string"
+    },
+    "medical_encounters": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::medical-encounter.medical-encounter",
+      "mappedBy": "diagnoses"
     }
   }
 }

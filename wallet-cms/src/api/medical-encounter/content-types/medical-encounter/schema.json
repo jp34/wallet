@@ -1,0 +1,56 @@
+{
+  "kind": "collectionType",
+  "collectionName": "medical_encounters",
+  "info": {
+    "singularName": "medical-encounter",
+    "pluralName": "medical-encounters",
+    "displayName": "MedicalEncounter",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "patient": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::patient.patient",
+      "inversedBy": "medical_encounters"
+    },
+    "medical_provider": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::medical-provider.medical-provider",
+      "inversedBy": "medical_encounters"
+    },
+    "diagnoses": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::diagnosis.diagnosis",
+      "inversedBy": "medical_encounters"
+    },
+    "visit_reason": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string",
+      "required": true
+    },
+    "visit_date": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "date",
+      "required": true
+    }
+  }
+}

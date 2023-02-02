@@ -1,0 +1,102 @@
+{
+  "kind": "collectionType",
+  "collectionName": "medical_providers",
+  "info": {
+    "singularName": "medical-provider",
+    "pluralName": "medical-providers",
+    "displayName": "MedicalProvider"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "title": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "email",
+      "required": true
+    },
+    "phone": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string",
+      "required": true
+    },
+    "address_line_1": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string",
+      "required": true
+    },
+    "address_line_2": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
+    },
+    "city": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string",
+      "required": true
+    },
+    "state": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string",
+      "required": true
+    },
+    "zip_cde": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string",
+      "required": true
+    },
+    "medical_encounters": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::medical-encounter.medical-encounter",
+      "mappedBy": "medical_provider"
+    },
+    "patient_medications": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::patient-medication.patient-medication",
+      "mappedBy": "medical_provider"
+    }
+  }
+}

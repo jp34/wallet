@@ -1,2 +1,0 @@
-var crypto = require("crypto");
-console.log(crypto.randomBytes(16).toString('base64'));

@@ -42,7 +42,8 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "plugin::users-permissions.user",
-      "inversedBy": "patient_id"
+      "inversedBy": "patient_id",
+      "autoPopulate": true
     },
     "medical_encounters": {
       "type": "relation",

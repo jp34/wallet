@@ -19,7 +19,8 @@
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::patient.patient",
-      "inversedBy": "patient_allergies"
+      "inversedBy": "patient_allergies",
+      "autoPopulate": true
     },
     "description": {
       "pluginOptions": {

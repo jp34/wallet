@@ -63,17 +63,19 @@ export const signup = async (username, email, password) => {
  */
 export const createPatient = async (username, firstname, middlename, lastname, phone, birthday) => {
     try {
-        const response = await axios.post(baseUrl.concat('/auth/local/register'), {
+        const response = await axios.post(baseUrl.concat('/api/patients'), {
             data: {
-            username: username,
-            first_name: firstname,
-            middle_name: middlename,
-            last_name: lastname,
-            phone : phone,
-            birthday: birthday
+                username: username,
+                first_name: firstname,
+                middle_name: middlename,
+                last_name: lastname,
+                phone : phone,
+                birthday: birthday
             }
-        }, { mode: 'no-cors' ,
-            Authorization: `Bearer ${token}`});
+        }, {
+            mode: 'no-cors' ,
+            Authorization: `Bearer ${token}`
+        });
         if (response.status != 200) throw Error("Server responded with error");
         return response.data;
     } catch (error) {

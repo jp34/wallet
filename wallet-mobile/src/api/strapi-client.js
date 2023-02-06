@@ -53,33 +53,6 @@ export const signup = async (username, email, password) => {
     }
 }
 
-export const createPatient = async (username, firstName, middleName, lastName, phone, birthday) => {
-    try {
-        const response = await axios.post(baseUrl.concat('auth/local/register'),
-            {
-                data: {
-                    username: username,
-                    first_name: firstName,
-                    middle_name: middleName,
-                    last_name: lastName,
-                    phone: phone,
-                    birthday: birthday,
-                }
-            },
-            {
-                Authorization: `Bearer ${token}`,
-                mode: 'no-cors',
-            }
-        );
-        if (response.status != 200) throw Error("Server responded with error");
-        return response.data;
-    } catch (error) {
-        console.log("Create patient failed with error");
-        console.log(error);
-        return false;
-    }
-}
-
 /**
  * This method makes a patient info request to the Strapi API
  * @param username Username of new user

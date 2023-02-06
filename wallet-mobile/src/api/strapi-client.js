@@ -63,7 +63,7 @@ export const signup = async (username, email, password) => {
  */
 export const createPatient = async (username, firstname, middlename, lastname, phone, birthday) => {
     try {
-        const response = await axios.post(baseUrl.concat('/api/patients'), {
+        const response = await axios.post(baseUrl.concat('/patients'), {
             data: {
                 username: username,
                 first_name: firstname,

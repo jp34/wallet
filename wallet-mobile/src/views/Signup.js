@@ -124,7 +124,7 @@ const Signup = ({ navigation }) => {
             return;
         }
         const response = await signup(username, email, password);
-        navigation.navigate("Dashboard");
+        navigation.navigate("CreatePatient");
     }
 
     // Renders Login Button

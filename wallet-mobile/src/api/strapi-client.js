@@ -81,6 +81,38 @@ export const createPatient = async (username, firstName, middleName, lastName, p
 }
 
 /**
+ * This method makes a patient info request to the Strapi API
+ * @param username Username of new user
+ * @param middlename middle name of usrer
+ * @param lastname last name of new user
+ * @param birthday birthday of new user
+ * @returns User data if post is successful, otherwise false
+ */
+export const createPatient = async (username, firstname, middlename, lastname, phone, birthday) => {
+    try {
+        const response = await axios.post(baseUrl.concat('/patients'), {
+            data: {
+                username: username,
+                first_name: firstname,
+                middle_name: middlename,
+                last_name: lastname,
+                phone : phone,
+                birthday: birthday
+            }
+        }, {
+            mode: 'no-cors' ,
+            Authorization: `Bearer ${token}`
+        });
+        if (response.status != 200) throw Error("Server responded with error");
+        return response.data;
+    } catch (error) {
+        console.log("Create patient failed with error");
+        console.log(error);
+        return false;
+    }
+}
+
+/**
  * This is a utility method used by various query methods
  * @param method Http method to use (get/post)
  * @param url Location of resource

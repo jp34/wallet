@@ -8,6 +8,7 @@ import Dashboard from "./src/views/Dashboard";
 import Profile from "./src/views/Profile";
 import MyHealth from "./src/views/MyHealth";
 import Research from "./src/views/Research";
+import CreatePatient from "./src/views/CreatePatient";
 
 const Stack = createNativeStackNavigator();
 
@@ -29,6 +30,7 @@ const App = () => {
                 <Stack.Screen name="Profile" component={Profile} />
                 <Stack.Screen name="MyHealth" component={MyHealth} />
                 <Stack.Screen name="Research" component={Research} />
+                <Stack.Screen name="CreatePatient" component={CreatePatient} />
             </Stack.Navigator>
         </NavigationContainer>
     );

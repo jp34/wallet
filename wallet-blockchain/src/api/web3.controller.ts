@@ -14,13 +14,6 @@ export default class Web3Controller {
         this.valid_token = false;
         this.web3Service = new Web3Service();
         this.ipfsService = new IpfsService();
-        this.init();
-    }
-
-    private init() {
-        this.router.get("/", this.getAll);
-        this.router.post("/", this.create);
-        this.router.get("/:id", this.getOne);
     }
 
     // ENDPOINTS

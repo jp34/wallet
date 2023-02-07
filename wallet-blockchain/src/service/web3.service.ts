@@ -24,7 +24,8 @@ export default class Web3Service {
     }
 
     async deploy(payload: Payload) {
-        const contractPath = path.join(__dirname, 'contracts', 'payload.sol');
+        const contractPath = path.join(__dirname, "../..", "contracts", "payload.sol");
+        console.log(contractPath);
         const compiled = await compileSol(contractPath, "auto");
         const abi = compiled.data.contracts[contractPath].payload.abi;
         const bytecode = compiled.data.contracts[contractPath].payload.evm.bytecode.object;

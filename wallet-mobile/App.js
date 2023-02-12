@@ -9,6 +9,9 @@ import Profile from "./src/views/Profile";
 import MyHealth from "./src/views/MyHealth";
 import Research from "./src/views/Research";
 import CreatePatient from "./src/views/CreatePatient";
+import TermsConditions from "./src/views/TermsConditions";
+import IntakeMedProvider from "./src/views/IntakeMedProvider";
+import IntakePatientAllergies from "./src/views/IntakePatientAllergies";
 
 const Stack = createNativeStackNavigator();
 
@@ -31,6 +34,9 @@ const App = () => {
                 <Stack.Screen name="MyHealth" component={MyHealth} />
                 <Stack.Screen name="Research" component={Research} />
                 <Stack.Screen name="CreatePatient" component={CreatePatient} />
+                <Stack.Screen name="TermsConditions" component={TermsConditions} />
+                <Stack.Screen name="IntakeMedProvider" component={IntakeMedProvider} />
+                <Stack.Screen name="IntakePatientAllergies" component={IntakePatientAllergies} />
             </Stack.Navigator>
         </NavigationContainer>
     );

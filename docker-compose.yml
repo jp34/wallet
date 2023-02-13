@@ -11,22 +11,38 @@ services:
       - "8432:5432"
 
   wallet-cms:
-    build: ./wallet-cms
     container_name: wallet-cms
+    build: ./wallet-cms    
     depends_on:
       - "wallet-db"
-    env_file:
-      - ./wallet-cms/.env
     ports:
       - "8000:8080"
+    environment:
+     - NODE_ENV=~
+     - STRAPI_HOST=~
+     - STRAPI_PORT=~
+     - STRAPI_URL=~
+     - STRAPI_SECRET=~
+     - STRAPI_APP_KEY_1=~
+     - STRAPI_APP_KEY_2=~
+     - STRAPI_DB_USER=~
+     - STRAPI_DB_PASS=~
+     - STRAPI_DB_HOST=~
+     - STRAPI_DB_PORT=~
+     - STRAPI_DB_NAME=~
+     - STRAPI_DB_SCHEMA=~
 
   wallet-blockchain:
     build: ./wallet-blockchain
     container_name: wallet-blockchain
     depends_on:
-      - "wallet-db"
-      - "wallet-cms"
-    env_file:
-      - ./wallet-blockchain/.env
+     - "wallet-db"
+     - "wallet-cms"
     ports:
-      - "8001:8080"
+     - "8001:8080"
+    environment:
+     - NODE_ENV=~
+     - WEB3_SERVER_PORT=~
+     - WEB3_PROVIDER_HOST=~
+     - WEB3_PROVIDER_PORT=~
+     - WEB3_IPFS_TOKEN=~

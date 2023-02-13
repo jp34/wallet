@@ -3,7 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Homescreen from "./src/views/Homescreen";
 import Login from "./src/views/Login";
-import Signup from "./src/views/Signup";
+import Signup from "./src/views/SignUp";
 import Dashboard from "./src/views/Dashboard";
 import Profile from "./src/views/Profile";
 import MyHealth from "./src/views/MyHealth";
@@ -21,12 +21,12 @@ const App = () => {
             <Stack.Navigator
                 screenOptions={{
                     headerShown: false,
-                    gestureEnabled: true,
-                    gestureResponseDistance: { horizontal: 20 },
+                    gestureEnabled: false,
+                    animation: "fade"
                 }}
-                initialRouteName={"Homescreen"}
+                initialRouteName={"Login"}
             >
-                <Stack.Screen name="Homescreen" component={Homescreen} />
+                {/* <Stack.Screen name="Homescreen" component={Homescreen} /> */}
                 <Stack.Screen name="Login" component={Login} />
                 <Stack.Screen name="Signup" component={Signup} />
                 <Stack.Screen name="Dashboard" component={Dashboard} />

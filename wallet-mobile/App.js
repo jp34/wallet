@@ -21,9 +21,9 @@ const App = () => {
                     gestureEnabled: true,
                     gestureResponseDistance: { horizontal: 20 },
                 }}
-                initialRouteName={"Homescreen"}
+                initialRouteName={"Login"}
             >
-                <Stack.Screen name="Homescreen" component={Homescreen} />
+                {/* <Stack.Screen name="Homescreen" component={Homescreen} /> */}
                 <Stack.Screen name="Login" component={Login} />
                 <Stack.Screen name="Signup" component={Signup} />
                 <Stack.Screen name="Dashboard" component={Dashboard} />

@@ -13,7 +13,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { signup } from "../api/strapi-client";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
-const Signup = ({ navigation }) => {
+const SignUp = ({ navigation }) => {
   // Boolean control for SecureText
   const [showPassword, setShowPassword] = React.useState(false);
   const [email, setEmail] = React.useState();
@@ -23,29 +23,56 @@ const Signup = ({ navigation }) => {
   const [firstName, setFirstName] = React.useState();
   const [middleName, setMiddleName] = React.useState();
   const [lastName, setLastName] = React.useState();
+  const [medicalTitle, setMedicalTitle] = React.useState();
+  const [medicalEmail, setMedicalEmail] = React.useState();
+  const [medicalPhone, setMedicalPhone] = React.useState();
 
-  // Renders Login Header
-  function renderLoginHeader() {
+  const [formOne, setFormOne] = React.useState(true);
+  const [formTwo, setFormTwo] = React.useState(false);
+  const [formThree, setFormThree] = React.useState(false);
+  const [formFour, setFormFour] = React.useState(false);
+
+  // Renders Page Header
+  function renderPageHeader() {
     return (
-      <TouchableOpacity
-        style={styles.header}
-        onPress={() => navigation.navigate("Login")}
-      >
-        <Image
-          style={styles.headerImage}
-          source={require("../../assets/chevron-left.png")}
-        />
-        <Text style={styles.headerText}>Login</Text>
-      </TouchableOpacity>
+      <View>
+        <TouchableOpacity
+          style={styles.header}
+          onPress={() => navigation.navigate("Login")}
+        >
+          <Image
+            style={styles.headerImage}
+            source={require("../../assets/chevron-left.png")}
+          />
+          <Text style={styles.headerText}>Login</Text>
+        </TouchableOpacity>
+        <Text style={styles.titleText}>Sign Up</Text>
+      </View>
     );
   }
 
-  // Renders Signup Form P1
-  function renderSignupForm1() {
+  function renderPageHeader2() {
     return (
       <View>
-        {/* Title */}
+        <TouchableOpacity
+          style={styles.header}
+          onPress={() => navigation.navigate("")}
+        >
+          <Image
+            style={styles.headerImage}
+            source={require("../../assets/chevron-left.png")}
+          />
+          <Text style={styles.headerText}>Back</Text>
+        </TouchableOpacity>
         <Text style={styles.titleText}>Sign Up</Text>
+      </View>
+    );
+  }
+
+  // Renders Sign Up Form 1
+  function renderSignUpForm1() {
+    return (
+      <View>
         {/* Form */}
         <View style={styles.formGroup}>
           {/* Account Details Section Header */}
@@ -134,7 +161,10 @@ const Signup = ({ navigation }) => {
         {/* Next Sign Up Form Button */}
         <TouchableOpacity
           style={styles.button}
-          onPress={() => renderSignupForm2()}
+          onPress={() => {
+            setFormOne(!formOne);
+            setFormTwo(!formTwo);
+          }}
         >
           {/* Button Text */}
           <Text style={styles.buttonText}>Next</Text>
@@ -143,11 +173,10 @@ const Signup = ({ navigation }) => {
     );
   }
 
-  function renderSignupForm2() {
+  // Renders Sign Up Form 2
+  function renderSignUpForm2() {
     return (
       <View>
-        {/* Title */}
-        <Text style={styles.titleText}>Sign Up</Text>
         {/* Form */}
         <View style={styles.formGroup}>
           {/* Full Name Section Header */}
@@ -206,7 +235,10 @@ const Signup = ({ navigation }) => {
         {/* Next Sign Up Form Button */}
         <TouchableOpacity
           style={styles.button}
-          onPress={() => renderSignupForm3()}
+          onPress={() => {
+            setFormTwo(!formTwo);
+            setFormThree(!formThree);
+          }}
         >
           {/* Button Text */}
           <Text style={styles.buttonText}>Next</Text>
@@ -215,8 +247,100 @@ const Signup = ({ navigation }) => {
     );
   }
 
+  // Renders Sign Up Form 3
+  function renderSignUpForm3() {
+    return (
+      <View>
+        {/* Form */}
+        <View style={styles.formGroup}>
+          {/* Medical Provider Section Header */}
+          <Text style={styles.sectionHeader}>Medical Provider</Text>
+          {/* Medical Provider Section */}
+          <View style={styles.section}>
+            {/* Title Group */}
+            <View style={styles.inputGroup}>
+              {/* Title Header */}
+              <Text style={styles.inputHeader}>Title</Text>
+              {/* Title Input */}
+              <TextInput
+                style={styles.input}
+                placeholder="Dr. Tyler Hallman"
+                onChangeText={(text) => setMedicalTitle(text)}
+              />
+            </View>
+            {/* Email Group */}
+            <View style={styles.inputGroup}>
+              {/* Email Header */}
+              <Text style={styles.inputHeader}>Email</Text>
+              {/* Email Input */}
+              <TextInput
+                style={styles.input}
+                placeholder="myemail@gmail.com"
+                onChangeText={(text) => setMedicalEmail(text)}
+              />
+            </View>
+            {/* Phone Num Group */}
+            <View style={styles.inputGroup}>
+              {/* Phone Num Header */}
+              <Text style={styles.inputHeader}>Phone Number</Text>
+              {/* Phone Num Input */}
+              <TextInput
+                style={styles.input}
+                placeholder="(440) 478 - 1120"
+                onChangeText={(text) => setMedicalPhone(text)}
+              />
+            </View>
+          </View>
+        </View>
+        {/* Next Sign Up Form Button */}
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            setFormThree(!formThree);
+            setFormFour(!formFour);
+          }}
+        >
+          {/* Button Text */}
+          <Text style={styles.buttonText}>Next</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
+  // Renders Sign Up Form 4
+  function renderSignUpForm4() {
+    return (
+      <View>
+        {/* Form */}
+        <View style={styles.formGroup}>
+          {/* Allergies Section Header */}
+          <Text style={styles.sectionHeader}>Allergies</Text>
+          {/* Allergies Section */}
+          <View style={styles.section}>
+            {/* Type Group */}
+            <View style={styles.inputGroup}>
+              {/* Type Header */}
+              <Text style={styles.inputHeader}>Type</Text>
+              {/* Type Input */}
+              <TextInput
+                style={styles.input}
+                placeholder="Gluten"
+                onChangeText={(text) => setAllergyType(text)}
+              />
+            </View>
+          </View>
+        </View>
+        {/* Next Sign Up Form Button */}
+        <TouchableOpacity style={styles.button}>
+          {/* Button Text */}
+          <Text style={styles.buttonText}>Next</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
   // Sign Up Function
-  async function attemptSignup() {
+  async function attemptSignUp() {
     if (password != passConfirm) {
       // Handle for non matching password and confirmation
       return;
@@ -228,11 +352,8 @@ const Signup = ({ navigation }) => {
   // Renders Signup Button
   function renderSignupButton() {
     return (
-      <TouchableOpacity
-        style={styles.signupButton}
-        onPress={() => attemptSignup()}
-      >
-        <Text style={styles.signupButtonText}>Sign Up</Text>
+      <TouchableOpacity style={styles.button} onPress={() => attemptSignUp()}>
+        <Text style={styles.buttonText}>Sign Up</Text>
       </TouchableOpacity>
     );
   }
@@ -242,9 +363,12 @@ const Signup = ({ navigation }) => {
       <LinearGradient colors={constants.colors.gradient1} style={{ flex: 1 }}>
         <SafeAreaView style={{ flex: 1 }}>
           <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding">
-            {renderLoginHeader()}
+            {renderPageHeader()}
             <View style={{ flex: 1, justifyContent: "center" }}>
-              {renderSignupForm1()}
+              {formOne && renderSignUpForm1()}
+              {formTwo && renderSignUpForm2()}
+              {formThree && renderSignUpForm3()}
+              {formFour && renderSignUpForm4()}
             </View>
           </KeyboardAvoidingView>
         </SafeAreaView>
@@ -289,6 +413,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginLeft: 30,
     marginBottom: 25,
+    paddingTop: 40,
   },
   formGroup: {
     marginHorizontal: 30,
@@ -353,4 +478,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Signup;
+export default SignUp;

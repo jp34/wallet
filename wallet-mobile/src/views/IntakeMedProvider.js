@@ -10,31 +10,13 @@ import {
     StyleSheet,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { createPatient } from "../api/strapi-client";
 
-const CreatePatient = ({ navigation }) => {
+const IntakeMedProvider = ({ navigation }) => {
     // Boolean control for SecureText
-    const [firstname, setFName] = React.useState();
-    const [middlename, setMName] = React.useState();
-    const [lastname, setLName] = React.useState();
-    const [date, setDate] = React.useState();
+    const [title, setTitle] = React.useState();
+    const [email, setEmail] = React.useState();
+    const [phone, setPhone] = React.useState();
     const url = "wallet.capstone.csi.miamioh.edu:8000";
-
-    // Renders Skip header (used for debugging purposes as of 2/4/23)
-    function renderSkipHeader() {
-        return (
-            <TouchableOpacity
-                style={styles.header}
-                onPress={() => navigation.navigate("Homescreen")}
-            >
-                <Text style={styles.headerText}>Skip</Text>
-                <Image
-                    style={styles.headerImage}
-                    source={require("../../assets/chevron-right.png")}
-                />
-            </TouchableOpacity>
-        );
-    }
 
     // Renders Intake Form
     function renderIntakeForm() {
@@ -45,55 +27,43 @@ const CreatePatient = ({ navigation }) => {
 
                 {/* Form */}
                 <View style={styles.formGroup}>
-                    
-                    {/* First Name */}
+
+                    {/* Title */}
                     <View style={styles.inputGroup}>
-                        <Text style={styles.inputHeader}>First Name</Text>
+                        <Text style={styles.inputHeader}>Title</Text>
                         <TextInput
                             style={styles.input}
-                            placeholder="First name here"
+                            placeholder="Medical Provider"
                             placeholderTextColor="#fff"
-                            onChangeText={(text) => setFName(text)}
+                            onChangeText={(text) => setTitle(text)}
                             require
                         />
                     </View>
 
-                    {/* Middle name */}
+                    {/* Email */}
                     <View style={styles.inputGroup}>
-                        <Text style={styles.inputHeader}>Middle Name</Text>
+                        <Text style={styles.inputHeader}>Email</Text>
                         <TextInput
                             style={styles.input}
-                            placeholder="Middle name here"
+                            placeholder="JDoe@email.com"
                             placeholderTextColor="#fff"
-                            onChangeText={(text) => setMName(text)}
+                            onChangeText={(text) => setEmail(text)}
                             require
                         />
                     </View>
 
-                    {/* Last Name */}
+                    {/* Phone number */}
                     <View style={styles.inputGroup}>
-                        <Text style={styles.inputHeader}>Last Name</Text>
+                        <Text style={styles.inputHeader}>Phone Number</Text>
                         <TextInput
                             style={styles.input}
-                            placeholder="Last name here"
-                            placeholderTextColor="#fff"
-                            onChangeText={(text) => setLName(text)}
-                            require
-                        />
-                    </View>
-
-                    {/* Birthdate */}
-                    <View style={styles.inputGroup}>
-                        <Text style={styles.inputHeader}>Birthdate</Text>
-                        <TextInput
-                            style={styles.input}
-                            placeholder="mm/dd/yyyy"
+                            placeholder="555-555-5555"
                             //onChange={(e) => formatDate(e)} 
                             keyboardType="numeric"
                             type="text"
-                            value={date}
-                            onChange={handleDateChange}
-                            maxLength={8}
+                            value={phone}
+                            onChange={handlePhoneChange}
+                            maxLength={10}
                             placeholderTextColor="#fff"
                             require
                         />
@@ -103,43 +73,16 @@ const CreatePatient = ({ navigation }) => {
         );
     }
 
-    const handleDateChange = event => {
-        const result = event.target.value.replace(/\D/g, '');
-        setDate(result);
-      };
-
     const handlePhoneChange = event => {
         const result = event.target.value.replace(/\D/g, '');
         setPhone(result);
       };
 
-      // An attempt at live formatting date input to split numbers with "/" e.g 01 / 01 / 2023
-    {/* function formatDate(value) {
-        if (!value) return value;
-
-        const newDate = value;
-
-        const dateLength = newDate.length;
-
-        if (dateLength < 2) return newDate;
-
-        if (dateLength < 4) {
-            return `${newDate.slice(0, 2)} / ${newDate.slice(2)}`;
-        }
-
-        //return `${newDate.slice(0, 2)} / ${newDate.slice(2,4)} / ${newDate.slice(4,8)}`;
-    }
-    */}
-
     // Attempts to save the form and move to next intake screen
     async function attemptSave() {
-        if (firstname == null || middlename == null || lastname == null || date == null) {
-            // Temporary handle for submitting unfilled fields
-            return;
-        }
-
-        const resp = await createPatient(firstname, middlename, lastname, date);
-        navigation.navigate("IntakeMedProvider");
+        // const resp = await createPatient(firstname, middlename, lastname, date);
+        // New client method needed with endpoint
+        navigation.navigate("IntakePatientAllergies");
     }
 
     // Renders Save Button
@@ -162,7 +105,6 @@ const CreatePatient = ({ navigation }) => {
                 style={styles.container}
             >
                 <ScrollView>
-                    {renderSkipHeader()}
                     {renderIntakeForm()}
                     {renderSaveButton()}
                 </ScrollView>
@@ -265,4 +207,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default CreatePatient;
+export default IntakeMedProvider;

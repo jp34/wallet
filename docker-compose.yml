@@ -3,12 +3,14 @@ version: '3'
 services:
 
   wallet-db:
-    image: postgres
     container_name: wallet-db
-    env_file:
-      - ./config/db.env
+    image: postgres:15.2
     ports:
-      - "8432:5432"
+     - "8432:5432"
+    environment:
+     - POSTGRES_USER=~
+     - POSTGRES_PASSWORD=~
+     - POSTGRES_DB=~
 
   wallet-cms:
     container_name: wallet-cms
@@ -33,8 +35,8 @@ services:
      - STRAPI_DB_SCHEMA=~
 
   wallet-blockchain:
-    build: ./wallet-blockchain
     container_name: wallet-blockchain
+    build: ./wallet-blockchain
     depends_on:
      - "wallet-db"
      - "wallet-cms"

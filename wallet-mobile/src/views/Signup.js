@@ -2,15 +2,16 @@ import React from "react";
 import {
   View,
   Text,
-  KeyboardAvoidingView,
-  ScrollView,
   TouchableOpacity,
   Image,
   TextInput,
   StyleSheet,
+  SafeAreaView,
+  KeyboardAvoidingView,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { signup } from "../api/strapi-client";
+import DateTimePicker from "@react-native-community/datetimepicker";
 
 const Signup = ({ navigation }) => {
   // Boolean control for SecureText
@@ -19,6 +20,9 @@ const Signup = ({ navigation }) => {
   const [username, setUsername] = React.useState();
   const [password, setPassword] = React.useState();
   const [passConfirm, setPassConfirm] = React.useState();
+  const [firstName, setFirstName] = React.useState();
+  const [middleName, setMiddleName] = React.useState();
+  const [lastName, setLastName] = React.useState();
 
   // Renders Login Header
   function renderLoginHeader() {
@@ -36,87 +40,182 @@ const Signup = ({ navigation }) => {
     );
   }
 
-  // Renders Signup Form
-  function renderSignupForm() {
+  // Renders Signup Form P1
+  function renderSignupForm1() {
     return (
       <View>
         {/* Title */}
         <Text style={styles.titleText}>Sign Up</Text>
-
         {/* Form */}
         <View style={styles.formGroup}>
-          {/* Email */}
-          <View style={styles.inputGroup}>
-            <Text style={styles.inputHeader}>Email</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="myemail@gmail.com"
-              placeholderTextColor="#fff"
-              onChangeText={(text) => setEmail(text)}
-              require
-            />
-          </View>
-
-          {/* Email */}
-          <View style={styles.inputGroup}>
-            <Text style={styles.inputHeader}>Username</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="username"
-              placeholderTextColor="#fff"
-              onChangeText={(text) => setUsername(text)}
-              require
-            />
-          </View>
-
-          {/* Password */}
-          <View style={styles.inputGroup}>
-            <Text style={styles.inputHeader}>Password</Text>
-            <TextInput
-              style={styles.input}
-              placeholderTextColor="#fff"
-              placeholder="12345"
-              secureTextEntry={!showPassword}
-              onChangeText={(text) => setPassword(text)}
-              require
-            />
-            <TouchableOpacity
-              style={styles.passwordImageArea}
-              onPress={() => setShowPassword(!showPassword)}
-            >
-              <Image
-                style={styles.passwordImage}
-                source={require("../../assets/unlock.png")}
+          {/* Account Details Section Header */}
+          <Text style={styles.sectionHeader}>Account Details</Text>
+          {/* Account Details Section */}
+          <View style={styles.section}>
+            {/* Email Input Group */}
+            <View style={styles.inputGroup}>
+              {/* Email Header */}
+              <Text style={styles.inputHeader}>Email</Text>
+              {/* Email Input */}
+              <TextInput
+                style={styles.input}
+                placeholder="myemail@gmail.com"
+                onChangeText={(text) => setEmail(text)}
+                require
               />
-            </TouchableOpacity>
+              {/* Username Group */}
+              <View style={styles.inputGroup}>
+                {/* Username Header */}
+                <Text style={styles.inputHeader}>Username</Text>
+                {/* Username Input */}
+                <TextInput
+                  style={styles.input}
+                  placeholder="johndoe01"
+                  onChangeText={(text) => setUsername(text)}
+                  require
+                />
+              </View>
+            </View>
           </View>
-
-          {/* Confirm Password */}
-          <View style={styles.inputGroup}>
-            <Text style={styles.inputHeader}>Confirm Password</Text>
-            <TextInput
-              style={styles.input}
-              placeholderTextColor="#fff"
-              placeholder="12345"
-              secureTextEntry={!showPassword}
-              onChangeText={(text) => setPassConfirm(text)}
-              require
-            />
-            <TouchableOpacity
-              style={styles.passwordImageArea}
-              onPress={() => setShowPassword(!showPassword)}
-            >
-              <Image
-                style={styles.passwordImage}
-                source={require("../../assets/unlock.png")}
+          {/* Password Section Header */}
+          <Text style={styles.sectionHeader}>Password</Text>
+          {/* Password Section */}
+          <View style={styles.section}>
+            {/* Password Group */}
+            <View style={styles.inputGroup}>
+              {/* Password Header */}
+              <Text style={styles.inputHeader}>Password</Text>
+              {/* Password Input */}
+              <TextInput
+                style={styles.input}
+                placeholder="12345"
+                secureTextEntry={!showPassword}
+                onChangeText={(text) => setPassword(text)}
+                require
               />
-            </TouchableOpacity>
+              {/* See Password Opacity */}
+              <TouchableOpacity
+                style={styles.passwordImageArea}
+                onPress={() => setShowPassword(!showPassword)}
+              >
+                {/* Password Lock Image */}
+                <Image
+                  style={styles.passwordImage}
+                  source={require("../../assets/unlock.png")}
+                />
+              </TouchableOpacity>
+            </View>
+            {/* Confirm Password Group */}
+            <View style={styles.inputGroup}>
+              {/* Confirm Password Header */}
+              <Text style={styles.inputHeader}>Confirm Password</Text>
+              {/* Confirm Password Input */}
+              <TextInput
+                style={styles.input}
+                placeholder="12345"
+                secureTextEntry={!showPassword}
+                onChangeText={(text) => setPassConfirm(text)}
+                require
+              />
+              {/* See Confirm Password Opacity */}
+              <TouchableOpacity
+                style={styles.passwordImageArea}
+                onPress={() => setShowPassword(!showPassword)}
+              >
+                {/* Confirm Password Lock Image */}
+                <Image
+                  style={styles.passwordImage}
+                  source={require("../../assets/unlock.png")}
+                />
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
+        {/* Next Sign Up Form Button */}
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => renderSignupForm2()}
+        >
+          {/* Button Text */}
+          <Text style={styles.buttonText}>Next</Text>
+        </TouchableOpacity>
       </View>
     );
   }
 
+  function renderSignupForm2() {
+    return (
+      <View>
+        {/* Title */}
+        <Text style={styles.titleText}>Sign Up</Text>
+        {/* Form */}
+        <View style={styles.formGroup}>
+          {/* Full Name Section Header */}
+          <Text style={styles.sectionHeader}>Full Name</Text>
+          {/* Full Name Section */}
+          <View style={styles.section}>
+            <View style={{ flexDirection: "row" }}>
+              {/* First Name Group*/}
+              <View style={[styles.inputRowGroup, { marginRight: 10 }]}>
+                {/* First Name Header */}
+                <Text style={styles.inputHeader}>First</Text>
+                {/* First Name Input */}
+                <TextInput
+                  style={styles.input}
+                  placeholder="John"
+                  onChangeText={(text) => setFirstName(text)}
+                  require
+                />
+              </View>
+              {/* Middle Name Group */}
+              <View style={[styles.inputRowGroup, { marginLeft: 10 }]}>
+                {/* Middle Name Header */}
+                <Text style={styles.inputHeader}>Middle</Text>
+                {/* Middle Name Input */}
+                <TextInput
+                  style={styles.input}
+                  placeholder="Michael"
+                  onChangeText={(text) => setMiddleName(text)}
+                  require
+                />
+              </View>
+            </View>
+            {/* Last Name Group */}
+            <View style={styles.inputGroup}>
+              {/* Last Name Header */}
+              <Text style={styles.inputHeader}>Last</Text>
+              {/* Last Name Input */}
+              <TextInput
+                style={styles.input}
+                placeholder="Doe"
+                onChangeText={(text) => setLastName(text)}
+              />
+            </View>
+          </View>
+          {/* Date of Birth Section Header */}
+          <Text style={styles.sectionHeader}>Date of Birth</Text>
+          {/* Date of Birth Section */}
+          <View style={styles.section}>
+            {/* Date of Birth Group */}
+            <View style={styles.inputGroup}>
+              {/* Date of Birth Input */}
+              <DateTimePicker value={new Date()} display="spinner" />
+            </View>
+          </View>
+        </View>
+        {/* Next Sign Up Form Button */}
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => renderSignupForm3()}
+        >
+          {/* Button Text */}
+          <Text style={styles.buttonText}>Next</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
+  // Sign Up Function
   async function attemptSignup() {
     if (password != passConfirm) {
       // Handle for non matching password and confirmation
@@ -126,7 +225,7 @@ const Signup = ({ navigation }) => {
     navigation.navigate("CreatePatient");
   }
 
-  // Renders Login Button
+  // Renders Signup Button
   function renderSignupButton() {
     return (
       <TouchableOpacity
@@ -139,18 +238,18 @@ const Signup = ({ navigation }) => {
   }
 
   return (
-    <KeyboardAvoidingView style={styles.page}>
-      <LinearGradient
-        colors={constants.colors.gradient1}
-        style={styles.container}
-      >
-        <ScrollView>
-          {renderLoginHeader()}
-          {renderSignupForm()}
-          {renderSignupButton()}
-        </ScrollView>
+    <View style={styles.page}>
+      <LinearGradient colors={constants.colors.gradient1} style={{ flex: 1 }}>
+        <SafeAreaView style={{ flex: 1 }}>
+          <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding">
+            {renderLoginHeader()}
+            <View style={{ flex: 1, justifyContent: "center" }}>
+              {renderSignupForm1()}
+            </View>
+          </KeyboardAvoidingView>
+        </SafeAreaView>
       </LinearGradient>
-    </KeyboardAvoidingView>
+    </View>
   );
 };
 
@@ -165,20 +264,13 @@ const constants = StyleSheet.create({
 
 const styles = StyleSheet.create({
   page: {
-    display: "flex",
-    width: "100%",
-    height: "100%",
-  },
-  container: {
     width: "100%",
     height: "100%",
   },
   header: {
     flexDirection: "row",
-    alignItems: "center",
-    marginTop: 65,
-    paddingHorizontal: 20,
-    justifyContent: "flex-start",
+    marginTop: 20,
+    paddingLeft: 20,
   },
   headerText: {
     marginLeft: 15,
@@ -191,35 +283,22 @@ const styles = StyleSheet.create({
     tintColor: "#fff",
     resizeMode: "contain",
   },
-  logoGradient: {
-    width: 160,
-    height: 160,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 30,
-    marginTop: 50,
-    alignSelf: "center",
-  },
-  logoText: {
-    color: "#fff",
-    fontSize: 30,
-    fontWeight: "bold",
-    letterSpacing: 1,
-  },
   titleText: {
     color: "#fff",
     fontSize: 30,
     fontWeight: "bold",
-    marginTop: 30,
     marginLeft: 30,
+    marginBottom: 25,
   },
   formGroup: {
-    marginTop: 10,
     marginHorizontal: 30,
   },
   inputGroup: {
-    marginTop: 20,
+    marginTop: 10,
+  },
+  inputRowGroup: {
+    marginTop: 10,
+    flex: 1,
   },
   inputHeader: {
     fontSize: 20,
@@ -231,7 +310,8 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     height: 40,
     color: "#fff",
-    fontSize: 20,
+    fontSize: 19,
+    placeholderTextColor: "#C9C9C9",
   },
   passwordImageArea: {
     position: "absolute",
@@ -245,18 +325,31 @@ const styles = StyleSheet.create({
     width: 20,
     tintColor: "#fff",
   },
-  signupButton: {
+  button: {
     height: 60,
     backgroundColor: "#fff",
-    borderRadius: 20,
+    borderRadius: 15,
     alignItems: "center",
     justifyContent: "center",
-    margin: 30,
+    marginHorizontal: 30,
+    marginTop: 30,
   },
-  signupButtonText: {
+  buttonText: {
     color: constants.colors.primary,
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: "bold",
+  },
+  section: {
+    padding: 16,
+    borderRadius: 8,
+    backgroundColor: "rgba(255, 255, 255, 0.15)",
+  },
+  sectionHeader: {
+    fontSize: 21,
+    color: "#fff",
+    fontWeight: "bold",
+    padding: 5,
+    marginTop: 10,
   },
 });
 

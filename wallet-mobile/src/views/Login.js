@@ -131,10 +131,7 @@ const Login = ({ navigation }) => {
     <View style={styles.page}>
       <LinearGradient colors={constants.colors.gradient1} style={{ flex: 1 }}>
         <SafeAreaView style={{ flex: 1 }}>
-          <KeyboardAvoidingView
-            style={{ flex: 1 }}
-            behavior="padding"
-          >
+          <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding">
             {renderSignUpHeader()}
             <View style={{ justifyContent: "center", flex: 1 }}>
               {renderLogo()}
@@ -218,7 +215,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     height: 40,
     color: "#fff",
-    fontSize: 20,
+    fontSize: 19,
     placeholderTextColor: "#C9C9C9",
   },
   passwordImageArea: {
@@ -239,11 +236,12 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     alignItems: "center",
     justifyContent: "center",
-    margin: 30,
+    marginTop: 30,
+    marginHorizontal: 30,
   },
   loginButtonText: {
     color: constants.colors.primary,
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: "bold",
   },
   metamaskButton: {

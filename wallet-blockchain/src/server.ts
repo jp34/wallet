@@ -10,7 +10,7 @@ const port = process.env.WEB3_SERVER_PORT;
 app.use(express.json());
 app.use(morgan("combined"));
 
-app.use("/api", apiRouter);
+app.use("/web3/api", apiRouter);
 
 // Handle errors
 app.use((error: Error, request: Request, response: Response, next: NextFunction) => {

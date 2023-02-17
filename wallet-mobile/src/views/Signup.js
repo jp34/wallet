@@ -119,12 +119,18 @@ const Signup = ({ navigation }) => {
     }
 
     async function attemptSignup() {
-        if (password != passConfirm) {
-            // Handle for non matching password and confirmation
-            return;
+        try {
+            if (password != passConfirm) {
+                // Handle for non matching password and confirmation
+                return;
+            }
+            const result = await signup(username, email, password);
+            if (result) return navigation.navigate("CreatePatient", { user: result.user });
+            // Handle for incorrect password
+        } catch (err) {
+            console.log("Signup Failed");
+            console.error(err);
         }
-        const response = await signup(username, email, password);
-        navigation.navigate("CreatePatient");
     }
 
     // Renders Login Button

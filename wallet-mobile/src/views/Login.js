@@ -96,10 +96,11 @@ const Login = ({ navigation }) => {
     async function attemptLogin() {
         const result = await login(identifier, password);
         if (result != false) {
-            navigation.navigate("Dashboard");
+            return navigation.navigate("Dashboard", result.user);
         } else {
             // Invalid login provided, should notify user
             console.log("Login failed");
+            return false;
         }
     }
 

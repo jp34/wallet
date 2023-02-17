@@ -1,8 +1,13 @@
 const axios = require("axios");
 
-const baseUrl = "http://localhost:8000/api/";
-var token = "";
-var user = {};
+const host = 'localhost';
+const port = '8000';
+const baseUrl = `http://${host}:${port}`;
+
+var session = {
+    user: {},
+    token: ""
+}
 
 /**
  * This method makes a login request to the Strapi API
@@ -12,15 +17,15 @@ var user = {};
  */
 export const login = async (identifier, password) => {
     try {
-        let response = await axios.post(baseUrl.concat('auth/local/'), {
+        const response = await axios.post(baseUrl.concat('/api/auth/local'), {
             identifier: identifier,
             password: password
         }, { mode: 'no-cors' });
         if (response.status != 200) throw Error("Server responded with error");
-        token = response.data.jwt;
-        user = response.data.user;
-        console.log(user);
-        return user;
+        session.user = response.data.user;
+        session.token = response.data.jwt;
+        console.log(session.user);
+        return { user: session.user };
     } catch (error) {
         console.log("Login failed due to error");
         console.log(error);
@@ -37,15 +42,15 @@ export const login = async (identifier, password) => {
  */
 export const signup = async (username, email, password) => {
     try {
-        let response = await axios.post(baseUrl.concat('auth/local/register'), {
+        let response = await axios.post(baseUrl.concat('/api/auth/local/register'), {
             username: username,
             email: email,
             password: password
         }, { mode: 'no-cors' });
         if (response.status != 200) throw Error("Server responded with error");
-        token = response.data.jwt;
-        user = response.data.user;
-        return user;
+        session.user = response.data.user;
+        session.token = response.data.jwt;
+        return { user: session.user };
     } catch (error) {
         console.log("Signup failed due to error");
         console.log(error);
@@ -63,7 +68,7 @@ export const signup = async (username, email, password) => {
  */
 export const createPatient = async (username, firstname, middlename, lastname, phone, birthday) => {
     try {
-        const response = await axios.post(baseUrl.concat('/patients'), {
+        const response = await axios.post(baseUrl.concat('/api/patients'), {
             data: {
                 username: username,
                 first_name: firstname,
@@ -74,7 +79,7 @@ export const createPatient = async (username, firstname, middlename, lastname, p
             }
         }, {
             mode: 'no-cors' ,
-            Authorization: `Bearer ${token}`
+            Authorization: `Bearer ${session.token}`
         });
         if (response.status != 200) throw Error("Server responded with error");
         return response.data;
@@ -99,7 +104,7 @@ const query = async (method, url) => {
             mode: 'no-cors',
             url: baseUrl.concat(url),
             headers: {
-                Authorization: `Bearer ${token}`
+                Authorization: `Bearer ${session.token}`
             }
         });
         return response.data;
@@ -114,8 +119,8 @@ const query = async (method, url) => {
  * @returns User data
  */
 export const getUserData = () => {
-    if (user == undefined) throw Error("Not logged in");
-    return user;
+    if (session.user == undefined) throw Error("Not logged in");
+    return session.user;
 }
 
 /**
@@ -124,6 +129,6 @@ export const getUserData = () => {
  * @returns Patient data
  */
 export const getPatientData = async () => {
-    if (user == undefined) throw Error("Not logged in");
-    return await query('get', `patients/${user.id}/`);
+    if (session.user == undefined) throw Error("Not logged in");
+    return await query('get', `/api/patients/${session.user.id}/`);
 }

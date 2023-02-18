@@ -75,7 +75,7 @@ const Research = ({ navigation }) => {
                 style={styles.backHeader}
             >
                 <Image
-                    source={require("../../assets/chevron-left.png")}
+                    source={require("../../../assets/icons/chevron-left.png")}
                     style={styles.backImage}
                 />
             </TouchableOpacity>

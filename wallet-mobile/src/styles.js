@@ -18,7 +18,9 @@ const styles = StyleSheet.create({
       color: '#FFF',
       fontSize: 35,
       fontWeight: 'bold',
-      marginVertical: 30,
+      marginTop: 20,
+      marginBottom: 30,
+      marginLeft: 30
     },
   },
 });

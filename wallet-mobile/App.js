@@ -1,7 +1,6 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Homescreen from "./src/views/Homescreen";
 import Login from "./src/views/Login";
 import Signup from "./src/views/Signup";
 import Dashboard from "./src/views/Dashboard";
@@ -24,9 +23,8 @@ const App = () => {
                     gestureEnabled: true,
                     gestureResponseDistance: { horizontal: 20 },
                 }}
-                initialRouteName={"Homescreen"}
+                initialRouteName={"Login"}
             >
-                <Stack.Screen name="Homescreen" component={Homescreen} />
                 <Stack.Screen name="Login" component={Login} />
                 <Stack.Screen name="Signup" component={Signup} />
                 <Stack.Screen name="Dashboard" component={Dashboard} />

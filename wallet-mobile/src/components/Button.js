@@ -1,8 +1,8 @@
-import { TouchableOpacity, Text, Image, View, StyleSheet } from 'react-native';
+import { TouchableOpacity, Text, Image, View, StyleSheet } from "react-native";
 
 const Button = ({ text, imgSource, textColor, backColor, onPress }) => {
   return (
-    <TouchableOpacity style={styles.view} activeOpacity={0.5} onPress={onPress}>
+    <TouchableOpacity style={styles.view} onPress={onPress}>
       {imgSource && <Image source={imgSource} style={styles.image} />}
       {imgSource && (
         <View
@@ -20,9 +20,9 @@ const Button = ({ text, imgSource, textColor, backColor, onPress }) => {
 
 const styles = StyleSheet.create({
   view: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#FFF',
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#FFF",
     height: 60,
     borderRadius: 10,
     marginHorizontal: 30,
@@ -33,14 +33,14 @@ const styles = StyleSheet.create({
     padding: 20,
     height: 45,
     width: 45,
-    resizeMode: 'stretch',
+    resizeMode: "stretch",
     marginRight: 15,
   },
   text: {
     fontSize: 20,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     flex: 1,
-    textAlign: 'center',
+    textAlign: "center",
   },
   separator: {
     height: 45,

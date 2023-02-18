@@ -1,5 +1,4 @@
 import { StyleSheet } from "react-native";
-import Constants from "expo-constants";
 
 const styles = StyleSheet.create({
   colors: {
@@ -10,16 +9,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    paddingTop: Constants.statusBarHeight,
-    padding: 8,
+    paddingHorizontal: 8,
+    paddingBottom: 8
   },
   text: {
     title: {
       color: "#FFF",
       fontSize: 35,
       fontWeight: "bold",
-      marginTop: 20,
-      marginBottom: 30,
+      marginVertical: 30,
       marginLeft: 30,
     },
   },

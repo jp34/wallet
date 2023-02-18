@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, StyleSheet, View } from "react-native";
+import { Text, StyleSheet, View, Image, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
@@ -12,8 +12,8 @@ import Button from "../components/Button";
 import Divider from "../components/Divider";
 
 const Login = ({ navigation }) => {
-  const [identifier, setIdentifier] = useState();
-  const [password, setPassword] = useState();
+  const [identifier, setIdentifier] = useState("");
+  const [password, setPassword] = useState("");
   const [showStatus, setShowStatus] = useState(false);
 
   async function attemptLogin() {
@@ -21,7 +21,7 @@ const Login = ({ navigation }) => {
     if (result != false) {
       navigation.navigate("Dashboard");
     } else {
-      setShowStatus(!showStatus);
+      setShowStatus(true);
       renderStatus(showStatus);
     }
   }
@@ -39,29 +39,46 @@ const Login = ({ navigation }) => {
   };
 
   return (
-    <LinearGradient colors={styles.colors.gradient1} style={styles.container}>
-      <Logo />
-      <Text style={styles.text.title}>Login</Text>
-      <Input
-        text="Email / Username"
-        sample="myemail@gmail.com"
-        id="identifier"
-      />
-      <Input text="Password" sample="12345" id="pass" />
-      <Button
-        text="Login"
-        textColor={styles.colors.primary}
-        onPress={() => attemptLogin()}
-      />
-      {renderStatus(showStatus)}
-      <Divider text="OR" />
-      <Button
-        text="Login with MetaMask"
-        imgSource={require("../../assets/fox.png")}
-        textColor="#F6851B"
-        backColor="#F6851B"
-        onPress={() => console.log("MetaMask Button")}
-      />
+    <LinearGradient colors={styles.colors.gradient1} style={{ flex: 1 }}>
+      <KeyboardAwareScrollView contentContainerStyle={{ flex: 1 }}>
+        <View style={styles.container}>
+          <TouchableOpacity style={logStyle.header.view}>
+            <Text style={logStyle.header.text} onPress={() => navigation.navigate("Signup")}>Sign Up</Text>
+            <Image
+              source={require("../../assets/chevron-right.png")}
+              style={logStyle.header.image}
+            />
+          </TouchableOpacity>
+          <Logo />
+          <Text style={styles.text.title}>Login</Text>
+          <Input
+            text="Email / Username"
+            sample="myemail@gmail.com"
+            changed={(currText) => setIdentifier(currText)}
+            req
+          />
+          <Input
+            text="Password"
+            sample="12345"
+            changed={(currText) => setPassword(currText)}
+            password
+          />
+          <Button
+            text="Login"
+            textColor={styles.colors.primary}
+            onPress={() => attemptLogin()}
+          />
+          {renderStatus(showStatus)}
+          <Divider text="OR" />
+          <Button
+            text="Login with MetaMask"
+            imgSource={require("../../assets/fox.png")}
+            textColor="#F6851B"
+            backColor="#F6851B"
+            onPress={() => console.log("MetaMask Button")}
+          />
+        </View>
+      </KeyboardAwareScrollView>
     </LinearGradient>
   );
 };
@@ -69,7 +86,7 @@ const Login = ({ navigation }) => {
 const logStyle = StyleSheet.create({
   status: {
     view: {
-      backgroundColor: "rgba(255, 51, 51, 0.5)",
+      backgroundColor: "rgba(255, 51, 51, 0.4)",
       marginHorizontal: 60,
       marginTop: 10,
       alignItems: "center",
@@ -83,34 +100,24 @@ const logStyle = StyleSheet.create({
     },
   },
   header: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: 65,
-    paddingHorizontal: 20,
-    justifyContent: "flex-end",
-  },
-  headerText: {
-    marginRight: 15,
-    color: "#fff",
-    fontSize: 18,
-  },
-  headerImage: {
-    width: 20,
-    height: 20,
-    tintColor: "#fff",
-    resizeMode: "contain",
-  },
-  passwordImageArea: {
-    position: "absolute",
-    right: 0,
-    bottom: 10,
-    height: 30,
-    width: 30,
-  },
-  passwordImage: {
-    height: 20,
-    width: 20,
-    tintColor: "#fff",
+    view: {
+      flexDirection: "row",
+      alignItems: "center",
+      paddingHorizontal: 20,
+      justifyContent: "flex-end",
+      marginBottom: 60,
+    },
+    text: {
+      marginRight: 15,
+      color: "#fff",
+      fontSize: 20,
+    },
+    image: {
+      width: 20,
+      height: 20,
+      tintColor: "#fff",
+      resizeMode: "contain",
+    },
   },
 });
 export default Login;

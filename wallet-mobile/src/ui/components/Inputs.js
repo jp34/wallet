@@ -4,13 +4,12 @@ import { View, TouchableOpacity, Image, TextInput, StyleSheet } from "react-nati
 export const BasicInput = ({ options }) => {
     return (
         <View style={InputStyles.container}>
-            <TextInput {...options}/>
+            <TextInput {...options} style={InputStyles.input}/>
         </View>
     );
 }
 
 export const PasswordInput = ({ options, onShowPassword }) => {
-    const [showPassword, setShowPassword] = React.useState(false);
     const styles = StyleSheet.create({
         showButton: {
             position: "absolute",
@@ -27,7 +26,7 @@ export const PasswordInput = ({ options, onShowPassword }) => {
     });
     return (
         <View style={InputStyles.container}>
-            <TextInput {...options}/>
+            <TextInput {...options} style={InputStyles.input}/>
             <TouchableOpacity
                 style={styles.showButton}
                 onPress={() => onShowPassword()}
@@ -49,11 +48,13 @@ const InputStyles = StyleSheet.create({
         marginBottom: 16,
         justifyContent: 'center',
         alignItems: 'flex-start',
-        borderBottomWidth: 1,
-        borderBottomColor: '#eeeeee',
     },
     input: {
-        borderWidth: 1,
-        borderColor: '#00ff00',
+        width: "100%",
+        padding: 8,
+        paddingLeft: 10,
+        color: '#eeeeee',
+        borderBottomWidth: 1,
+        borderBottomColor: '#cccccc',
     }
 });

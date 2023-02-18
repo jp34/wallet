@@ -5,15 +5,15 @@ import {
     TextInput,
     StyleSheet,
 } from "react-native";
-import CheckBox from "@react-native-community/checkbox";
 import { LinearGradient } from "expo-linear-gradient";
 import { PrimaryButton } from "../../components/Buttons";
 import { ScreenStyles, Gradients } from "../../Style";
+import Checkbox from "expo-checkbox";
 import Header from "../../components/Header";
 
 const AgreementScreen = ({ navigation }) => {
 
-    const [confirm, setConfirm] = React.useState();
+    const [confirm, setConfirm] = React.useState(false);
 
     const renderAgreement = () => {
         const styles = StyleSheet.create({
@@ -63,7 +63,7 @@ const AgreementScreen = ({ navigation }) => {
                 <Text style={styles.title}>Terms & Conditions</Text>
                 <TextInput {...options} />
                 <View style={styles.confirmContainer}>
-                    <CheckBox value={confirm} onValueChange={setConfirm} style={styles.confirm}/>
+                    <Checkbox value={confirm} onValueChange={setConfirm} style={styles.confirm}/>
                     <Text style={styles.confirmLabel}>I agree</Text>
                 </View>
             </View>
@@ -86,7 +86,7 @@ const AgreementScreen = ({ navigation }) => {
                             return navigation.navigate('CreateAccount');
                         },
                         disabled: !confirm,
-                    }}/>
+                    }} />
                 </View>
             </LinearGradient>
         </View>
@@ -101,10 +101,6 @@ const AgreementStyles = StyleSheet.create({
     agreement: {
         flex: 8,
     },
-    form: {
-        flex: 1,
-        justifyContent: 'center',
-    }
 });
 
 export default AgreementScreen;

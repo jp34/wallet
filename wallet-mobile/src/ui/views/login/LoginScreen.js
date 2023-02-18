@@ -100,9 +100,11 @@ const LoginScreen = ({ navigation }) => {
                 <View style={ScreenStyles.container}>
                     {renderWelcomeMessage()}
                     {renderLoginForm()}
-                    <PrimaryButton label="Get Started" options={{
-                            onPress: () => attemptLogin()
-                        }}/>
+                    <PrimaryButton label="Log In" options={{
+                        onPress: () => {
+                            return navigation.navigate('HomeRouter');
+                        }
+                    }}/>
                 </View>
             </LinearGradient>
         </KeyboardAvoidingView>

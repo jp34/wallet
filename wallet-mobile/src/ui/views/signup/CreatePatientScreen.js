@@ -7,20 +7,21 @@ import {
     StyleSheet,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { login } from "../../../api/strapi-client";
 import { PrimaryButton } from "../../components/Buttons";
 import { ScreenStyles, Gradients } from "../../Style";
-import { BasicInput, PasswordInput } from "../../components/Inputs";
+import { BasicInput } from "../../components/Inputs";
 import Header from "../../components/Header";
 
-const CreateAccountScreen = ({ navigation }) => {
+const CreatePatientScreen = ({ navigation }) => {
 
-    const [email, setEmail] = React.useState();
-    const [username, setUsername] = React.useState();
-    const [password, setPassword] = React.useState();
-    const [showPassword, setShowPassword] = React.useState(false);
-    const [passwordConfirm, setPasswordConfirm] = React.useState();
-    const [showPasswordConfirm, setShowPasswordConfirm] = React.useState(false);
+    const [firstName, setFirstName] = React.useState();
+    const [middleName, setMiddleName] = React.useState();
+    const [lastName, setLastName] = React.useState();
+    const [birthday, setBirthday] = React.useState();
+
+    async function attemptCreatePatient() {
+
+    }
 
     const renderForm = () => {
         const styles = StyleSheet.create({
@@ -29,6 +30,7 @@ const CreateAccountScreen = ({ navigation }) => {
                 paddingHorizontal: 32,
             },
             title: {
+                marginLeft: 8,
                 marginBottom: 16,
                 color: '#eeeeee',
                 fontSize: 20,
@@ -37,43 +39,37 @@ const CreateAccountScreen = ({ navigation }) => {
         });
         return (
             <ScrollView style={styles.form}>
-                <Text style={styles.title}>Create your account</Text>
+                <Text style={styles.title}>Basic Information</Text>
                 <BasicInput options={{
-                    id: 'user-email',
-                    placeholder: 'Email',
+                    id: 'user-first',
+                    placeholder: 'First name',
                     placeholderTextColor: '#eeeeee',
                     require: true,
-                    onChangeText: (text) => setEmail(text)
+                    onChangeText: (text) => setFirstName(text)
                 }}/>
 
                 <BasicInput options={{
-                    id: 'user-name',
-                    placeholder: 'Username',
+                    id: 'user-middle',
+                    placeholder: 'Middle Name',
                     placeholderTextColor: '#eeeeee',
                     require: true,
-                    onChangeText: (text) => setUsername(text)
-                }}/>
-                
-                <PasswordInput options={{
-                    id: 'user-password',
-                    placeholder: 'Password',
-                    placeholderTextColor: '#eeeeee',
-                    secureTextEntry: !showPassword,
-                    require: true,
-                    onChangeText: (text) => setPassword(text)
-                }} onShowPassword={() => {
-                    setShowPassword(!showPassword);
+                    onChangeText: (text) => setMiddleName(text)
                 }}/>
 
-                <PasswordInput options={{
-                    id: 'user-password-confirm',
-                    placeholder: 'Confirm password',
+                <BasicInput options={{
+                    id: 'user-last',
+                    placeholder: 'Last name',
                     placeholderTextColor: '#eeeeee',
-                    secureTextEntry: !showPasswordConfirm,
                     require: true,
-                    onChangeText: (text) => setPasswordConfirm(text)
-                }} onShowPassword={() => {
-                    setShowPasswordConfirm(!showPasswordConfirm);
+                    onChangeText: (text) => setLastName(text)
+                }}/>
+
+                <BasicInput options={{
+                    id: 'user-birthday',
+                    placeholder: 'Birthday',
+                    placeholderTextColor: '#eeeeee',
+                    require: true,
+                    onChangeText: (text) => setBirthday(text)
                 }}/>
             </ScrollView>
         );
@@ -88,9 +84,9 @@ const CreateAccountScreen = ({ navigation }) => {
                 <Header navigation={navigation}/>
                 <View style={ScreenStyles.container}>
                     {renderForm()}
-                    <PrimaryButton label="Continue" options={{
+                    <PrimaryButton label="Finish" options={{
                         onPress: () => {
-                            return navigation.navigate('CreatePatient');
+                            return navigation.navigate('HomeRouter');
                         }
                     }}/>
                 </View>
@@ -99,4 +95,4 @@ const CreateAccountScreen = ({ navigation }) => {
     );
 };
 
-export default CreateAccountScreen;
+export default CreatePatientScreen;

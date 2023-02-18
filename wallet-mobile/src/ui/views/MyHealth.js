@@ -1,39 +1,10 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { View, StyleSheet, TouchableOpacity, Image, Text } from "react-native";
-import axios from "axios";
 
 const MyHealth = ({ navigation }) => {
-    // Renders Profile Header
-    // Commented out to add back button for demo until swipe gestures work -- TODO: will still need to relocate proile button to make room for back button (swipe isnt always intuitive)
-    /*
-  function renderProfileHeader() {
-    return (
-      <TouchableOpacity
-        style={styles.header}
-        onPress={() => navigation.navigate("Profile")}
-      >
-        <Image
-          style={styles.headerImage}
-          source={require("../../assets/profile.png")}
-        />
-      </TouchableOpacity>
-    );
-  }
-*/
-    const [data, setData] = useState("Loading...");
 
-    const getData = () => {
-        axios({
-            method: 'get',
-            mode: 'no-cors',
-            url: 'wallet.capstone.csi.miamioh.edu:8000/patients/:1',
-          })
-        .then(response => {
-            console.log(response.data);
-            setData(response.data);
-      })
-    }
+    const [data, setData] = useState("Loading...");
 
     useEffect(() => {
         getData();
@@ -47,7 +18,7 @@ const MyHealth = ({ navigation }) => {
                 style={styles.backHeader}
             >
                 <Image
-                    source={require("../../assets/chevron-left.png")}
+                    source={require("../../../assets/icons/chevron-left.png")}
                     style={styles.backImage}
                 />
             </TouchableOpacity>
@@ -120,7 +91,6 @@ const MyHealth = ({ navigation }) => {
         <View style={styles.page}>
             <View style={styles.container}>
                 {renderBackButton()}
-                {/*{renderProfileHeader()}*/}
                 {renderTitle()}
                 {renderDiagnoses()}
                 {renderMedications()}

@@ -11,7 +11,7 @@ const Dashboard = ({ navigation }) => {
             >
                 <Image
                     style={styles.headerImage}
-                    source={require("../../assets/profile.png")}
+                    source={require("../../../assets/icons/profile.png")}
                 />
             </TouchableOpacity>
         );

@@ -24,6 +24,7 @@ const Login = ({ navigation }) => {
       setShowStatus(true);
       renderStatus(showStatus);
     }
+    console.log(identifier);
   }
 
   const renderStatus = (showStatus) => {
@@ -43,7 +44,12 @@ const Login = ({ navigation }) => {
       <KeyboardAwareScrollView contentContainerStyle={{ flex: 1 }}>
         <View style={styles.container}>
           <TouchableOpacity style={logStyle.header.view}>
-            <Text style={logStyle.header.text} onPress={() => navigation.navigate("Signup")}>Sign Up</Text>
+            <Text
+              style={logStyle.header.text}
+              onPress={() => navigation.navigate("Signup")}
+            >
+              Sign Up
+            </Text>
             <Image
               source={require("../../assets/chevron-right.png")}
               style={logStyle.header.image}

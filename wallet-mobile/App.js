@@ -11,6 +11,8 @@ import CreatePatient from "./src/views/CreatePatient";
 import TermsConditions from "./src/views/TermsConditions";
 import IntakeMedProvider from "./src/views/IntakeMedProvider";
 import IntakePatientAllergies from "./src/views/IntakePatientAllergies";
+import IntakePatientDiagnoses from "./src/views/IntakePatientDiagnoses";
+import IntakePatientMed from "./src/views/IntakePatientMed";
 
 const Stack = createNativeStackNavigator();
 
@@ -23,7 +25,7 @@ const App = () => {
                     gestureEnabled: true,
                     gestureResponseDistance: { horizontal: 20 },
                 }}
-                initialRouteName={"Login"}
+                initialRouteName={"IntakePatientDiagnoses"}
             >
                 <Stack.Screen name="Login" component={Login} />
                 <Stack.Screen name="Signup" component={Signup} />
@@ -35,6 +37,8 @@ const App = () => {
                 <Stack.Screen name="TermsConditions" component={TermsConditions} />
                 <Stack.Screen name="IntakeMedProvider" component={IntakeMedProvider} />
                 <Stack.Screen name="IntakePatientAllergies" component={IntakePatientAllergies} />
+                <Stack.Screen name="IntakePatientDiagnoses" component={IntakePatientDiagnoses} />
+                <Stack.Screen name="IntakePatientMed" component={IntakePatientMed} />
             </Stack.Navigator>
         </NavigationContainer>
     );

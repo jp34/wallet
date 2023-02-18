@@ -66,11 +66,15 @@
     "ens_address": {
       "type": "string"
     },
-    "patient_id": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::patient.patient",
-      "mappedBy": "username"
+    "earning": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "agreement": {
+      "type": "boolean",
+      "default": false,
+      "required": true
     }
   }
 }

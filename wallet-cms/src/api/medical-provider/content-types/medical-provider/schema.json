@@ -91,12 +91,6 @@
       "relation": "oneToMany",
       "target": "api::medical-encounter.medical-encounter",
       "mappedBy": "medical_provider"
-    },
-    "patient_medications": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::patient-medication.patient-medication",
-      "mappedBy": "medical_provider"
     }
   }
 }

@@ -7,20 +7,41 @@ import {
     StyleSheet,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { login } from "../../../api/strapi-client";
 import { PrimaryButton } from "../../components/Buttons";
 import { ScreenStyles, Gradients } from "../../Style";
 import { BasicInput, PasswordInput } from "../../components/Inputs";
 import Header from "../../components/Header";
+import { createAccount } from "../../../api/strapi-client";
 
-const CreateAccountScreen = ({ navigation }) => {
+const CreateAccountScreen = ({ navigation, route }) => {
 
+    const confirm = route.params.agreement;
     const [email, setEmail] = React.useState();
     const [username, setUsername] = React.useState();
     const [password, setPassword] = React.useState();
     const [showPassword, setShowPassword] = React.useState(false);
     const [passwordConfirm, setPasswordConfirm] = React.useState();
     const [showPasswordConfirm, setShowPasswordConfirm] = React.useState(false);
+
+    // API Methods
+
+    const attemptCreateAccount = async () => {
+        try {
+            console.log(`Username: ${username}`);
+            console.log(`Email: ${email}`);
+            console.log(`Password: ${password}`);
+            console.log(`PasswordConfirm: ${passwordConfirm}`);
+            const result = await createAccount(username, email, password, confirm);
+            if (result) return navigation.navigate('CreatePatient');
+            // Handle for incorrect logins
+        } catch (err) {
+            console.log("Create account failed with error");
+            console.error(err);
+            return false;
+        }
+    }
+
+    // Render Methods
 
     const renderForm = () => {
         const styles = StyleSheet.create({
@@ -90,9 +111,7 @@ const CreateAccountScreen = ({ navigation }) => {
                 <View style={ScreenStyles.container}>
                     {renderForm()}
                     <PrimaryButton label="Continue" options={{
-                        onPress: () => {
-                            return navigation.navigate('CreatePatient');
-                        }
+                        onPress: () => attemptCreateAccount()
                     }}/>
                 </View>
             </LinearGradient>

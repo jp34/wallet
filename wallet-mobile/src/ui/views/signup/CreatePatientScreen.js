@@ -11,16 +11,26 @@ import { PrimaryButton } from "../../components/Buttons";
 import { ScreenStyles, Gradients } from "../../Style";
 import { BasicInput } from "../../components/Inputs";
 import Header from "../../components/Header";
+import { createPatient } from "../../../api/strapi-client";
 
 const CreatePatientScreen = ({ navigation }) => {
 
     const [firstName, setFirstName] = React.useState();
     const [middleName, setMiddleName] = React.useState();
     const [lastName, setLastName] = React.useState();
+    const [phone, setPhone] = React.useState();
     const [birthday, setBirthday] = React.useState();
 
     async function attemptCreatePatient() {
-
+        try {
+            const result = await createPatient(firstName, middleName, lastName, phone, birthday);
+            if (result) return navigation.navigate('HomeRouter', { patient: result });
+            // Handle for incorrect logins
+        } catch (err) {
+            console.log("Create account failed with error");
+            console.error(err);
+            return false;
+        }
     }
 
     const renderForm = () => {
@@ -65,6 +75,14 @@ const CreatePatientScreen = ({ navigation }) => {
                 }}/>
 
                 <BasicInput options={{
+                    id: 'user-phone',
+                    placeholder: 'Phone',
+                    placeholderTextColor: '#eeeeee',
+                    require: true,
+                    onChangeText: (text) => setPhone(text)
+                }}/>
+
+                <BasicInput options={{
                     id: 'user-birthday',
                     placeholder: 'Birthday',
                     placeholderTextColor: '#eeeeee',
@@ -85,9 +103,7 @@ const CreatePatientScreen = ({ navigation }) => {
                 <View style={ScreenStyles.container}>
                     {renderForm()}
                     <PrimaryButton label="Finish" options={{
-                        onPress: () => {
-                            return navigation.navigate('HomeRouter');
-                        }
+                        onPress: () => attemptCreatePatient()
                     }}/>
                 </View>
             </LinearGradient>

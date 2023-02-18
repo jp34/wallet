@@ -4,7 +4,8 @@
   "info": {
     "singularName": "patient-allergy",
     "pluralName": "patient-allergies",
-    "displayName": "PatientAllergy"
+    "displayName": "PatientAllergy",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -15,13 +16,6 @@
     }
   },
   "attributes": {
-    "patient": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::patient.patient",
-      "inversedBy": "patient_allergies",
-      "autoPopulate": true
-    },
     "description": {
       "pluginOptions": {
         "i18n": {
@@ -41,6 +35,12 @@
       "required": true,
       "max": 10,
       "min": 0
+    },
+    "patient": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::patient.patient",
+      "inversedBy": "allergies"
     }
   }
 }

@@ -83,7 +83,7 @@ const AgreementScreen = ({ navigation }) => {
                     </View>
                     <PrimaryButton label="Continue" options={{
                         onPress: () => {
-                            return navigation.navigate('CreateAccount');
+                            return navigation.navigate('CreateAccount', { agreement: confirm });
                         },
                         disabled: !confirm,
                     }} />

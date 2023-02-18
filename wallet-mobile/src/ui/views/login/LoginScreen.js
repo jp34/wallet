@@ -19,10 +19,10 @@ const LoginScreen = ({ navigation }) => {
     const [identifier, setIdentifier] = React.useState();
     const [password, setPassword] = React.useState();
 
-    async function attemptLogin() {
+    const attemptLogin = async () => {
         try {
             const result = await login(identifier, password);
-            if (result) return navigation.navigate("Home", { user: result.user });
+            if (result) return navigation.navigate('HomeRouter', { user: result.user });
             // Handle for incorrect logins
         } catch (err) {
             console.log("Login failed");
@@ -101,9 +101,7 @@ const LoginScreen = ({ navigation }) => {
                     {renderWelcomeMessage()}
                     {renderLoginForm()}
                     <PrimaryButton label="Log In" options={{
-                        onPress: () => {
-                            return navigation.navigate('HomeRouter');
-                        }
+                        onPress: () => attemptLogin()
                     }}/>
                 </View>
             </LinearGradient>

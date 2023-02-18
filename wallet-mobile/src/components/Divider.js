@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from "react-native";
 
 const Divider = ({ text }) => {
   return (
@@ -12,22 +12,22 @@ const Divider = ({ text }) => {
 
 const styles = StyleSheet.create({
   group: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginVertical: 30,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    marginVertical: 20,
   },
   line: {
-    borderColor: '#FFF',
+    borderColor: "#FFF",
     borderWidth: 1,
     flex: 1,
     borderRadius: 10,
     marginHorizontal: 25,
   },
   text: {
-    color: '#FFF',
+    color: "#FFF",
     fontSize: 19,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
 });
 

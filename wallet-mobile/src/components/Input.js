@@ -1,10 +1,15 @@
 import { View, Text, TextInput, StyleSheet } from "react-native";
 
-const Input = ({ text, sample }) => {
+const Input = ({ text, sample, id }) => {
   return (
     <View style={styles.group}>
       <Text style={styles.header}>{text}</Text>
-      <TextInput style={styles.text} placeholder={sample} placeholderTextColor="#C9C9C9"/>
+      <TextInput
+        style={styles.text}
+        placeholder={sample}
+        placeholderTextColor="#C9C9C9"
+        testID={id}
+      />
     </View>
   );
 };

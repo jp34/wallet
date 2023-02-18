@@ -1,9 +1,12 @@
-import { Text, StyleSheet } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
+import { Text, StyleSheet } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 
 const Logo = () => {
   return (
-    <LinearGradient style={styles.linearGradient} colors={['#6030D9', '#2B1360']}>
+    <LinearGradient
+      style={styles.linearGradient}
+      colors={["#6030D9", "#2B1360"]}
+    >
       <Text style={styles.text}>JustBe</Text>
     </LinearGradient>
   );
@@ -13,15 +16,15 @@ const styles = StyleSheet.create({
   linearGradient: {
     width: 180,
     height: 180,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     borderRadius: 30,
-    alignSelf: 'center',
+    alignSelf: "center",
   },
   text: {
-    color: '#FFF',
+    color: "#FFF",
     fontSize: 35,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     letterSpacing: 1,
   },
 });

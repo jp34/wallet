@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import Constants from "expo-constants";
 
 const styles = StyleSheet.create({
   colors: {
@@ -10,7 +11,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     paddingHorizontal: 8,
-    paddingBottom: 8
+    paddingBottom: 8,
+  },
+  containerNormal: {
+    flex: 1,
+    paddingHorizontal: 8,
+    paddingBottom: 8,
+    marginTop: 70,
   },
   text: {
     title: {
@@ -19,6 +26,12 @@ const styles = StyleSheet.create({
       fontWeight: "bold",
       marginVertical: 30,
       marginLeft: 30,
+    },
+    paragraph: {
+      color: "#FFF",
+      fontSize: 25,
+      marginLeft: 30,
+      marginBottom: 20,
     },
   },
 });

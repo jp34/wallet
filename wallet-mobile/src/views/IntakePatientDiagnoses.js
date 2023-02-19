@@ -1,24 +1,37 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, Text, ScrollView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
+// Local Imports
 import styles from "../styles";
 import CheckboxList from "../components/CheckboxList";
 
-const IntakePatientDiagnoses = ({ navigation }) => {
+const IntakePatientDiagnoses = () => {
   return (
+    // Gradient Background
     <LinearGradient colors={styles.colors.gradient1} style={{ flex: 1 }}>
+      {/* Page Container */}
       <View style={styles.containerNormal}>
-      <ScrollView style={{flex: 1}}>
-        <Text style={styles.text.title}>Diagnoses</Text>
-        <Text style={styles.text.paragraph}>
-          Do you have any existing diagnoses?
-        </Text>
-        <Text style={styles.text.paragraph}>Select all that apply.</Text>
-        <CheckboxList options={["Asthma", "Hypertension", "Hypotension", "None"]} />
+        {/* Enable Scrolling */}
+        <ScrollView style={{ flex: 1 }}>
+          {/* Title */}
+          <Text style={styles.text.title}>Diagnoses</Text>
+          {/* Paragraphs */}
+          <Text style={styles.text.paragraph}>
+            Do you have any pre-existing diagnoses?
+          </Text>
+          <Text style={styles.text.paragraph}>Select all that apply.</Text>
+          {/* Checklist Section */}
+          <View style={styles.section}>
+            {/* Checklist */}
+            <CheckboxList
+              options={["Asthma", "Hypertension", "Hypotension", "None"]}
+            />
+          </View>
         </ScrollView>
       </View>
     </LinearGradient>
   );
 };
+
 export default IntakePatientDiagnoses;

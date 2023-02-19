@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, Touchable } from "react-native";
+import { View, Text, TouchableOpacity} from "react-native";
 
 const CheckboxList = ({ options }) => {
   const [checkedItems, setCheckedItems] = useState({});
@@ -9,7 +9,7 @@ const CheckboxList = ({ options }) => {
   };
 
   return (
-    <View style={{marginHorizontal: 30}}>
+    <View>
       {options.map((item, index) => (
         <View
           key={index}
@@ -19,7 +19,7 @@ const CheckboxList = ({ options }) => {
             style={{
               height: 35,
               width: 35,
-              borderWidth: 1,
+              borderWidth: 1.25,
               borderColor: "#FFF",
               borderRadius: 12,
               alignItems: "center",
@@ -38,7 +38,7 @@ const CheckboxList = ({ options }) => {
               />
             )}
           </TouchableOpacity>
-          <Text style={{ color: "#FFF", fontSize: 20, marginLeft: 10, marginVertical: 7 }}>
+          <Text style={{ color: "#FFF", fontSize: 22, marginLeft: 10, marginVertical: 7, fontWeight: "475" }}>
             {item}
           </Text>
         </View>

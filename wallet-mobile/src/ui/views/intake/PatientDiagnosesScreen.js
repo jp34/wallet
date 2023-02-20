@@ -1,17 +1,13 @@
-import React, { useState } from "react";
-import { View, Text, ScrollView, SafeAreaView } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
-import { ScreenStyles, Gradients, TextStyles } from "../../Styles";
+import React from "react";
 import Header from "../../components/Header";
 import CheckboxList from "../../components/CheckboxList";
+import { View, Text, SafeAreaView } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
+import { ScreenStyles, Gradients, TextStyles } from "../../Styles";
 import { PrimaryButton } from "../../components/Buttons";
 
 const PatientDiagnosesScreen = ({ navigation }) => {
-  const demo = useState(true);
-
-  const attemptCreateAccount = async () => {
-    if (demo) return navigation.navigate("PatientMedication");
-  };
+  const attemptPatientDiagnoses = async () => {};
 
   return (
     // Background Gradient
@@ -24,13 +20,16 @@ const PatientDiagnosesScreen = ({ navigation }) => {
           <Header navigation={navigation} />
           {/* Non-Header Container */}
           <View style={ScreenStyles.nonHeaderContainer}>
+            {/* Diagnoses Page Header */}
             <Text style={TextStyles.page.header}>Diagnoses</Text>
+            {/* Diagnoses Page Description */}
             <Text style={TextStyles.page.description}>
               Do you have any pre-existing diagnoses?
             </Text>
             <Text style={TextStyles.page.description}>
               Select all that apply.
             </Text>
+            {/* Spacer */}
             <View style={{ marginVertical: 10 }}></View>
             {/* Checklist Section */}
             <View style={ScreenStyles.sectionContainer}>

@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { SmallLogo } from "./Logos";
 
-const Header = ({ navigation }) => {
+const Header = ({ navigation, logo }) => {
   return (
     // Header Container
     <View style={HeaderStyles.container}>
@@ -42,7 +42,7 @@ const Header = ({ navigation }) => {
       {/* Logo View */}
       <View style={{ flex: 2, alignItems: "center" }}>
         {/* Small Logo */}
-        <SmallLogo />
+        {logo && <SmallLogo />}
       </View>
       {/* Spacer */}
       <View style={{ flex: 1 }}></View>

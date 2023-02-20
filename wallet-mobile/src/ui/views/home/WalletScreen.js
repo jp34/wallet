@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text } from "react-native";
 import { ScreenStyles } from "../../Styles";
 
-const WalletScreen = ({ navigation }) => {
+const Wallet = ({ navigation }) => {
   return (
     <View style={ScreenStyles.container}>
       <Text>Wallet</Text>
@@ -10,4 +10,4 @@ const WalletScreen = ({ navigation }) => {
   );
 };
 
-export default WalletScreen;
+export default Wallet;

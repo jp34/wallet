@@ -39,7 +39,7 @@ export const Input = ({ text, sample, changed, password }) => {
 
 const styles = StyleSheet.create({
   header: {
-    fontSize: 19,
+    fontSize: 20,
     color: "#EEE",
     fontFamily: "Quicksand-Medium",
   },
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     borderBottomColor: "#EEE",
     borderBottomWidth: 1,
     height: 40,
-    fontSize: 16,
+    fontSize: 18,
     color: "#EEE",
   },
   group: {

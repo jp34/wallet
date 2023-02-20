@@ -1,22 +1,17 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, StyleSheet, SafeAreaView } from "react-native";
+import { View, Text, TextInput, SafeAreaView } from "react-native";
 import { ScreenStyles, Gradients, TextStyles } from "../../Styles";
 import { LinearGradient } from "expo-linear-gradient";
-import Header from "../../components/Header";
-import { PrimaryButton } from "../../components/Buttons";
-import CheckboxList from "../../components/CheckboxList";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { PrimaryButton } from "../../components/Buttons";
+import Header from "../../components/Header";
+import CheckboxList from "../../components/CheckboxList";
 
 const PatientAllergiesScreen = ({ navigation }) => {
   const [description, setDescription] = useState("");
   const [severity, setSeverity] = useState("");
-  const demo = useState(true);
 
-  async function attemptPatientAllergies() {
-    if (demo) {
-      navigation.navigate("PatientEncounters");
-    }
-  }
+  const attemptPatientAllergies = async () => {};
 
   return (
     // Background Gradient

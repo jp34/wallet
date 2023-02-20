@@ -10,8 +10,6 @@ import SplashScreen from "./views/signup/SplashScreen";
 import AgreementScreen from "./views/signup/AgreementScreen";
 import CreateAccountScreen from "./views/signup/CreateAccountScreen";
 import CreatePatientScreen from "./views/signup/CreatePatientScreen";
-import PatientDiagnosesScreen from "./views/signup/PatientDiagnosesScreen";
-import PatientAllergiesScreen from "./views/signup/PatientAllergiesScreen";
 
 const Home = createBottomTabNavigator();
 
@@ -54,11 +52,9 @@ const Router = () => {
 
       {/* Signup Screens */}
       <Root.Screen name="Splash" component={SplashScreen} />
-      <Root.Screen name="Agreement" component={AgreementScreen} />
       <Root.Screen name="CreateAccount" component={CreateAccountScreen} />
       <Root.Screen name="CreatePatient" component={CreatePatientScreen} />
-      <Root.Screen name="PatientDiagnoses" component={PatientDiagnosesScreen} />
-      <Root.Screen name="PatientAllergies" component={PatientAllergiesScreen} />
+      <Root.Screen name="Agreement" component={AgreementScreen} />
 
       {/* Route to home router */}
       <Root.Screen name="HomeRouter" component={HomeRouter} />

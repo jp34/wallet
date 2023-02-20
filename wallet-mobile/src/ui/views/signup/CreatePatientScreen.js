@@ -9,8 +9,7 @@ import Input from "../../components/Inputs";
 import DatePicker from "../../components/DatePicker";
 import Header from "../../components/Header";
 
-const CreatePatient = ({ navigation }) => {
-  // Boolean control for SecureText
+const CreatePatientScreen = ({ navigation }) => {
   const [firstName, setFirstName] = useState("");
   const [middleName, setMiddleName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -133,4 +132,4 @@ const CreatePatient = ({ navigation }) => {
   );
 };
 
-export default CreatePatient;
+export default CreatePatientScreen;

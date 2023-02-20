@@ -3,7 +3,7 @@ import { View, Text } from "react-native";
 import { PrimaryButton } from "../../components/Buttons";
 import { ScreenStyles } from "../../Styles";
 
-const ProfileScreen = ({ navigation }) => {
+const Profile = ({ navigation }) => {
   return (
     <View style={ScreenStyles.container}>
       <Text>Profile</Text>
@@ -19,4 +19,4 @@ const ProfileScreen = ({ navigation }) => {
   );
 };
 
-export default ProfileScreen;
+export default Profile;

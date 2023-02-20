@@ -5,13 +5,12 @@ import {
     KeyboardAvoidingView,
     ScrollView,
     TouchableOpacity,
-    Image,
     TextInput,
     StyleSheet,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
-const IntakeMedProvider = ({ navigation }) => {
+const PatientMedProvider = ({ navigation }) => {
     // Boolean control for SecureText
     const [title, setTitle] = React.useState();
     const [email, setEmail] = React.useState();
@@ -207,4 +206,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default IntakeMedProvider;
+export default PatientMedProvider;

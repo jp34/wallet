@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { Text, StyleSheet, View, Image, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { login } from "../api/strapi-client";
-import styles from "../styles";
-import Logo from "../components/Logo";
-import Input from "../components/Input";
-import Button from "../components/Button";
-import Divider from "../components/Divider";
+import { login } from "../../../api/strapi-client";
+import styles from "../../styles";
+import Logo from "../../components/Logo";
+import Input from "../../components/Input";
+import Button from "../../components/Button";
+import Divider from "../../components/Divider";
 
 const Login = ({ navigation }) => {
   // Constants
@@ -66,7 +66,7 @@ const Login = ({ navigation }) => {
             <Text style={logStyle.header.text}>Sign Up</Text>
             {/* Header Image */}
             <Image
-              source={require("../../assets/chevron-right.png")}
+              source={require("../../../../assets/icons/chevron-right.png")}
               style={logStyle.header.image}
             />
           </TouchableOpacity>
@@ -101,7 +101,7 @@ const Login = ({ navigation }) => {
           {/* Metamask Button */}
           <Button
             text="Login with MetaMask"
-            imgSource={require("../../assets/fox.png")}
+            imgSource={require("../../../../assets/icons/fox.png")}
             textColor="#F6851B"
             backColor="#F6851B"
             onPress={() => console.log("MetaMask Button")}

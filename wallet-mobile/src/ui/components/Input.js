@@ -8,91 +8,64 @@ import {
   Image,
 } from "react-native";
 
-const Input = ({ text, sample, changed, req, password }) => {
+const Input = ({ text, sample, changed, password }) => {
   const [showPassword, setShowPassword] = useState(false);
-  if (password) {
-    return (
-      <View style={styles.group}>
-        <Text style={styles.header}>{text}</Text>
-        <TextInput
-          style={styles.text}
-          placeholder={sample}
-          placeholderTextColor="#C9C9C9"
-          onChangeText={changed}
-          secureTextEntry={showPassword}
-          required
-        />
+  return (
+    <View style={styles.group}>
+      <Text style={styles.header}>{text}</Text>
+      <TextInput
+        style={styles.text}
+        placeholder={sample}
+        placeholderTextColor="#C9C9C9"
+        onChangeText={changed}
+        secureTextEntry={showPassword}
+      />
+      {/* {password && (
         <TouchableOpacity
           style={styles.password.view}
           onPress={() => setShowPassword(!showPassword)}
         >
           <Image
             style={styles.password.image}
-            source={require("../../assets/unlock.png")}
+            source={require("../../../assets/icons/unlock.png")}
           />
         </TouchableOpacity>
-      </View>
-    );
-  } else {
-    if (req) {
-      return (
-        <View style={styles.group}>
-          <Text style={styles.header}>{text}</Text>
-          <TextInput
-            style={styles.text}
-            placeholder={sample}
-            placeholderTextColor="#C9C9C9"
-            onChangeText={changed}
-            required
-          />
-        </View>
-      );
-    } else {
-      return (
-        <View style={styles.group}>
-          <Text style={styles.header}>{text}</Text>
-          <TextInput
-            style={styles.text}
-            placeholder={sample}
-            placeholderTextColor="#C9C9C9"
-            onChangeText={changed}
-          />
-        </View>
-      );
-    }
-  }
+      )} */}
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
   header: {
-    fontSize: 22,
-    color: "#FFF",
-    fontWeight: "600",
+    fontSize: 25,
+    color: "#EEE",
+    fontFamily: "Quicksand-SemiBold",
   },
   text: {
     marginVertical: 5,
-    borderBottomColor: "#FFF",
+    borderBottomColor: "#EEE",
     borderBottomWidth: 1,
     height: 40,
-    fontSize: 18,
-    color: "#FFF",
+    fontSize: 20,
+    color: "#EEE",
+    fontFamily: "Quicksand-SemiBold",
   },
   group: {
-    marginHorizontal: 30,
     paddingVertical: 5,
+    flex: 1,
   },
   password: {
     view: {
       position: "absolute",
       right: -20,
-      bottom: -5,
+      bottom: 0,
       height: 45,
       width: 45,
     },
     image: {
       height: 20,
       width: 20,
-      tintColor: "#fff",
+      tintColor: "#EEE",
     },
   },
 });

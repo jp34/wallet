@@ -10,7 +10,7 @@ const CheckboxList = ({ options }) => {
 
   return (
     // Container for checkbox list.
-    <View style={{ paddingHorizontal: 20 }}>
+    <View>
       {/* Component to Create Checkbox List */}
       {options.map((item, index) => (
         // Item View
@@ -39,10 +39,11 @@ const styles = StyleSheet.create({
     },
     text: {
       color: "#FFF",
-      fontSize: 22,
+      fontSize: 18,
       marginLeft: 10,
       marginVertical: 7,
       fontWeight: "475",
+      fontFamily: "Quicksand-Regular"
     },
   },
   checkbox: {

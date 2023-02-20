@@ -3,7 +3,7 @@ import { View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-import styles from "../styles";
+import styles from "../../styles";
 
 const IntakePatientMed = ({ navigation }) => {
   return (

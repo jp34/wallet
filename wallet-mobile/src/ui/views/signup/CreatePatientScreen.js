@@ -8,7 +8,6 @@ import { PrimaryButton } from "../../components/Buttons";
 import Input from "../../components/Inputs";
 import DatePicker from "../../components/DatePicker";
 import Header from "../../components/Header";
-import { TouchableHighlight } from "react-native-gesture-handler";
 
 const CreatePatient = ({ navigation }) => {
   // Boolean control for SecureText
@@ -17,22 +16,25 @@ const CreatePatient = ({ navigation }) => {
   const [lastName, setLastName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [birthDate, setBirthDate] = useState("");
+  const demo = useState(true);
 
   async function attemptCreatePatient() {
-    console.log(birthDate);
-    // try {
-    //   const result = await createPatient(
-    //     firstName,
-    //     middleName,
-    //     lastName,
-    //     phoneNumber,
-    //     birthDate
-    //   );
-    //   if (result) return navigation.navigate("HomeRouter", { patient: result });
-    // } catch (err) {
-    //   console.log("Create Patient Failed");
-    //   return;
-    // }
+    if (demo) {
+      navigation.navigate("HomeRouter");
+    }
+    try {
+      const result = await createPatient(
+        firstName,
+        middleName,
+        lastName,
+        phoneNumber,
+        birthDate
+      );
+      if (result) return navigation.navigate("HomeRouter", { patient: result });
+    } catch (err) {
+      console.log("Create Patient Failed");
+      return;
+    }
   }
 
   return (

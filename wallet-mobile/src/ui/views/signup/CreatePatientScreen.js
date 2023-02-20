@@ -1,58 +1,38 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, SafeAreaView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { createPatient } from "../../../api/strapi-client";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import styles from "../../styles";
-import Input from "../../components/Input";
-import Button from "../../components/Button";
+import { Gradients, TextStyles, ScreenStyles } from "../../Styless";
+import { PrimaryButton } from "../../components/Buttons";
+import Input from "../../components/Inputs";
 import DatePicker from "../../components/DatePicker";
+import Header from "../../components/Header";
+import { TouchableHighlight } from "react-native-gesture-handler";
 
 const CreatePatient = ({ navigation }) => {
   // Boolean control for SecureText
-  const [fName, setFName] = useState("");
-  const [mName, setMName] = useState("");
-  const [lName, setLName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [middleName, setMiddleName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [date, setDate] = useState("");
   const demo = useState(true);
 
-  // An attempt at live formatting date input to split numbers with "/" e.g 01 / 01 / 2023
-  {
-    /* function formatDate(value) {
-        if (!value) return value;
-
-        const newDate = value;
-
-        const dateLength = newDate.length;
-
-        if (dateLength < 2) return newDate;
-
-        if (dateLength < 4) {
-            return `${newDate.slice(0, 2)} / ${newDate.slice(2)}`;
-        }
-
-        //return `${newDate.slice(0, 2)} / ${newDate.slice(2,4)} / ${newDate.slice(4,8)}`;
-    }
-    */
-  }
-
-  // Attempts to save the form and move to next intake screen
-  async function attemptSave() {
-    if (demo) {
-      navigation.navigate("IntakeMedProvider");
-    } else {
-      if (fNmae == null || mNAme == null || lName == null || date == null) {
-        // Error
-        return;
-      } else {
-        const result = await createPatient(fName, mName, lName, date);
-        if (result) {
-          navigation.navigate("IntakeMedProvider");
-        } else {
-          // Error
-          return;
-        }
-      }
+  async function attemptCreatePatient() {
+    try {
+      const result = await createPatient(
+        firstName,
+        middleName,
+        lastName,
+        phone,
+        birthday
+      );
+      if (result) return navigation.navigate("HomeRouter", { patient: result });
+      // Handle for incorrect logins
+    } catch (err) {
+      console.log("Create account failed with error");
+      console.error(err);
+      return false;
     }
   }
 
@@ -81,24 +61,25 @@ const CreatePatient = ({ navigation }) => {
               <Input
                 text="First Name"
                 sample="John"
-                changed={(text) => setFName(text)}
+                changed={(text) => setFirstName(text)}
                 req
               />
               {/* Middle Name Input */}
               <Input
                 text="Middle Name"
                 sample="Michael"
-                changed={(text) => setMName(text)}
+                changed={(text) => setMiddleName(text)}
                 req
               />
               {/* Last Name Input */}
               <Input
                 text="Last Name"
                 sample="Doe"
-                changed={(text) => setLName(text)}
+                changed={(text) => setLastName(text)}
                 req
               />
             </View>
+            {/* Spacer */}
             <View style={{ marginVertical: 10 }}></View>
             {/* Birth Date Section Header */}
             <Text style={TextStyles.section.header}>Birth Date</Text>
@@ -114,7 +95,7 @@ const CreatePatient = ({ navigation }) => {
           <PrimaryButton
             text="Continue"
             options={{
-              onPress: () => attemptCreateAccount(),
+              onPress: () => attemptCreatePatient(),
             }}
           />
         </KeyboardAwareScrollView>

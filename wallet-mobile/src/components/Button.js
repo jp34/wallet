@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     marginRight: 15,
   },
   text: {
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: "bold",
     flex: 1,
     textAlign: "center",

@@ -119,9 +119,8 @@ const styles = StyleSheet.create({
     },
   },
   buttonTextStyle: {
-    color: "#EEE",
+    color: "#C9C9C9",
     fontSize: 18,
-    fontFamily: "Quicksand-Regular",
   },
   dropdownStyle: {
     backgroundColor: "#EEE",
@@ -131,13 +130,11 @@ const styles = StyleSheet.create({
     marginTop: 16,
     fontSize: 18,
     color: "#333",
-    fontFamily: "Quicksand-Regular",
   },
   text: {
     color: "#FFF",
     fontSize: 30,
     marginHorizontal: 3,
-    fontFamily: "Quicksand-Regular",
   },
   separator: {
     height: 1,

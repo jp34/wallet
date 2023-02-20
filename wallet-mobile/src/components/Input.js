@@ -67,15 +67,15 @@ const styles = StyleSheet.create({
   header: {
     fontSize: 22,
     color: "#FFF",
+    fontWeight: "600",
   },
   text: {
     marginVertical: 5,
     borderBottomColor: "#FFF",
     borderBottomWidth: 1,
     height: 40,
-    fontSize: 19,
+    fontSize: 18,
     color: "#FFF",
-    fontSize: 22,
   },
   group: {
     marginHorizontal: 30,

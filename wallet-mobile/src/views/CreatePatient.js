@@ -6,6 +6,7 @@ import {
   Image,
   TextInput,
   StyleSheet,
+  DatePickerIOSBase,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { createPatient } from "../api/strapi-client";
@@ -13,6 +14,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import styles from "../styles";
 import Input from "../components/Input";
 import Button from "../components/Button";
+import DatePicker from "../components/DatePicker";
 
 const CreatePatient = ({ navigation }) => {
   // Boolean control for SecureText
@@ -168,7 +170,10 @@ const CreatePatient = ({ navigation }) => {
           {/* Birth Date Section Header */}
           <Text style={styles.text.sectionHeader}>Birth Date</Text>
           {/* Section View */}
-          <View style={styles.section}>{/* Birth Date Input */}</View>
+          <View style={styles.section}>
+            {/* Birth Date Input */}
+            <View style={{height: 75}}><DatePicker/></View>
+          </View>
           <View style={{ marginVertical: 10 }}></View>
           <Button text="Next" textColor={styles.colors.primary} />
         </View>

@@ -5,7 +5,7 @@ import { login } from "../../../api/strapi-client";
 import { PrimaryButton } from "../../components/Buttons";
 import { ScreenStyles, Gradients, TextStyles } from "../../Styless";
 import Header from "../../components/Header";
-import Input from "../../components/Input";
+import Input from "../../components/Inputs";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const LoginScreen = ({ navigation }) => {

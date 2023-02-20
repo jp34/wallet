@@ -5,7 +5,7 @@ import { PrimaryButton } from "../../components/Buttons";
 import { ScreenStyles, Gradients, TextStyles } from "../../Styless";
 import Header from "../../components/Header";
 import { createAccount } from "../../../api/strapi-client";
-import Input from "../../components/Input";
+import Input from "../../components/Inputs";
 import DatePicker from "../../components/DatePicker";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 

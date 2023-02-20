@@ -1,242 +1,82 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
+import { signup } from "../api/strapi-client";
 import styles from "../styles";
 import Input from "../components/Input";
+import Button from "../components/Button";
 
 const Signup = ({ navigation }) => {
-  // Boolean control for SecureText
-  //   const [showPassword, setShowPassword] = React.useState(false);
-  //   const [email, setEmail] = React.useState();
-  //   const [username, setUsername] = React.useState();
-  //   const [password, setPassword] = React.useState();
-  //   const [passConfirm, setPassConfirm] = React.useState();
+  const [email, setEmail] = useState();
+  const [username, setUsername] = React.useState();
+  const [password, setPassword] = useState();
+  const [passConfirm, setPassConfirm] = useState();
 
-  //   // Renders Login Header
-  //   function renderLoginHeader() {
-  //     return (
-  //       <TouchableOpacity
-  //         style={styles.header}
-  //         onPress={() => navigation.navigate("Login")}
-  //       >
-  //         <Text style={styles.headerText}>Login</Text>
-  //         <Image
-  //           style={styles.headerImage}
-  //           source={require("../../assets/chevron-right.png")}
-  //         />
-  //       </TouchableOpacity>
-  //     );
-  //   }
-
-  //   // Renders Signup Form
-  //   function renderSignupForm() {
-  //     return (
-  //       <View>
-  //         {/* Title */}
-  //         <Text style={styles.titleText}>Sign Up</Text>
-
-  //         {/* Form */}
-  //         <View style={styles.formGroup}>
-  //           {/* Email */}
-  //           <View style={styles.inputGroup}>
-  //             <Text style={styles.inputHeader}>Email</Text>
-  //             <TextInput
-  //               style={styles.input}
-  //               placeholder="myemail@gmail.com"
-  //               placeholderTextColor="#fff"
-  //               onChangeText={(text) => setEmail(text)}
-  //               require
-  //             />
-  //           </View>
-
-  //           {/* Email */}
-  //           <View style={styles.inputGroup}>
-  //             <Text style={styles.inputHeader}>Username</Text>
-  //             <TextInput
-  //               style={styles.input}
-  //               placeholder="username"
-  //               placeholderTextColor="#fff"
-  //               onChangeText={(text) => setUsername(text)}
-  //               require
-  //             />
-  //           </View>
-
-  //           {/* Password */}
-  //           <View style={styles.inputGroup}>
-  //             <Text style={styles.inputHeader}>Password</Text>
-  //             <TextInput
-  //               style={styles.input}
-  //               placeholderTextColor="#fff"
-  //               placeholder="12345"
-  //               secureTextEntry={!showPassword}
-  //               onChangeText={(text) => setPassword(text)}
-  //               require
-  //             />
-  //             <TouchableOpacity
-  //               style={styles.passwordImageArea}
-  //               onPress={() => setShowPassword(!showPassword)}
-  //             >
-  //               <Image
-  //                 style={styles.passwordImage}
-  //                 source={require("../../assets/unlock.png")}
-  //               />
-  //             </TouchableOpacity>
-  //           </View>
-
-  //           {/* Confirm Password */}
-  //           <View style={styles.inputGroup}>
-  //             <Text style={styles.inputHeader}>Confirm Password</Text>
-  //             <TextInput
-  //               style={styles.input}
-  //               placeholderTextColor="#fff"
-  //               placeholder="12345"
-  //               secureTextEntry={!showPassword}
-  //               onChangeText={(text) => setPassConfirm(text)}
-  //               require
-  //             />
-  //             <TouchableOpacity
-  //               style={styles.passwordImageArea}
-  //               onPress={() => setShowPassword(!showPassword)}
-  //             >
-  //               <Image
-  //                 style={styles.passwordImage}
-  //                 source={require("../../assets/unlock.png")}
-  //               />
-  //             </TouchableOpacity>
-  //           </View>
-  //         </View>
-  //       </View>
-  //     );
-  //   }
-
-  //   async function attemptSignup() {
-  //     if (password != passConfirm) {
-  //       // Handle for non matching password and confirmation
-  //       return;
-  //     }
-  //     const response = await signup(username, email, password);
-  //     navigation.navigate("CreatePatient");
-  //   }
-
-  //   // Renders Login Button
-  //   function renderSignupButton() {
-  //     return (
-  //       <TouchableOpacity
-  //         style={styles.signupButton}
-  //         onPress={() => attemptSignup()}
-  //       >
-  //         <Text style={styles.signupButtonText}>Sign Up</Text>
-  //       </TouchableOpacity>
-  //     );
-  //   }
+  async function attemptSignUp() {
+    if (password != passConfirm) {
+      return;
+    } else {
+      const result = await signup(username, email, password);
+      if (result != false) {
+        navigation.navigate("CreatePatient");
+      } else {
+        return;
+      }
+    }
+  }
 
   return (
     <LinearGradient colors={styles.colors.gradient1} style={{ flex: 1 }}>
       <KeyboardAwareScrollView contentContainerStyle={{ flex: 1 }}>
         <View style={styles.containerNormal}>
           <Text style={styles.text.title}>Sign Up</Text>
+          <Text style={styles.text.paragraph}>Let's your JustBe account.</Text>
+          <View style={{ marginVertical: 10 }}></View>
+          <Text style={styles.text.sectionHeader}>Email / Username</Text>
           <View style={styles.section}>
             <Input
-              text="Email / Username"
+              text="Email"
               sample="myemail@gmail.com"
-              changed={(currText) => setIdentifier(currText)}
+              changed={(currText) => setEmail(currText)}
+              req
+            />
+            <Input
+              text="Username"
+              sample="jdoe3"
+              changed={(currText) => setUsername(currText)}
               req
             />
           </View>
+          <View style={{ marginVertical: 10 }}></View>
+          <Text style={styles.text.sectionHeader}>Password</Text>
+          <View style={styles.section}>
+            <Input
+              text="Password"
+              sample="12345"
+              changed={(currText) => setPassword(currText)}
+              password
+              req
+            />
+            <Input
+              text="Verify Password"
+              sample="12345"
+              changed={(currText) => setPassConfirm(currText)}
+              password
+              req
+            />
+          </View>
+          <View style={{ marginVertical: 10 }}></View>
+          <Button
+            text="Sign Up"
+            textColor={styles.colors.primary}
+            onPress={() => attemptSignUp()}
+          />
         </View>
       </KeyboardAwareScrollView>
     </LinearGradient>
   );
 };
-
-// const styl = StyleSheet.create({
-//   header: {
-//     flexDirection: "row",
-//     alignItems: "center",
-//     marginTop: 65,
-//     paddingHorizontal: 20,
-//     justifyContent: "flex-end",
-//   },
-//   headerText: {
-//     marginRight: 15,
-//     color: "#fff",
-//     fontSize: 18,
-//   },
-//   headerImage: {
-//     width: 20,
-//     height: 20,
-//     tintColor: "#fff",
-//     resizeMode: "contain",
-//   },
-//   logoGradient: {
-//     width: 160,
-//     height: 160,
-//     display: "flex",
-//     justifyContent: "center",
-//     alignItems: "center",
-//     borderRadius: 30,
-//     marginTop: 50,
-//     alignSelf: "center",
-//   },
-//   logoText: {
-//     color: "#fff",
-//     fontSize: 30,
-//     fontWeight: "bold",
-//     letterSpacing: 1,
-//   },
-//   titleText: {
-//     color: "#fff",
-//     fontSize: 30,
-//     fontWeight: "bold",
-//     marginTop: 30,
-//     marginLeft: 30,
-//   },
-//   formGroup: {
-//     marginTop: 10,
-//     marginHorizontal: 30,
-//   },
-//   inputGroup: {
-//     marginTop: 20,
-//   },
-//   inputHeader: {
-//     fontSize: 20,
-//     color: "#fff",
-//   },
-//   input: {
-//     marginVertical: 10,
-//     borderBottomColor: "#fff",
-//     borderBottomWidth: 1,
-//     height: 40,
-//     color: "#fff",
-//     fontSize: 20,
-//   },
-//   passwordImageArea: {
-//     position: "absolute",
-//     right: 0,
-//     bottom: 10,
-//     height: 30,
-//     width: 30,
-//   },
-//   passwordImage: {
-//     height: 20,
-//     width: 20,
-//     tintColor: "#fff",
-//   },
-//   signupButton: {
-//     height: 60,
-//     backgroundColor: "#fff",
-//     borderRadius: 20,
-//     alignItems: "center",
-//     justifyContent: "center",
-//     margin: 30,
-//   },
-//   signupButtonText: {
-//     color: constants.colors.primary,
-//     fontSize: 16,
-//     fontWeight: "bold",
-//   },
-// });
 
 export default Signup;

@@ -13,7 +13,7 @@ const Input = ({ text, sample, changed, req, password }) => {
   if (password) {
     return (
       <View style={styles.group}>
-        {{text} && <Text style={styles.header}>{text}</Text>}
+        <Text style={styles.header}>{text}</Text>
         <TextInput
           style={styles.text}
           placeholder={sample}
@@ -37,7 +37,7 @@ const Input = ({ text, sample, changed, req, password }) => {
     if (req) {
       return (
         <View style={styles.group}>
-          {{text} && <Text style={styles.header}>{text}</Text>}
+          <Text style={styles.header}>{text}</Text>
           <TextInput
             style={styles.text}
             placeholder={sample}
@@ -50,7 +50,7 @@ const Input = ({ text, sample, changed, req, password }) => {
     } else {
       return (
         <View style={styles.group}>
-          {{text} && <Text style={styles.header}>{text}</Text>}
+          <Text style={styles.header}>{text}</Text>
           <TextInput
             style={styles.text}
             placeholder={sample}

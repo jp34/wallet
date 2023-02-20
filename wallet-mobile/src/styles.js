@@ -32,12 +32,18 @@ const styles = StyleSheet.create({
       marginLeft: 30,
       marginBottom: 20,
     },
+    sectionHeader: {
+      color: "#FFF",
+      fontSize: 23,
+      marginLeft: 30,
+      marginBottom: 5,
+    },
   },
   section: {
-    paddingVertical: 10,
+    paddingVertical: 20,
     borderRadius: 15,
     backgroundColor: "rgba(255, 255, 255, 0.15)",
-    marginHorizontal: 22,
+    marginHorizontal: 20,
   },
 });
 

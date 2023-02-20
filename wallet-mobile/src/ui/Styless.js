@@ -19,6 +19,14 @@ export const ScreenStyles = StyleSheet.create({
     alignItems: "center",
     width: "100%",
   },
+  flexGrowContainer: {
+    flex: 1,
+    paddingTop: 16,
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    flexGrow: 1,
+  },
   nonHeaderContainer: {
     flex: 1,
     width: "100%",
@@ -29,7 +37,7 @@ export const ScreenStyles = StyleSheet.create({
     padding: 15,
     borderRadius: 15,
     backgroundColor: "rgba(255, 255, 255, 0.15)",
-  }
+  },
 });
 
 export const TextStyles = StyleSheet.create({
@@ -52,22 +60,13 @@ export const TextStyles = StyleSheet.create({
       fontFamily: "Quicksand-SemiBold",
       marginBottom: 10,
       fontSize: 30,
-      marginTop: 20,
+      marginTop: 15,
     },
     description: {
       color: "#EEE",
       fontSize: 20,
       marginVertical: 10,
       fontFamily: "Quicksand-Regular",
-    },
-  },
-  section: {
-    header: {
-      color: "#EEE",
-      fontSize: 20,
-      marginBottom: 5,
-      marginLeft: 5,
-      fontFamily: "Quicksand-Medium",
     },
   },
 });

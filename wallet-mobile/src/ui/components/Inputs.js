@@ -39,16 +39,16 @@ export const Input = ({ text, sample, changed, password }) => {
 
 const styles = StyleSheet.create({
   header: {
-    fontSize: 22,
+    fontSize: 19,
     color: "#EEE",
-    fontFamily: "Quicksand-SemiBold",
+    fontFamily: "Quicksand-Medium",
   },
   text: {
-    marginVertical: 5,
+    marginVertical: 2,
     borderBottomColor: "#EEE",
     borderBottomWidth: 1,
     height: 40,
-    fontSize: 20,
+    fontSize: 16,
     color: "#EEE",
     fontFamily: "Quicksand-Regular",
   },
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     view: {
       position: "absolute",
       right: -20,
-      bottom: 0,
+      bottom: -10,
       height: 45,
       width: 45,
     },

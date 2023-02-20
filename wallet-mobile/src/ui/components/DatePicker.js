@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import SelectDropdown from "react-native-select-dropdown";
 
-const DatePicker = () => {
+const DatePicker = ({ onDateChange }) => {
   const [selectedDay, setSelectedDay] = useState(null);
   const [selectedMonth, setSelectedMonth] = useState(null);
   const [selectedYear, setSelectedYear] = useState(null);
-  const [selectedDate, setSelectedDate] = useState(null);
 
   const days = Array.from({ length: 31 }, (_, i) =>
     (i + 1).toString().padStart(2, "0")
@@ -34,12 +33,6 @@ const DatePicker = () => {
 
   return (
     <View style={styles.container}>
-      {/* <Text style={styles.selectedDateText}>
-        {selectedDay && selectedMonth && selectedYear
-          ? `${selectedMonth}/${selectedDay}/${selectedYear}`
-          : "Please select a date"}
-
-      </Text> */}
       <View style={styles.datePickerContainer}>
         <SelectDropdown
           data={months}
@@ -74,6 +67,13 @@ const DatePicker = () => {
           rowTextStyle={{ color: "#6030D9" }}
         />
       </View>
+      {/* <Text style={styles.selectedDateText}>
+        {formatSelectedDate() || "Please select a date"}
+      </Text>
+      <View style={styles.separator} /> */}
+      {/* <Text style={styles.saveButton} onPress={handleDateChange}>
+        Save Date
+      </Text> */}
     </View>
   );
 };
@@ -92,8 +92,8 @@ const styles = StyleSheet.create({
   buttonStyle: {
     day: {
       backgroundColor: "rgba(0, 0, 0, 0.0)",
-      borderWidth: 2,
-      borderColor: "#FFF",
+      borderWidth: 1,
+      borderColor: "#EEE",
       paddingVertical: 12,
       borderRadius: 10,
       marginHorizontal: 5,
@@ -101,8 +101,8 @@ const styles = StyleSheet.create({
     },
     month: {
       backgroundColor: "rgba(0, 0, 0, 0.0)",
-      borderWidth: 2,
-      borderColor: "#FFF",
+      borderWidth: 1,
+      borderColor: "#EEE",
       paddingVertical: 12,
       borderRadius: 10,
       marginHorizontal: 5,
@@ -110,8 +110,8 @@ const styles = StyleSheet.create({
     },
     year: {
       backgroundColor: "rgba(0, 0, 0, 0.0)",
-      borderWidth: 2,
-      borderColor: "#FFF",
+      borderWidth: 1,
+      borderColor: "#EEE",
       paddingVertical: 12,
       borderRadius: 10,
       marginHorizontal: 5,
@@ -119,19 +119,26 @@ const styles = StyleSheet.create({
     },
   },
   buttonTextStyle: {
-    color: "#FFF",
-    fontSize: 20,
+    color: "#EEE",
+    fontSize: 18,
+    fontFamily: "Quicksand-Regular",
   },
   dropdownStyle: {
-    backgroundColor: "#FFF",
+    backgroundColor: "#EEE",
     borderRadius: 10,
   },
   selectedDateText: {
     marginTop: 16,
     fontSize: 18,
     color: "#333",
+    fontFamily: "Quicksand-Regular",
   },
-  text: { color: "#FFF", fontSize: 30, marginHorizontal: 3 },
+  text: {
+    color: "#FFF",
+    fontSize: 30,
+    marginHorizontal: 3,
+    fontFamily: "Quicksand-Regular",
+  },
   separator: {
     height: 1,
     width: "100%",

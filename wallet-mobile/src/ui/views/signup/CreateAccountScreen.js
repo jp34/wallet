@@ -61,10 +61,8 @@ const CreateAccountScreen = ({ navigation, route }) => {
               Let's create your JustBe account.
             </Text>
             {/* Spacer */}
-            <View style={{ marginVertical: 15 }}></View>
-            {/* Email / User Section Header */}
-            <Text style={TextStyles.section.header}>Email / Username</Text>
-            {/* Email / User Section View */}
+            <View style={{ marginVertical: 10 }}></View>
+            {/* User Section View */}
             <View style={ScreenStyles.sectionContainer}>
               {/* Email Input */}
               <Input
@@ -72,6 +70,11 @@ const CreateAccountScreen = ({ navigation, route }) => {
                 sample="myemail@gmail.com"
                 changed={(newText) => setEmail(newText)}
               />
+            </View>
+            {/* Spacer */}
+            <View style={{ marginVertical: 10 }}></View>
+            {/* User Section View */}
+            <View style={ScreenStyles.sectionContainer}>
               {/* Username Input */}
               <Input
                 text="Username"
@@ -80,8 +83,6 @@ const CreateAccountScreen = ({ navigation, route }) => {
               />
             </View>
             <View style={{ marginVertical: 10 }}></View>
-            {/* Password Section Header */}
-            <Text style={TextStyles.section.header}>Password</Text>
             {/* Password Section View */}
             <View style={ScreenStyles.sectionContainer}>
               {/* Pass Input */}

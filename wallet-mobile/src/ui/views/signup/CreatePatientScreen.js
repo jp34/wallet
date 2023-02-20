@@ -15,25 +15,24 @@ const CreatePatient = ({ navigation }) => {
   const [firstName, setFirstName] = useState("");
   const [middleName, setMiddleName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [date, setDate] = useState("");
-  const demo = useState(true);
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [birthDate, setBirthDate] = useState("");
 
   async function attemptCreatePatient() {
-    try {
-      const result = await createPatient(
-        firstName,
-        middleName,
-        lastName,
-        phone,
-        birthday
-      );
-      if (result) return navigation.navigate("HomeRouter", { patient: result });
-      // Handle for incorrect logins
-    } catch (err) {
-      console.log("Create account failed with error");
-      console.error(err);
-      return false;
-    }
+    console.log(birthDate);
+    // try {
+    //   const result = await createPatient(
+    //     firstName,
+    //     middleName,
+    //     lastName,
+    //     phoneNumber,
+    //     birthDate
+    //   );
+    //   if (result) return navigation.navigate("HomeRouter", { patient: result });
+    // } catch (err) {
+    //   console.log("Create Patient Failed");
+    //   return;
+    // }
   }
 
   return (
@@ -42,7 +41,9 @@ const CreatePatient = ({ navigation }) => {
       {/* Padding Based on Device */}
       <SafeAreaView style={{ flex: 1 }}>
         {/* Screen Container */}
-        <KeyboardAwareScrollView contentContainerStyle={ScreenStyles.container}>
+        <KeyboardAwareScrollView
+          contentContainerStyle={ScreenStyles.flexGrowContainer}
+        >
           {/* Header */}
           <Header navigation={navigation} />
           {/* Non-Header Container */}
@@ -52,9 +53,7 @@ const CreatePatient = ({ navigation }) => {
               Tell us more about you!
             </Text>
             {/* Spacer */}
-            <View style={{ marginVertical: 15 }}></View>
-            {/* Name Section Header */}
-            <Text style={TextStyles.section.header}>Full Name</Text>
+            <View style={{ marginVertical: 10 }}></View>
             {/* Section View */}
             <View style={ScreenStyles.sectionContainer}>
               {/* First Name Input */}
@@ -81,17 +80,46 @@ const CreatePatient = ({ navigation }) => {
             </View>
             {/* Spacer */}
             <View style={{ marginVertical: 10 }}></View>
-            {/* Birth Date Section Header */}
-            <Text style={TextStyles.section.header}>Birth Date</Text>
+            {/* Section View */}
+            <View style={ScreenStyles.sectionContainer}>
+              {/* Phone Number Input */}
+              <Input
+                text="Phone Number"
+                sample="123-123-1234"
+                changed={(text) => setPhoneNumber(text)}
+              />
+            </View>
+            {/* Spacer */}
+            <View style={{ marginVertical: 10 }}></View>
             {/* Section View */}
             <View style={ScreenStyles.sectionContainer}>
               {/* Birth Date Input View */}
-              <View style={{ height: 75 }}>
+              <View style={{ height: 80 }}>
+                <Text
+                  style={{
+                    fontSize: 19,
+                    color: "#EEE",
+                    fontFamily: "Quicksand-Medium",
+                    marginBottom: 10,
+                    marginLeft: 2,
+                  }}
+                >
+                  Birth Date
+                </Text>
                 {/* Birth Date Input */}
-                <DatePicker />
+                <DatePicker onDateChange={(date) => setBirthDate(date)} />
               </View>
             </View>
+            <View style={{ marginVertical: 10 }}></View>
+            <View
+              style={{
+                justifyContent: "center",
+                alignItems: "center",
+                marginTop: 10,
+              }}
+            ></View>
           </View>
+          <View style={{ marginVertical: 100 }}></View>
           <PrimaryButton
             text="Continue"
             options={{

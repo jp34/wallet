@@ -14,7 +14,7 @@ const Login = ({ navigation }) => {
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [showStatus, setShowStatus] = useState(false);
-  const [demo, setDemo] = useState(true);
+  const demo = useState(true);
 
   // Function for API Login
   async function attemptLogin() {

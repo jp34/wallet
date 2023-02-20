@@ -24,7 +24,6 @@ const Login = ({ navigation }) => {
       setShowStatus(true);
       renderStatus(showStatus);
     }
-    console.log(identifier);
   }
 
   const renderStatus = (showStatus) => {

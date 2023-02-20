@@ -65,7 +65,7 @@ const Input = ({ text, sample, changed, req, password }) => {
 
 const styles = StyleSheet.create({
   header: {
-    fontSize: 20,
+    fontSize: 22,
     color: "#FFF",
   },
   text: {
@@ -75,6 +75,7 @@ const styles = StyleSheet.create({
     height: 40,
     fontSize: 19,
     color: "#FFF",
+    fontSize: 22,
   },
   group: {
     marginHorizontal: 30,

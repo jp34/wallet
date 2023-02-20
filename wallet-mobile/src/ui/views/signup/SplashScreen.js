@@ -25,7 +25,7 @@ const SplashScreen = ({ navigation }) => {
               <Text style={TextStyles.splash.header}>What is JustBe?</Text>
               {/* Text Description */}
               <Text style={TextStyles.splash.description}>
-                Description of what JustBe is all about.
+                Description of JustBe.
               </Text>
             </View>
             {/* Text Group Container */}
@@ -34,7 +34,7 @@ const SplashScreen = ({ navigation }) => {
               <Text style={TextStyles.splash.header}>How Can I Use It?</Text>
               {/* Text Description */}
               <Text style={TextStyles.splash.description}>
-                Description of what JustBe is all about.
+                Description of JustBe.
               </Text>
             </View>
           </View>

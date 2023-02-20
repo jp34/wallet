@@ -19,11 +19,12 @@ const ButtonStyles = StyleSheet.create({
   primary: {
     view: {
       height: 50,
-      paddingHorizontal: 100,
+      width: 300,
       justifyContent: "center",
       borderWidth: 1.5,
       borderColor: "#EEE",
       borderRadius: 10,
+      alignItems: "center"
     },
     text: {
       color: "#EEE",

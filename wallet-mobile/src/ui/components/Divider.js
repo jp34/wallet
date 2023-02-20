@@ -18,16 +18,16 @@ const styles = StyleSheet.create({
     marginVertical: 20,
   },
   line: {
-    borderColor: "#FFF",
-    borderWidth: 1,
+    borderColor: "#EEE",
+    borderWidth: 0.75,
     flex: 1,
     borderRadius: 10,
     marginHorizontal: 25,
   },
   text: {
-    color: "#FFF",
+    color: "#EEE",
     fontSize: 19,
-    fontWeight: "bold",
+    fontFamily: "Quicksand-SemiBold"
   },
 });
 

@@ -19,8 +19,10 @@ const Input = ({ text, sample, changed, password }) => {
         placeholderTextColor="#C9C9C9"
         onChangeText={changed}
         secureTextEntry={showPassword}
+        autoCapitalize={false}
+        autoCorrect={false}
       />
-      {/* {password && (
+      {password && (
         <TouchableOpacity
           style={styles.password.view}
           onPress={() => setShowPassword(!showPassword)}
@@ -30,14 +32,14 @@ const Input = ({ text, sample, changed, password }) => {
             source={require("../../../assets/icons/unlock.png")}
           />
         </TouchableOpacity>
-      )} */}
+      )}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   header: {
-    fontSize: 25,
+    fontSize: 22,
     color: "#EEE",
     fontFamily: "Quicksand-SemiBold",
   },
@@ -48,11 +50,10 @@ const styles = StyleSheet.create({
     height: 40,
     fontSize: 20,
     color: "#EEE",
-    fontFamily: "Quicksand-SemiBold",
+    fontFamily: "Quicksand-Regular",
   },
   group: {
     paddingVertical: 5,
-    flex: 1,
   },
   password: {
     view: {

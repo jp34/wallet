@@ -17,6 +17,7 @@ export const ScreenStyles = StyleSheet.create({
     paddingTop: 16,
     justifyContent: "center",
     alignItems: "center",
+    width: "100%"
   },
   nonHeaderContainer: {
     flex: 1,

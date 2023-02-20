@@ -30,7 +30,7 @@ const StartScreen = ({ navigation }) => {
               }}
             />
             {/* Login Subtitle View */}
-            <View style={{ flexDirection: "row", marginTop: 5 }}>
+            <View style={{ flexDirection: "row", marginTop: 10 }}>
               {/* Subtitle Text */}
               <Text style={{ color: "#EEE", fontFamily: "Quicksand-Regular" }}>Already have an account?</Text>
               {/* Subtitle Hyperlink */}

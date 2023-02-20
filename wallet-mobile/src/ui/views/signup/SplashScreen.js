@@ -18,20 +18,20 @@ const SplashScreen = ({ navigation }) => {
           {/* Non-Header Container */}
           <View style={ScreenStyles.nonHeaderContainer}>
             {/* Text Group Container */}
-            <View style={{ marginBottom: 30 }}>
+            <View style={{ marginBottom: 20 }}>
               {/* Text Header */}
-              <Text style={TextStyles.splash.header}>What is JustBe?</Text>
+              <Text style={TextStyles.page.header}>What is JustBe?</Text>
               {/* Text Description */}
-              <Text style={TextStyles.splash.description}>
+              <Text style={TextStyles.page.description}>
                 Description of JustBe.
               </Text>
             </View>
             {/* Text Group Container */}
-            <View style={{ marginBottom: 30 }}>
+            <View style={{ marginBottom: 20 }}>
               {/* Text Header */}
-              <Text style={TextStyles.splash.header}>How Can I Use It?</Text>
+              <Text style={TextStyles.page.header}>How Can I Use It?</Text>
               {/* Text Description */}
-              <Text style={TextStyles.splash.description}>
+              <Text style={TextStyles.page.description}>
                 Description of JustBe.
               </Text>
             </View>

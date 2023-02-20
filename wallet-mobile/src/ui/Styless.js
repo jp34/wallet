@@ -25,22 +25,14 @@ export const ScreenStyles = StyleSheet.create({
     alignSelf: "flex-start",
     paddingHorizontal: 20,
   },
+  sectionContainer: {
+    padding: 15,
+    borderRadius: 15,
+    backgroundColor: "rgba(255, 255, 255, 0.15)",
+  }
 });
 
 export const TextStyles = StyleSheet.create({
-  splash: {
-    header: {
-      color: "#EEE",
-      fontSize: 25,
-      fontFamily: "Quicksand-SemiBold",
-      marginVertical: 10,
-    },
-    description: {
-      color: "#EEE",
-      fontSize: 20,
-      fontFamily: "Quicksand-Regular",
-    },
-  },
   pageTitle: {
     color: "#EEE",
     fontSize: 40,
@@ -54,17 +46,28 @@ export const TextStyles = StyleSheet.create({
     marginVertical: 10,
     fontFamily: "Quicksand-Regular",
   },
-  header: {
-    color: "#EEE",
-    fontFamily: "Quicksand-SemiBold",
-    marginBottom: 10,
-    fontSize: 30,
-    marginTop: 20,
+  page: {
+    header: {
+      color: "#EEE",
+      fontFamily: "Quicksand-SemiBold",
+      marginBottom: 10,
+      fontSize: 30,
+      marginTop: 20,
+    },
+    description: {
+      color: "#EEE",
+      fontSize: 20,
+      marginVertical: 10,
+      fontFamily: "Quicksand-Regular",
+    },
   },
-  description: {
-    color: "#EEE",
-    fontSize: 20,
-    marginVertical: 10,
-    fontFamily: "Quicksand-Regular",
+  section: {
+    header: {
+      color: "#EEE",
+      fontSize: 20,
+      marginBottom: 5,
+      marginLeft: 5,
+      fontFamily: "Quicksand-Medium",
+    },
   },
 });

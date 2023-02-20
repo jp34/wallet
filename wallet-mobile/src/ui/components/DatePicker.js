@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
       paddingVertical: 12,
       borderRadius: 10,
       marginHorizontal: 5,
-      width: "25%",
+      width: "30%",
     },
     year: {
       backgroundColor: "rgba(0, 0, 0, 0.0)",
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: "#333",
   },
-  text: { color: "#FFF", fontSize: 30, marginHorizontal: 1 },
+  text: { color: "#FFF", fontSize: 30, marginHorizontal: 3 },
   separator: {
     height: 1,
     width: "100%",

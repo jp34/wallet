@@ -9,7 +9,6 @@ import Input from "../../components/Input";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const LoginScreen = ({ navigation }) => {
-  const [showPassword, setShowPassword] = useState(false);
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const demo = useState(true);

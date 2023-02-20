@@ -1,122 +1,106 @@
 import React from "react";
-import {
-    View,
-    Text,
-    KeyboardAvoidingView,
-    ScrollView,
-    StyleSheet,
-} from "react-native";
+import { View, Text, ScrollView, StyleSheet, SafeAreaView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { PrimaryButton } from "../../components/Buttons";
-import { ScreenStyles, Gradients } from "../../Styless";
-import { BasicInput, PasswordInput } from "../../components/Inputs";
+import { ScreenStyles, Gradients, TextStyles } from "../../Styless";
 import Header from "../../components/Header";
 import { createAccount } from "../../../api/strapi-client";
+import Input from "../../components/Input";
+import DatePicker from "../../components/DatePicker";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const CreateAccountScreen = ({ navigation, route }) => {
+  const confirm = route.params.agreement;
+  const [email, setEmail] = React.useState();
+  const [username, setUsername] = React.useState();
+  const [password, setPassword] = React.useState();
+  const [showPassword, setShowPassword] = React.useState(false);
+  const [passwordConfirm, setPasswordConfirm] = React.useState();
+  const [showPasswordConfirm, setShowPasswordConfirm] = React.useState(false);
 
-    const confirm = route.params.agreement;
-    const [email, setEmail] = React.useState();
-    const [username, setUsername] = React.useState();
-    const [password, setPassword] = React.useState();
-    const [showPassword, setShowPassword] = React.useState(false);
-    const [passwordConfirm, setPasswordConfirm] = React.useState();
-    const [showPasswordConfirm, setShowPasswordConfirm] = React.useState(false);
+  // API Methods
 
-    // API Methods
-
-    const attemptCreateAccount = async () => {
-        try {
-            console.log(`Username: ${username}`);
-            console.log(`Email: ${email}`);
-            console.log(`Password: ${password}`);
-            console.log(`PasswordConfirm: ${passwordConfirm}`);
-            const result = await createAccount(username, email, password, confirm);
-            if (result) return navigation.navigate('CreatePatient');
-            // Handle for incorrect logins
-        } catch (err) {
-            console.log("Create account failed with error");
-            console.error(err);
-            return false;
-        }
+  const attemptCreateAccount = async () => {
+    try {
+      console.log(`Username: ${username}`);
+      console.log(`Email: ${email}`);
+      console.log(`Password: ${password}`);
+      console.log(`PasswordConfirm: ${passwordConfirm}`);
+      const result = await createAccount(username, email, password, confirm);
+      if (result) return navigation.navigate("CreatePatient");
+      // Handle for incorrect logins
+    } catch (err) {
+      console.log("Create account failed with error");
+      console.error(err);
+      return false;
     }
+  };
 
-    // Render Methods
-
-    const renderForm = () => {
-        const styles = StyleSheet.create({
-            form: {
-                paddingVertical: 16,
-                paddingHorizontal: 32,
-            },
-            title: {
-                marginLeft: 8,
-                marginBottom: 16,
-                color: '#eeeeee',
-                fontSize: 20,
-                fontFamily: 'Quicksand-Regular',
-            }
-        });
-        return (
-            <ScrollView style={styles.form}>
-                <Text style={styles.title}>Create your account</Text>
-                <BasicInput options={{
-                    id: 'user-email',
-                    placeholder: 'Email',
-                    placeholderTextColor: '#eeeeee',
-                    require: true,
-                    onChangeText: (text) => setEmail(text)
-                }}/>
-
-                <BasicInput options={{
-                    id: 'user-name',
-                    placeholder: 'Username',
-                    placeholderTextColor: '#eeeeee',
-                    require: true,
-                    onChangeText: (text) => setUsername(text)
-                }}/>
-                
-                <PasswordInput options={{
-                    id: 'user-password',
-                    placeholder: 'Password',
-                    placeholderTextColor: '#eeeeee',
-                    secureTextEntry: !showPassword,
-                    require: true,
-                    onChangeText: (text) => setPassword(text)
-                }} onShowPassword={() => {
-                    setShowPassword(!showPassword);
-                }}/>
-
-                <PasswordInput options={{
-                    id: 'user-password-confirm',
-                    placeholder: 'Confirm password',
-                    placeholderTextColor: '#eeeeee',
-                    secureTextEntry: !showPasswordConfirm,
-                    require: true,
-                    onChangeText: (text) => setPasswordConfirm(text)
-                }} onShowPassword={() => {
-                    setShowPasswordConfirm(!showPasswordConfirm);
-                }}/>
-            </ScrollView>
-        );
-    }
-
-    return (
-        <KeyboardAvoidingView style={ScreenStyles.screen}>
-            <LinearGradient
-                colors={Gradients.gradient1}
-                style={ScreenStyles.gradient}
-            >
-                <Header navigation={navigation}/>
-                <View style={ScreenStyles.container}>
-                    {renderForm()}
-                    <PrimaryButton label="Continue" options={{
-                        onPress: () => attemptCreateAccount()
-                    }}/>
-                </View>
-            </LinearGradient>
-        </KeyboardAvoidingView>
-    );
+  return (
+    // Background Gradient
+    <LinearGradient colors={Gradients.gradient1} style={{ flex: 1 }}>
+      {/* Padding Based on Device */}
+      <SafeAreaView style={{ flex: 1 }}>
+        {/* Screen Container */}
+        <KeyboardAwareScrollView contentContainerStyle={ScreenStyles.container}>
+          {/* Header */}
+          <Header navigation={navigation} />
+          {/* Non-Header Container */}
+          <View style={ScreenStyles.nonHeaderContainer}>
+            <Text style={TextStyles.page.header}>About You</Text>
+            <Text style={TextStyles.page.description}>
+              Tell us more about you!
+            </Text>
+            {/* Spacer */}
+            <View style={{ marginVertical: 15 }}></View>
+            {/* Name Section Header */}
+            <Text style={TextStyles.section.header}>Full Name</Text>
+            {/* Section View */}
+            <View style={ScreenStyles.sectionContainer}>
+              {/* First Name Input */}
+              <Input
+                text="First Name"
+                sample="John"
+                changed={(text) => setFName(text)}
+                req
+              />
+              {/* Middle Name Input */}
+              <Input
+                text="Middle Name"
+                sample="Michael"
+                changed={(text) => setMName(text)}
+                req
+              />
+              {/* Last Name Input */}
+              <Input
+                text="Last Name"
+                sample="Doe"
+                changed={(text) => setLName(text)}
+                req
+              />
+            </View>
+            <View style={{ marginVertical: 10 }}></View>
+            {/* Birth Date Section Header */}
+            <Text style={TextStyles.section.header}>Birth Date</Text>
+            {/* Section View */}
+            <View style={ScreenStyles.sectionContainer}>
+              {/* Birth Date Input View */}
+              <View style={{ height: 75 }}>
+                {/* Birth Date Input */}
+                <DatePicker />
+              </View>
+            </View>
+          </View>
+          <PrimaryButton
+            text="Continue"
+            options={{
+              onPress: () => attemptCreateAccount(),
+            }}
+          />
+        </KeyboardAwareScrollView>
+      </SafeAreaView>
+    </LinearGradient>
+  );
 };
 
 export default CreateAccountScreen;

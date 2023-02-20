@@ -10,6 +10,31 @@ import SplashScreen from "./views/signup/SplashScreen";
 import AgreementScreen from "./views/signup/AgreementScreen";
 import CreateAccountScreen from "./views/signup/CreateAccountScreen";
 import CreatePatientScreen from "./views/signup/CreatePatientScreen";
+import AllergyIntakeScreen from "./views/intake/AllergyIntakeScreen";
+import MedicationIntakeScreen from "./views/intake/MedicationIntakeScreen";
+
+// Intake Router - Screens: AllergyIntake, MedicationIntake
+
+const Intake = createNativeStackNavigator();
+
+const IntakeRouter = () => {
+    return (
+        <Intake.Navigator
+            screenOptions={{
+                headerShown: false,
+                gestureEnabled: true,
+                gestureResponseDistance: { horizontal: 20 },
+                animation: false,
+            }}
+            initialRouteName={"AllergyIntake"}
+        >
+            <Intake.Screen name="AllergyIntake" component={AllergyIntakeScreen}/>
+            <Intake.Screen name="MedicationIntake" component={MedicationIntakeScreen}/>
+        </Intake.Navigator>
+    );
+}
+
+// Home Router - Screens: Wallet, Home, Profile
 
 const Home = createBottomTabNavigator();
 
@@ -30,6 +55,8 @@ const HomeRouter = () => {
         </Home.Navigator>
     );
 }
+
+// Root Router
 
 const Root = createNativeStackNavigator();
 
@@ -59,6 +86,9 @@ const Router = () => {
 
             {/* Route to home router */}
             <Root.Screen name="HomeRouter" component={HomeRouter} />
+
+            {/* Route to intake router */}
+            <Home.Screen name="IntakeRouter" component={IntakeRouter} />
         </Root.Navigator>
     );
 }

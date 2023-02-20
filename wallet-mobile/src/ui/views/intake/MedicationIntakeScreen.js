@@ -11,20 +11,19 @@ import { PrimaryButton } from "../../components/Buttons";
 import { ScreenStyles, Gradients } from "../../Style";
 import { BasicInput } from "../../components/Inputs";
 import Header from "../../components/Header";
-import { createPatient } from "../../../api/strapi-client";
+import { createPatientMedication } from "../../../api/strapi-client";
 
-const CreatePatientScreen = ({ navigation }) => {
+const MedicationIntakeScreen = ({ navigation }) => {
 
-    const [firstName, setFirstName] = React.useState();
-    const [middleName, setMiddleName] = React.useState();
-    const [lastName, setLastName] = React.useState();
-    const [phone, setPhone] = React.useState();
-    const [birthday, setBirthday] = React.useState();
+    const [name, setName] = React.useState();
+    const [dosage, setDosage] = React.useState();
+    const [frequency, setFrequency] = React.useState();
 
-    async function attemptCreatePatient() {
+    async function attemptCreateAllergy() {
         try {
-            const result = await createPatient(firstName, middleName, lastName, phone, birthday);
-            if (result) return navigation.navigate('HomeRouter');
+            // const result = await createPatientAllergy(patientId, description, severity);
+            // if (result) 
+            return navigation.navigate('HomeRouter');
             // Handle for incorrect logins
         } catch (err) {
             console.log("Create account failed with error");
@@ -49,45 +48,26 @@ const CreatePatientScreen = ({ navigation }) => {
         });
         return (
             <ScrollView style={styles.form}>
-                <Text style={styles.title}>Basic Information</Text>
+                <Text style={styles.title}>Record a Medication</Text>
                 <BasicInput options={{
-                    id: 'user-first',
-                    placeholder: 'First name',
+                    placeholder: 'Description',
                     placeholderTextColor: '#eeeeee',
                     require: true,
-                    onChangeText: (text) => setFirstName(text)
+                    onChangeText: (text) => setDescription(text)
                 }}/>
 
                 <BasicInput options={{
-                    id: 'user-middle',
-                    placeholder: 'Middle Name',
+                    placeholder: 'Severity',
                     placeholderTextColor: '#eeeeee',
                     require: true,
-                    onChangeText: (text) => setMiddleName(text)
+                    onChangeText: (text) => setSeverity(text)
                 }}/>
 
                 <BasicInput options={{
-                    id: 'user-last',
-                    placeholder: 'Last name',
+                    placeholder: 'Frequency',
                     placeholderTextColor: '#eeeeee',
                     require: true,
-                    onChangeText: (text) => setLastName(text)
-                }}/>
-
-                <BasicInput options={{
-                    id: 'user-phone',
-                    placeholder: 'Phone',
-                    placeholderTextColor: '#eeeeee',
-                    require: true,
-                    onChangeText: (text) => setPhone(text)
-                }}/>
-
-                <BasicInput options={{
-                    id: 'user-birthday',
-                    placeholder: 'Birthday',
-                    placeholderTextColor: '#eeeeee',
-                    require: true,
-                    onChangeText: (text) => setBirthday(text)
+                    onChangeText: (text) => setFrequency(text)
                 }}/>
             </ScrollView>
         );
@@ -102,8 +82,8 @@ const CreatePatientScreen = ({ navigation }) => {
                 <Header navigation={navigation}/>
                 <View style={ScreenStyles.container}>
                     {renderForm()}
-                    <PrimaryButton label="Finish" options={{
-                        onPress: () => attemptCreatePatient()
+                    <PrimaryButton label="Next" options={{
+                        onPress: () => attemptCreateAllergy()
                     }}/>
                 </View>
             </LinearGradient>
@@ -111,4 +91,4 @@ const CreatePatientScreen = ({ navigation }) => {
     );
 };
 
-export default CreatePatientScreen;
+export default MedicationIntakeScreen;

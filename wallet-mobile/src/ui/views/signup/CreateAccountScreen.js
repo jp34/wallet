@@ -27,10 +27,6 @@ const CreateAccountScreen = ({ navigation, route }) => {
 
     const attemptCreateAccount = async () => {
         try {
-            console.log(`Username: ${username}`);
-            console.log(`Email: ${email}`);
-            console.log(`Password: ${password}`);
-            console.log(`PasswordConfirm: ${passwordConfirm}`);
             const result = await createAccount(username, email, password, confirm);
             if (result) return navigation.navigate('CreatePatient');
             // Handle for incorrect logins

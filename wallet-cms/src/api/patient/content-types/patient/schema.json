@@ -28,10 +28,6 @@
       "required": true,
       "unique": false
     },
-    "birthday": {
-      "type": "date",
-      "required": true
-    },
     "medicalEncounters": {
       "type": "relation",
       "relation": "oneToMany",
@@ -54,6 +50,10 @@
       "relation": "oneToMany",
       "target": "api::patient-allergy.patient-allergy",
       "mappedBy": "patient"
+    },
+    "birthday": {
+      "type": "string",
+      "required": true
     }
   }
 }

@@ -22,7 +22,7 @@ const LoginScreen = ({ navigation }) => {
     const attemptLogin = async () => {
         try {
             const result = await login(identifier, password);
-            if (result) return navigation.navigate('HomeRouter', { user: result.user });
+            if (result) return navigation.navigate('HomeRouter');
             // Handle for incorrect logins
         } catch (err) {
             console.log("Login failed");

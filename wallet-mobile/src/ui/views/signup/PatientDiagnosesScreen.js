@@ -32,15 +32,13 @@ const PatientDiagnosesScreen = ({ navigation }) => {
               Select all that apply.
             </Text>
             <View style={{ marginVertical: 10 }}></View>
-            <ScrollView style={{ flex: 1 }}>
-              {/* Checklist Section */}
-              <View style={ScreenStyles.sectionContainer}>
-                {/* Checklist */}
-                <CheckboxList
-                  options={["Asthma", "Hypertension", "Hypotension", "None"]}
-                />
-              </View>
-            </ScrollView>
+            {/* Checklist Section */}
+            <View style={ScreenStyles.sectionContainer}>
+              {/* Checklist */}
+              <CheckboxList
+                options={["Asthma", "Hypertension", "Hypotension", "None"]}
+              />
+            </View>
           </View>
           <PrimaryButton
             text="Continue"

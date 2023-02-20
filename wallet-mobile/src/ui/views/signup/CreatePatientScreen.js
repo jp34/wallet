@@ -121,7 +121,6 @@ const CreatePatient = ({ navigation }) => {
               }}
             ></View>
           </View>
-          <View style={{ marginVertical: 100 }}></View>
           <PrimaryButton
             text="Continue"
             options={{

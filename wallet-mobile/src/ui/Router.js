@@ -1,9 +1,9 @@
 import React from "react";
 // import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-// import WalletScreen from "./views/home/WalletScreen";
-// import HomeScreen from "./views/home/HomeScreen";
-// import ProfileScreen from "./views/home/ProfileScreen";
+import WalletScreen from "./views/home/WalletScreen";
+import HomeScreen from "./views/home/HomeScreen";
+import ProfileScreen from "./views/home/ProfileScreen";
 import StartScreen from "./views/StartScreen";
 import LoginScreen from "./views/login/LoginScreen";
 import SplashScreen from "./views/signup/SplashScreen";

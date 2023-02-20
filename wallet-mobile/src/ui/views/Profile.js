@@ -10,7 +10,7 @@ const Profile = ({ navigation }) => {
                 style={styles.backHeader}
             >
                 <Image
-                    source={require("../../assets/chevron-left.png")}
+                    source={require("../../../assets/icons/chevron-left.png")}
                     style={styles.backImage}
                 />
             </TouchableOpacity>
@@ -31,7 +31,7 @@ const Profile = ({ navigation }) => {
         return (
             <View style={styles.profileView}>
                 <Image
-                    source={require("../../assets/profile.png")}
+                    source={require("../../../assets/icons/profile.png")}
                     resizeMode="contain"
                     style={styles.profileImage}
                 />

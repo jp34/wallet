@@ -1,209 +1,126 @@
-import React from "react";
-import {
-    View,
-    Text,
-    KeyboardAvoidingView,
-    ScrollView,
-    TouchableOpacity,
-    TextInput,
-    StyleSheet,
-} from "react-native";
+import React, { useState } from "react";
+import { View, Text, SafeAreaView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { ScreenStyles, Gradients, TextStyles } from "../../Styles";
+import Header from "../../components/Header";
+import Input from "../../components/Inputs";
+import { PrimaryButton } from "../../components/Buttons";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import CustomAlert from "../../components/CustomAlert";
 
-const PatientMedProvider = ({ navigation }) => {
-    // Boolean control for SecureText
-    const [title, setTitle] = React.useState();
-    const [email, setEmail] = React.useState();
-    const [phone, setPhone] = React.useState();
-    const url = "wallet.capstone.csi.miamioh.edu:8000";
+const PatientMedProviderScreen = ({ navigation }) => {
+  // Boolean control for SecureText
+  const [title, setTitle] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [showAlert, setShowAlert] = useState(false);
+  const [message, setMessage] = useState("Submission Failed");
 
-    // Renders Intake Form
-    function renderIntakeForm() {
-        return (
-            <View>
-                {/* Title */}
-                <Text style={styles.titleText}>Tell us about you!</Text>
+  const attemptPatientMedProvider = async () => {
+    console.log(`Title: ${title}`);
+    console.log(`Email: ${email}`);
+    console.log(`Phone Number: ${phone}`);
+    navigation.navigate("Start");
+  };
 
-                {/* Form */}
-                <View style={styles.formGroup}>
+  function validateEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
 
-                    {/* Title */}
-                    <View style={styles.inputGroup}>
-                        <Text style={styles.inputHeader}>Title</Text>
-                        <TextInput
-                            style={styles.input}
-                            placeholder="Medical Provider"
-                            placeholderTextColor="#fff"
-                            onChangeText={(text) => setTitle(text)}
-                            require
-                        />
-                    </View>
+  const attemptSubmission = () => {
+    if (title.trim() === "") {
+      setMessage("Please enter a Title.");
+      setShowAlert(true);
+      return;
+    } else if (email.trim() === "") {
+      setMessage("Please enter an Email Address.");
+      setShowAlert(true);
+      return;
+    } else if (phone.trim() === "") {
+      setMessage("Please enter a Phone Number.");
+      setShowAlert(true);
+      return;
+    } else if (!validateEmail(email)) {
+      setMessage("PLease enter a valid Email Address.");
+      setShowAlert(true);
+      return;
+    } else {
+        attemptPatientMedProvider(title, email, phone);
+    }
+  };
 
-                    {/* Email */}
-                    <View style={styles.inputGroup}>
-                        <Text style={styles.inputHeader}>Email</Text>
-                        <TextInput
-                            style={styles.input}
-                            placeholder="JDoe@email.com"
-                            placeholderTextColor="#fff"
-                            onChangeText={(text) => setEmail(text)}
-                            require
-                        />
-                    </View>
-
-                    {/* Phone number */}
-                    <View style={styles.inputGroup}>
-                        <Text style={styles.inputHeader}>Phone Number</Text>
-                        <TextInput
-                            style={styles.input}
-                            placeholder="555-555-5555"
-                            //onChange={(e) => formatDate(e)} 
-                            keyboardType="numeric"
-                            type="text"
-                            value={phone}
-                            onChange={handlePhoneChange}
-                            maxLength={10}
-                            placeholderTextColor="#fff"
-                            require
-                        />
-                    </View>
-                </View>
+  return (
+    // Background Gradient
+    <LinearGradient colors={Gradients.gradient1} style={{ flex: 1 }}>
+      {/* Padding Based on Device */}
+      <SafeAreaView style={{ flex: 1 }}>
+        {/* Screen Container */}
+        <KeyboardAwareScrollView contentContainerStyle={ScreenStyles.container}>
+          {/* Header */}
+          <Header navigation={navigation} />
+          {/* Non-Header Container */}
+          <View style={ScreenStyles.nonHeaderContainer}>
+            {/* Medical Provider Page Header */}
+            <Text style={TextStyles.page.header}>Medical Provider</Text>
+            {/* Medical Provider Page Description */}
+            <Text style={TextStyles.page.description}>
+              Who is your current medical provider?
+            </Text>
+            {/* Spacer */}
+            <View style={{ marginVertical: 10 }}></View>
+            {/* Title Input Section */}
+            <View style={ScreenStyles.sectionContainer}>
+              {/* Title Input */}
+              <Input
+                text="Title"
+                sample="Dr. J Doe"
+                changed={(newText) => setTitle(newText)}
+                value={title}
+              />
             </View>
-        );
-    }
-
-    const handlePhoneChange = event => {
-        const result = event.target.value.replace(/\D/g, '');
-        setPhone(result);
-      };
-
-    // Attempts to save the form and move to next intake screen
-    async function attemptSave() {
-        // const resp = await createPatient(firstname, middlename, lastname, date);
-        // New client method needed with endpoint
-        navigation.navigate("IntakePatientAllergies");
-    }
-
-    // Renders Save Button
-    function renderSaveButton() {
-        return (
-            <TouchableOpacity
-                style={styles.saveButton}
-                onPress={() => attemptSave()}
-            >
-                <Text style={styles.saveButtonText}>Next</Text>
-            </TouchableOpacity>
-        );
-    }
-
-    return (
-        
-        <KeyboardAvoidingView style={styles.page}>
-            <LinearGradient
-                colors={constants.colors.gradient1}
-                style={styles.container}
-            >
-                <ScrollView>
-                    {renderIntakeForm()}
-                    {renderSaveButton()}
-                </ScrollView>
-            </LinearGradient>
-        </KeyboardAvoidingView>
-    );
+            {/* Spacer */}
+            <View style={{ marginVertical: 10 }}></View>
+            {/* Email Input Section */}
+            <View style={ScreenStyles.sectionContainer}>
+              {/* Email Input */}
+              <Input
+                text="Email"
+                sample="myemail@gmail.com"
+                changed={(newText) => setEmail(newText)}
+                value={email}
+              />
+            </View>
+            {/* Spacer */}
+            <View style={{ marginVertical: 10 }}></View>
+            {/* Phone Number Input Section */}
+            <View style={ScreenStyles.sectionContainer}>
+              {/* Phone Number Input */}
+              <Input
+                text="Phone Number"
+                sample="123-123-1234"
+                changed={(newText) => setPhone(newText)}
+                value={phone}
+              />
+            </View>
+          </View>
+          {/* Continue Button */}
+          <PrimaryButton
+            text="Continue"
+            options={{
+              onPress: () => attemptSubmission(),
+            }}
+          />
+          {showAlert && (
+            <CustomAlert
+              message={message}
+              onPress={() => setShowAlert(false)}
+            />
+          )}
+        </KeyboardAwareScrollView>
+      </SafeAreaView>
+    </LinearGradient>
+  );
 };
 
-const constants = StyleSheet.create({
-    colors: {
-        primary: "#6030D9",
-        secondary: "#2B1360",
-        gradient1: ["#2B1360", "#6030D9"],
-        gradient2: ["#6030D9", "#2B1360"],
-    },
-});
-
-const styles = StyleSheet.create({
-    page: {
-        display: "flex",
-        width: "100%",
-        height: "100%",
-    },
-    container: {
-        width: "100%",
-        height: "100%",
-    },
-    header: {
-        flexDirection: "row",
-        alignItems: "center",
-        marginTop: 65,
-        paddingHorizontal: 20,
-        justifyContent: "flex-end",
-    },
-    headerText: {
-        marginRight: 15,
-        color: "#fff",
-        fontSize: 18,
-    },
-    headerImage: {
-        width: 20,
-        height: 20,
-        tintColor: "#fff",
-        resizeMode: "contain",
-    },
-    logoGradient: {
-        width: 160,
-        height: 160,
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        borderRadius: 30,
-        marginTop: 50,
-        alignSelf: "center",
-    },
-    logoText: {
-        color: "#fff",
-        fontSize: 30,
-        fontWeight: "bold",
-        letterSpacing: 1,
-    },
-    titleText: {
-        color: "#fff",
-        fontSize: 30,
-        fontWeight: "bold",
-        marginTop: 30,
-        marginLeft: 30,
-    },
-    formGroup: {
-        marginTop: 10,
-        marginHorizontal: 30,
-    },
-    inputGroup: {
-        marginTop: 20,
-    },
-    inputHeader: {
-        fontSize: 20,
-        color: "#fff",
-    },
-    input: {
-        marginVertical: 10,
-        borderBottomColor: "#fff",
-        borderBottomWidth: 1,
-        height: 40,
-        color: "#fff",
-        fontSize: 20,
-    },
-    saveButton: {
-        height: 60,
-        backgroundColor: "#fff",
-        borderRadius: 20,
-        alignItems: "center",
-        justifyContent: "center",
-        margin: 30,
-    },
-    saveButtonText: {
-        color: constants.colors.primary,
-        fontSize: 16,
-        fontWeight: "bold",
-    },
-});
-
-export default PatientMedProvider;
+export default PatientMedProviderScreen;

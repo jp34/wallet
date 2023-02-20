@@ -8,7 +8,7 @@ import {
   Image,
 } from "react-native";
 
-export const Input = ({ text, sample, changed, password }) => {
+export const Input = ({ text, sample, changed, password, value }) => {
   const [showPassword, setShowPassword] = useState(false);
   return (
     <View style={styles.group}>
@@ -19,8 +19,8 @@ export const Input = ({ text, sample, changed, password }) => {
         placeholderTextColor="#C9C9C9"
         onChangeText={changed}
         secureTextEntry={showPassword}
-        autoCapitalize={false}
         autoCorrect={false}
+        value={value}
       />
       {password && (
         <TouchableOpacity

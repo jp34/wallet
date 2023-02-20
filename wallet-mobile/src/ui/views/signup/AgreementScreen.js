@@ -99,7 +99,6 @@ const AgreeStyles = StyleSheet.create({
   },
   text: {
     color: "#EEE",
-    fontFamily: "Quicksand-Regular",
     fontSize: "20",
     paddingTop: 2,
     paddingBottom: 25,

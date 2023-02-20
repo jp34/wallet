@@ -29,7 +29,6 @@ const ButtonStyles = StyleSheet.create({
     text: {
       color: "#EEE",
       fontSize: 20,
-      fontFamily: "Quicksand-Bold"
     },
   },
 });

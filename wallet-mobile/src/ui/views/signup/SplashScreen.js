@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, SafeAreaView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { PrimaryButton } from "../../components/Buttons";
-import { ScreenStyles, Gradients, TextStyles } from "../../Styless";
+import { ScreenStyles, Gradients, TextStyles } from "../../Styles";
 import Header from "../../components/Header";
 
 const SplashScreen = ({ navigation }) => {

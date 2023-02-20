@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, SafeAreaView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { ScreenStyles, Gradients } from "../Styless";
+import { ScreenStyles, Gradients } from "../Styles";
 import { LargeLogo } from "../components/Logos";
 import { PrimaryButton } from "../components/Buttons";
 

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, StyleSheet, SafeAreaView } from "react-native";
-import { ScreenStyles, Gradients, TextStyles } from "../../Styless";
+import { ScreenStyles, Gradients, TextStyles } from "../../Styles";
 import { LinearGradient } from "expo-linear-gradient";
 import Header from "../../components/Header";
 import { PrimaryButton } from "../../components/Buttons";

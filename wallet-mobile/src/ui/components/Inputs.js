@@ -50,7 +50,6 @@ const styles = StyleSheet.create({
     height: 40,
     fontSize: 16,
     color: "#EEE",
-    fontFamily: "Quicksand-Regular",
   },
   group: {
     paddingVertical: 5,

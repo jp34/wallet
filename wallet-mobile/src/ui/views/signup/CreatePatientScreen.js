@@ -3,7 +3,7 @@ import { View, Text, SafeAreaView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { createPatient } from "../../../api/strapi-client";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { Gradients, TextStyles, ScreenStyles } from "../../Styless";
+import { Gradients, TextStyles, ScreenStyles } from "../../Styles";
 import { PrimaryButton } from "../../components/Buttons";
 import Input from "../../components/Inputs";
 import DatePicker from "../../components/DatePicker";

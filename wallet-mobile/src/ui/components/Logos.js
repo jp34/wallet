@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { Gradients } from "../Styless";
+import { Gradients } from "../Styles";
 
 const LargeLogo = () => {
   return (

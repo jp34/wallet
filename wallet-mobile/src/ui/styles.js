@@ -1,53 +1,72 @@
 import { StyleSheet } from "react-native";
 
-const styles = StyleSheet.create({
-  colors: {
-    primary: "#6030D9",
-    secondary: "#2B1360",
-    gradient1: ["#2B1360", "#6030D9"],
-  },
+export const Gradients = {
+  gradient1: ["#2B1360", "#6030D9"],
+  gradient2: ["#6030D9", "#2B1360"],
+};
+
+export const Colors = {
+  backgroundDark: "#0C0C0C",
+  primary: "#6030D9",
+  secondary: "#2B1360",
+};
+
+export const ScreenStyles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop: 16,
     justifyContent: "center",
-    paddingHorizontal: 8,
-    paddingBottom: 8,
+    alignItems: "center",
+    width: "100%",
   },
-  containerNormal: {
+  flexGrowContainer: {
     flex: 1,
-    paddingHorizontal: 8,
-    paddingBottom: 8,
+    paddingTop: 16,
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    flexGrow: 1,
   },
-  text: {
-    title: {
-      color: "#FFF",
-      fontSize: 35,
-      fontWeight: "bold",
-      marginVertical: 30,
-      marginLeft: 30,
-    },
-    paragraph: {
-      color: "#FFF",
-      fontSize: 25,
-      marginLeft: 30,
-      marginBottom: 20,
-    },
-    sectionHeader: {
-      color: "#FFF",
-      fontSize: 23,
-      marginLeft: 30,
-      marginBottom: 5,
-    },
-    subtitle: {
-      color: "#FFF",
-      fontSize: 22,
-    }
+  nonHeaderContainer: {
+    flex: 1,
+    width: "100%",
+    alignSelf: "flex-start",
+    paddingHorizontal: 20,
   },
-  section: {
-    paddingVertical: 20,
+  sectionContainer: {
+    padding: 15,
     borderRadius: 15,
     backgroundColor: "rgba(255, 255, 255, 0.15)",
-    marginHorizontal: 20,
   },
 });
 
-export default styles;
+export const TextStyles = StyleSheet.create({
+  pageTitle: {
+    color: "#EEE",
+    fontSize: 40,
+    marginTop: 20,
+    marginBottom: 10,
+    fontFamily: "Quicksand-Bold",
+  },
+  pageDescription: {
+    color: "#EEE",
+    fontSize: 25,
+    marginVertical: 10,
+    fontFamily: "Quicksand-Regular",
+  },
+  page: {
+    header: {
+      color: "#EEE",
+      fontFamily: "Quicksand-SemiBold",
+      marginBottom: 10,
+      fontSize: 30,
+      marginTop: 15,
+    },
+    description: {
+      color: "#EEE",
+      fontSize: 20,
+      marginVertical: 10,
+      fontFamily: "Quicksand-Regular",
+    },
+  },
+});

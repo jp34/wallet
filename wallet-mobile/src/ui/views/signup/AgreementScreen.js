@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet, SafeAreaView, ScrollView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { PrimaryButton } from "../../components/Buttons";
-import { ScreenStyles, Gradients, TextStyles } from "../../Styless";
+import { ScreenStyles, Gradients, TextStyles } from "../../Styles";
 import Checkbox from "expo-checkbox";
 import Header from "../../components/Header";
 

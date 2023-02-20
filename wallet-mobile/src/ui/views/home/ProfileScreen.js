@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text } from "react-native";
 import { PrimaryButton } from "../../components/Buttons";
-import { ScreenStyles } from "../../Styless";
+import { ScreenStyles } from "../../Styles";
 
 const ProfileScreen = ({ navigation }) => {
   return (

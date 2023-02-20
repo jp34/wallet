@@ -10,7 +10,7 @@ const CheckboxList = ({ options }) => {
 
   return (
     // Container for checkbox list.
-    <View>
+    <View style={{paddingHorizontal: 20}}>
       {/* Component to Create Checkbox List */}
       {options.map((item, index) => (
         // Item View

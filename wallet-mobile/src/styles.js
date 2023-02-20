@@ -34,7 +34,6 @@ const styles = StyleSheet.create({
     },
   },
   section: {
-    paddingHorizontal: 20,
     paddingVertical: 10,
     borderRadius: 15,
     backgroundColor: "rgba(255, 255, 255, 0.15)",

@@ -17,7 +17,7 @@ export const ScreenStyles = StyleSheet.create({
     paddingTop: 16,
     justifyContent: "center",
     alignItems: "center",
-    width: "100%"
+    width: "100%",
   },
   nonHeaderContainer: {
     flex: 1,
@@ -51,6 +51,19 @@ export const TextStyles = StyleSheet.create({
   pageDescription: {
     color: "#EEE",
     fontSize: 25,
+    marginVertical: 10,
+    fontFamily: "Quicksand-Regular",
+  },
+  header: {
+    color: "#EEE",
+    fontFamily: "Quicksand-SemiBold",
+    marginBottom: 10,
+    fontSize: 30,
+    marginTop: 20,
+  },
+  description: {
+    color: "#EEE",
+    fontSize: 20,
     marginVertical: 10,
     fontFamily: "Quicksand-Regular",
   },

@@ -7,8 +7,8 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import StartScreen from "./views/StartScreen";
 import LoginScreen from "./views/login/LoginScreen";
 import SplashScreen from "./views/signup/SplashScreen";
-// import AgreementScreen from "./views/signup/AgreementScreen";
-// import CreateAccountScreen from "./views/signup/CreateAccountScreen";
+import AgreementScreen from "./views/signup/AgreementScreen";
+import CreateAccountScreen from "./views/signup/CreateAccountScreen";
 // import CreatePatientScreen from "./views/signup/CreatePatientScreen";
 
 // const Home = createBottomTabNavigator();
@@ -52,9 +52,9 @@ const Router = () => {
 
       {/* Signup Screens */}
       <Root.Screen name="Splash" component={SplashScreen} />
-      {/*<Root.Screen name="Agreement" component={AgreementScreen} />
-            <Root.Screen name="CreateAccount" component={CreateAccountScreen} />
-            <Root.Screen name="CreatePatient" component={CreatePatientScreen} /> */}
+      <Root.Screen name="Agreement" component={AgreementScreen} />
+      <Root.Screen name="CreateAccount" component={CreateAccountScreen} />
+      {/*    <Root.Screen name="CreatePatient" component={CreatePatientScreen} /> */}
 
       {/* Route to home router */}
       {/* <Root.Screen name="HomeRouter" component={HomeRouter} /> */}

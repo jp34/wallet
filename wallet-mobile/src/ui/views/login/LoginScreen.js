@@ -45,7 +45,7 @@ const LoginScreen = ({ navigation }) => {
           <View style={ScreenStyles.nonHeaderContainer}>
             <Text style={TextStyles.pageTitle}>Login</Text>
             <Text style={TextStyles.pageDescription}>Welcome back.</Text>
-            <View style={{ marginTop: 20, marginHorizontal: 20 }}>
+            <View style={{ marginVertical: 20, marginHorizontal: 20 }}>
               <Input
                 text="Email / Username"
                 changed={(newText) => setIdentifier(newText)}
@@ -57,7 +57,7 @@ const LoginScreen = ({ navigation }) => {
                 password
               />
             </View>
-            <View style={{ alignItems: "center", marginTop: 15 }}>
+            <View style={{ alignItems: "center" }}>
               <PrimaryButton
                 text="Login"
                 options={{

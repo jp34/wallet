@@ -84,10 +84,10 @@ const styles = StyleSheet.create({
   password: {
     view: {
       position: "absolute",
-      right: -10,
-      bottom: 0,
-      height: 40,
-      width: 40,
+      right: -20,
+      bottom: -5,
+      height: 45,
+      width: 45,
     },
     image: {
       height: 20,

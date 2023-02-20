@@ -37,6 +37,10 @@ const styles = StyleSheet.create({
       marginLeft: 30,
       marginBottom: 5,
     },
+    subtitle: {
+      color: "#FFF",
+      fontSize: 22,
+    }
   },
   section: {
     paddingVertical: 20,

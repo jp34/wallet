@@ -1,26 +1,31 @@
 const axios = require("axios");
 
-const baseUrl = "http://localhost:8000/api/";
-var token = "";
-var user = {};
+const host = 'localhost';
+const port = '8000';
+const baseUrl = `http://${host}:${port}`;
+
+var session = {
+    user: {},
+    token: ""
+}
 
 /**
  * This method makes a login request to the Strapi API
  * @param identifier Username or email of user to login as
  * @param password Password of user
- * @returns User data if login is successful, otherwise false
+ * @returns True if successful, otherwise false
  */
 export const login = async (identifier, password) => {
     try {
-        let response = await axios.post(baseUrl.concat('auth/local/'), {
+        const response = await axios.post(baseUrl.concat('/api/auth/local'), {
             identifier: identifier,
             password: password
         }, { mode: 'no-cors' });
         if (response.status != 200) throw Error("Server responded with error");
-        token = response.data.jwt;
-        user = response.data.user;
-        console.log(user);
-        return user;
+        session.user = response.data.user;
+        session.token = response.data.jwt;
+        console.log(session.user);
+        return true;
     } catch (error) {
         console.log("Login failed due to error");
         console.log(error);
@@ -33,19 +38,21 @@ export const login = async (identifier, password) => {
  * @param username Username of new user
  * @param email Email of new user
  * @param password Password of new user
- * @returns User data if login is successful, otherwise false
+ * @returns True if successful, otherwise false
  */
-export const signup = async (username, email, password) => {
+export const createAccount = async (username, email, password, agreement) => {
     try {
-        let response = await axios.post(baseUrl.concat('auth/local/register'), {
+        if (!agreement) throw new Error("User has not accepted the terms and conditions!");
+        const response = await axios.post(baseUrl.concat('/api/auth/local/register'), {
             username: username,
             email: email,
-            password: password
+            password: password,
+            agreement: agreement
         }, { mode: 'no-cors' });
         if (response.status != 200) throw Error("Server responded with error");
-        token = response.data.jwt;
-        user = response.data.user;
-        return user;
+        session.user = response.data.user;
+        session.token = response.data.jwt;
+        return true;
     } catch (error) {
         console.log("Signup failed due to error");
         console.log(error);
@@ -55,26 +62,36 @@ export const signup = async (username, email, password) => {
 
 /**
  * This method makes a patient info request to the Strapi API
- * @param username Username of new user
- * @param middlename middle name of usrer
- * @param lastname last name of new user
- * @param birthday birthday of new user
- * @returns User data if post is successful, otherwise false
+ * @param firstName Username of new patient
+ * @param middleName middle name of patient
+ * @param lastName last name of new patient
+ * @param phone phone number of new patient
+ * @param birthday birthday of new patient
+ * @returns Patient data if successful, otherwise false
  */
-export const createPatient = async (username, firstname, middlename, lastname, phone, birthday) => {
+export const createPatient = async (firstName, middleName, lastName, phone, birthday) => {
     try {
-        const response = await axios.post(baseUrl.concat('/patients'), {
+        console.log(session);
+        console.log(`Username ${session.user.username}`);
+        console.log(`FirstName ${firstName}`);
+        console.log(`MiddleName ${middleName}`);
+        console.log(`LastName ${lastName}`);
+        console.log(`Phone ${phone}`);
+        console.log(`Birthday ${birthday}`);
+        const response = await axios.post(baseUrl.concat('/api/patients'), {
             data: {
-                username: username,
-                first_name: firstname,
-                middle_name: middlename,
-                last_name: lastname,
+                username: session.user.username,
+                firstName: firstName,
+                middleName: middleName,
+                lastName: lastName,
                 phone : phone,
                 birthday: birthday
             }
         }, {
-            mode: 'no-cors' ,
-            Authorization: `Bearer ${token}`
+            headers: {
+                Authorization: `Bearer ${session.token}`,
+                'Content-Type': 'application/json',
+            }
         });
         if (response.status != 200) throw Error("Server responded with error");
         return response.data;
@@ -94,12 +111,12 @@ export const createPatient = async (username, firstname, middlename, lastname, p
 const query = async (method, url) => {
     if (method != 'get' && method != 'post') throw Error("Invalid method provided, use 'get' or 'post'")
     try {
-        let response = await axios({
+        const response = await axios({
             method: method,
             mode: 'no-cors',
             url: baseUrl.concat(url),
             headers: {
-                Authorization: `Bearer ${token}`
+                Authorization: `Bearer ${session.token}`
             }
         });
         return response.data;
@@ -114,8 +131,8 @@ const query = async (method, url) => {
  * @returns User data
  */
 export const getUserData = () => {
-    if (user == undefined) throw Error("Not logged in");
-    return user;
+    if (session.user == undefined) throw Error("Not logged in");
+    return session.user;
 }
 
 /**
@@ -124,6 +141,6 @@ export const getUserData = () => {
  * @returns Patient data
  */
 export const getPatientData = async () => {
-    if (user == undefined) throw Error("Not logged in");
-    return await query('get', `patients/${user.id}/`);
+    if (session.user == undefined) throw Error("Not logged in");
+    return await query('get', `/api/patients/${session.user.id}/`);
 }

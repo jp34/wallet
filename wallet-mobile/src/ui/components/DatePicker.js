@@ -6,9 +6,12 @@ const DatePicker = () => {
   const [selectedDay, setSelectedDay] = useState(null);
   const [selectedMonth, setSelectedMonth] = useState(null);
   const [selectedYear, setSelectedYear] = useState(null);
-  const [selectedDate, setSelectedDate] = useState(null)
+  const [selectedDate, setSelectedDate] = useState(null);
 
-  const days = Array.from({ length: 31 }, (_, i) => i + 1);
+  const days = Array.from({ length: 31 }, (_, i) =>
+    (i + 1).toString().padStart(2, "0")
+  );
+
   const months = [
     "01",
     "02",
@@ -46,18 +49,18 @@ const DatePicker = () => {
           buttonStyle={styles.buttonStyle.month}
           buttonTextStyle={styles.buttonTextStyle}
           dropdownStyle={styles.dropdownStyle}
-          rowTextStyle={{color: "#6030D9"}}
+          rowTextStyle={{ color: "#6030D9" }}
         />
         <Text style={styles.text}>/</Text>
         <SelectDropdown
           data={days}
           onSelect={(selectedItem, index) => setSelectedDay(selectedItem)}
           defaultButtonText="Day"
-          buttonText={selectedDay ? selectedDay : 'Day'}
+          buttonText={selectedDay ? selectedDay : "Day"}
           buttonStyle={styles.buttonStyle.day}
           buttonTextStyle={styles.buttonTextStyle}
           dropdownStyle={styles.dropdownStyle}
-          rowTextStyle={{color: "#6030D9"}}
+          rowTextStyle={{ color: "#6030D9" }}
         />
         <Text style={styles.text}>/</Text>
         <SelectDropdown
@@ -68,7 +71,7 @@ const DatePicker = () => {
           buttonStyle={styles.buttonStyle.year}
           buttonTextStyle={styles.buttonTextStyle}
           dropdownStyle={styles.dropdownStyle}
-          rowTextStyle={{color: "#6030D9"}}
+          rowTextStyle={{ color: "#6030D9" }}
         />
       </View>
     </View>
@@ -131,7 +134,7 @@ const styles = StyleSheet.create({
   text: { color: "#FFF", fontSize: 30, marginHorizontal: 1 },
   separator: {
     height: 1,
-    width: '100%',
+    width: "100%",
     backgroundColor: "#6030D9",
   },
 });

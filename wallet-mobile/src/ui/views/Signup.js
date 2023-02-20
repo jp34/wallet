@@ -2,30 +2,50 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { signup } from "../api/strapi-client";
-import styles from "../styles";
-import Input from "../components/Input";
-import Button from "../components/Button";
+import { signup } from "../../api/strapi-client";
+import styles from "../../styles";
+import Input from "../../components/Input";
+import Button from "../../components/Button";
 
 const Signup = ({ navigation }) => {
   // Constants
-  const [email, setEmail] = useState();
-  const [username, setUsername] = React.useState();
-  const [password, setPassword] = useState();
-  const [passConfirm, setPassConfirm] = useState();
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = React.useState("");
+  const [password, setPassword] = useState("");
+  const [passConfirm, setPassConfirm] = useState("");
   const [showStatus, setShowStatus] = useState(false);
-  const [demo, setDemo] = useState(true);
+  const demo = useState(true);
 
   // Function for API Sign Up
   async function attemptSignUp() {
     // If demoing... skip Sign Up
     if (demo) {
-      navigation.navigate("CreatePatient");
+      // Check Fields
+      if (email === "") {
+        console.log("Email Empty");
+      } else if (username === "") {
+        console.log("Username Empty");
+      } else if (password === "") {
+        console.log("Password Empty");
+      } else if (passConfirm === "") {
+        console.log("Pass Confirm Empty");
+      } else if (password != passConfirm) {
+        console.log("Passwords Do Not Match");
+      } else {
+        navigation.navigate("CreatePatient");
+      }
     } else {
-      // Check Pass and Verify Match
-      if (password != passConfirm) {
-        setShowStatus(true);
-        renderStatus(showStatus);
+      // Check Fields
+      if (email === "") {
+        console.log("Email Empty");
+      } else if (username === "") {
+        console.log("Username Empty");
+      } else if (password === "") {
+        console.log("Password Empty");
+      } else if (passConfirm === "") {
+        console.log("Pass Confirm Empty");
+      } else if (password != passConfirm) {
+        console.log("Passwords Do Not Match");
       } else {
         // Attempt Sign Up
         const result = await signup(username, email, password);
@@ -79,14 +99,13 @@ const Signup = ({ navigation }) => {
             <Input
               text="Email"
               sample="myemail@gmail.com"
-              changed={(currText) => setEmail(currText)}
-              req
+              changed={(newText) => setEmail(newText)}
             />
             {/* Username Input */}
             <Input
               text="Username"
               sample="jdoe3"
-              changed={(currText) => setUsername(currText)}
+              changed={(newText) => setUsername(newText)}
               req
             />
           </View>
@@ -100,7 +119,7 @@ const Signup = ({ navigation }) => {
             <Input
               text="Password"
               sample="12345"
-              changed={(currText) => setPassword(currText)}
+              changed={(newText) => setPassword(newText)}
               password
               req
             />
@@ -108,7 +127,7 @@ const Signup = ({ navigation }) => {
             <Input
               text="Verify Password"
               sample="12345"
-              changed={(currText) => setPassConfirm(currText)}
+              changed={(newText) => setPassConfirm(newText)}
               password
               req
             />

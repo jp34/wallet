@@ -42,7 +42,7 @@ const Input = ({ text, sample, changed, req, password }) => {
             style={styles.text}
             placeholder={sample}
             placeholderTextColor="#C9C9C9"
-            onChange={changed}
+            onChangeText={changed}
             required
           />
         </View>
@@ -55,7 +55,7 @@ const Input = ({ text, sample, changed, req, password }) => {
             style={styles.text}
             placeholder={sample}
             placeholderTextColor="#C9C9C9"
-            onChange={changed}
+            onChangeText={changed}
           />
         </View>
       );

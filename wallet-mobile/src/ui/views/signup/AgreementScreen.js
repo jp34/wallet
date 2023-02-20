@@ -26,7 +26,7 @@ const AgreementScreen = ({ navigation }) => {
               <Text style={TextStyles.page.header}>Terms & Conditions</Text>
               {/* Terms Description */}
               <Text style={TextStyles.page.description}>
-                Please read and accept the terms of service.
+                Please read and confirm the terms and conditions.
               </Text>
               {/* Spacer */}
               <View style={{ marginVertical: 10 }}></View>
@@ -53,7 +53,7 @@ const AgreementScreen = ({ navigation }) => {
               {/* Spacer */}
               <View style={{ marginVertical: 10 }}></View>
               {/* Terms Checkbox View */}
-              <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <View style={{ flexDirection: "row", alignItems: "center"}}>
                 {/* Terms Checkbox */}
                 <Checkbox
                   value={confirm}
@@ -61,7 +61,7 @@ const AgreementScreen = ({ navigation }) => {
                   style={AgreeStyles.checkbox}
                 />
                 {/* Terms Checkbox Text */}
-                <Text style={TextStyles.page.description}>I Agree</Text>
+                <Text style={TextStyles.page.description}>I have read and agree to the Terms.</Text>
               </View>
             </View>
           </View>

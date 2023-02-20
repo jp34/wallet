@@ -44,7 +44,7 @@ const Router = () => {
         gestureResponseDistance: { horizontal: 20 },
         animation: false,
       }}
-      initialRouteName={"PatientAllergies"}
+      initialRouteName={"Start"}
     >
       {/* Starting Screen */}
       <Root.Screen name="Start" component={StartScreen} />

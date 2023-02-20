@@ -25,7 +25,7 @@ const App = () => {
                     gestureEnabled: true,
                     gestureResponseDistance: { horizontal: 20 },
                 }}
-                initialRouteName={"Signup"}
+                initialRouteName={"Login"}
             >
                 <Stack.Screen name="Login" component={Login} />
                 <Stack.Screen name="Signup" component={Signup} />

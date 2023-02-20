@@ -3,9 +3,9 @@ import { Text, StyleSheet, View, Image, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
+// Local Imports
 import { login } from "../api/strapi-client";
 import styles from "../styles";
-
 import Logo from "../components/Logo";
 import Input from "../components/Input";
 import Button from "../components/Button";
@@ -39,16 +39,14 @@ const Login = ({ navigation }) => {
   };
 
   return (
-    <LinearGradient colors={styles.colors.gradient1} style={{ flex: 1 }}>
+    <LinearGradient colors={styles.colors.gradient1} style={{ flex: 1, paddingTop: 70 }}>
       <KeyboardAwareScrollView contentContainerStyle={{ flex: 1 }}>
-        <View style={styles.container}>
-          <TouchableOpacity style={logStyle.header.view}>
-            <Text
-              style={logStyle.header.text}
-              onPress={() => navigation.navigate("Signup")}
-            >
-              Sign Up
-            </Text>
+        <View style={styles.containerNormal}>
+          <TouchableOpacity
+            style={logStyle.header.view}
+            onPress={() => navigation.navigate("Signup")}
+          >
+            <Text style={logStyle.header.text}>Sign Up</Text>
             <Image
               source={require("../../assets/chevron-right.png")}
               style={logStyle.header.image}
@@ -110,7 +108,7 @@ const logStyle = StyleSheet.create({
       alignItems: "center",
       paddingHorizontal: 20,
       justifyContent: "flex-end",
-      marginBottom: 60,
+      paddingBottom: 50,
     },
     text: {
       marginRight: 15,

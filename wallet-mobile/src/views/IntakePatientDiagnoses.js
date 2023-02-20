@@ -1,12 +1,10 @@
 import React from "react";
 import { View, Text, ScrollView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-
-// Local Imports
 import styles from "../styles";
 import CheckboxList from "../components/CheckboxList";
 
-const IntakePatientDiagnoses = () => {
+const IntakePatientDiagnoses = ({ navigation }) => {
   return (
     // Gradient Background
     <LinearGradient colors={styles.colors.gradient1} style={{ flex: 1 }}>

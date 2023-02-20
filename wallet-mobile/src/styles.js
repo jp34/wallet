@@ -16,7 +16,6 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 8,
     paddingBottom: 8,
-    marginTop: 70,
   },
   text: {
     title: {

@@ -5,7 +5,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 // import HomeScreen from "./views/home/HomeScreen";
 // import ProfileScreen from "./views/home/ProfileScreen";
 import StartScreen from "./views/StartScreen";
-import LoginScreen from "./views/login/PreviewLogin";
+import LoginScreen from "./views/login/LoginScreen";
 import SplashScreen from "./views/signup/SplashScreen";
 // import AgreementScreen from "./views/signup/AgreementScreen";
 // import CreateAccountScreen from "./views/signup/CreateAccountScreen";

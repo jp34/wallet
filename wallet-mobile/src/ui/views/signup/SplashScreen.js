@@ -16,9 +16,7 @@ const SplashScreen = ({ navigation }) => {
           {/* Header */}
           <Header navigation={navigation} />
           {/* Non-Header Container */}
-          <View
-            style={ScreenStyles.nonHeaderContainer}
-          >
+          <View style={ScreenStyles.nonHeaderContainer}>
             {/* Text Group Container */}
             <View style={{ marginBottom: 30 }}>
               {/* Text Header */}

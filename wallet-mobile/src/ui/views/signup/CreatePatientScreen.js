@@ -13,26 +13,24 @@ const CreatePatientScreen = ({ navigation }) => {
   const [firstName, setFirstName] = useState("");
   const [middleName, setMiddleName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [birthDate, setBirthDate] = useState("");
-  const demo = useState(true);
+  const [phone, setPhone] = useState("");
+  const [birthday, setBirthday] = useState("");
 
   async function attemptCreatePatient() {
-    if (demo) {
-      navigation.navigate("HomeRouter");
-    }
     try {
       const result = await createPatient(
         firstName,
         middleName,
         lastName,
-        phoneNumber,
-        birthDate
+        phone,
+        birthday
       );
-      if (result) return navigation.navigate("HomeRouter", { patient: result });
+      if (result) return navigation.navigate("HomeRouter");
+      // Handle for incorrect logins
     } catch (err) {
-      console.log("Create Patient Failed");
-      return;
+      console.log("Create account failed with error");
+      console.error(err);
+      return false;
     }
   }
 

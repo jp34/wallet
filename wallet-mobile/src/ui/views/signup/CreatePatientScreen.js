@@ -5,7 +5,7 @@ import { createPatient } from "../../../api/strapi-client";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Gradients, TextStyles, ScreenStyles } from "../../Styles";
 import { PrimaryButton } from "../../components/Buttons";
-import Input from "../../components/Inputs";
+import { Input } from "../../components/Inputs";
 import DatePicker from "../../components/DatePicker";
 import Header from "../../components/Header";
 
@@ -15,8 +15,10 @@ const CreatePatientScreen = ({ navigation }) => {
   const [lastName, setLastName] = useState("");
   const [phone, setPhone] = useState("");
   const [birthday, setBirthday] = useState("");
+  const demo = useState(true);
 
   async function attemptCreatePatient() {
+    if (demo) return navigation.navigate("HomeRouter");
     try {
       const result = await createPatient(
         firstName,
@@ -28,9 +30,8 @@ const CreatePatientScreen = ({ navigation }) => {
       if (result) return navigation.navigate("HomeRouter");
       // Handle for incorrect logins
     } catch (err) {
-      console.log("Create account failed with error");
+      console.log("Create Patient Failed.");
       console.error(err);
-      return false;
     }
   }
 
@@ -42,6 +43,8 @@ const CreatePatientScreen = ({ navigation }) => {
         {/* Screen Container */}
         <KeyboardAwareScrollView
           contentContainerStyle={ScreenStyles.flexGrowContainer}
+          scrollEnabled={false}
+          extraHeight={200}
         >
           {/* Header */}
           <Header navigation={navigation} />
@@ -60,21 +63,18 @@ const CreatePatientScreen = ({ navigation }) => {
                 text="First Name"
                 sample="John"
                 changed={(text) => setFirstName(text)}
-                req
               />
               {/* Middle Name Input */}
               <Input
                 text="Middle Name"
                 sample="Michael"
                 changed={(text) => setMiddleName(text)}
-                req
               />
               {/* Last Name Input */}
               <Input
                 text="Last Name"
                 sample="Doe"
                 changed={(text) => setLastName(text)}
-                req
               />
             </View>
             {/* Spacer */}
@@ -85,7 +85,7 @@ const CreatePatientScreen = ({ navigation }) => {
               <Input
                 text="Phone Number"
                 sample="123-123-1234"
-                changed={(text) => setPhoneNumber(text)}
+                changed={(text) => setPhone(text)}
               />
             </View>
             {/* Spacer */}
@@ -93,33 +93,24 @@ const CreatePatientScreen = ({ navigation }) => {
             {/* Section View */}
             <View style={ScreenStyles.sectionContainer}>
               {/* Birth Date Input View */}
-              <View style={{ height: 80 }}>
-                <Text
-                  style={{
-                    fontSize: 19,
-                    color: "#EEE",
-                    fontFamily: "Quicksand-Medium",
-                    marginBottom: 10,
-                    marginLeft: 2,
-                  }}
-                >
-                  Birth Date
-                </Text>
-                {/* Birth Date Input */}
-                <DatePicker onDateChange={(date) => setBirthDate(date)} />
-              </View>
+              {/* Birth Date Input */}
+              <Input
+                text="Birth Date"
+                changed={(text) => setBirthday(text)}
+                sample="01/02/2003"
+              />
             </View>
-            <View style={{ marginVertical: 10 }}></View>
-            <View
-              style={{
-                justifyContent: "center",
-                alignItems: "center",
-                marginTop: 10,
-              }}
-            ></View>
           </View>
+          <View style={{ marginVertical: 10 }}></View>
+          <View
+            style={{
+              justifyContent: "center",
+              alignItems: "center",
+              marginTop: 10,
+            }}
+          ></View>
           <PrimaryButton
-            text="Continue"
+            label="Continue"
             options={{
               onPress: () => attemptCreatePatient(),
             }}

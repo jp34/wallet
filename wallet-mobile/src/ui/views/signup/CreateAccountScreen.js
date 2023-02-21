@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { View, Text, SafeAreaView } from "react-native";
+import { View, Text, SafeAreaView, KeyboardAvoidingView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { PrimaryButton } from "../../components/Buttons";
 import { ScreenStyles, Gradients, TextStyles } from "../../Styles";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { createAccount } from "../../../api/strapi-client";
 import Header from "../../components/Header";
-import Input from "../../components/Inputs";
+import { Input } from "../../components/Inputs";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const CreateAccountScreen = ({ navigation, route }) => {
   const confirm = route.params.agreement;
@@ -54,7 +54,6 @@ const CreateAccountScreen = ({ navigation, route }) => {
   const renderAccountForm = () => {
     return (
       <View>
-        // Create Acct Header
         <Text style={TextStyles.page.header}>Create Account</Text>
         {/* Create Acc Description */}
         <Text style={TextStyles.page.description}>
@@ -108,22 +107,28 @@ const CreateAccountScreen = ({ navigation, route }) => {
     // Background Gradient
     <LinearGradient colors={Gradients.gradient1} style={{ flex: 1 }}>
       {/* Padding Based on Device */}
-      <SafeAreaView style={{ flex: 1 }}>
-        {/* Screen Container */}
-        <KeyboardAwareScrollView contentContainerStyle={ScreenStyles.container}>
+      <SafeAreaView style={{ flex: 1}}>
+        {/* Keyboard Avoid View Page Container */}
+        <KeyboardAwareScrollView
+          contentContainerStyle={ScreenStyles.container}
+          scrollEnabled={false}
+          extraHeight={200}
+        >
           {/* Header */}
           <Header navigation={navigation} />
           {/* Non-Header Container */}
           <View style={ScreenStyles.nonHeaderContainer}>
-            {/* {renderAccountForm()} */}
+            {renderAccountForm()}
+            <View style={{flex: 1, justifyContent: "flex-end", alignItems: "center"}}>
+              {/* Continue Button */}
+              <PrimaryButton
+                label="Continue"
+                options={{
+                  onPress: () => attemptCreateAccount(),
+                }}
+              />
+            </View>
           </View>
-          {/* Continue Button */}
-          <PrimaryButton
-            text="Continue"
-            options={{
-              onPress: () => attemptCreateAccount(),
-            }}
-          />
         </KeyboardAwareScrollView>
       </SafeAreaView>
     </LinearGradient>

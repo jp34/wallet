@@ -65,13 +65,13 @@ const LoginScreen = ({ navigation }) => {
         <Input
           text="Email / Username"
           sample="johndoe@apple.com"
-          onChangeText={(text) => setIdentifier(text)}
+          changed={(text) => setIdentifier(text)}
         />
         {/* Password Input */}
         <Input
           text="Password"
           sample="12345"
-          onChangeText={(text) => setPassword(text)}
+          changed={(text) => setPassword(text)}
           password
         />
         {/* Spacer */}

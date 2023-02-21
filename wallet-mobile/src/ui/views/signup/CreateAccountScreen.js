@@ -11,34 +11,18 @@ import Input from "../../components/Inputs";
 const CreateAccountScreen = ({ navigation, route }) => {
   const confirm = route.params.agreement;
   const [email, setEmail] = useState("");
-  const [username, setUsername] = React.useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [passConfirm, setPassConfirm] = useState("");
-  const demo = useState(true);
+  const [passwordConfirm, setPasswordConfirm] = useState("");
 
   const attemptCreateAccount = async () => {
-    if (demo) return navigation.navigate("CreatePatient");
     try {
-      if (email === "") {
-        console.log("Email Empty");
-      } else if (username === "") {
-        console.log("Username Empty");
-      } else if (password === "") {
-        console.log("Password Empty");
-      } else if (passConfirm === "") {
-        console.log("Pass Confirm Empty");
-      } else if (password != passConfirm) {
-        console.log("Passwords Do Not Match");
-      } else {
-        console.log(`Username: ${username}`);
-        console.log(`Email: ${email}`);
-        console.log(`Password: ${password}`);
-        console.log(`PasswordConfirm: ${passConfirm}`);
-        const result = await createAccount(username, email, password, confirm);
-        if (result) return navigation.navigate("CreatePatient");
-      }
+      const result = await createAccount(username, email, password, confirm);
+      if (result) return navigation.navigate("CreatePatient");
+      // Handle for incorrect logins.
     } catch (err) {
       console.log("Create Account Failed");
+      console.error(err);
       return;
     }
   };
@@ -96,7 +80,7 @@ const CreateAccountScreen = ({ navigation, route }) => {
               <Input
                 text="Verify Password"
                 sample="12345"
-                changed={(newText) => setPassConfirm(newText)}
+                changed={(newText) => setPasswordConfirm(newText)}
                 password
               />
             </View>

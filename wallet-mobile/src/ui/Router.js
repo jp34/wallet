@@ -12,7 +12,7 @@ import CreateAccountScreen from "./views/signup/CreateAccountScreen";
 import CreatePatientScreen from "./views/signup/CreatePatientScreen";
 import AllergyIntakeScreen from "./views/intake/AllergyIntakeScreen";
 import MedicationIntakeScreen from "./views/intake/MedicationIntakeScreen";
-import PatientDiagnosesScreen from "./views/intake/PatientDiagnosesScreen";
+import DiagnosesIntakeScreen from "./views/intake/DiagnosesIntakeScreen";
 
 // Intake Router - Screens: AllergyIntake, MedicationIntake
 
@@ -27,13 +27,11 @@ const IntakeRouter = () => {
         gestureResponseDistance: { horizontal: 20 },
         animation: false,
       }}
-      initialRouteName={"AllergyIntake"}
+      initialRouteName={"MedProviderIntake"}
     >
+      <Intake.Screen name="MedProviderIntake" component={MedProviderIntakeScreen}/>
       <Intake.Screen name="AllergyIntake" component={AllergyIntakeScreen} />
-      <Intake.Screen
-        name="MedicationIntake"
-        component={MedicationIntakeScreen}
-      />
+      <Intake.Screen name="DiagnosesIntake" component={DiagnosesIntakeScreen} />
     </Intake.Navigator>
   );
 };
@@ -73,7 +71,8 @@ const Router = () => {
         gestureResponseDistance: { horizontal: 20 },
         animation: false,
       }}
-      initialRouteName={"PatientDiagnoses"}
+      initialRouteName={"MedicationIntake"}
+      
     >
       {/* Starting Screen */}
       <Root.Screen name="Start" component={StartScreen} />
@@ -86,13 +85,14 @@ const Router = () => {
       <Root.Screen name="Agreement" component={AgreementScreen} />
       <Root.Screen name="CreateAccount" component={CreateAccountScreen} />
       <Root.Screen name="CreatePatient" component={CreatePatientScreen} />
-      <Root.Screen name="PatientDiagnoses" component={PatientDiagnosesScreen} />
+      <Intake.Screen name="MedicationIntake" component={MedicationIntakeScreen} />
 
       {/* Route to home router */}
       <Root.Screen name="HomeRouter" component={HomeRouter} />
 
       {/* Route to intake router */}
       <Home.Screen name="IntakeRouter" component={IntakeRouter} />
+
     </Root.Navigator>
   );
 };

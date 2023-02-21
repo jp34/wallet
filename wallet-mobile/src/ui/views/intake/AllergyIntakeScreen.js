@@ -11,7 +11,9 @@ const AllergyIntakeScreen = ({ navigation }) => {
   const [description, setDescription] = useState("");
   const [severity, setSeverity] = useState("");
 
-  const attemptPatientAllergies = async () => {};
+  const attemptPatientAllergies = async () => {
+    
+  };
 
   return (
     // Background Gradient

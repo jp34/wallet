@@ -7,7 +7,7 @@ import { ScreenStyles, Gradients, TextStyles } from "../../Styles";
 import { PrimaryButton } from "../../components/Buttons";
 import { Input } from "../../components/Inputs";
 
-const PatientDiagnosesScreen = ({ navigation }) => {
+const DiagnosesIntakeScreen = ({ navigation }) => {
   const attemptPatientDiagnoses = async () => {};
 
   return (
@@ -57,4 +57,4 @@ const PatientDiagnosesScreen = ({ navigation }) => {
   );
 };
 
-export default PatientDiagnosesScreen;
+export default DiagnosesIntakeScreen;

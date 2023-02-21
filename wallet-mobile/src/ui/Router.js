@@ -12,6 +12,7 @@ import CreateAccountScreen from "./views/signup/CreateAccountScreen";
 import CreatePatientScreen from "./views/signup/CreatePatientScreen";
 import AllergyIntakeScreen from "./views/intake/AllergyIntakeScreen";
 import MedicationIntakeScreen from "./views/intake/MedicationIntakeScreen";
+import PatientDiagnosesScreen from "./views/intake/PatientDiagnosesScreen";
 
 // Intake Router - Screens: AllergyIntake, MedicationIntake
 
@@ -72,7 +73,7 @@ const Router = () => {
         gestureResponseDistance: { horizontal: 20 },
         animation: false,
       }}
-      initialRouteName={"Start"}
+      initialRouteName={"PatientDiagnoses"}
     >
       {/* Starting Screen */}
       <Root.Screen name="Start" component={StartScreen} />
@@ -85,6 +86,7 @@ const Router = () => {
       <Root.Screen name="Agreement" component={AgreementScreen} />
       <Root.Screen name="CreateAccount" component={CreateAccountScreen} />
       <Root.Screen name="CreatePatient" component={CreatePatientScreen} />
+      <Root.Screen name="PatientDiagnoses" component={PatientDiagnosesScreen} />
 
       {/* Route to home router */}
       <Root.Screen name="HomeRouter" component={HomeRouter} />

@@ -43,7 +43,6 @@ const styles = StyleSheet.create({
       marginLeft: 10,
       marginVertical: 7,
       fontWeight: "475",
-      fontFamily: "Quicksand-Regular"
     },
   },
   checkbox: {

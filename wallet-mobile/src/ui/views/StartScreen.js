@@ -24,7 +24,7 @@ const StartScreen = ({ navigation }) => {
       <View style={StartStyles.buttonContainer}>
         {/* Sign Up Button */}
         <PrimaryButton
-          text="Get Started"
+          label="Get Started"
           options={{
             onPress: () => {
               return navigation.navigate("Splash");

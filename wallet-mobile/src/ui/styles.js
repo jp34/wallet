@@ -30,7 +30,7 @@ export const ScreenStyles = StyleSheet.create({
   nonHeaderContainer: {
     flex: 1,
     width: "100%",
-    paddingHorizontal: 20,
+    paddingHorizontal: 30,
   },
   sectionContainer: {
     padding: 15,

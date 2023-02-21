@@ -38,7 +38,7 @@ const SplashScreen = ({ navigation }) => {
           </View>
           {/* Continue Button */}
           <PrimaryButton
-            text="Continue"
+            label="Continue"
             options={{
               onPress: () => {
                 return navigation.navigate("Agreement");

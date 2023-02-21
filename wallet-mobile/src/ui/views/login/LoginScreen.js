@@ -16,9 +16,11 @@ import Header from "../../components/Header";
 const LoginScreen = ({ navigation }) => {
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
+  const demo = useState(true);
 
   // Login Function
   const attemptLogin = async () => {
+    if (demo) return navigation.navigate("HomeRouter");
     try {
       if (identifier.trim() === "") {
         console.log("Invalid Identifier.");
@@ -55,7 +57,6 @@ const LoginScreen = ({ navigation }) => {
       // Login Form View
       <View
         style={{
-          marginHorizontal: 20,
           marginTop: 20,
           justifyContent: "center",
         }}
@@ -77,7 +78,7 @@ const LoginScreen = ({ navigation }) => {
         <View style={{ alignItems: "center", marginTop: 40 }}>
           {/* Login Button */}
           <PrimaryButton
-            text="Log In"
+            label="Log In"
             options={{
               onPress: () => attemptLogin(),
             }}

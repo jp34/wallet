@@ -15,49 +15,49 @@ import MedicationIntakeScreen from "./views/intake/MedicationIntakeScreen";
 
 // Intake Router - Screens: AllergyIntake, MedicationIntake
 
-// const Intake = createNativeStackNavigator();
+const Intake = createNativeStackNavigator();
 
-// const IntakeRouter = () => {
-//   return (
-//     <Intake.Navigator
-//       screenOptions={{
-//         headerShown: false,
-//         gestureEnabled: true,
-//         gestureResponseDistance: { horizontal: 20 },
-//         animation: false,
-//       }}
-//       initialRouteName={"AllergyIntake"}
-//     >
-//       <Intake.Screen name="AllergyIntake" component={AllergyIntakeScreen} />
-//       <Intake.Screen
-//         name="MedicationIntake"
-//         component={MedicationIntakeScreen}
-//       />
-//     </Intake.Navigator>
-//   );
-// };
+const IntakeRouter = () => {
+  return (
+    <Intake.Navigator
+      screenOptions={{
+        headerShown: false,
+        gestureEnabled: true,
+        gestureResponseDistance: { horizontal: 20 },
+        animation: false,
+      }}
+      initialRouteName={"AllergyIntake"}
+    >
+      <Intake.Screen name="AllergyIntake" component={AllergyIntakeScreen} />
+      <Intake.Screen
+        name="MedicationIntake"
+        component={MedicationIntakeScreen}
+      />
+    </Intake.Navigator>
+  );
+};
 
 // Home Router - Screens: Wallet, Home, Profile
 
-// const Home = createBottomTabNavigator();
+const Home = createBottomTabNavigator();
 
-// const HomeRouter = () => {
-//   return (
-//     <Home.Navigator
-//       screenOptions={{
-//         headerShown: false,
-//         gestureEnabled: true,
-//         gestureResponseDistance: { horizontal: 20 },
-//         animation: false,
-//       }}
-//       initialRouteName={"Home"}
-//     >
-//       <Home.Screen name="Wallet" component={WalletScreen} />
-//       <Home.Screen name="Home" component={HomeScreen} />
-//       <Home.Screen name="Profile" component={ProfileScreen} />
-//     </Home.Navigator>
-//   );
-// };
+const HomeRouter = () => {
+  return (
+    <Home.Navigator
+      screenOptions={{
+        headerShown: false,
+        gestureEnabled: true,
+        gestureResponseDistance: { horizontal: 20 },
+        animation: false,
+      }}
+      initialRouteName={"Home"}
+    >
+      <Home.Screen name="Wallet" component={WalletScreen} />
+      <Home.Screen name="Home" component={HomeScreen} />
+      <Home.Screen name="Profile" component={ProfileScreen} />
+    </Home.Navigator>
+  );
+};
 
 // Root Router
 
@@ -81,16 +81,16 @@ const Router = () => {
       <Root.Screen name="Login" component={LoginScreen} />
 
       {/* Signup Screens */}
-      {/* <Root.Screen name="Splash" component={SplashScreen} />
+      <Root.Screen name="Splash" component={SplashScreen} />
       <Root.Screen name="Agreement" component={AgreementScreen} />
       <Root.Screen name="CreateAccount" component={CreateAccountScreen} />
-      <Root.Screen name="CreatePatient" component={CreatePatientScreen} /> */}
+      <Root.Screen name="CreatePatient" component={CreatePatientScreen} />
 
       {/* Route to home router */}
-      {/* <Root.Screen name="HomeRouter" component={HomeRouter} /> */}
+      <Root.Screen name="HomeRouter" component={HomeRouter} />
 
       {/* Route to intake router */}
-      {/* <Home.Screen name="IntakeRouter" component={IntakeRouter} /> */}
+      <Home.Screen name="IntakeRouter" component={IntakeRouter} />
     </Root.Navigator>
   );
 };

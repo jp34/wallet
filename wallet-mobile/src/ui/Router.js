@@ -13,8 +13,7 @@ import CreatePatientScreen from "./views/signup/CreatePatientScreen";
 import AllergyIntakeScreen from "./views/intake/AllergyIntakeScreen";
 import MedicationIntakeScreen from "./views/intake/MedicationIntakeScreen";
 import DiagnosesIntakeScreen from "./views/intake/DiagnosesIntakeScreen";
-
-// Intake Router - Screens: AllergyIntake, MedicationIntake
+import EncountersIntakeScreen from "./views/intake/EncountersIntakeScreen";
 
 const Intake = createNativeStackNavigator();
 
@@ -32,6 +31,7 @@ const IntakeRouter = () => {
       <Intake.Screen name="MedProviderIntake" component={MedProviderIntakeScreen}/>
       <Intake.Screen name="AllergyIntake" component={AllergyIntakeScreen} />
       <Intake.Screen name="DiagnosesIntake" component={DiagnosesIntakeScreen} />
+      <Intake.Screen name="MedicationIntake" component={MedicationIntakeScreen} />
     </Intake.Navigator>
   );
 };
@@ -71,7 +71,7 @@ const Router = () => {
         gestureResponseDistance: { horizontal: 20 },
         animation: false,
       }}
-      initialRouteName={"MedicationIntake"}
+      initialRouteName={"EncountersIntake"}
       
     >
       {/* Starting Screen */}
@@ -85,7 +85,7 @@ const Router = () => {
       <Root.Screen name="Agreement" component={AgreementScreen} />
       <Root.Screen name="CreateAccount" component={CreateAccountScreen} />
       <Root.Screen name="CreatePatient" component={CreatePatientScreen} />
-      <Intake.Screen name="MedicationIntake" component={MedicationIntakeScreen} />
+      <Root.Screen name="EncountersIntake" component={EncountersIntakeScreen} />
 
       {/* Route to home router */}
       <Root.Screen name="HomeRouter" component={HomeRouter} />

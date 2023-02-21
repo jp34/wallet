@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import Header from "../../components/Header";
-import { View, Text, SafeAreaView, TextInput} from "react-native";
+import { View, Text, SafeAreaView, TextInput } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { ScreenStyles, Gradients, TextStyles } from "../../Styles";
 import { PrimaryButton } from "../../components/Buttons";
 import { Input } from "../../components/Inputs";
 
 const MedicationIntakeScreen = ({ navigation }) => {
+  const attemptMedications = async () => {};
+
   return (
     // Background Gradient
     <LinearGradient colors={Gradients.gradient1} style={{ flex: 1 }}>
@@ -18,9 +20,9 @@ const MedicationIntakeScreen = ({ navigation }) => {
           <Header navigation={navigation} />
           {/* Non-Header Container */}
           <View style={ScreenStyles.nonHeaderContainer}>
-            {/* Diagnoses Page Header */}
+            {/* Medication Page Header */}
             <Text style={TextStyles.page.header}>Medications</Text>
-            {/* Diagnoses Page Description */}
+            {/* Medication Page Description */}
             <Text style={TextStyles.page.description}>
               Are you currently taking any medications?
             </Text>
@@ -31,8 +33,10 @@ const MedicationIntakeScreen = ({ navigation }) => {
                 changed={(text) => setMedNumber(text)}
               />
             </View>
-            <View style={{marginVertical: 10}}></View>
-            <Text style={TextStyles.page.description}>Please list all medications.</Text>
+            <View style={{ marginVertical: 10 }}></View>
+            <Text style={TextStyles.page.description}>
+              Please list all medications.
+            </Text>
             <View style={ScreenStyles.sectionContainer}>
               <TextInput
                 style={{
@@ -45,7 +49,6 @@ const MedicationIntakeScreen = ({ navigation }) => {
                   borderColor: "#EEE",
                   borderRadius: 10,
                   padding: 10,
-                  fontFamily: "Quicksand-Regular",
                 }}
                 multiline={true}
                 numberOfLines={4}

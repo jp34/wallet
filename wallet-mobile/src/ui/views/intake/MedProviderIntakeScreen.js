@@ -3,7 +3,7 @@ import { View, Text, SafeAreaView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { ScreenStyles, Gradients, TextStyles } from "../../Styles";
 import Header from "../../components/Header";
-import Input from "../../components/Inputs";
+import { Input } from "../../components/Inputs";
 import { PrimaryButton } from "../../components/Buttons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import CustomAlert from "../../components/CustomAlert";
@@ -12,8 +12,6 @@ const PatientMedProviderScreen = ({ navigation }) => {
   const [title, setTitle] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [showAlert, setShowAlert] = useState(false);
-  const [message, setMessage] = useState("Submission Failed");
 
   const attemptPatientMedProvider = async () => {
     console.log(`Title: ${title}`);
@@ -44,7 +42,7 @@ const PatientMedProviderScreen = ({ navigation }) => {
       setShowAlert(true);
       return;
     } else {
-        attemptPatientMedProvider(title, email, phone);
+      attemptPatientMedProvider(title, email, phone);
     }
   };
 
@@ -104,17 +102,11 @@ const PatientMedProviderScreen = ({ navigation }) => {
           </View>
           {/* Continue Button */}
           <PrimaryButton
-            text="Continue"
+            label="Continue"
             options={{
               onPress: () => attemptSubmission(),
             }}
           />
-          {showAlert && (
-            <CustomAlert
-              message={message}
-              onPress={() => setShowAlert(false)}
-            />
-          )}
         </KeyboardAwareScrollView>
       </SafeAreaView>
     </LinearGradient>

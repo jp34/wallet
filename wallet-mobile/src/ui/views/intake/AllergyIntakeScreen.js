@@ -66,7 +66,7 @@ const AllergyIntakeScreen = ({ navigation }) => {
             </View>
           </View>
           <PrimaryButton
-            text="Continue"
+            label="Continue"
             options={{
               onPress: () => attemptPatientAllergies(),
             }}

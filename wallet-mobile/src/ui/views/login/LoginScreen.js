@@ -17,15 +17,22 @@ const LoginScreen = ({ navigation }) => {
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
 
+  // Login Function
   const attemptLogin = async () => {
     try {
-      const result = await login(identifier, password);
-      if (result) return navigation.navigate("HomeRouter");
-      // Handle for incorrect logins
+      if (identifier.trim() === "") {
+        console.log("Invalid Identifier.");
+        // Show alert.
+      } else if (password.trim() === "") {
+        console.log("Password invalid.");
+        // Show alert.
+      } else {
+        const result = await login(identifier, password);
+        if (result) return navigation.navigate("HomeRouter");
+      }
     } catch (err) {
-      console.log("Login failed");
+      console.log("Login Failed.");
       console.error(err);
-      return false;
     }
   };
 

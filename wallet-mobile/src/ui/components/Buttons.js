@@ -33,6 +33,7 @@ const ButtonStyles = StyleSheet.create({
       borderColor: "#EEE",
       borderRadius: 10,
       alignItems: "center",
+      marginBottom: 5,
     },
     text: {
       color: "#EEE",

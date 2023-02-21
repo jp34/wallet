@@ -5,6 +5,7 @@ import { View, Text, SafeAreaView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { ScreenStyles, Gradients, TextStyles } from "../../Styles";
 import { PrimaryButton } from "../../components/Buttons";
+import { Input } from "../../components/Inputs";
 
 const PatientDiagnosesScreen = ({ navigation }) => {
   const attemptPatientDiagnoses = async () => {};
@@ -38,9 +39,14 @@ const PatientDiagnosesScreen = ({ navigation }) => {
                 options={["Asthma", "Hypertension", "Hypotension", "None"]}
               />
             </View>
+            {/* Spacer */}
+            <View style={{ marginVertical: 10 }}></View>
+            <View style={ScreenStyles.sectionContainer}>
+              <Input text="Other:" />
+            </View>
           </View>
           <PrimaryButton
-            text="Continue"
+            label="Continue"
             options={{
               onPress: () => attemptPatientDiagnoses(),
             }}

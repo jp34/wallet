@@ -7,7 +7,7 @@ import { PrimaryButton } from "../../components/Buttons";
 import Header from "../../components/Header";
 import CheckboxList from "../../components/CheckboxList";
 
-const PatientAllergiesScreen = ({ navigation }) => {
+const AllergyIntakeScreen = ({ navigation }) => {
   const [description, setDescription] = useState("");
   const [severity, setSeverity] = useState("");
 
@@ -75,4 +75,4 @@ const PatientAllergiesScreen = ({ navigation }) => {
   );
 };
 
-export default PatientAllergiesScreen;
+export default AllergyIntakeScreen;

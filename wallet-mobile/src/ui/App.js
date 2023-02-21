@@ -1,4 +1,6 @@
+import React from "react";
 import { useFonts } from "expo-font";
+import { NavigationContainer } from "@react-navigation/native";
 import Router from "./Router";
 
 const App = () => {

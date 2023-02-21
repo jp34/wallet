@@ -78,7 +78,7 @@ const Router = () => {
       <Root.Screen name="Start" component={StartScreen} />
 
       {/* Login Screens */}
-      {/* <Root.Screen name="Login" component={LoginScreen} /> */}
+      <Root.Screen name="Login" component={LoginScreen} />
 
       {/* Signup Screens */}
       {/* <Root.Screen name="Splash" component={SplashScreen} />

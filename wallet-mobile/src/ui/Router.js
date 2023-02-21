@@ -32,6 +32,7 @@ const IntakeRouter = () => {
       <Intake.Screen name="AllergyIntake" component={AllergyIntakeScreen} />
       <Intake.Screen name="DiagnosesIntake" component={DiagnosesIntakeScreen} />
       <Intake.Screen name="MedicationIntake" component={MedicationIntakeScreen} />
+      <Intake.Screen name="EncountersIntake" component={EncountersIntakeScreen} />
     </Intake.Navigator>
   );
 };
@@ -71,7 +72,7 @@ const Router = () => {
         gestureResponseDistance: { horizontal: 20 },
         animation: false,
       }}
-      initialRouteName={"EncountersIntake"}
+      initialRouteName={"Start"}
       
     >
       {/* Starting Screen */}
@@ -85,7 +86,6 @@ const Router = () => {
       <Root.Screen name="Agreement" component={AgreementScreen} />
       <Root.Screen name="CreateAccount" component={CreateAccountScreen} />
       <Root.Screen name="CreatePatient" component={CreatePatientScreen} />
-      <Root.Screen name="EncountersIntake" component={EncountersIntakeScreen} />
 
       {/* Route to home router */}
       <Root.Screen name="HomeRouter" component={HomeRouter} />

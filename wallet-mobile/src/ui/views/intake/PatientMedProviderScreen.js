@@ -9,7 +9,6 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import CustomAlert from "../../components/CustomAlert";
 
 const PatientMedProviderScreen = ({ navigation }) => {
-  // Boolean control for SecureText
   const [title, setTitle] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -20,7 +19,6 @@ const PatientMedProviderScreen = ({ navigation }) => {
     console.log(`Title: ${title}`);
     console.log(`Email: ${email}`);
     console.log(`Phone Number: ${phone}`);
-    navigation.navigate("Start");
   };
 
   function validateEmail(email) {

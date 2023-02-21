@@ -10,60 +10,87 @@ import SplashScreen from "./views/signup/SplashScreen";
 import AgreementScreen from "./views/signup/AgreementScreen";
 import CreateAccountScreen from "./views/signup/CreateAccountScreen";
 import CreatePatientScreen from "./views/signup/CreatePatientScreen";
-import PatientMedProviderScreen from "./views/intake/PatientMedProviderScreen";
+import AllergyIntakeScreen from "./views/intake/AllergyIntakeScreen";
+import MedicationIntakeScreen from "./views/intake/MedicationIntakeScreen";
+
+// Intake Router - Screens: AllergyIntake, MedicationIntake
+
+const Intake = createNativeStackNavigator();
+
+const IntakeRouter = () => {
+    return (
+        <Intake.Navigator
+            screenOptions={{
+                headerShown: false,
+                gestureEnabled: true,
+                gestureResponseDistance: { horizontal: 20 },
+                animation: false,
+            }}
+            initialRouteName={"AllergyIntake"}
+        >
+            <Intake.Screen name="AllergyIntake" component={AllergyIntakeScreen}/>
+            <Intake.Screen name="MedicationIntake" component={MedicationIntakeScreen}/>
+        </Intake.Navigator>
+    );
+}
+
+// Home Router - Screens: Wallet, Home, Profile
 
 const Home = createBottomTabNavigator();
 
 const HomeRouter = () => {
-  return (
-    <Home.Navigator
-      screenOptions={{
-        headerShown: false,
-        gestureEnabled: true,
-        gestureResponseDistance: { horizontal: 20 },
-        animation: false,
-      }}
-      initialRouteName={"Home"}
-    >
-      <Home.Screen name="Wallet" component={WalletScreen} />
-      <Home.Screen name="Home" component={HomeScreen} />
-      <Home.Screen name="Profile" component={ProfileScreen} />
-    </Home.Navigator>
-  );
-};
+    return (
+        <Home.Navigator
+            screenOptions={{
+                headerShown: false,
+                gestureEnabled: true,
+                gestureResponseDistance: { horizontal: 20 },
+                animation: false,
+            }}
+            initialRouteName={"Home"}
+        >
+            <Home.Screen name="Wallet" component={WalletScreen}/>
+            <Home.Screen name="Home" component={HomeScreen}/>
+            <Home.Screen name="Profile" component={ProfileScreen}/>
+        </Home.Navigator>
+    );
+}
+
+// Root Router
 
 const Root = createNativeStackNavigator();
 
 const Router = () => {
-  return (
-    <Root.Navigator
-      screenOptions={{
-        headerShown: false,
-        gestureEnabled: true,
-        gestureResponseDistance: { horizontal: 20 },
-        animation: false,
-      }}
-      initialRouteName={"PatientMedProvider"}
-    >
-      {/* Starting Screen */}
-      <Root.Screen name="Start" component={StartScreen} />
+    return (
+        <Root.Navigator
+            screenOptions={{
+                headerShown: false,
+                gestureEnabled: true,
+                gestureResponseDistance: { horizontal: 20 },
+                animation: false,
+            }}
+            initialRouteName={"Start"}
+        >
 
-      {/* Login Screens */}
-      <Root.Screen name="Login" component={LoginScreen} />
+            {/* Starting Screen */}
+            <Root.Screen name="Start" component={StartScreen} />
 
-      {/* Signup Screens */}
-      <Root.Screen name="Splash" component={SplashScreen} />
-      <Root.Screen name="CreateAccount" component={CreateAccountScreen} />
-      <Root.Screen name="CreatePatient" component={CreatePatientScreen} />
-      <Root.Screen name="Agreement" component={AgreementScreen} />
+            {/* Login Screens */}
+            <Root.Screen name="Login" component={LoginScreen} />
 
-      {/* Intake Screens */}
-      <Root.Screen name="PatientMedProvider" component={PatientMedProviderScreen} />
+            {/* Signup Screens */}
+            <Root.Screen name="Splash" component={SplashScreen} />
+            <Root.Screen name="Agreement" component={AgreementScreen} />
+            <Root.Screen name="CreateAccount" component={CreateAccountScreen} />
+            <Root.Screen name="CreatePatient" component={CreatePatientScreen} />
 
-      {/* Route to home router */}
-      <Root.Screen name="HomeRouter" component={HomeRouter} />
-    </Root.Navigator>
-  );
-};
+            {/* Route to home router */}
+            <Root.Screen name="HomeRouter" component={HomeRouter} />
+
+            {/* Route to intake router */}
+            <Home.Screen name="IntakeRouter" component={IntakeRouter} />
+        </Root.Navigator>
+    );
+}
 
 export default Router;

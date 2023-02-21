@@ -1,83 +1,8 @@
-// import React, { useState } from "react";
-// import { View, Text, SafeAreaView } from "react-native";
-// import { LinearGradient } from "expo-linear-gradient";
-// import { login } from "../../../api/strapi-client";
-// import { PrimaryButton } from "../../components/Buttons";
-// import { ScreenStyles, Gradients, TextStyles } from "../../Styles";
-// import Header from "../../components/Header";
-// import Input from "../../components/Inputs";
-// import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-
-// const LoginScreen = ({ navigation }) => {
-
-//   const attemptLogin = async () => {
-//     if (demo) {
-//       return navigation.navigate("HomeRouter", { user: result.user });
-//     }
-//     try {
-//       if (identifier === "") {
-//         console.log("LoginScreen: Identifier Empty");
-//       } else if (password === "") {
-//         console.log("LoginScreen: Password Empty");
-//       } else {
-//         const result = await login(identifier, password);
-//         if (result)
-//           return navigation.navigate("HomeRouter", { user: result.user });
-//       }
-//     } catch (err) {
-//       console.log("LoginScreen: Login Failed");
-//       return;
-//     }
-//   };
-
-//   return (
-//     // Background Gradient
-//     <LinearGradient colors={Gradients.gradient1} style={{ flex: 1 }}>
-//       {/* Padding Based on Device */}
-//       <SafeAreaView style={{ flex: 1 }}>
-//         {/* Screen Container */}
-//         <KeyboardAwareScrollView contentContainerStyle={ScreenStyles.container}>
-//           <Header navigation={navigation} />
-//           <View style={ScreenStyles.nonHeaderContainer}>
-//             <Text style={TextStyles.pageTitle}>Login</Text>
-//             <Text style={TextStyles.pageDescription}>Welcome back.</Text>
-//             <View style={{ marginVertical: 20, marginHorizontal: 20 }}>
-//               <Input
-//                 text="Email / Username"
-//                 changed={(newText) => setIdentifier(newText)}
-//               />
-//               <View style={{ marginVertical: 10 }}></View>
-//               <Input
-//                 text="Password"
-//                 changed={(newText) => setPassword(newText)}
-//                 password
-//               />
-//             </View>
-//             <View style={{ alignItems: "center" }}>
-//               <PrimaryButton
-//                 text="Login"
-//                 options={{
-//                   onPress: () => {
-//                     attemptLogin();
-//                   },
-//                 }}
-//               />
-//             </View>
-//           </View>
-//         </KeyboardAwareScrollView>
-//       </SafeAreaView>
-//     </LinearGradient>
-//   );
-// };
-
-// export default LoginScreen;
-
 import React, { useState } from "react";
 import {
   View,
   Text,
   KeyboardAvoidingView,
-  ScrollView,
   StyleSheet,
   SafeAreaView,
 } from "react-native";
@@ -85,11 +10,10 @@ import { LinearGradient } from "expo-linear-gradient";
 import { login } from "../../../api/strapi-client";
 import { PrimaryButton } from "../../components/Buttons";
 import { ScreenStyles, Gradients } from "../../Styles";
-import { BasicInput, PasswordInput } from "../../components/Inputs";
+import { Input } from "../../components/Inputs";
 import Header from "../../components/Header";
 
 const LoginScreen = ({ navigation }) => {
-  const [showPassword, setShowPassword] = useState(false);
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
 
@@ -105,84 +29,96 @@ const LoginScreen = ({ navigation }) => {
     }
   };
 
+  // Render Welcome Message
   const renderWelcomeMessage = () => {
-    const styles = StyleSheet.create({
-      container: {
-        paddingVertical: 32,
-        paddingHorizontal: 32,
-        justifyContent: "center",
-        alignItems: "flex-start",
-      },
-      text: {
-        color: "#eeeeee",
-        fontSize: 30,
-        fontFamily: "Quicksand-SemiBold",
-      },
-    });
     return (
-      <View style={styles.container}>
-        <Text style={styles.text}>Welcome back</Text>
+      // Header Message View
+      <View>
+        {/* Header Title */}
+        <Text style={LoginStyles.title}>Login</Text>
+        {/* Header Description */}
+        <Text style={LoginStyles.description}>Welcome back.</Text>
       </View>
     );
   };
 
+  // Render Login Form
   const renderLoginForm = () => {
-    const styles = StyleSheet.create({
-      form: {
-        paddingVertical: 16,
-        paddingHorizontal: 32,
-      },
-      title: {
-        marginBottom: 16,
-        color: "#eeeeee",
-        fontSize: 20,
-        fontFamily: "Quicksand-Regular",
-      },
-    });
     return (
-      <ScrollView style={styles.form}>
-        <Text style={styles.title}>Log into your account</Text>
-        <BasicInput
-          options={{
-            id: "user-identifier",
-            placeholder: "johndoe@apple.com",
-            placeholderTextColor: "#eeeeee",
-            require: true,
-            onChangeText: (text) => setIdentifier(text),
-          }}
+      // Login Form View
+      <View
+        style={{
+          marginHorizontal: 20,
+          marginTop: 20,
+          justifyContent: "center",
+        }}
+      >
+        {/* Email / Username Input */}
+        <Input
+          text="Email / Username"
+          sample="johndoe@apple.com"
+          onChangeText={(text) => setIdentifier(text)}
         />
-
-        <PasswordInput
-          options={{
-            id: "user-password",
-            placeholder: "password",
-            placeholderTextColor: "#eeeeee",
-            secureTextEntry: !showPassword,
-            require: true,
-            onChangeText: (text) => setPassword(text),
-          }}
-          onShowPassword={() => {
-            setShowPassword(!showPassword);
-          }}
+        {/* Password Input */}
+        <Input
+          text="Password"
+          sample="12345"
+          onChangeText={(text) => setPassword(text)}
+          password
         />
-      </ScrollView>
+        {/* Spacer */}
+        <View style={{ alignItems: "center", marginTop: 40 }}>
+          {/* Login Button */}
+          <PrimaryButton
+            text="Log In"
+            options={{
+              onPress: () => attemptLogin(),
+            }}
+          />
+        </View>
+      </View>
     );
   };
 
   return (
+    // Background Gradient
     <LinearGradient colors={Gradients.gradient1} style={{ flex: 1 }}>
-      <KeyboardAvoidingView contentContainerStyle={ScreenStyles.container}>
-        <Header navigation={navigation} />
-        <View style={ScreenStyles.container}>
-          {renderWelcomeMessage()}
-          {/* {renderLoginForm()} */}
-          {/* <PrimaryButton label="Log In" options={{
-                        onPress: () => attemptLogin()
-                    }}/> */}
-        </View>
-      </KeyboardAvoidingView>
+      {/* Padding Based on Device */}
+      <SafeAreaView style={{ flex: 1 }}>
+        {/* Keyboard Avoid View Page Container */}
+        <KeyboardAvoidingView
+          style={ScreenStyles.container}
+          behavior="padding"
+          enabled
+        >
+          {/* Header Component */}
+          <Header navigation={navigation} />
+          {/* Body Container */}
+          <View style={ScreenStyles.nonHeaderContainer}>
+            {/* Render Login Welcome Text */}
+            {renderWelcomeMessage()}
+            {renderLoginForm()}
+          </View>
+        </KeyboardAvoidingView>
+      </SafeAreaView>
     </LinearGradient>
   );
 };
+
+const LoginStyles = StyleSheet.create({
+  title: {
+    color: "#EEE",
+    fontSize: 40,
+    marginTop: 20,
+    marginBottom: 10,
+    fontFamily: "Quicksand-Bold",
+  },
+  description: {
+    color: "#EEE",
+    fontSize: 25,
+    marginVertical: 10,
+    fontFamily: "Quicksand-Regular",
+  },
+});
 
 export default LoginScreen;

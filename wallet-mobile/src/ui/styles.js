@@ -30,7 +30,6 @@ export const ScreenStyles = StyleSheet.create({
   nonHeaderContainer: {
     flex: 1,
     width: "100%",
-    alignSelf: "flex-start",
     paddingHorizontal: 20,
   },
   sectionContainer: {
@@ -41,19 +40,6 @@ export const ScreenStyles = StyleSheet.create({
 });
 
 export const TextStyles = StyleSheet.create({
-  pageTitle: {
-    color: "#EEE",
-    fontSize: 40,
-    marginTop: 20,
-    marginBottom: 10,
-    fontFamily: "Quicksand-Bold",
-  },
-  pageDescription: {
-    color: "#EEE",
-    fontSize: 25,
-    marginVertical: 10,
-    fontFamily: "Quicksand-Regular",
-  },
   page: {
     header: {
       color: "#EEE",

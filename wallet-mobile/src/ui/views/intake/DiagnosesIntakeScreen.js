@@ -7,10 +7,7 @@ import { PrimaryButton } from "../../components/Buttons";
 
 const DiagnosesIntakeScreen = ({ navigation }) => {
   return (
-    <LinearGradient
-      colors={Gradients.gradient1}
-      style={{ flex: 1 }}
-    >
+    <LinearGradient colors={Gradients.gradient1} style={{ flex: 1 }}>
       <SafeAreaView style={{ flex: 1 }}>
         <Header navigation={navigation} />
         <View
@@ -38,11 +35,15 @@ const DiagnosesIntakeScreen = ({ navigation }) => {
               />
               <View style={{ marginVertical: 10 }}></View>
               <Text style={TextStyles.description}>Other</Text>
-              <TextInput style={styles.input} placeholder="Ex Condition" placeholderTextColor={"#AAA"} />
+              <TextInput
+                style={styles.input}
+                placeholder="Ex Condition"
+                placeholderTextColor={"#AAA"}
+              />
             </View>
           </View>
           <View>
-            <PrimaryButton label={"Next"} />
+            <PrimaryButton label={"Continue"} />
           </View>
         </View>
       </SafeAreaView>

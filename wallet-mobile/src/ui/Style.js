@@ -28,6 +28,11 @@ export const ScreenStyles = StyleSheet.create({
     padding: 16,
     flexDirection: "column",
   },
+  section: {
+    backgroundColor: "rgba(255, 255, 255, 0.15)",
+    borderRadius: 15,
+    padding: 15,
+  },
 });
 
 export const TextStyles = StyleSheet.create({

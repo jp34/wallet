@@ -1,6 +1,6 @@
 import { LinearGradient } from "expo-linear-gradient";
 import { SafeAreaView, View, Text } from "react-native";
-import { Gradients, TextStyles } from "../../Style";
+import { Gradients, TextStyles, ScreenStyles } from "../../Style";
 import Header from "../../components/Header";
 import CheckboxList from "../../components/CheckboxList";
 
@@ -17,11 +17,7 @@ const DiagnosesIntakeScreen = ({ navigation }) => {
           <Text style={TextStyles.description}>Select all that apply.</Text>
           <View style={{ marginVertical: 10 }}></View>
           <View
-            style={{
-              backgroundColor: "rgba(255, 255, 255, 0.15)",
-              borderRadius: 15,
-              padding: 15
-            }}
+            style={ScreenStyles.section}
           >
             <CheckboxList
               options={[

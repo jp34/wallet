@@ -8,9 +8,13 @@ const DiagnosesIntakeScreen = ({ navigation }) => {
     <LinearGradient colors={Gradients.gradient1} style={{ flex: 1 }}>
       <SafeAreaView>
         <Header navigation={navigation} />
-        <View style={{paddingHorizontal: 30}}>
+        <View style={{ paddingHorizontal: 30 }}>
           <Text style={TextStyles.header}>Diagnoses</Text>
-          <Text style={TextStyles.description}>Do you have any pre-existing diagnoses?</Text>
+          <Text style={TextStyles.description}>
+            Do you have any pre-existing diagnoses?
+          </Text>
+          <Text style={TextStyles.description}>Select all that apply.</Text>
+          <View style={{ marginVertical: 10 }}></View>
         </View>
       </SafeAreaView>
     </LinearGradient>

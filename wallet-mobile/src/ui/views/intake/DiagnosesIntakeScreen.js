@@ -9,7 +9,7 @@ const DiagnosesIntakeScreen = ({ navigation }) => {
   return (
     <LinearGradient
       colors={Gradients.gradient1}
-      style={{ flex: 1, height: "100%" }}
+      style={{ flex: 1 }}
     >
       <SafeAreaView style={{ flex: 1 }}>
         <Header navigation={navigation} />
@@ -38,11 +38,11 @@ const DiagnosesIntakeScreen = ({ navigation }) => {
               />
               <View style={{ marginVertical: 10 }}></View>
               <Text style={TextStyles.description}>Other</Text>
-              <TextInput style={styles.input} placeholder="Condition 5" />
+              <TextInput style={styles.input} placeholder="Ex Condition" placeholderTextColor={"#AAA"} />
             </View>
           </View>
           <View>
-            <PrimaryButton label={"Save"} />
+            <PrimaryButton label={"Next"} />
           </View>
         </View>
       </SafeAreaView>

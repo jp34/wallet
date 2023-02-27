@@ -2,6 +2,7 @@ import { View, SafeAreaView, Text } from "react-native";
 import Header from "../../components/Header";
 import { LinearGradient } from "expo-linear-gradient";
 import { Gradients, TextStyles, ScreenStyles } from "../../Style";
+import { Input } from "../../components/Inputs";
 
 const EncountersIntakeScreen = ({ navigation }) => {
   return (
@@ -20,6 +21,7 @@ const EncountersIntakeScreen = ({ navigation }) => {
             <Text style={TextStyles.description}>
               Have you had any recent medical encounters? If so, please state.
             </Text>
+            <Input text="Medical Provider" sample="Dr. J Doe" />
           </View>
         </View>
       </SafeAreaView>

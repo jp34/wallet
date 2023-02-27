@@ -4,6 +4,7 @@ import { Gradients, TextStyles, ScreenStyles } from "../../Style";
 import Header from "../../components/Header";
 import CheckboxList from "../../components/CheckboxList";
 import { PrimaryButton } from "../../components/Buttons";
+import { Input } from "../../components/Inputs";
 
 const DiagnosesIntakeScreen = ({ navigation }) => {
   return (
@@ -34,12 +35,7 @@ const DiagnosesIntakeScreen = ({ navigation }) => {
                 ]}
               />
               <View style={{ marginVertical: 10 }}></View>
-              <Text style={TextStyles.description}>Other</Text>
-              <TextInput
-                style={styles.input}
-                placeholder="Ex Condition"
-                placeholderTextColor={"#AAA"}
-              />
+              <Input text="Other" sample="Ex Condition"/>
             </View>
           </View>
           <View>

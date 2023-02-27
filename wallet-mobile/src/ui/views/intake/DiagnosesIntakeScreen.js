@@ -4,16 +4,17 @@ import { Gradients, TextStyles } from "../../Style";
 import Header from "../../components/Header";
 
 const DiagnosesIntakeScreen = ({ navigation }) => {
-    return (
-        <LinearGradient colors={Gradients.gradient1} style={{flex: 1}}>
-            <SafeAreaView>
-                <View>
-                    <Header navigation={navigation} />
-                    <Text style={TextStyles.header}>Diagnoses</Text>
-                </View>
-            </SafeAreaView>
-        </LinearGradient>
-    );
+  return (
+    <LinearGradient colors={Gradients.gradient1} style={{ flex: 1 }}>
+      <SafeAreaView>
+        <Header navigation={navigation} />
+        <View style={{paddingHorizontal: 30}}>
+          <Text style={TextStyles.header}>Diagnoses</Text>
+          <Text style={TextStyles.description}>Do you have any pre-existing diagnoses?</Text>
+        </View>
+      </SafeAreaView>
+    </LinearGradient>
+  );
 };
 
 export default DiagnosesIntakeScreen;

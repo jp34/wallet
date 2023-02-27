@@ -3,16 +3,12 @@ import {
   View,
   Text,
   KeyboardAvoidingView,
-  ScrollView,
-  StyleSheet,
   SafeAreaView,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { PrimaryButton } from "../../components/Buttons";
 import { ScreenStyles, Gradients, TextStyles } from "../../Style";
-import { BasicInput } from "../../components/Inputs";
 import Header from "../../components/Header";
-import { createPatientMedication } from "../../../api/strapi-client";
 import { Input } from "../../components/Inputs";
 
 const MedicationIntakeScreen = ({ navigation }) => {

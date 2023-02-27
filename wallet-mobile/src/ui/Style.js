@@ -30,7 +30,7 @@ export const ScreenStyles = StyleSheet.create({
   },
 });
 
-export const Text = StyleSheet.create({
+export const TextStyles = StyleSheet.create({
   header: {
     color: "#EEE",
     fontFamily: "Quicksand-SemiBold",

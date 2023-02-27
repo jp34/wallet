@@ -1,6 +1,6 @@
 import { LinearGradient } from "expo-linear-gradient";
-import { SafeAreaView, View } from "react-native";
-import { Gradients } from "../../Style";
+import { SafeAreaView, View, Text } from "react-native";
+import { Gradients, TextStyles } from "../../Style";
 import Header from "../../components/Header";
 
 const DiagnosesIntakeScreen = ({ navigation }) => {
@@ -9,6 +9,7 @@ const DiagnosesIntakeScreen = ({ navigation }) => {
             <SafeAreaView>
                 <View>
                     <Header navigation={navigation} />
+                    <Text style={TextStyles.header}>Diagnoses</Text>
                 </View>
             </SafeAreaView>
         </LinearGradient>

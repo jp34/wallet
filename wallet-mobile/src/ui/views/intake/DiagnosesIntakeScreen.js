@@ -13,9 +13,15 @@ const DiagnosesIntakeScreen = ({ navigation }) => {
     >
       <SafeAreaView style={{ flex: 1 }}>
         <Header navigation={navigation} />
-        <View style={{ paddingHorizontal: 30, flex: 1, justifyContent: "space-between" }}>
+        <View
+          style={{
+            paddingHorizontal: 30,
+            flex: 1,
+            justifyContent: "space-between",
+          }}
+        >
           <View>
-          <Text style={TextStyles.header}>Diagnoses</Text>
+            <Text style={TextStyles.header}>Diagnoses</Text>
             <Text style={TextStyles.description}>
               Do you have any pre-existing diagnoses?
             </Text>

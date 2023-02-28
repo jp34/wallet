@@ -19,26 +19,31 @@ const ProfileScreen = ({ navigation }) => {
       id: "1",
       label: "Personal Information",
       icon: "user",
+      onPress: "",
     },
     {
       id: "2",
       label: "Medical Information",
       icon: "medicinebox",
+      onPress: "",
     },
     {
       id: "3",
       label: "Change Password",
       icon: "retweet",
+      onPress: "",
     },
     {
       id: "4",
       label: "Settings",
       icon: "setting",
+      onPress: "",
     },
     {
       id: "5",
       label: "Log Out",
       icon: "logout",
+      onPress: "Start",
     },
   ];
   // User Profile Image
@@ -137,7 +142,7 @@ const ProfileScreen = ({ navigation }) => {
             data={data}
             scrollEnabled={false}
             renderItem={({ item }) => (
-              <Pressable onPress={() => console.log(item.label)}>
+              <Pressable onPress={() => navigation.navigate(item.onPress)}>
                 <Box px="5" py="3">
                   <HStack space="8" alignItems="center">
                     <Box

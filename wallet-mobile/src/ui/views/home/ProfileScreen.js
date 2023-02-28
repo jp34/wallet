@@ -10,39 +10,36 @@ import {
   HStack,
   Spacer,
   Pressable,
+  Icon,
 } from "native-base";
-import { Gradients } from "../../Style";
+import { AntDesign } from '@expo/vector-icons';
 
 const ProfileScreen = ({ navigation }) => {
   const data = [
     {
       id: "1",
       label: "Personal Information",
-      avatarUrl:
-        "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+      icon: "user",
     },
     {
       id: "2",
       label: "Medical Information",
-      avatarUrl:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyEaZqT3fHeNrPGcnjLLX1v_W4mvBlgpwxnA&usqp=CAU",
+      icon: "medicinebox"
     },
     {
       id: "3",
       label: "Change Password",
-      avatarUrl: "https://miro.medium.com/max/1400/0*0fClPmIScV5pTLoE.jpg",
+      icon: "retweet"
     },
     {
       id: "4",
       label: "Settings",
-      avatarUrl:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSr01zI37DYuR8bMV5exWQBSw28C1v_71CAh8d7GP1mplcmTgQA6Q66Oo--QedAN1B4E1k&usqp=CAU",
+      icon: "setting"
     },
     {
       id: "5",
       label: "Log Out",
-      avatarUrl:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBwgu1A5zgPSvfE83nurkuzNEoXs9DMNr8Ww&usqp=CAU",
+      icon: "logout"
     },
   ];
 
@@ -84,7 +81,7 @@ const ProfileScreen = ({ navigation }) => {
           variant="subtle"
           _pressed={{ bgColor: "gray.200" }}
         >
-            Finish Your Profile
+          Finish Your Profile
         </Button>
       </VStack>
     );
@@ -128,13 +125,10 @@ const ProfileScreen = ({ navigation }) => {
               <Pressable onPress={() => console.log(item.label)}>
                 <Box p="5">
                   <HStack space="8" alignItems="center">
-                    <Box size="16" bgColor="purple.200" rounded="15">
+                    <Box size="16" bgColor="purple.200" rounded="15" justifyContent="center" alignItems="center">
+                    <AntDesign name={item.icon} size="36" color="#6A5ACD" />
                     </Box>
-                    <Text
-                      color="#333333"
-                      fontSize="xl"
-                      fontWeight="semibold"
-                    >
+                    <Text color="#333333" fontSize="xl" fontWeight="semibold">
                       {item.label}
                     </Text>
                   </HStack>

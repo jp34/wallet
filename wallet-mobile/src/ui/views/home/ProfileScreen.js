@@ -58,7 +58,7 @@ const ProfileScreen = ({ navigation }) => {
   const renderCompleteProfileButton = () => {
     return (
       // Vertical Stack - Place Exclamation Badge
-      <VStack pt="1">
+      <VStack pb="1.5">
         {/* Exclamation Point Badge */}
         <Badge
           rounded="full"

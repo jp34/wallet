@@ -8,13 +8,12 @@ import {
   Button,
   FlatList,
   HStack,
-  Spacer,
   Pressable,
-  Icon,
 } from "native-base";
-import { AntDesign } from '@expo/vector-icons';
+import { AntDesign } from "@expo/vector-icons";
 
 const ProfileScreen = ({ navigation }) => {
+  // FlatList Data
   const data = [
     {
       id: "1",
@@ -24,24 +23,31 @@ const ProfileScreen = ({ navigation }) => {
     {
       id: "2",
       label: "Medical Information",
-      icon: "medicinebox"
+      icon: "medicinebox",
     },
     {
       id: "3",
       label: "Change Password",
-      icon: "retweet"
+      icon: "retweet",
     },
     {
       id: "4",
       label: "Settings",
-      icon: "setting"
+      icon: "setting",
     },
     {
       id: "5",
       label: "Log Out",
-      icon: "logout"
+      icon: "logout",
     },
   ];
+  // User Profile Image
+  const profileImage =
+    "https://images.unsplash.com/photo-1677504207981-618778a3abd2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2456&q=80";
+  // User Full Name Placeholder
+  const userFullName = "[ Name ]";
+  // User Profile Incomplete Flag
+  const profileIncomplete = true;
 
   // Render Complete Profile Button
   const renderCompleteProfileButton = () => {
@@ -89,32 +95,41 @@ const ProfileScreen = ({ navigation }) => {
 
   return (
     // Page Container
-    <Flex bg="#9370DB" flex safeAreaTop>
+    <Flex bg="#9370DB" flex={1} safeAreaTop>
       {/* Box to Cover Background */}
-      <Box flex>
+      <Box flex={1}>
+        <Pressable
+          flex={0.05}
+          onPress={() => navigation.goBack()}
+          justifyContent="center"
+        >
+          <HStack px="5">
+            <AntDesign name="left" color="white" size="32" />
+          </HStack>
+        </Pressable>
         {/* Upper Box - Contains Avatar / Username / Navigation */}
-        <Box flex="2/6" justifyContent="center" alignItems="center">
+        <Box flex="0.35" justifyContent="center" alignItems="center">
           {/* User Profile Image */}
           <Avatar
             alignSelf="center"
             size="2xl"
             shadow="9"
             source={{
-              uri: "https://images.unsplash.com/photo-1677504207981-618778a3abd2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2456&q=80",
+              uri: profileImage,
             }}
           ></Avatar>
           {/* User Username / Full Name */}
           <Text pt="4" fontSize="2xl" fontWeight="semibold" color="white">
-            [ Name ]
+            {userFullName}
           </Text>
-          {renderCompleteProfileButton()}
+          {profileIncomplete && renderCompleteProfileButton()}
         </Box>
         {/* Lower Box - Contains List of Navigation Pages  */}
         <Box
-          flex="4/6"
+          flex="0.6"
           height="50%"
           bgColor={"#F5F5F5"}
-          rounded="50"
+          roundedTop="50"
           p="4"
           pt="6"
         >
@@ -123,10 +138,16 @@ const ProfileScreen = ({ navigation }) => {
             scrollEnabled={false}
             renderItem={({ item }) => (
               <Pressable onPress={() => console.log(item.label)}>
-                <Box p="5">
+                <Box px="5" py="3">
                   <HStack space="8" alignItems="center">
-                    <Box size="16" bgColor="purple.200" rounded="15" justifyContent="center" alignItems="center">
-                    <AntDesign name={item.icon} size="36" color="#6A5ACD" />
+                    <Box
+                      size="16"
+                      bgColor="purple.200"
+                      rounded="15"
+                      justifyContent="center"
+                      alignItems="center"
+                    >
+                      <AntDesign name={item.icon} color="#6A5ACD" size="40%" />
                     </Box>
                     <Text color="#333333" fontSize="xl" fontWeight="semibold">
                       {item.label}

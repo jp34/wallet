@@ -7,7 +7,7 @@
 * Sequence Diagram - [PDF](https://drive.google.com/file/d/1TUsv5Zo4XeQ-Q1PQDEU1BcdmeuRrkwv-/view?usp=sharing)
 * Database Diagram - [PDF](https://drive.google.com/file/d/1G1bUflaVK4TG7XMCwE5DFOzC2usc5DW8/view?usp=share_link)
 * Signup Flow Diagram - [PDF](https://drive.google.com/file/d/1UCT3MScA_dTCGdWfVGxfdtVHPTQ0vImn/view?usp=sharing)
-* UI Wireframe - [Miro](https://miro.com/app/board/uXjVPP5VJak=/?share_link_id=431653755129)
+* UI Wireframe - [Miro](https://miro.com/app/board/uXjVPP5VJak=/?share_link_id=701144025960)
 
 ### Projects
 * [wallet-blockchain](https://github.com/Healthcare-Wallet/wallet/tree/main/wallet-blockchain)
@@ -33,5 +33,4 @@ and provide uniform and complete medical documents to disease state researchers.
 * Nathan Sivak
 * Connor Estell
 * Ryan Wilcox
-* Azura Cooper
 * Jake Foss

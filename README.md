@@ -13,6 +13,7 @@
 * [wallet-blockchain](https://github.com/Healthcare-Wallet/wallet/tree/main/wallet-blockchain)
 * [wallet-cms](https://github.com/Healthcare-Wallet/wallet/tree/main/wallet-cms)
 * [wallet-mobile](https://github.com/Healthcare-Wallet/wallet/tree/main/wallet-mobile)
+* [wallet-marketplace](https://github.com/Healthcare-Wallet/wallet/tree/main/wallet-market)
 
 ## Info
 

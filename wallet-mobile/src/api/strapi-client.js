@@ -26,7 +26,6 @@ export const login = async (identifier, password) => {
         session.token = response.data.jwt;
         return true;
     } catch (err) {
-        console.log("Login failed due to error");
         console.log(err);
         return false;
     }
@@ -53,7 +52,6 @@ export const createAccount = async (username, email, password, agreement) => {
         session.token = response.data.jwt;
         return true;
     } catch (err) {
-        console.log("Signup failed due to error");
         console.log(err);
         return false;
     }
@@ -73,7 +71,7 @@ export const createPatient = async (firstName, middleName, lastName, phone, birt
         if (!session) throw Error('User has not been authenticated yet');
         const response = await axios.post(baseUrl.concat('/api/patients'), {
             'data': {
-                'username': session.user.username,
+                'user': session.user.id,
                 'firstName': firstName,
                 'middleName': middleName,
                 'lastName': lastName,
@@ -88,7 +86,6 @@ export const createPatient = async (firstName, middleName, lastName, phone, birt
         if (response.status != 200) throw Error("Server responded with error");
         return response.data;
     } catch (err) {
-        console.log("Create patient failed with error");
         console.log(err);
         return false;
     }
@@ -111,7 +108,6 @@ export const createPatientAllergy = async (patientId, description, severity) => 
         if (response.status != 200) throw Error("Server responded with error");
         return response.data;
     } catch (err) {
-        console.log("Failed to record patient allergy");
         console.log(err);
         return false;
     }
@@ -135,25 +131,43 @@ export const createPatientMedication = async (patientId, name, dosage, frequency
         if (response.status != 200) throw Error("Server responded with error");
         return response.data;
     } catch (err) {
-        console.log("Failed to record patient medication");
         console.log(err);
         return false;
     }
 }
 
-export const getPatientData = async () => {
+export const findPatientByUserId = async () => {
     try {
         if (!session) throw Error('User has not been authenticated yet');
-        const response = await axios.get(baseUrl.concat(`/api/findByUsername/${session.user.username}`), {
+        const response = await axios.get(baseUrl.concat(`/api/patients?filters[user][$eq]=${session.user.id}`), {
             headers: {
                 Authorization: `Bearer ${session.token}`,
             }
         });
         if (response.status != 200) throw Error("Server responded with error");
-        console.log(JSON.stringify(response));
+        return response.data.data[0];
+    } catch (err) {
+        console.log(err);
+        return false;
+    }
+}
+
+export const createWallet = async () => {
+    try {
+        if (!session) throw Error('User has not been authenticated yet');
+        const response = await axios.post(baseUrl.concat('/api/wallets'), {
+            'data': {
+                'user': session.user.id,
+                'earning': true,
+            }
+        }, {
+            headers: {
+                Authorization: `Bearer ${session.token}`,
+            }
+        });
+        if (response.status != 200) throw Error("Server responded with error");
         return response.data;
     } catch (err) {
-        console.log("Failed to get patient data");
         console.log(err);
         return false;
     }

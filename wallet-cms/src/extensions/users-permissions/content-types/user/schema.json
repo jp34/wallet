@@ -63,14 +63,6 @@
       "inversedBy": "users",
       "configurable": false
     },
-    "ens_address": {
-      "type": "string"
-    },
-    "earning": {
-      "type": "boolean",
-      "default": false,
-      "required": true
-    },
     "agreement": {
       "type": "boolean",
       "default": false,

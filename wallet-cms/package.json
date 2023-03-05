@@ -14,7 +14,8 @@
     "@strapi/strapi": "4.4.5",
     "dotenv": "^16.0.3",
     "pg": "8.6.0",
-    "strapi-plugin-entity-relationship-chart": "^4.1.0"
+    "strapi-plugin-entity-relationship-chart": "^4.1.0",
+    "strapi-utils": "^3.6.11"
   },
   "author": {
     "name": "HealthcareWallet"

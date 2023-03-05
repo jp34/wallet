@@ -34,11 +34,6 @@
       "target": "api::medical-encounter.medical-encounter",
       "mappedBy": "patient"
     },
-    "username": {
-      "type": "string",
-      "unique": true,
-      "required": true
-    },
     "medications": {
       "type": "relation",
       "relation": "oneToMany",
@@ -54,6 +49,11 @@
     "birthday": {
       "type": "string",
       "required": true
+    },
+    "user": {
+      "type": "integer",
+      "required": true,
+      "unique": true
     }
   }
 }

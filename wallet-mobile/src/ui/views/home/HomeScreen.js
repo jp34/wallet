@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { ScreenStyles } from "../../Style";
 import { SecondaryButton } from "../../components/Buttons";
-import { getPatientData } from "../../../api/strapi-client";
+import { findPatientByUserId } from "../../../api/strapi-client";
 
 const HomeScreen = ({ navigation }) => {
 
@@ -11,10 +11,10 @@ const HomeScreen = ({ navigation }) => {
     const [patient, setPatient] = useState();
 
     useEffect(() => {
-        getPatientData().then(data => {
+        findPatientByUserId().then(data => {
             setPatient(data);
             setLoading(false);
-        })
+        });
     }, []);
 
     const renderLoading = () => {
@@ -28,7 +28,7 @@ const HomeScreen = ({ navigation }) => {
     const renderLoaded = () => {
         return (
             <View style={ScreenStyles.container}>
-                <Text style={HomeStyles.message}>Welcome {patient.firstName}</Text>
+                <Text style={HomeStyles.message}>Welcome {patient.attributes.firstName}</Text>
                 <SecondaryButton label="Complete Account" options={{
                     onPress: () => {
                         return navigation.navigate('IntakeRouter');
@@ -37,8 +37,6 @@ const HomeScreen = ({ navigation }) => {
             </View>
         );
     }
-
-    console.log(JSON.stringify(patient));
     
     return (isLoading) ? renderLoading() : renderLoaded();
 }

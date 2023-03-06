@@ -30,6 +30,7 @@ h2 {
   color: #fff;
   background-color: #6030D9;
   margin-bottom: 10px;
+  font-size: 25px;
 }
 .header__logo {
   width: 55;
@@ -102,8 +103,32 @@ h2 {
   border-radius: 0.25em;
 }
 
+.card__button__img {
+  cursor: pointer;
+  display: inline-block;
+  text-decoration: none;
+  background-color: #6b6b6b;
+  padding: 0.5em 1.25em;
+  border-radius: 0.25em;
+  padding-left: 10px;
+  padding-top: 9px;
+  padding-right: 10px;
+  margin-left: 50px;
+}
+
+.card__shop__button {
+  cursor: pointer;
+  display: inline-block;
+  color: var(--clr-neutral-100);
+  background-color: var(--clr-accent-400);
+  margin-top: 10px;
+  border-radius: 0.25em;
+}
+
 .card__button:hover,
-.card__button:focus {
+.card__button:focus,
+.card__button__img:hover,
+.card__button__img:focus {
   background-color: var(--clr-neutral-100);
   color: var(--clr-accent-400);
 }
@@ -125,4 +150,20 @@ h2 {
   max-width: max-content;
   border-radius: 1rem;
   overflow: hidden;
+}
+
+.cart_button {
+  cursor: pointer;
+  display: inline-block;
+  text-decoration: none;
+  color: var(--clr-neutral-100);
+  background-color: var(--clr-neutral-800);
+  padding: 0.5em 1.25em;
+  border-radius: 0.25em;
+}
+.cart_button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.16), 0 3px 3px rgba(0, 0, 0, 0.23);
+  background-color: #6b6b6b;
+  color: var(--clr-accent-400);
 }/*# sourceMappingURL=styles.css.map */

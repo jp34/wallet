@@ -11,6 +11,9 @@
 <body>
     <header class="header">
         <div class="header__logo">JustBe Marketplace</div>
+        <a id = "cart" href="/cart?" class="cart_button">
+            <img src="../img/shoppingCart.jpg" width="25" height="25"></img>
+        </a>
     </header>
 
     <div class="wrapper">
@@ -26,13 +29,51 @@
                             NFT ID: <%- NFT._id %> 
                         </p>
                         <a href="/fact/<%-NFT._id %>" class="card__button">Learn More</a>
+                        <div id= "<%- NFT._id %>" class = "card__button__img" onclick= "process(this, this.children[0])">
+                            <img id="cardShoppingStatus<%- index %>" src="../img/plusSign.png" width="15" height="15"></img>
+                        </div>
                     </div>
                 </div>
             <% }) %>
             <% } else { %>
                 No information available.
             <% } %>
+            
         </div>
     </div>
+
+    <script>
+        var selected;
+        var items = [];
+        function process(el, elChild) {
+           if (selected) {
+                el.style.backgroundColor = "#6b6b6b";
+                elChild.src = "../img/plusSign.png";
+                selected = false;
+                removeFromCart(el);
+            } else {
+                el.style.backgroundColor = "#3CB043";
+                elChild.src = "../img/checkmark.png";
+                selected = true;
+                addtoCart(el);
+            }
+        }
+
+        function addtoCart(el) {
+            items.push(el.id);
+            document.getElementById("cart").href = "/cart?" + items.toString();
+            console.log(items.toString());
+        }
+
+        function removeFromCart(el) {
+            console.log(el.id)
+            var itemIndex = items.indexOf(el.id);
+            if(itemIndex > -1) {
+                items.splice(itemIndex, 1);
+            }
+            document.getElementById("cart").href = "/cart?" + items.toString();
+            console.log(items.toString());
+        }
+    </script>
 </body>
 </html>

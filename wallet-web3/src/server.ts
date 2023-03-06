@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 dotenv.config();
 import express, { Request, Response, NextFunction} from "express";
 import morgan from "morgan";
-import apiRouter from "./api/router";
+import api from "./api/router";
 
 const app = express();
 const port = process.env.WEB3_SERVER_PORT;
@@ -10,7 +10,7 @@ const port = process.env.WEB3_SERVER_PORT;
 app.use(express.json());
 app.use(morgan("combined"));
 
-app.use("/api/web3", apiRouter);
+app.use("/api", api);
 
 // Handle errors
 app.use((error: Error, request: Request, response: Response, next: NextFunction) => {

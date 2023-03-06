@@ -1,46 +1,39 @@
 import { Web3Storage, File } from "web3.storage";
-import { Payload } from "../model/payload.interface";
+import { Emr } from "../model/payload.interface";
 
-export default class IpfsService {
-    
-    private token: string;
-    private client: Web3Storage;
+const token = process.env.WEB3_IPFS_TOKEN ?? "undefined";
+const client = new Web3Storage({ token: token });
 
-    constructor() {
-        this.token = process.env.WEB3_IPFS_TOKEN ?? "undefined";
-        if (this.token === "undefined")
-            throw new Error("IPFS_JWT_TOKEN is not defined in .env!");
-        this.client = new Web3Storage({ token: this.token });
-    }
-
-    private buildFileBuffers = (documents: Payload[]) => {
-        let files: File[] = [];
-        for (let doc of documents) {
-            let buffer = Buffer.from(JSON.stringify(doc));
-            files.push(new File([buffer], doc.from));
-        }
-        return files;
-    };
-
-    public upload = async (documents: Payload[]) => {
-        let files = this.buildFileBuffers(documents);
-        let cid = await this.client.put(files);
-        console.log(
-            `Successfully uploaded ${documents.length} files. CID: ${cid}`
-        );
-        return cid;
-    };
-
-    public getOne = async (cid: string) => {
-        let response = await this.client.get(cid);
-        return await response?.files();
-    };
-
-    public getAll = async () => {
-        const uploads = [];
-        for await (const item of this.client.list()) {
-            uploads.push(item);
-        }
-        return uploads;
-    };
+const buildFileBuffer = (emr: Emr) => {
+    const buffer = Buffer.from(JSON.stringify(emr));
+    const fileName = 'emr';
+    return new File([buffer], fileName);
 }
+
+const buildFileBuffers = (emrArray: Emr[]) => {
+    var files: File[] = [];
+    for (var emr of emrArray) files.push(buildFileBuffer(emr));
+    return files;
+};
+
+export const findOne = async (cid: string) => {
+    const response = await client.get(cid);
+    return await response?.files();
+};
+
+export const findMany = async () => {
+    const uploads = [];
+    for await (const item of client.list()) {
+        uploads.push(item);
+    }
+    return uploads;
+};
+
+export const upload = async (emrArray: Emr[]) => {
+    const files = buildFileBuffers(emrArray);
+    const cid = await client.put(files);
+    console.log(
+        `Successfully uploaded ${emrArray.length} files. CID: ${cid}`
+    );
+    return cid;
+};

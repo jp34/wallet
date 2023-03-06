@@ -1,18 +1,12 @@
 import { Router } from "express";
-import IpfsController from "./ipfs.controller";
-import Web3Controller from "./web3.controller";
+import EmrController from "./emr.controller";
 
 const router = Router();
-const ipfsController = new IpfsController();
-const web3Controller = new Web3Controller();
+const emr = new EmrController();
 
-// IPFS
-router.get('/ipfs/files', ipfsController.getAll);
-router.get('/ipfs/files/:id', ipfsController.getOne);
-
-// Web3
-router.get("/web3", web3Controller.getAll);
-router.get("/web3/:id", web3Controller.getOne);
-router.post("/web3", web3Controller.create);
+// EMR
+router.get('/emr', emr.getMany);
+router.get('/emr/:id', emr.getOne);
+router.post('/emr', emr.create);
 
 export default router;

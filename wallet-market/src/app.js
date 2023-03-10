@@ -1,5 +1,6 @@
-const express = require('express')
-const bodyParser =  require('body-parser')
+const express = require("express");
+const bodyParser = require("body-parser");
+const router = require("./controller/Router");
 
 const app = express()
 const port  = 5000;
@@ -17,10 +18,7 @@ app.set('view engine', 'ejs')
 app.use(bodyParser.urlencoded({extended : true}))
 
 // Routes
-const marketRouter = require('./src/routes/Marketplace')
-
-app.use('/', marketRouter)
-app.use('/fact', marketRouter)
+app.use(router);
 
 // Listen on port 5000
 app.listen(port, () => console.log(`Listening on port ${port}`))

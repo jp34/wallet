@@ -45,6 +45,29 @@ class MarketplaceController {
             }
         }
     }
+
+    cartView = async (req, res) => {
+        let factID = req.params.id
+
+        try {
+            const API = await axios.get(`https://cat-fact.herokuapp.com/facts/${factID}`)
+            res.render('shoppingCart', {info: API.data})
+
+        } catch (error) {
+            if(error.response) {
+                res.render('marketSingle', {info : null})
+                console.log(error.response)
+                console.log(error.response.status)
+                console.log(error.response.headers)
+            } else if (error.request) {
+                res.render('marketSingle', {info : null})
+                console.log(error.request)
+            } else {
+                res.render('marketSingle', {info : null})
+                console.error('Error', error.message)
+            }
+        }
+    }
 }
 
 module.exports = MarketplaceController;

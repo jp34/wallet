@@ -3,6 +3,7 @@ import { useFonts } from "expo-font";
 import { NavigationContainer } from "@react-navigation/native";
 import Router from "./Router";
 import { NativeBaseProvider } from "native-base";
+import { LinearGradient } from "expo-linear-gradient";
 
 const App = () => {
   const [fonts] = useFonts({
@@ -13,8 +14,14 @@ const App = () => {
   });
   if (!fonts) return null;
 
+  const config = {
+    dependencies: {
+      "linear-gradient": LinearGradient,
+    },
+  };
+
   return (
-    <NativeBaseProvider>
+    <NativeBaseProvider config={config}>
       <NavigationContainer>
         <Router />
       </NavigationContainer>

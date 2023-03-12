@@ -1,6 +1,5 @@
 import { Gradients } from "../Style";
 import { LargeLogo } from "../components/Logos";
-import { PrimaryButton } from "../components/Buttons";
 import { Flex, Box, VStack, HStack, Text, Button } from "native-base";
 
 const StartScreen = ({ navigation }) => {

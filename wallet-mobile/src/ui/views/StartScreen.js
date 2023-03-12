@@ -32,11 +32,12 @@ const StartScreen = ({ navigation }) => {
         <VStack space="2">
           <Button
             variant="outline"
+            colorScheme="white"
             onPress={() => {
               return navigation.navigate("Splash");
             }}
-            _text={{color: "#EEE", fontSize: "lg"}}
             rounded="7"
+            size="lg"
           >
             Get Started
           </Button>

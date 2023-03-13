@@ -34,6 +34,18 @@ export default () => ({
                 'data': emr
             });
 
+            const emrReceipt = await strapi.db.query('api::emr.emr').create({
+                data: {
+                    subject: patient.id,
+                    cid: response.data.cid,
+                    timestamp: Date.now()
+                }
+            });
+
+            if (!emrReceipt) {
+                throw new Error("Unable to store emr receipt");
+            }
+
             if (response) return true;
             return false;
         } catch (err: any) {

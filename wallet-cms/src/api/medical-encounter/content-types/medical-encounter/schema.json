@@ -22,12 +22,6 @@
       "target": "api::medical-provider.medical-provider",
       "inversedBy": "medical_encounters"
     },
-    "diagnoses": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::diagnosis.diagnosis",
-      "inversedBy": "medical_encounters"
-    },
     "visit_reason": {
       "pluginOptions": {
         "i18n": {

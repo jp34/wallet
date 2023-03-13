@@ -10,6 +10,9 @@
     "ios": {
       "bundleIdentifier": "edu.miamioh.csi.capstone.wallet",
       "buildNumber": "1.0.0"
+    },
+    "web": {
+      "bundler": "metro"
     }
   },
   "name": "wallet-mobile"

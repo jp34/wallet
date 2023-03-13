@@ -77,7 +77,7 @@ const LoginScreen = ({ navigation }) => {
         {/* Navigation Header */}
         <Pressable
           onPress={() => navigation.goBack()}
-          flex="0.1"
+          flex="0.05"
           justifyContent="center"
         >
           {/* Navigation Icon */}

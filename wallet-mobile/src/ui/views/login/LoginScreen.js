@@ -72,12 +72,12 @@ const LoginScreen = ({ navigation }) => {
       px="4"
     >
       <Container safeArea width="full" maxWidth="390" flex="1">
-        <Pressable onPress={() => navigation.goBack()} flex="0.05">
+        <Pressable onPress={() => navigation.goBack()} flex="0.05" alignItems="flex-start">
           <ChevronLeftIcon color="white" size="md" />
         </Pressable>
         <KeyboardAvoidingView flex="0.95" width="full" behavior="height">
           <ScrollView contentContainerStyle={{flex: 1, justifyContent: "center"}} >
-            <Box>
+            <Box px="2">
               <Text color="lightAccent" fontSize="4xl">
                 Welcome Back
               </Text>

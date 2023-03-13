@@ -4,17 +4,16 @@ import {
   Flex,
   Text,
   Button,
-  Box,
   Input,
-  KeyboardAvoidingView,
+  Box,
   FormControl,
   Pressable,
   Container,
   Icon,
   ChevronLeftIcon,
-  ScrollView,
 } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const LoginScreen = ({ navigation }) => {
   const [invalid, setInvalid] = React.useState(false);
@@ -72,6 +71,10 @@ const LoginScreen = ({ navigation }) => {
       py="3"
       px="4"
     >
+      <KeyboardAwareScrollView
+        style={{ width: "100%" }}
+        contentContainerStyle={{ flex: 1 }}
+      >
       {/* Page Body */}
       <Container safeArea flex="1" w="full" maxW="390">
         {/* Navigation Header */}
@@ -83,12 +86,7 @@ const LoginScreen = ({ navigation }) => {
           {/* Navigation Icon */}
           <ChevronLeftIcon color="lightAccent" size="lg" />
         </Pressable>
-        {/* Login Form Avoiding View */}
-        <KeyboardAvoidingView flex="0.7" w="full" behavior="height" px="4">
-          {/* Scroll View */}
-          <ScrollView
-            contentContainerStyle={{ flex: 1, justifyContent: "center" }}
-          >
+        <Box flex="0.8" w="full" px="4" justifyContent="center">
             {/* Login Headers */}
             <Text color="lightAccent" fontSize="4xl">
               Welcome Back
@@ -172,9 +170,9 @@ const LoginScreen = ({ navigation }) => {
                 Log In
               </Text>
             </Button>
-          </ScrollView>
-        </KeyboardAvoidingView>
+        </Box>
       </Container>
+      </KeyboardAwareScrollView>
     </Flex>
   );
 };

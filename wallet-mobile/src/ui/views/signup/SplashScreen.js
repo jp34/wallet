@@ -35,7 +35,7 @@ const SplashScreen = ({ navigation }) => {
           {/* Navigation Icon */}
           <ChevronLeftIcon color="lightAccent" size="lg" />
         </Pressable>
-        <VStack space={16} flex="0.7" justifyContent="center" px="4">
+        <VStack space={16} flex="0.30" justifyContent="center" px="4">
           <Box>
             <Text color="lightAccent" fontSize="2xl">
               What is JustBe?
@@ -53,7 +53,7 @@ const SplashScreen = ({ navigation }) => {
             </Text>
           </Box>
         </VStack>
-        <Box flex="0.25" w="full" justifyContent="flex-end">
+        <Box flex="0.65" w="full" justifyContent="flex-end">
           <Button
             variant="outline"
             colorScheme="white"

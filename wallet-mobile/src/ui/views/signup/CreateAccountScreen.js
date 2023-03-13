@@ -12,10 +12,9 @@ import {
   Icon,
   VStack,
   Button,
-  ScrollView,
-  KeyboardAvoidingView,
 } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const CreateAccountScreen = ({ navigation }) => {
   const [showPassword, setShowPassword] = React.useState(false);
@@ -48,6 +47,7 @@ const CreateAccountScreen = ({ navigation }) => {
     /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?])(?=.*[a-zA-Z]).{8,}$/;
 
   const attemptCreateAccount = async () => {
+    if (true) return navigation.navigate("CreatePatient");
     try {
       if (email === undefined) {
         setEmailEM("Email Address is required.");
@@ -106,6 +106,7 @@ const CreateAccountScreen = ({ navigation }) => {
       } else {
         const result = await createAccount(user, email, pass, confirm);
         if (result) return navigation.navigate("CreatePatient");
+        else console.log("Error");
       }
     } catch (err) {
       console.error(err);
@@ -126,33 +127,30 @@ const CreateAccountScreen = ({ navigation }) => {
       py="3"
       px="4"
     >
-      {/* Page Body */}
-      <Container safeArea flex="1" w="full" maxW="390">
-        {/* Navigation Header */}
-        <Pressable
-          onPress={() => navigation.goBack()}
-          flex="0.05"
-          justifyContent="center"
-        >
-          {/* Navigation Icon */}
-          <ChevronLeftIcon color="lightAccent" size="lg" />
-        </Pressable>
-        <Box flex="0.2" justifyContent="center" px="4">
-          <Text fontSize="2xl" color="lightAccent">
-            Create Your Account
-          </Text>
-          <Text fontSize="lg" color="lightAccent">
-            Tell us about you.
-          </Text>
-        </Box>
-        <KeyboardAvoidingView
-          flex="0.55"
-          justifyContent="center"
-          px="4"
-          w="full"
-          behavior="height"
-        >
-          <ScrollView contentContainerStyle={{ flex: 1, justifyContent: "center" }}>
+      <KeyboardAwareScrollView
+        style={{ width: "100%" }}
+        contentContainerStyle={{ flex: 1 }}
+      >
+        {/* Page Body */}
+        <Container safeArea flex="1" w="full" maxW="390">
+          {/* Navigation Header */}
+          <Pressable
+            onPress={() => navigation.goBack()}
+            flex="0.05"
+            justifyContent="center"
+          >
+            {/* Navigation Icon */}
+            <ChevronLeftIcon color="lightAccent" size="lg" />
+          </Pressable>
+          <Box flex="0.2" justifyContent="center" px="4">
+            <Text fontSize="2xl" color="lightAccent">
+              Create Your Account
+            </Text>
+            <Text fontSize="lg" color="lightAccent">
+              Tell us about you.
+            </Text>
+          </Box>
+          <Box flex="0.45" justifyContent="center" px="4" w="full">
             <VStack space={4}>
               {/* Email Address Form */}
               <FormControl isRequired isInvalid={emailInvalid}>
@@ -281,23 +279,23 @@ const CreateAccountScreen = ({ navigation }) => {
                 <FormControl.ErrorMessage>{passCEM}</FormControl.ErrorMessage>
               </FormControl>
             </VStack>
-          </ScrollView>
-        </KeyboardAvoidingView>
-        <Box flex="0.2" w="full" justifyContent="flex-end">
-          <Button
-            variant="outline"
-            colorScheme="white"
-            onPress={() => attemptCreateAccount()}
-            rounded="7"
-            alignSelf="center"
-            w="70%"
-          >
-            <Text color="#EEE" fontSize="lg">
-              Continue
-            </Text>
-          </Button>
-        </Box>
-      </Container>
+          </Box>
+          <Box flex="0.30" w="full" justifyContent="flex-end">
+            <Button
+              variant="outline"
+              colorScheme="white"
+              onPress={() => attemptCreateAccount()}
+              rounded="7"
+              alignSelf="center"
+              w="70%"
+            >
+              <Text color="#EEE" fontSize="lg">
+                Continue
+              </Text>
+            </Button>
+          </Box>
+        </Container>
+      </KeyboardAwareScrollView>
     </Flex>
   );
 };

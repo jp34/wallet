@@ -11,7 +11,7 @@
 <body>
     <header class="header">
         <div class="header__logo">JustBe Marketplace</div>
-        <a id = "cart" href="/market/cart?" class="cart_button">
+        <a id = "cart" href="/cart" class="cart_button">
             <img src="../img/shoppingCart.jpg" width="25" height="25"></img>
         </a>
     </header>
@@ -61,7 +61,7 @@
 
         function addtoCart(el) {
             items.push(el.id);
-            document.getElementById("cart").href = "/market/cart?" + items.toString();
+            document.getElementById("cart").href = "/cart?id=" + items.toString();
             console.log(items.toString());
         }
 
@@ -71,7 +71,7 @@
             if(itemIndex > -1) {
                 items.splice(itemIndex, 1);
             }
-            document.getElementById("cart").href = "/market/cart?" + items.toString();
+            document.getElementById("cart").href = "/cart?id=" + items.toString();
             console.log(items.toString());
         }
     </script>

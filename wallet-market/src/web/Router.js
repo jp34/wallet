@@ -6,6 +6,6 @@ const marketplace = new MarketplaceController();
 
 router.get('/market', marketplace.listView);
 router.get('/market/:id', marketplace.detailView);
-router.get('/market/cart', marketplace.cartView);
+router.get('/cart', marketplace.cartView);
 
 module.exports = router;

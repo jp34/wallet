@@ -1,112 +1,105 @@
-import React from "react";
-import {
-    View,
-    Text,
-    KeyboardAvoidingView,
-    ScrollView,
-    StyleSheet,
-} from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
+import React, { useRef } from "react";
 import { login } from "../../../api/strapi-client";
-import { PrimaryButton } from "../../components/Buttons";
-import { ScreenStyles, Gradients } from "../../Style";
-import { BasicInput, PasswordInput } from "../../components/Inputs";
-import Header from "../../components/Header";
+import { Gradients } from "../../Style";
+import {
+  Flex,
+  VStack,
+  Text,
+  Button,
+  Box,
+  Input,
+  KeyboardAvoidingView,
+  FormControl,
+  Pressable
+} from "native-base";
 
 const LoginScreen = ({ navigation }) => {
+  const [showPassword, setShowPassword] = React.useState(false);
+  const [identifier, setIdentifier] = React.useState();
+  const [password, setPassword] = React.useState();
+  const userInput = useRef();
+  const passInput = useRef();
 
-    const [showPassword, setShowPassword] = React.useState(false);
-    const [identifier, setIdentifier] = React.useState();
-    const [password, setPassword] = React.useState();
-
-    const attemptLogin = async () => {
-        try {
-            const result = await login(identifier, password);
-            if (result) return navigation.navigate('HomeRouter');
-            // Handle for incorrect logins
-        } catch (err) {
-            console.log("Login failed");
-            console.error(err);
-            return false;
-        }
+  const attemptLogin = async () => {
+    try {
+      const result = await login(identifier, password);
+      if (result) return navigation.navigate("HomeRouter");
+      // Handle for incorrect logins
+    } catch (err) {
+      console.log("Login failed");
+      console.error(err);
+      return false;
     }
+  };
 
-    const renderWelcomeMessage = () => {
-        const styles = StyleSheet.create({
-            container: {
-                paddingVertical: 32,
-                paddingHorizontal: 32,
-                justifyContent: 'center',
-                alignItems: 'flex-start',
-            },
-            text: {
-                color: '#eeeeee',
-                fontSize: 30,
-                fontFamily: 'Quicksand-SemiBold',
-            }
-        });
-        return (
-            <View style={styles.container}>
-                <Text style={styles.text}>Welcome back</Text>
-            </View>
-        );
-    }
-
-    const renderLoginForm = () => {
-        const styles = StyleSheet.create({
-            form: {
-                paddingVertical: 16,
-                paddingHorizontal: 32,
-            },
-            title: {
-                marginBottom: 16,
-                color: '#eeeeee',
-                fontSize: 20,
-                fontFamily: 'Quicksand-Regular',
-            }
-        });
-        return (
-            <ScrollView style={styles.form}>
-                <Text style={styles.title}>Log into your account</Text>
-                <BasicInput options={{
-                    id: 'user-identifier',
-                    placeholder: 'johndoe@apple.com',
-                    placeholderTextColor: '#eeeeee',
-                    require: true,
-                    onChangeText: (text) => setIdentifier(text)
-                }}/>
-                
-                <PasswordInput options={{
-                    id: 'user-password',
-                    placeholder: 'password',
-                    placeholderTextColor: '#eeeeee',
-                    secureTextEntry: !showPassword,
-                    require: true,
-                    onChangeText: (text) => setPassword(text)
-                }} onShowPassword={() => {
-                    setShowPassword(!showPassword);
-                }}/>
-            </ScrollView>
-        );
-    }
-
-    return (
-        <KeyboardAvoidingView style={ScreenStyles.screen}>
-            <LinearGradient
-                colors={Gradients.gradient1}
-                style={ScreenStyles.gradient}
-            >
-                <Header navigation={navigation}/>
-                <View style={ScreenStyles.container}>
-                    {renderWelcomeMessage()}
-                    {renderLoginForm()}
-                    <PrimaryButton label="Log In" options={{
-                        onPress: () => attemptLogin()
-                    }}/>
-                </View>
-            </LinearGradient>
+  return (
+    <Flex
+      flex="1"
+      justifyContent="center"
+      alignItems="center"
+      bg={{
+        linearGradient: {
+          colors: Gradients.gradient1,
+        },
+      }}
+      py="3"
+    >
+      <VStack flex="1" safeArea justifyContent="space-evenly">
+        <KeyboardAvoidingView flex="1" behavior="padding" enabled>
+          <Box flex="1" justifyContent="center">
+            <VStack space="16">
+              <Box>
+                <Text color="#EEE" fontSize="4xl">
+                  Welcome Back
+                </Text>
+                <Text color="#EEE" fontSize="xl">
+                  Login to your account.
+                </Text>
+              </Box>
+              <VStack space="5">
+                <FormControl>
+                  <Input
+                    placeholder="Email Address"
+                    size="2xl"
+                    _input={{ color: "#EEE" }}
+                    _focus={{ selectionColor: "#EEE" }}
+                    onChangeText={(text) => setIdentifier(text)}
+                    ref={userInput}
+                    onSubmitEditing={() => passInput.current.focus()}
+                  ></Input>
+                </FormControl>
+                <FormControl>
+                  <Input
+                    placeholder="Password"
+                    size="2xl"
+                    _input={{ color: "#EEE" }}
+                    _focus={{ selectionColor: "#EEE" }}
+                    onChangeText={(text) => setPassword(text)}
+                    ref={passInput}
+                    type={showPassword ? "text" : "password"}
+                    InputRightElement={
+                      <Pressable onPress={() => setShowPassword(!showPassword)}>
+                      </Pressable>
+                    }
+                  ></Input>
+                </FormControl>
+              </VStack>
+            </VStack>
+          </Box>
         </KeyboardAvoidingView>
-    );
+        <Button
+          variant="outline"
+          colorScheme="white"
+          onPress={() => attemptLogin()}
+          rounded="7"
+        >
+          <Text color="#EEE" fontSize="lg">
+            Log In
+          </Text>
+        </Button>
+      </VStack>
+    </Flex>
+  );
 };
 
 export default LoginScreen;

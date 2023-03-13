@@ -11,7 +11,7 @@ const StartScreen = ({ navigation }) => {
       alignItems="center"
       bg={{
         linearGradient: {
-          colors: Gradients.gradient1,
+          colors: ["violet.900", "violet.600"],
         },
       }}
       py="3"
@@ -44,10 +44,9 @@ const StartScreen = ({ navigation }) => {
               Already have an account?
             </Text>
             <Text
-              color="#2A93D5"
+              color="info.500"
               fontSize="sm"
-              onPress={() => {
-                return navigation.navigate("Login");
+              onPress={() => {navigation.navigate("Login");
               }}
             >
               Log In

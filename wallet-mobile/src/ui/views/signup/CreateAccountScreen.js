@@ -1,118 +1,305 @@
-import React from "react";
-import {
-    View,
-    Text,
-    KeyboardAvoidingView,
-    ScrollView,
-    StyleSheet,
-} from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
-import { PrimaryButton } from "../../components/Buttons";
-import { ScreenStyles, Gradients } from "../../Style";
-import { BasicInput, PasswordInput } from "../../components/Inputs";
-import Header from "../../components/Header";
+import React, { useRef } from "react";
 import { createAccount } from "../../../api/strapi-client";
+import {
+  Flex,
+  Container,
+  Text,
+  Box,
+  Pressable,
+  ChevronLeftIcon,
+  FormControl,
+  Input,
+  Icon,
+  VStack,
+  Button,
+  ScrollView,
+  KeyboardAvoidingView,
+} from "native-base";
+import { Ionicons } from "@expo/vector-icons";
 
-const CreateAccountScreen = ({ navigation, route }) => {
+const CreateAccountScreen = ({ navigation }) => {
+  const [showPassword, setShowPassword] = React.useState(false);
+  const [showPasswordConfirm, setShowPasswordConfirm] = React.useState(false);
 
-    const confirm = route.params.agreement;
-    const [email, setEmail] = React.useState();
-    const [username, setUsername] = React.useState();
-    const [password, setPassword] = React.useState();
-    const [showPassword, setShowPassword] = React.useState(false);
-    const [passwordConfirm, setPasswordConfirm] = React.useState();
-    const [showPasswordConfirm, setShowPasswordConfirm] = React.useState(false);
+  const emailInp = useRef();
+  const [emailInvalid, setEmailInvalid] = React.useState(false);
+  const [email, setEmail] = React.useState();
+  const [emailEM, setEmailEM] = React.useState();
 
-    // API Methods
+  const userInp = useRef();
+  const [userInvalid, setUserInvalid] = React.useState(false);
+  const [user, setUser] = React.useState();
+  const [userEM, setUserEM] = React.useState();
 
-    const attemptCreateAccount = async () => {
-        try {
-            const result = await createAccount(username, email, password, confirm);
-            if (result) return navigation.navigate('CreatePatient');
-            // Handle for incorrect logins
-        } catch (err) {
-            console.log("Create account failed with error");
-            console.error(err);
-            return false;
-        }
-    }
+  const passInp = useRef();
+  const [passInvalid, setPassInvalid] = React.useState(false);
+  const [pass, setPass] = React.useState();
+  const [passEM, setPassEM] = React.useState();
 
-    // Render Methods
+  const passConfirmInp = useRef();
+  const [passConfirmInvalid, setPassConfirmInvalid] = React.useState(false);
+  const [passwordConfirm, setPasswordConfirm] = React.useState();
+  const [passCEM, setPassCEM] = React.useState();
 
-    const renderForm = () => {
-        const styles = StyleSheet.create({
-            form: {
-                paddingVertical: 16,
-                paddingHorizontal: 32,
-            },
-            title: {
-                marginLeft: 8,
-                marginBottom: 16,
-                color: '#eeeeee',
-                fontSize: 20,
-                fontFamily: 'Quicksand-Regular',
-            }
-        });
-        return (
-            <ScrollView style={styles.form}>
-                <Text style={styles.title}>Create your account</Text>
-                <BasicInput options={{
-                    id: 'user-email',
-                    placeholder: 'Email',
-                    placeholderTextColor: '#eeeeee',
-                    require: true,
-                    onChangeText: (text) => setEmail(text)
-                }}/>
+  const confirm = React.useState(true);
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const userRegex = /^[a-zA-Z0-9._-]{3,20}$/;
+  const passwordRegex =
+    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?])(?=.*[a-zA-Z]).{8,}$/;
 
-                <BasicInput options={{
-                    id: 'user-name',
-                    placeholder: 'Username',
-                    placeholderTextColor: '#eeeeee',
-                    require: true,
-                    onChangeText: (text) => setUsername(text)
-                }}/>
-                
-                <PasswordInput options={{
-                    id: 'user-password',
-                    placeholder: 'Password',
-                    placeholderTextColor: '#eeeeee',
-                    secureTextEntry: !showPassword,
-                    require: true,
-                    onChangeText: (text) => setPassword(text)
-                }} onShowPassword={() => {
-                    setShowPassword(!showPassword);
-                }}/>
-
-                <PasswordInput options={{
-                    id: 'user-password-confirm',
-                    placeholder: 'Confirm password',
-                    placeholderTextColor: '#eeeeee',
-                    secureTextEntry: !showPasswordConfirm,
-                    require: true,
-                    onChangeText: (text) => setPasswordConfirm(text)
-                }} onShowPassword={() => {
-                    setShowPasswordConfirm(!showPasswordConfirm);
-                }}/>
-            </ScrollView>
+  const attemptCreateAccount = async () => {
+    try {
+      if (email === undefined) {
+        setEmailEM("Email Address is required.");
+        setEmailInvalid(true);
+        return;
+      } else if (email.trim() === "") {
+        setEmailEM("Email Address is required.");
+        setEmailInvalid(true);
+        return;
+      } else if (!emailRegex.test(email)) {
+        setEmailEM("Must be a valid email address.");
+        setEmailInvalid(true);
+        return;
+      } else if (user === undefined) {
+        setUserEM("Username is required.");
+        setUserInvalid(true);
+        return;
+      } else if (user.trim() === "") {
+        setUserEM("Username is required.");
+        setUserInvalid(true);
+        return;
+      } else if (!userRegex.test(user)) {
+        setUserEM(
+          "Username is invalid. Must be 3 - 20 characters. No special characters other than _, -, . or numbers."
         );
+        setUserInvalid(true);
+        return;
+      } else if (pass === undefined) {
+        setPassEM("Password is required.");
+        setPassInvalid(true);
+        return;
+      } else if (pass.trim() === "") {
+        setPassEM("Password is required.");
+        setPassInvalid(true);
+        return;
+      } else if (!passwordRegex.test(pass)) {
+        setPassEM("Invalid password.");
+        setPassInvalid(true);
+        return;
+      } else if (passwordConfirm === undefined) {
+        setPassCEM("Verify password is required.");
+        setPassConfirmInvalid(true);
+        return;
+      } else if (passwordConfirm.trim() === "") {
+        setPassCEM("Verify password is required.");
+        setPassConfirmInvalid(true);
+        return;
+      } else if (!passwordRegex.test(passwordConfirm)) {
+        setPassCEM("Invalid password.");
+        setPassConfirmInvalid(true);
+        return;
+      } else if (pass != passwordConfirm) {
+        setPassCEM("Passwords do not match.");
+        setPassConfirmInvalid(true);
+        return;
+      } else {
+        const result = await createAccount(user, email, pass, confirm);
+        if (result) return navigation.navigate("CreatePatient");
+      }
+    } catch (err) {
+      console.error(err);
+      return;
     }
+  };
 
-    return (
-        <KeyboardAvoidingView style={ScreenStyles.screen}>
-            <LinearGradient
-                colors={Gradients.gradient1}
-                style={ScreenStyles.gradient}
-            >
-                <Header navigation={navigation}/>
-                <View style={ScreenStyles.container}>
-                    {renderForm()}
-                    <PrimaryButton label="Continue" options={{
-                        onPress: () => attemptCreateAccount()
-                    }}/>
-                </View>
-            </LinearGradient>
+  return (
+    // Page Container
+    <Flex
+      flex="1"
+      bg={{
+        linearGradient: {
+          colors: ["violet.900", "violet.600"],
+        },
+      }}
+      alignItems="center"
+      py="3"
+      px="4"
+    >
+      {/* Page Body */}
+      <Container safeArea flex="1" w="full" maxW="390">
+        {/* Navigation Header */}
+        <Pressable
+          onPress={() => navigation.goBack()}
+          flex="0.05"
+          justifyContent="center"
+        >
+          {/* Navigation Icon */}
+          <ChevronLeftIcon color="lightAccent" size="lg" />
+        </Pressable>
+        <Box flex="0.2" justifyContent="center" px="4">
+          <Text fontSize="2xl" color="lightAccent">
+            Create Your Account
+          </Text>
+          <Text fontSize="lg" color="lightAccent">
+            Tell us about you.
+          </Text>
+        </Box>
+        <KeyboardAvoidingView
+          flex="0.55"
+          justifyContent="center"
+          px="4"
+          w="full"
+          behavior="height"
+        >
+          <ScrollView contentContainerStyle={{ flex: 1, justifyContent: "center" }}>
+            <VStack space={4}>
+              {/* Email Address Form */}
+              <FormControl isRequired isInvalid={emailInvalid}>
+                <FormControl.Label
+                  _text={{ color: "lightAccent", fontSize: "md" }}
+                >
+                  Email Address
+                </FormControl.Label>
+                <Input
+                  size="2xl"
+                  _input={{ color: "lightAccent" }}
+                  _focus={{
+                    selectionColor: "lightAccent",
+                    backgroundColor: "purple.400",
+                    borderColor: "purple.500",
+                  }}
+                  onChangeText={(text) => setEmail(text)}
+                  ref={emailInp}
+                  autoCorrect={false}
+                  onFocus={() => setEmailInvalid(false)}
+                  onSubmitEditing={() => userInp.current.focus()}
+                  blurOnSubmit={false}
+                />
+                <FormControl.ErrorMessage>{emailEM}</FormControl.ErrorMessage>
+              </FormControl>
+              {/* User Form */}
+              <FormControl isRequired isInvalid={userInvalid}>
+                <FormControl.Label
+                  _text={{ color: "lightAccent", fontSize: "md" }}
+                >
+                  Username
+                </FormControl.Label>
+                <Input
+                  size="2xl"
+                  _input={{ color: "lightAccent" }}
+                  _focus={{
+                    selectionColor: "lightAccent",
+                    backgroundColor: "purple.400",
+                    borderColor: "purple.500",
+                  }}
+                  onChangeText={(text) => setUser(text)}
+                  ref={userInp}
+                  autoCorrect={false}
+                  onFocus={() => setUserInvalid(false)}
+                  onSubmitEditing={() => passInp.current.focus()}
+                  blurOnSubmit={false}
+                />
+                <FormControl.ErrorMessage>{userEM}</FormControl.ErrorMessage>
+              </FormControl>
+              {/* Pass Form */}
+              <FormControl isRequired isInvalid={passInvalid}>
+                <FormControl.Label
+                  _text={{ color: "lightAccent", fontSize: "md" }}
+                >
+                  Password
+                </FormControl.Label>
+                <Input
+                  size="2xl"
+                  _input={{ color: "lightAccent" }}
+                  _focus={{
+                    selectionColor: "lightAccent",
+                    backgroundColor: "purple.400",
+                    borderColor: "purple.500",
+                  }}
+                  onChangeText={(text) => setPass(text)}
+                  ref={passInp}
+                  autoCorrect={false}
+                  onFocus={() => setPassInvalid(false)}
+                  onSubmitEditing={() => passConfirmInp.current.focus()}
+                  blurOnSubmit={false}
+                  type={showPassword ? "text" : "password"}
+                  InputRightElement={
+                    <Pressable onPress={() => setShowPassword(!showPassword)}>
+                      <Icon
+                        as={Ionicons}
+                        name={showPassword ? "eye-outline" : "eye-off-outline"}
+                        color="#EEE"
+                        size="lg"
+                        mr="3"
+                      />
+                    </Pressable>
+                  }
+                />
+                <FormControl.ErrorMessage>{passEM}</FormControl.ErrorMessage>
+              </FormControl>
+              {/* Pass Confirm Form */}
+              <FormControl isRequired isInvalid={passConfirmInvalid}>
+                <FormControl.Label
+                  _text={{ color: "lightAccent", fontSize: "md" }}
+                >
+                  Verify Password
+                </FormControl.Label>
+                <Input
+                  size="2xl"
+                  _input={{ color: "lightAccent" }}
+                  _focus={{
+                    selectionColor: "lightAccent",
+                    backgroundColor: "purple.400",
+                    borderColor: "purple.500",
+                  }}
+                  onChangeText={(text) => setPasswordConfirm(text)}
+                  ref={passConfirmInp}
+                  autoCorrect={false}
+                  onFocus={() => setPassConfirmInvalid(false)}
+                  type={showPasswordConfirm ? "text" : "password"}
+                  InputRightElement={
+                    <Pressable
+                      onPress={() =>
+                        setShowPasswordConfirm(!showPasswordConfirm)
+                      }
+                    >
+                      <Icon
+                        as={Ionicons}
+                        name={
+                          showPasswordConfirm
+                            ? "eye-outline"
+                            : "eye-off-outline"
+                        }
+                        color="#EEE"
+                        size="lg"
+                        mr="3"
+                      />
+                    </Pressable>
+                  }
+                />
+                <FormControl.ErrorMessage>{passCEM}</FormControl.ErrorMessage>
+              </FormControl>
+            </VStack>
+          </ScrollView>
         </KeyboardAvoidingView>
-    );
+        <Box flex="0.2" w="full" justifyContent="flex-end">
+          <Button
+            variant="outline"
+            colorScheme="white"
+            onPress={() => attemptCreateAccount()}
+            rounded="7"
+            alignSelf="center"
+            w="70%"
+          >
+            <Text color="#EEE" fontSize="lg">
+              Continue
+            </Text>
+          </Button>
+        </Box>
+      </Container>
+    </Flex>
+  );
 };
 
 export default CreateAccountScreen;

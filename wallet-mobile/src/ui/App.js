@@ -2,7 +2,7 @@ import React from "react";
 import { useFonts } from "expo-font";
 import { NavigationContainer } from "@react-navigation/native";
 import Router from "./Router";
-import { NativeBaseProvider } from "native-base";
+import { NativeBaseProvider} from "native-base";
 import { LinearGradient } from "expo-linear-gradient";
 
 const App = () => {

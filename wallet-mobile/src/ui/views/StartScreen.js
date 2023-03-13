@@ -14,15 +14,14 @@ const StartScreen = ({ navigation }) => {
           colors: Gradients.gradient1,
         },
       }}
+      py="3"
     >
       {/* Screen Container */}
       <VStack
         flex="1"
-        maxWidth="400"
         safeArea
         alignItems="center"
         justifyContent="space-evenly"
-        p="5"
       >
         {/* Logo Container */}
         <Box flex="1" justifyContent="center">
@@ -34,15 +33,16 @@ const StartScreen = ({ navigation }) => {
             variant="outline"
             colorScheme="white"
             onPress={() => {
-              return navigation.navigate("Splash");
+              navigation.navigate("Splash");
             }}
             rounded="7"
-            size="lg"
           >
-            Get Started
+            <Text color="#EEE" fontSize="xl" >Get Started</Text>
           </Button>
           <HStack justifyContent="center" alignItems="center" space="1">
-            <Text color="#EEE" fontSize="sm">Already have an account?</Text>
+            <Text color="#EEE" fontSize="sm">
+              Already have an account?
+            </Text>
             <Text
               color="#2A93D5"
               fontSize="sm"

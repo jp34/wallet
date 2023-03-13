@@ -60,6 +60,7 @@ const LoginScreen = ({ navigation }) => {
   };
 
   return (
+    // Page Container
     <Flex
       flex="1"
       bg={{
@@ -71,89 +72,106 @@ const LoginScreen = ({ navigation }) => {
       py="3"
       px="4"
     >
-      <Container safeArea width="full" maxWidth="390" flex="1">
-        <Pressable onPress={() => navigation.goBack()} flex="0.05" alignItems="flex-start">
-          <ChevronLeftIcon color="white" size="md" />
+      {/* Page Body */}
+      <Container safeArea flex="1" w="full" maxW="390">
+        {/* Navigation Header */}
+        <Pressable
+          onPress={() => navigation.goBack()}
+          flex="0.1"
+          justifyContent="center"
+        >
+          {/* Navigation Icon */}
+          <ChevronLeftIcon color="lightAccent" size="lg" />
         </Pressable>
-        <KeyboardAvoidingView flex="0.95" width="full" behavior="height">
-          <ScrollView contentContainerStyle={{flex: 1, justifyContent: "center"}} >
-            <Box px="2">
-              <Text color="lightAccent" fontSize="4xl">
-                Welcome Back
-              </Text>
-              <Text color="lightAccent" fontSize="xl">
-                Login to your account.
-              </Text>
-              <FormControl pt="12" isRequired isInvalid={invalid}>
-                <FormControl.Label
-                  _text={{ color: "lightAccent", fontSize: "md" }}
-                >
-                  Email Address / Username
-                </FormControl.Label>
-                <Input
-                  size="2xl"
-                  _input={{ color: "lightAccent" }}
-                  _focus={{
-                    selectionColor: "lightAccent",
-                    backgroundColor: "purple.400",
-                    borderColor: "purple.500",
-                  }}
-                  onChangeText={(text) => setIdentifier(text)}
-                  ref={userInput}
-                  autoCorrect={false}
-                  onFocus={() => setInvalid(false)}
-                  onSubmitEditing={() => passInput.current.focus()}
-                  blurOnSubmit={false}
-                />
-                <FormControl.Label
-                  _text={{ color: "lightAccent", fontSize: "md" }}
-                  mt="4"
-                >
-                  Password
-                </FormControl.Label>
-                <Input
-                  size="2xl"
-                  _input={{ color: "lightAccent" }}
-                  _focus={{
-                    selectionColor: "lightAccent",
-                    backgroundColor: "purple.400",
-                    borderColor: "purple.500",
-                  }}
-                  onFocus={() => setInvalid(false)}
-                  onChangeText={(text) => setPassword(text)}
-                  ref={passInput}
-                  type={showPassword ? "text" : "password"}
-                  autoCorrect={false}
-                  InputRightElement={
-                    <Pressable onPress={() => setShowPassword(!showPassword)}>
-                      <Icon
-                        as={Ionicons}
-                        name={showPassword ? "eye-outline" : "eye-off-outline"}
-                        color="#EEE"
-                        size="lg"
-                        mr="3"
-                      />
-                    </Pressable>
-                  }
-                />
-                <FormControl.ErrorMessage>
-                  {errorMessage}
-                </FormControl.ErrorMessage>
-              </FormControl>
-              <Button
-                variant="outline"
-                colorScheme="white"
-                onPress={() => attemptLogin()}
-                rounded="7"
-                alignSelf="center"
-                mt="12"
-                width="1/2"
+        {/* Login Form Avoiding View */}
+        <KeyboardAvoidingView flex="0.7" w="full" behavior="height" px="4">
+          {/* Scroll View */}
+          <ScrollView
+            contentContainerStyle={{ flex: 1, justifyContent: "center" }}
+          >
+            {/* Login Headers */}
+            <Text color="lightAccent" fontSize="4xl">
+              Welcome Back
+            </Text>
+            <Text color="lightAccent" fontSize="xl">
+              Login to your account.
+            </Text>
+            {/* Login Form */}
+            <FormControl pt="12" isRequired isInvalid={invalid}>
+              {/* Email / Username Label */}
+              <FormControl.Label
+                _text={{ color: "lightAccent", fontSize: "md" }}
               >
-                <Text color="#EEE" fontSize="lg">
-                  Log In
-                </Text>
-              </Button>
-            </Box>
+                Email Address / Username
+              </FormControl.Label>
+              {/* Email / Username Input */}
+              <Input
+                size="2xl"
+                _input={{ color: "lightAccent" }}
+                _focus={{
+                  selectionColor: "lightAccent",
+                  backgroundColor: "purple.400",
+                  borderColor: "purple.500",
+                }}
+                onChangeText={(text) => setIdentifier(text)}
+                ref={userInput}
+                autoCorrect={false}
+                onFocus={() => setInvalid(false)}
+                onSubmitEditing={() => passInput.current.focus()}
+                blurOnSubmit={false}
+              />
+              {/* Password Label */}
+              <FormControl.Label
+                _text={{ color: "lightAccent", fontSize: "md" }}
+                mt="4"
+              >
+                Password
+              </FormControl.Label>
+              {/* Password Input */}
+              <Input
+                size="2xl"
+                _input={{ color: "lightAccent" }}
+                _focus={{
+                  selectionColor: "lightAccent",
+                  backgroundColor: "purple.400",
+                  borderColor: "purple.500",
+                }}
+                onFocus={() => setInvalid(false)}
+                onChangeText={(text) => setPassword(text)}
+                ref={passInput}
+                type={showPassword ? "text" : "password"}
+                autoCorrect={false}
+                InputRightElement={
+                  <Pressable onPress={() => setShowPassword(!showPassword)}>
+                    <Icon
+                      as={Ionicons}
+                      name={showPassword ? "eye-outline" : "eye-off-outline"}
+                      color="#EEE"
+                      size="lg"
+                      mr="3"
+                    />
+                  </Pressable>
+                }
+              />
+              {/* Form Error Handler */}
+              <FormControl.ErrorMessage>
+                {errorMessage}
+              </FormControl.ErrorMessage>
+            </FormControl>
+            {/* Login Button */}
+            <Button
+              variant="outline"
+              colorScheme="white"
+              onPress={() => attemptLogin()}
+              rounded="7"
+              alignSelf="center"
+              mt="12"
+              width="70%"
+            >
+              <Text color="lightAccent" fontSize="lg">
+                Log In
+              </Text>
+            </Button>
           </ScrollView>
         </KeyboardAvoidingView>
       </Container>

@@ -42,7 +42,7 @@ const AgreementScreen = ({ navigation }) => {
           <Text fontSize="2xl" color="lightAccent">
             Terms & Conditions
           </Text>
-          <Text fontSize="xl" color="lightAccent">
+          <Text fontSize="lg" color="lightAccent">
             Please read and accept the terms.
           </Text>
         </Box>

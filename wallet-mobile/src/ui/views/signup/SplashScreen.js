@@ -1,5 +1,4 @@
 import React from "react";
-import { PrimaryButton } from "../../components/Buttons";
 import {
   Flex,
   Container,
@@ -30,7 +29,7 @@ const SplashScreen = ({ navigation }) => {
         {/* Navigation Header */}
         <Pressable
           onPress={() => navigation.goBack()}
-          flex="0.1"
+          flex="0.05"
           justifyContent="center"
         >
           {/* Navigation Icon */}
@@ -54,7 +53,7 @@ const SplashScreen = ({ navigation }) => {
             </Text>
           </Box>
         </VStack>
-        <Box flex="0.2" w="full" justifyContent="flex-end">
+        <Box flex="0.25" w="full" justifyContent="flex-end">
           <Button
             variant="outline"
             colorScheme="white"

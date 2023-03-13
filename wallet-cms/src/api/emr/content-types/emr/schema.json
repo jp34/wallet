@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "emrs",
+  "info": {
+    "singularName": "emr",
+    "pluralName": "emrs",
+    "displayName": "emr"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "subject": {
+      "type": "integer",
+      "required": true
+    },
+    "cid": {
+      "type": "string",
+      "required": true
+    },
+    "timestamp": {
+      "type": "datetime",
+      "required": true
+    }
+  }
+}

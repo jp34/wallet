@@ -7,6 +7,7 @@ const BASE_URL = `http://${WEB3_HOST}:${WEB3_PORT}/api`;
 export default () => ({
     generate: async (user: number) => {
         try {
+            // Fetch patient and populate required fields
             const patient = await strapi.db.query('api::patient.patient').findOne({
                 select: [
                     'firstName',
@@ -22,7 +23,7 @@ export default () => ({
                 ]
             });
     
-            // Compile EMR
+            // Compile EMR document
             const emr = {
                 meta: {},
                 data: patient

@@ -1,74 +1,76 @@
 import React from "react";
-import {
-    View,
-    Text,
-    KeyboardAvoidingView,
-    ScrollView,
-    StyleSheet,
-} from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
 import { PrimaryButton } from "../../components/Buttons";
-import { ScreenStyles, Gradients } from "../../Style";
-import Header from "../../components/Header";
+import {
+  Flex,
+  Container,
+  VStack,
+  Text,
+  Box,
+  Button,
+  Pressable,
+  ChevronLeftIcon,
+} from "native-base";
 
 const SplashScreen = ({ navigation }) => {
-
-    const renderSplashContent = () => {
-        const styles = StyleSheet.create({
-            container: {
-                flex: 1,
-            },
-            group: {
-                marginHorizontal: 8,
-                marginVertical: 16,
-            },
-            h: {
-                color: '#eeeeee',
-                fontSize: 18,
-                fontFamily: 'Quicksand-SemiBold'
-            },
-            p: {
-                color: '#eeeeee',
-                fontSize: 14,
-                fontFamily: 'Quicksand-Regular'
-            }
-        });
-        return (
-            <ScrollView style={styles.container}>
-                <View style={styles.group}>
-                    <Text style={styles.h}>What is JustBe?</Text>
-                    <Text style={styles.p}>
-                        This is some text
-                    </Text>
-                </View>
-                <View style={styles.group}>
-                    <Text style={styles.h}>How can I use it?</Text>
-                    <Text style={styles.p}>
-                        This is some text
-                    </Text>
-                </View>
-            </ScrollView>
-        );
-    }
-
-    return (
-        <KeyboardAvoidingView style={ScreenStyles.screen}>
-            <LinearGradient
-                colors={Gradients.gradient1}
-                style={ScreenStyles.gradient}
-            >
-                <Header navigation={navigation} />
-                <View style={ScreenStyles.container}>
-                    {renderSplashContent()}
-                    <PrimaryButton label="Continue" options={{
-                        onPress: () => {
-                            return navigation.navigate('Agreement');
-                        }
-                    }}/>
-                </View>
-            </LinearGradient>
-        </KeyboardAvoidingView>
-    );
+  return (
+    // Page Container
+    <Flex
+      flex="1"
+      bg={{
+        linearGradient: {
+          colors: ["violet.900", "violet.600"],
+        },
+      }}
+      alignItems="center"
+      py="3"
+      px="4"
+    >
+      {/* Page Body */}
+      <Container safeArea flex="1" w="full" maxW="390">
+        {/* Navigation Header */}
+        <Pressable
+          onPress={() => navigation.goBack()}
+          flex="0.1"
+          justifyContent="center"
+        >
+          {/* Navigation Icon */}
+          <ChevronLeftIcon color="lightAccent" size="lg" />
+        </Pressable>
+        <VStack space={16} flex="0.7" justifyContent="center" px="4">
+          <Box>
+            <Text color="lightAccent" fontSize="2xl">
+              What is JustBe?
+            </Text>
+            <Text color="lightAccent" fontSize="xl">
+              Description.
+            </Text>
+          </Box>
+          <Box>
+            <Text color="lightAccent" fontSize="2xl">
+              How Can I Use It?
+            </Text>
+            <Text color="lightAccent" fontSize="xl">
+              Description.
+            </Text>
+          </Box>
+        </VStack>
+        <Box flex="0.2" w="full" justifyContent="flex-end">
+          <Button
+            variant="outline"
+            colorScheme="white"
+            onPress={() => navigation.navigate("Agreement")}
+            rounded="7"
+            alignSelf="center"
+            w="70%"
+          >
+            <Text color="#EEE" fontSize="lg">
+              Continue
+            </Text>
+          </Button>
+        </Box>
+      </Container>
+    </Flex>
+  );
 };
 
 export default SplashScreen;

@@ -1,60 +1,59 @@
-import { Gradients } from "../Style";
-import { LargeLogo } from "../components/Logos";
-import { Flex, Box, VStack, HStack, Text, Button } from "native-base";
+import { Logo } from "../components/Logo";
+import { Center, Box, VStack, HStack, Text, Button } from "native-base";
 
 const StartScreen = ({ navigation }) => {
   return (
     // Page Container
-    <Flex
+    <Center
       flex="1"
-      justifyContent="center"
-      alignItems="center"
       bg={{
         linearGradient: {
-          colors: ["violet.900", "violet.600"],
+          colors: ["secondary", "base"],
         },
       }}
-      py="3"
     >
-      {/* Screen Container */}
-      <VStack
-        flex="1"
-        safeArea
-        alignItems="center"
-        justifyContent="space-evenly"
-      >
+      {/* Body Container */}
+      <Box flex="1" safeArea alignItems="center">
         {/* Logo Container */}
-        <Box flex="1" justifyContent="center">
-          <LargeLogo />
+        <Box flex="0.8" justifyContent="center">
+          <Logo lg />
         </Box>
         {/* Button / Text Container */}
-        <VStack space="2">
+        <VStack
+          flex="0.2"
+          w="full"
+          justifyContent="flex-end"
+          space="2"
+          justifyItems="center"
+        >
           <Button
             variant="outline"
             colorScheme="white"
-            onPress={() => {
-              navigation.navigate("Splash");
-            }}
+            onPress={() => navigation.navigate("Splash")}
             rounded="7"
+            size="lg"
+            _text={{ fontSize: "lg", color: "#EEE" }}
           >
-            <Text color="#EEE" fontSize="xl" >Get Started</Text>
+            Get Started
           </Button>
-          <HStack justifyContent="center" alignItems="center" space="1">
-            <Text color="#EEE" fontSize="sm">
+          <HStack space="2">
+            <Text color="#EEE" fontSize="md">
               Already have an account?
             </Text>
             <Text
-              color="info.500"
-              fontSize="sm"
-              onPress={() => {navigation.navigate("Login");
+              color="secondaryBlue.600"
+              fontSize="md"
+              fontWeight="semibold"
+              onPress={() => {
+                navigation.navigate("Login");
               }}
             >
               Log In
             </Text>
           </HStack>
         </VStack>
-      </VStack>
-    </Flex>
+      </Box>
+    </Center>
   );
 };
 

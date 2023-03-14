@@ -1,7 +1,7 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import Router from "./Router";
-import { NativeBaseProvider, extendTheme } from "native-base";
+import { NativeBaseProvider, extendTheme, Button } from "native-base";
 import { LinearGradient } from "expo-linear-gradient";
 
 const App = () => {
@@ -83,6 +83,20 @@ const App = () => {
         600: "#35abda",
         700: "#2a93bd",
         800: "#217495",
+      },
+    },
+    components: {
+      Button: {
+        variants: {
+          primary: {
+            borderWidth: 1,
+            borderColor: "#EEE",
+            rounded: 7,
+            _text: {
+              color: "#EEE",
+            },
+          },
+        },
       },
     },
   });

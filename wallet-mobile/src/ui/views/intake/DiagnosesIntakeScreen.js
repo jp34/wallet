@@ -1,10 +1,10 @@
 import { LinearGradient } from "expo-linear-gradient";
 import { SafeAreaView, View, Text, TextInput, StyleSheet } from "react-native";
 import { Gradients, TextStyles, ScreenStyles } from "../../Style";
-import Header from "../../components/Header";
-import CheckboxList from "../../components/CheckboxList";
-import { PrimaryButton } from "../../components/Buttons";
-import { Input } from "../../components/Inputs";
+import Header from "../../../components/Header";
+import CheckboxList from "../../../components/CheckboxList";
+import { PrimaryButton } from "../../../components/Buttons";
+import { Input } from "../../../components/Inputs";
 
 const DiagnosesIntakeScreen = ({ navigation }) => {
   return (
@@ -35,7 +35,7 @@ const DiagnosesIntakeScreen = ({ navigation }) => {
                 ]}
               />
               <View style={{ marginVertical: 10 }}></View>
-              <Input text="Other" sample="Ex Condition"/>
+              <Input text="Other" sample="Ex Condition" />
             </View>
           </View>
           <View>

@@ -1,18 +1,12 @@
 import React from "react";
-import {
-  View,
-  Text,
-  KeyboardAvoidingView,
-  SafeAreaView,
-} from "react-native";
+import { View, Text, KeyboardAvoidingView, SafeAreaView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { PrimaryButton } from "../../components/Buttons";
+import { PrimaryButton } from "../../../components/Buttons";
 import { ScreenStyles, Gradients, TextStyles } from "../../Style";
-import Header from "../../components/Header";
-import { Input } from "../../components/Inputs";
+import Header from "../../../components/Header";
+import { Input } from "../../../components/Inputs";
 
 const MedicationIntakeScreen = ({ navigation }) => {
-
   return (
     <LinearGradient colors={Gradients.gradient1} style={{ flex: 1 }}>
       <SafeAreaView style={{ flex: 1 }}>
@@ -40,7 +34,7 @@ const MedicationIntakeScreen = ({ navigation }) => {
             </View>
           </View>
           <View>
-            <PrimaryButton label="Continue"/>
+            <PrimaryButton label="Continue" />
           </View>
         </KeyboardAvoidingView>
       </SafeAreaView>

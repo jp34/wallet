@@ -6,7 +6,7 @@ export const Logo = ({ lg }) => {
   return (
     <Center
       width={lg ? 160 : 55}
-      aspectRatio="1"
+      height={lg ? 160 : 55}
       rounded={lg ? 28 : 10}
       bg={{
         linearGradient: {

@@ -26,12 +26,7 @@ export const Input = ({ text, sample, changed, password, value }) => {
         <TouchableOpacity
           style={InputStyles.password.view}
           onPress={() => setShowPassword(!showPassword)}
-        >
-          <Image
-            style={InputStyles.password.image}
-            source={require("../../../assets/icons/unlock.png")}
-          />
-        </TouchableOpacity>
+        ></TouchableOpacity>
       )}
     </View>
   );
@@ -66,12 +61,7 @@ export const PasswordInput = ({ options, onShowPassword }) => {
       <TouchableOpacity
         style={styles.showButton}
         onPress={() => onShowPassword()}
-      >
-        <Image
-          style={styles.icon}
-          source={require("../../../assets/icons/unlock.png")}
-        />
-      </TouchableOpacity>
+      ></TouchableOpacity>
     </View>
   );
 };

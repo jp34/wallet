@@ -1,7 +1,6 @@
 import React, { useRef } from "react";
 import { login } from "../../../api/strapi-client";
 import {
-  Flex,
   Text,
   Button,
   Input,
@@ -11,6 +10,7 @@ import {
   Container,
   Icon,
   ChevronLeftIcon,
+  Center,
 } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -59,34 +59,17 @@ const LoginScreen = ({ navigation }) => {
   };
 
   return (
-    // Page Container
-    <Flex
-      flex="1"
-      bg={{
-        linearGradient: {
-          colors: ["violet.900", "violet.600"],
-        },
-      }}
-      alignItems="center"
-      py="3"
-      px="4"
-    >
-      <KeyboardAwareScrollView
-        style={{ width: "100%" }}
-        contentContainerStyle={{ flex: 1 }}
-      >
-      {/* Page Body */}
-      <Container safeArea flex="1" w="full" maxW="390">
-        {/* Navigation Header */}
-        <Pressable
-          onPress={() => navigation.goBack()}
-          flex="0.05"
-          justifyContent="center"
-        >
-          {/* Navigation Icon */}
-          <ChevronLeftIcon color="lightAccent" size="lg" />
-        </Pressable>
-        <Box flex="0.8" w="full" px="4" justifyContent="center">
+<Container/>
+          {/* Navigation Header */}
+          <Pressable
+            onPress={() => navigation.goBack()}
+            flex="0.05"
+            justifyContent="center"
+          >
+            {/* Navigation Icon */}
+            <ChevronLeftIcon color="lightAccent" size="lg" />
+          </Pressable>
+          <Box flex="0.8" w="full" px="4" justifyContent="center">
             {/* Login Headers */}
             <Text color="lightAccent" fontSize="4xl">
               Welcome Back
@@ -170,10 +153,10 @@ const LoginScreen = ({ navigation }) => {
                 Log In
               </Text>
             </Button>
-        </Box>
-      </Container>
+          </Box>
+        </Container>
       </KeyboardAwareScrollView>
-    </Flex>
+    </Center>
   );
 };
 

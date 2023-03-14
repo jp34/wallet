@@ -1,7 +1,7 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import Router from "./Router";
-import { NativeBaseProvider, extendTheme, Button } from "native-base";
+import { NativeBaseProvider, extendTheme } from "native-base";
 import { LinearGradient } from "expo-linear-gradient";
 
 const App = () => {
@@ -94,6 +94,30 @@ const App = () => {
             rounded: 7,
             _text: {
               color: "#EEE",
+            },
+            _pressed: {
+              bg: "secondaryViolet.600",
+            },
+          },
+        },
+      },
+      Input: {
+        variants: {
+          primary: {
+            borderWidth: 1,
+            borderColor: "#EEE",
+            py: 3,
+            _input: {
+              color: "#EEE",
+              selectionColor: "#EEE",
+            },
+            _focus: {
+              selectionColor: "#EEE",
+              backgroundColor: "secondaryViolet.600",
+              borderColor: "secondaryViolet.700",
+            },
+            _hover: {
+              borderColor: "secondaryViolet.700",
             },
           },
         },

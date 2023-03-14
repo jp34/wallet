@@ -8,7 +8,6 @@ export const Logo = ({ lg }) => {
       width={lg ? 160 : 55}
       aspectRatio="1"
       rounded={lg ? 28 : 10}
-      shadow="7"
       bg={{
         linearGradient: {
           colors: ["base", "secondary"],

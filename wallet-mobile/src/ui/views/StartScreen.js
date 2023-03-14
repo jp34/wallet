@@ -1,11 +1,12 @@
 import { Logo } from "../components/Logo";
 import { Center, Box, VStack, HStack, Text, Button } from "native-base";
 
-const StartScreen = ({ navigation }) => {
+export default function StartScreen({ navigation }) {
   return (
     // Page Container
     <Center
       flex="1"
+      py="2"
       bg={{
         linearGradient: {
           colors: ["secondary", "base"],
@@ -19,23 +20,17 @@ const StartScreen = ({ navigation }) => {
           <Logo lg />
         </Box>
         {/* Button / Text Container */}
-        <VStack
-          flex="0.2"
-          w="full"
-          justifyContent="flex-end"
-          space="2"
-          justifyItems="center"
-        >
+        <VStack flex="0.2" w="full" justifyContent="flex-end" space="2">
+          {/* Sign Up Button */}
           <Button
-            variant="outline"
-            colorScheme="white"
-            onPress={() => navigation.navigate("Splash")}
-            rounded="7"
+            variant="primary"
             size="lg"
-            _text={{ fontSize: "lg", color: "#EEE" }}
+            _text={{ fontSize: "lg" }}
+            onPress={() => navigation.navigate("Splash")}
           >
             Get Started
           </Button>
+          {/* Login Helper Text / Link */}
           <HStack space="2">
             <Text color="#EEE" fontSize="md">
               Already have an account?
@@ -55,6 +50,4 @@ const StartScreen = ({ navigation }) => {
       </Box>
     </Center>
   );
-};
-
-export default StartScreen;
+}

@@ -1,8 +1,11 @@
-import { Logo } from "../../components/Logo";
+import { useRouter } from "expo-router";
 import { Box, VStack, HStack, Text, Button, Pressable } from "native-base";
-import { Wrapper } from "../../components/Wrapper";
 
-export default function StartScreen({ navigation }) {
+import { Logo } from "../src/components/Logo";
+import { Wrapper } from "../src/components/Wrapper";
+
+export default function StartScreen() {
+  const router = useRouter();
   return (
     // Page Wrapper
     <Wrapper>
@@ -17,7 +20,9 @@ export default function StartScreen({ navigation }) {
           variant="primary"
           size="lg"
           _text={{ fontSize: "lg" }}
-          onPress={() => navigation.navigate("Splash")}
+          onPress={() => {
+            router.push("/signup");
+          }}
           width="70%"
           alignSelf="center"
         >
@@ -30,7 +35,7 @@ export default function StartScreen({ navigation }) {
           </Text>
           <Pressable
             onPress={() => {
-              navigation.navigate("Login");
+              router.push("/login");
             }}
           >
             <Text color="secondaryBlue.600" fontSize="md" fontWeight="semibold">

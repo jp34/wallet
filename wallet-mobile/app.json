@@ -4,7 +4,7 @@
     "slug": "wallet-mobile",
     "owner": "HealthcareWallet",
     "version": "1.0.0",
-    "scheme": "metro",
+    "scheme": "acme",
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "bundleIdentifier": "edu.miamioh.csi.capstone.wallet",

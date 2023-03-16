@@ -1,6 +1,6 @@
 import { Link } from "expo-router";
 import { VStack, Text, Box, Button, Heading } from "native-base";
-import { Wrapper } from "../../src/components/Wrapper";
+import { Wrapper } from "../src/components/Wrapper";
 
 export default function SplashScreen() {
   return (
@@ -24,7 +24,7 @@ export default function SplashScreen() {
         </Box>
       </VStack>
       <Box flex="0.1" justifyContent="flex-end">
-        <Link href="./agreement" asChild>
+        <Link href="agreement" asChild>
           <Button
             variant="primary"
             size="lg"

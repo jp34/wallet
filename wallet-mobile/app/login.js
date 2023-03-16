@@ -12,8 +12,8 @@ import {
   VStack,
 } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
-import { Wrapper } from "../../src/components/Wrapper";
-import { login } from "../../src/api/strapi-client";
+import { Wrapper } from "../src/components/Wrapper";
+import { login } from "../src/api/strapi-client";
 
 export default function LoginScreen() {
   const [invalid, setInvalid] = useState(false);

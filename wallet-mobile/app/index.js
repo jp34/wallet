@@ -10,7 +10,7 @@ export default function StartScreen() {
         <Logo lg />
       </Center>
       <VStack flex="0.1" justifyContent="flex-end" space="2">
-        <Link href="/signup/splash" asChild>
+        <Link href="splash" asChild>
           <Button
             variant="primary"
             size="lg"
@@ -25,7 +25,7 @@ export default function StartScreen() {
           <Text color="#EEE" fontSize="md">
             Already have an account?
           </Text>
-          <Link href="/login/login" asChild>
+          <Link href="login" asChild>
             <Pressable>
               <Text
                 color="secondaryBlue.600"

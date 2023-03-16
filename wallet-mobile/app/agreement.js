@@ -1,4 +1,5 @@
-import React from "react";
+import { useState } from "react";
+import { useRouter } from "expo-router";
 import {
   Heading,
   Text,
@@ -8,10 +9,12 @@ import {
   Button,
   Center,
 } from "native-base";
-import { Wrapper } from "../../src/components/Wrapper";
+import { Wrapper } from "../src/components/Wrapper";
 
 export default function AgreementScreen() {
-  const [confirm, setConfirm] = React.useState(false);
+  const router = useRouter();
+
+  const [confirm, setConfirm] = useState(false);
 
   return (
     <Wrapper>
@@ -19,7 +22,7 @@ export default function AgreementScreen() {
         <Heading fontSize="3xl" color="#EEE">
           Terms & Conditions
         </Heading>
-        <Text fontSize="lg" color="#EEE">
+        <Text fontSize="xl" color="#EEE">
           Please read and accept the terms.
         </Text>
       </Box>
@@ -57,6 +60,9 @@ export default function AgreementScreen() {
           _text={{ fontSize: "lg" }}
           width="70%"
           alignSelf="center"
+          onPress={() => {
+            confirm && router.push("createAccount");
+          }}
         >
           Continue
         </Button>

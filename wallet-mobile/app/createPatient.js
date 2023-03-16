@@ -47,6 +47,7 @@ export default function CreatePatientScreen() {
   const dateRegex = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/;
 
   const attemptCreatePatient = async () => {
+    if (demo) router.replace("home/home");
     try {
       if (fName === undefined) {
         setFNameEM("First Name is required.");
@@ -99,7 +100,7 @@ export default function CreatePatientScreen() {
         phone.replace(/\D/g, "");
         bday.replace(/\D/g, "");
         const result = await createPatient(fName, mName, lName, phone, bday);
-        if (result) router.push("/home");
+        if (result) router.replace("home/home");
       }
     } catch (err) {
       console.error(err);

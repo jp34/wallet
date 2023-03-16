@@ -78,7 +78,7 @@ const AgreementScreen = ({ navigation }) => {
             mt="4"
             onChange={(value) => setConfirm(value)}
             colorScheme="fuchsia"
-            _text={{color: "lightAccent"}}
+            _text={{ color: "lightAccent" }}
           >
             I agree to the terms & conditions.
           </Checkbox>
@@ -87,7 +87,9 @@ const AgreementScreen = ({ navigation }) => {
           <Button
             variant="outline"
             colorScheme="white"
-            onPress={() => confirm ? navigation.navigate("CreateAccount") : {} }
+            onPress={() =>
+              confirm ? navigation.navigate("CreateAccount") : {}
+            }
             rounded="7"
             alignSelf="center"
             w="70%"

@@ -24,7 +24,7 @@ export default function Layout() {
         2: "#65BAA9",
         3: "#005245",
       },
-      grayComplement: {
+      secondaryGray: {
         100: "#eeedf1",
         200: "#e2e0e7",
         300: "#d4d1dc",

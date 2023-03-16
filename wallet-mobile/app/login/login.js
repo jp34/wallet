@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { useRef, useState } from "react";
 import {
   Text,
   Button,
@@ -7,20 +7,22 @@ import {
   FormControl,
   Pressable,
   Icon,
+  Center,
   Heading,
+  VStack,
 } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import { Wrapper } from "../../src/components/Wrapper";
 import { login } from "../../src/api/strapi-client";
 
 export default function LoginScreen() {
-  const [invalid, setInvalid] = React.useState(false);
-  const [errorMessage, setErrorMessage] = React.useState();
-  const [showPassword, setShowPassword] = React.useState(false);
-  const [identifier, setIdentifier] = React.useState();
-  const [password, setPassword] = React.useState();
-  const userInput = useRef();
-  const passInput = useRef();
+  const [invalid, setInvalid] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [identifier, setIdentifier] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const userInput = useRef(null);
+  const passInput = useRef(null);
 
   const attemptLogin = async () => {
     try {
@@ -44,7 +46,7 @@ export default function LoginScreen() {
         const result = await login(identifier, password);
         if (result) {
           setInvalid(false);
-          return navigation.navigate("HomeRouter");
+          return router.push("");
         } else {
           setErrorMessage("Email / Username or Password is incorrect.");
           setInvalid(true);
@@ -58,83 +60,71 @@ export default function LoginScreen() {
 
   return (
     <Wrapper keyboard>
-      <Box flex="0.3" justifyContent="center" alignSelf="flex-start" px="4">
-        {/* Login Headers */}
-        <Heading color="#EEE" fontSize="4xl">
-          Welcome Back
-        </Heading>
-        <Text color="#EEE" fontSize="xl">
-          Login to your account.
-        </Text>
-      </Box>
-      <Box
-        flex="0.3"
-        w="full"
-        px="4"
-        justifyContent="center"
-        alignSelf="center"
-      >
-        {/* Login Form */}
-        <FormControl isRequired isInvalid={invalid}>
-          {/* Email / Username Label */}
-          <FormControl.Label _text={{ color: "#EEE", fontSize: "md" }}>
-            Email Address / Username
-          </FormControl.Label>
-          {/* Email / Username Input */}
-          <Input
-            size="2xl"
-            variant="primary"
-            onChangeText={(text) => setIdentifier(text)}
-            ref={userInput}
-            autoCorrect={false}
-            onFocus={() => setInvalid(false)}
-            onSubmitEditing={() => passInput.current.focus()}
-            blurOnSubmit={false}
-          />
-          {/* Password Label */}
-          <FormControl.Label _text={{ color: "#EEE", fontSize: "md" }} mt="4">
-            Password
-          </FormControl.Label>
-          {/* Password Input */}
-          <Input
-            size="2xl"
-            py="3"
-            _input={{ color: "#EEE" }}
-            _focus={{
-              selectionColor: "#EEE",
-              backgroundColor: "secondaryViolet.600",
-              borderColor: "secondaryViolet.700",
-            }}
-            onFocus={() => setInvalid(false)}
-            onChangeText={(text) => setPassword(text)}
-            ref={passInput}
-            type={showPassword ? "text" : "password"}
-            autoCorrect={false}
-            InputRightElement={
-              <Pressable onPress={() => setShowPassword(!showPassword)}>
-                <Icon
-                  as={Ionicons}
-                  name={showPassword ? "eye-outline" : "eye-off-outline"}
-                  color="#EEE"
-                  size="lg"
-                  mr="3"
-                />
-              </Pressable>
-            }
-            _hover={{ borderColor: "secondaryViolet.700" }}
-          />
-          {/* Form Error Handler */}
-          <FormControl.ErrorMessage>{errorMessage}</FormControl.ErrorMessage>
-        </FormControl>
-      </Box>
-      <Box flex="0.4" justifyContent="flex-end" alignItems="center">
-        {/* Login Button */}
+      <VStack flex="0.9" justifyContent="center" space={10} px="4">
+        <Box justifyContent="center">
+          <Heading color="#EEE" fontSize="4xl">
+            Welcome Back
+          </Heading>
+          <Text color="#EEE" fontSize="xl">
+            Login to your account.
+          </Text>
+        </Box>
+        <Center px="4">
+          <FormControl isRequired isInvalid={invalid}>
+            <FormControl.Label _text={{ color: "#EEE", fontSize: "md" }}>
+              Email Address / Username
+            </FormControl.Label>
+            <Input
+              size="2xl"
+              variant="primary"
+              onChangeText={(text) => setIdentifier(text)}
+              ref={userInput}
+              autoCorrect={false}
+              onFocus={() => setInvalid(false)}
+              onSubmitEditing={() => passInput.current.focus()}
+              blurOnSubmit={false}
+            />
+            <FormControl.Label _text={{ color: "#EEE", fontSize: "md" }} mt="4">
+              Password
+            </FormControl.Label>
+            <Input
+              size="2xl"
+              py="3"
+              _input={{ color: "#EEE" }}
+              _focus={{
+                selectionColor: "#EEE",
+                backgroundColor: "secondaryViolet.600",
+                borderColor: "secondaryViolet.700",
+              }}
+              onFocus={() => setInvalid(false)}
+              onChangeText={(text) => setPassword(text)}
+              ref={passInput}
+              type={showPassword ? "text" : "password"}
+              autoCorrect={false}
+              InputRightElement={
+                <Pressable onPress={() => setShowPassword(!showPassword)}>
+                  <Icon
+                    as={Ionicons}
+                    name={showPassword ? "eye-outline" : "eye-off-outline"}
+                    color="#EEE"
+                    size="lg"
+                    mr="3"
+                  />
+                </Pressable>
+              }
+              _hover={{ borderColor: "secondaryViolet.700" }}
+            />
+            <FormControl.ErrorMessage>{errorMessage}</FormControl.ErrorMessage>
+          </FormControl>
+        </Center>
+      </VStack>
+      <Box flex="0.1" justifyContent="flex-end">
         <Button
           variant="primary"
           size="lg"
           _text={{ fontSize: "lg" }}
-          onPress={() => navigation.navigate("HomeRouter")}
           w="70%"
+          alignSelf="center"
         >
           Log In
         </Button>

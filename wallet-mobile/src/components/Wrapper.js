@@ -1,9 +1,33 @@
 import React from "react";
-import { useTheme, Center, Box } from "native-base";
+import { useTheme, Center, Box, Pressable, ChevronLeftIcon } from "native-base";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-export const Wrapper = ({ children, keyboard }) => {
+const Wrapper = ({ children, keyboard, header, onPress }) => {
   const theme = useTheme();
+
+  const renderHeader = () => (
+    <Box flex="0.1" alignSelf="flex-start" justifyContent="center">
+      <Pressable onPress={onPress}>
+        <ChevronLeftIcon color="#EEE" size="lg" />
+      </Pressable>
+    </Box>
+  );
+
+  const renderContent = () => {
+    if (keyboard) {
+      return (
+        <KeyboardAwareScrollView
+          style={{ width: "100%" }}
+          contentContainerStyle={{ flex: 1 }}
+          showsVerticalScrollIndicator={false}
+        >
+          {children}
+        </KeyboardAwareScrollView>
+      );
+    }
+    return <Box flex="1">{children}</Box>;
+  };
+
   return (
     <Center
       flex="1"
@@ -15,19 +39,12 @@ export const Wrapper = ({ children, keyboard }) => {
         },
       }}
     >
-      <Box flex="1" w="full" maxW="400" safeArea>
-        {keyboard ? (
-          <KeyboardAwareScrollView
-            style={{ width: "100%" }}
-            contentContainerStyle={{ flex: 1 }}
-            showsVerticalScrollIndicator={false}
-          >
-            {children}
-          </KeyboardAwareScrollView>
-        ) : (
-          <Box flex="1">{children}</Box>
-        )}
+      {header && renderHeader()}
+      <Box flex={header ? "0.9" : "1"} maxW="400" w="full">
+        {renderContent()}
       </Box>
     </Center>
   );
 };
+
+export default Wrapper;

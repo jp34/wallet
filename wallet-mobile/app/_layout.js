@@ -120,10 +120,7 @@ export default function Layout() {
     <NativeBaseProvider config={config} theme={theme}>
       <Stack
         screenOptions={{
-          headerBackVisible: true,
-          headerTransparent: true,
-          headerTitle: "",
-          headerTintColor: "#EEE",
+          headerShown: false,
         }}
       />
     </NativeBaseProvider>

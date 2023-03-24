@@ -1,10 +1,12 @@
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import { VStack, Text, Box, Button, Heading } from "native-base";
-import { Wrapper } from "../src/components/Wrapper";
+import Wrapper from "../src/components/Wrapper";
 
 export default function SplashScreen() {
+  const router = useRouter();
+
   return (
-    <Wrapper>
+    <Wrapper header onPress={() => router.back()}>
       <VStack space={16} flex="0.9" justifyContent="center" alignItems="center">
         <Box alignItems="center">
           <Heading color="#EEE" fontSize="3xl">

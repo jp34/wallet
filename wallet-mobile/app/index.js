@@ -1,7 +1,7 @@
 import { Link } from "expo-router";
 import { Center, VStack, HStack, Text, Button, Pressable } from "native-base";
 import { Logo } from "../src/components/Logo";
-import { Wrapper } from "../src/components/Wrapper";
+import Wrapper from "../src/components/Wrapper";
 
 export default function StartScreen() {
   return (

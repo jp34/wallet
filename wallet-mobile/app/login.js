@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { useRouter } from "expo-router";
 import {
   Text,
   Button,
@@ -12,15 +13,20 @@ import {
   VStack,
 } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
-import { Wrapper } from "../src/components/Wrapper";
+import Wrapper from "../src/components/Wrapper";
 import { login } from "../src/api/strapi-client";
 
 export default function LoginScreen() {
+  const router = useRouter();
+
   const [invalid, setInvalid] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
+
   const [errorMessage, setErrorMessage] = useState("");
+
   const userInput = useRef(null);
   const passInput = useRef(null);
 
@@ -59,7 +65,7 @@ export default function LoginScreen() {
   };
 
   return (
-    <Wrapper keyboard>
+    <Wrapper keyboard header onPress={() => router.back()}>
       <VStack flex="0.9" justifyContent="center" space={10} px="4">
         <Box justifyContent="center">
           <Heading color="#EEE" fontSize="4xl">
@@ -69,7 +75,7 @@ export default function LoginScreen() {
             Login to your account.
           </Text>
         </Box>
-        <Center px="4">
+        <Center>
           <FormControl isRequired isInvalid={invalid}>
             <FormControl.Label _text={{ color: "#EEE", fontSize: "md" }}>
               Email Address / Username

@@ -13,7 +13,7 @@ import {
 } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import { createAccount } from "../src/api/strapi-client";
-import { Wrapper } from "../src/components/Wrapper";
+import Wrapper from "../src/components/Wrapper";
 
 export default function CreateAccountScreen() {
   // Demo for quick navigation purposes.
@@ -117,8 +117,8 @@ export default function CreateAccountScreen() {
   };
 
   return (
-    <Wrapper keyboard>
-      <Box flex="0.3" justifyContent="center">
+    <Wrapper keyboard header onPress={() => router.back()}>
+      <Box flex="0.1" justifyContent="center" px="4">
         <Heading fontSize="3xl" color="#EEE">
           Create Your Account
         </Heading>
@@ -126,7 +126,7 @@ export default function CreateAccountScreen() {
           Tell us about you.
         </Text>
       </Box>
-      <VStack space={4} flex="0.5" px="4" justifyContent="center">
+      <VStack space={4} flex="0.8" px="4" justifyContent="center">
         <FormControl isRequired isInvalid={emailInvalid}>
           <FormControl.Label _text={{ color: "#EEE", fontSize: "md" }}>
             Email Address
@@ -216,7 +216,7 @@ export default function CreateAccountScreen() {
           <FormControl.ErrorMessage>{passCEM}</FormControl.ErrorMessage>
         </FormControl>
       </VStack>
-      <Box flex="0.2" justifyContent="flex-end">
+      <Box flex="0.1" justifyContent="flex-end">
         <Button
           variant="primary"
           size="lg"

@@ -9,7 +9,7 @@ import {
   Button,
   Center,
 } from "native-base";
-import { Wrapper } from "../src/components/Wrapper";
+import Wrapper from "../src/components/Wrapper";
 
 export default function AgreementScreen() {
   const router = useRouter();
@@ -17,8 +17,8 @@ export default function AgreementScreen() {
   const [confirm, setConfirm] = useState(false);
 
   return (
-    <Wrapper>
-      <Box flex="0.3" justifyContent="center">
+    <Wrapper header onPress={() => router.back()}>
+      <Box flex="0.1" justifyContent="center" px="4">
         <Heading fontSize="3xl" color="#EEE">
           Terms & Conditions
         </Heading>
@@ -26,9 +26,13 @@ export default function AgreementScreen() {
           Please read and accept the terms.
         </Text>
       </Box>
-      <Box flex="0.4" shadow="9" bgColor="#EEE" rounded="10" p="5">
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <Text color="secondary" fontSize="md">
+      <Box flex="0.1"></Box>
+      <Box flex="0.5" shadow="9" bgColor="#EEE" rounded="10" px="4">
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          style={{ paddingHorizontal: 4 }}
+        >
+          <Text color="secondary" fontSize="md" py="4">
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
             ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut

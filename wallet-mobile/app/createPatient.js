@@ -10,7 +10,7 @@ import {
   Heading,
 } from "native-base";
 import { createPatient } from "../src/api/strapi-client";
-import { Wrapper } from "../src/components/Wrapper";
+import Wrapper from "../src/components/Wrapper";
 
 export default function CreatePatientScreen() {
   // Demo for quick navigation purposes.
@@ -47,7 +47,7 @@ export default function CreatePatientScreen() {
   const dateRegex = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/;
 
   const attemptCreatePatient = async () => {
-    if (demo) router.replace("home/home");
+    if (demo) router.push("home");
     try {
       if (fName === undefined) {
         setFNameEM("First Name is required.");
@@ -108,8 +108,8 @@ export default function CreatePatientScreen() {
   };
 
   return (
-    <Wrapper keyboard>
-      <Box flex="0.3" justifyContent="center">
+    <Wrapper keyboard header onPress={() => router.back()}>
+      <Box flex="0.1" justifyContent="center" px="4">
         <Heading fontSize="3xl" color="#EEE">
           Patient Information
         </Heading>
@@ -117,14 +117,14 @@ export default function CreatePatientScreen() {
           Let's get some more info.
         </Text>
       </Box>
-      <VStack space={2} flex="0.5" justifyContent="center" px="4">
+      <VStack space={2} flex="0.8" justifyContent="center" px="4">
         {renderFirstNameInput()}
         {renderMiddleNameInput()}
         {renderLastNameInput()}
         {renderPhoneNumberInput()}
         {renderDateOfBirthInput()}
       </VStack>
-      <Box flex="0.2" justifyContent="flex-end">
+      <Box flex="0.1" justifyContent="flex-end">
         <Button
           variant="primary"
           size="lg"
@@ -133,7 +133,7 @@ export default function CreatePatientScreen() {
           alignSelf="center"
           onPress={() => attemptCreatePatient()}
         >
-          Complete
+          Finish
         </Button>
       </Box>
     </Wrapper>

@@ -4,7 +4,7 @@
   "info": {
     "singularName": "emr",
     "pluralName": "emrs",
-    "displayName": "emr"
+    "displayName": "Emr"
   },
   "options": {
     "draftAndPublish": false

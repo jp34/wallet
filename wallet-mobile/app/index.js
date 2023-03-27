@@ -1,5 +1,13 @@
 import { Link } from "expo-router";
-import { Center, VStack, HStack, Text, Button, Pressable } from "native-base";
+import {
+  Center,
+  VStack,
+  HStack,
+  Text,
+  Button,
+  Pressable,
+  Box,
+} from "native-base";
 import { Logo } from "../src/components/Logo";
 import Wrapper from "../src/components/Wrapper";
 
@@ -9,7 +17,9 @@ export default function StartScreen() {
       <Center flex="0.9">
         <Logo lg />
       </Center>
-      <Center flex="0.1">{renderButtonFooter()}</Center>
+      <Box flex="0.1" alignSelf="center">
+        {renderButtonFooter()}
+      </Box>
     </Wrapper>
   );
 
@@ -20,11 +30,7 @@ export default function StartScreen() {
           <Button
             variant="primary"
             _text={{
-              fontSize: {
-                base: "lg",
-                sm: "md",
-                lg: "xl",
-              },
+              fontSize: "lg",
             }}
           >
             Get Started

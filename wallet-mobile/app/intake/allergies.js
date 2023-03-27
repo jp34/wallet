@@ -37,26 +37,20 @@ export default function AllergiesIntakeScreen() {
     const allergy = allergyRef.current.getValue();
     const severity = severityRef.current.getValue();
 
-    // Create a new object to represent the allergy and its severity
     if (allergy === "" || severity === "") return;
     const newAllergy = { allergy, severity };
 
-    // Add the new allergy to the state array of allergies
     setAllergies([...allergies, newAllergy]);
 
-    // Clear the input fields and hide the keyboard
     allergyRef.current.clear();
     severityRef.current.clear();
     Keyboard.dismiss();
   };
 
   const handleRemoveAllergy = (indexToRemove) => {
-    // Create a new array of allergies that excludes the allergy at the specified index
     const newAllergies = allergies.filter(
       (_, index) => index !== indexToRemove
     );
-
-    // Update the state with the new array of allergies
     setAllergies(newAllergies);
   };
 
@@ -100,33 +94,41 @@ export default function AllergiesIntakeScreen() {
           >
             Add
           </Button>
-          <Box bgColor="#EEE" rounded="15" mt="6">
+          <Box bgColor="secondaryViolet.600" rounded="15" mt="6">
             <ScrollView maxH="32" p="2" my="2">
-              {allergies.map((allergy, index) => (
-                <Box
-                  key={index}
-                  flexDirection="row"
-                  alignItems="center"
-                  alignSelf="center"
-                >
-                  <Text
-                    mx="2"
-                    color="shades.1"
-                    fontSize="md"
-                    fontWeight="semibold"
+              {allergies.length === 0 ? (
+                <Text color="#EEE" fontSize="lg" fontWeight="semibold" mx="2">
+                  No Allergies
+                </Text>
+              ) : (
+                allergies.map((allergy, index) => (
+                  <Box
+                    key={index}
+                    flexDirection="row"
+                    alignItems="center"
+                    justifyContent="space-between"
                   >
-                    {allergy.allergy} - {allergy.severity}
-                  </Text>
-                  <Button
-                    variant="unstyled"
-                    onPress={() => handleRemoveAllergy(index)}
-                  >
-                    <Text color="fuchsia.500" fontWeight="bold" fontSize="md">
-                      X
+                    <Text
+                      mx="2"
+                      color="#EEE"
+                      fontSize="lg"
+                      fontWeight="semibold"
+                    >
+                      {allergy.allergy} - {allergy.severity}
                     </Text>
-                  </Button>
-                </Box>
-              ))}
+                    <Box>
+                      <Button
+                        variant="unstyled"
+                        onPress={() => handleRemoveAllergy(index)}
+                      >
+                        <Text color="white" fontSize="md">
+                          Remove
+                        </Text>
+                      </Button>
+                    </Box>
+                  </Box>
+                ))
+              )}
             </ScrollView>
           </Box>
         </VStack>

@@ -5,6 +5,7 @@
     "owner": "HealthcareWallet",
     "version": "1.0.0",
     "scheme": "acme",
+    "orientation": "portrait",
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "bundleIdentifier": "edu.miamioh.csi.capstone.wallet",

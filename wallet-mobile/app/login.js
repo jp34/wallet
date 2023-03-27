@@ -67,7 +67,7 @@ export default function LoginScreen() {
 
   return (
     <Wrapper keyboard>
-      <Box flex="0.1" justifyContent="flex-start">
+      <Box flex="0.1" justifyContent="center">
         <Pressable onPress={() => router.back()}>
           <ChevronLeftIcon color="#EEE" size="lg" />
         </Pressable>
@@ -97,7 +97,7 @@ export default function LoginScreen() {
         <Heading color="#EEE" fontSize="3xl">
           Welcome Back
         </Heading>
-        <Text color="#EEE" fontSize="lg">
+        <Text color="#EEE" fontSize="xl">
           Login to your account.
         </Text>
       </Box>
@@ -130,6 +130,7 @@ export default function LoginScreen() {
               color: "#EEE",
               fontSize: "md",
             }}
+            mt="4"
           >
             Password
           </FormControl.Label>

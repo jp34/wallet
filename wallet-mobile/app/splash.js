@@ -1,15 +1,28 @@
 import { Link, useRouter } from "expo-router";
-import { VStack, Text, Box, Button, Heading } from "native-base";
+import {
+  VStack,
+  Text,
+  Box,
+  Button,
+  Heading,
+  Pressable,
+  ChevronLeftIcon,
+} from "native-base";
 import Wrapper from "../src/components/Wrapper";
 
 export default function SplashScreen() {
   const router = useRouter();
 
   return (
-    <Wrapper header onPress={() => router.back()}>
-      <VStack space={16} flex="0.9" justifyContent="center" alignItems="center">
+    <Wrapper>
+      <Box flex="0.1" justifyContent="center">
+        <Pressable onPress={() => router.back()}>
+          <ChevronLeftIcon color="#EEE" size="lg" />
+        </Pressable>
+      </Box>
+      <VStack space={"12"} flex="0.8" justifyContent="center">
         <Box alignItems="center">
-          <Heading color="#EEE" fontSize="3xl">
+          <Heading color="#EEE" fontSize="2xl">
             What is JustBe?
           </Heading>
           <Text color="#EEE" fontSize="xl">
@@ -17,7 +30,7 @@ export default function SplashScreen() {
           </Text>
         </Box>
         <Box alignItems="center">
-          <Heading color="#EEE" fontSize="3xl">
+          <Heading color="#EEE" fontSize="2xl">
             How Can I Use It?
           </Heading>
           <Text color="#EEE" fontSize="xl">
@@ -25,14 +38,14 @@ export default function SplashScreen() {
           </Text>
         </Box>
       </VStack>
-      <Box flex="0.1" justifyContent="flex-end">
+      <Box flex="0.1" alignItems="center" justifyContent="flex-end">
         <Link href="agreement" asChild>
           <Button
             variant="primary"
-            size="lg"
-            _text={{ fontSize: "lg" }}
-            width="70%"
-            alignSelf="center"
+            _text={{
+              fontSize: "lg",
+            }}
+            w="1/2"
           >
             Continue
           </Button>

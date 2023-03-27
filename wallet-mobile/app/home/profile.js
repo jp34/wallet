@@ -52,7 +52,7 @@ export default function ProfileScreen() {
 
   const profileImage =
     "https://images.unsplash.com/photo-1677504207981-618778a3abd2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2456&q=80";
-  const userFullName = useState("[ Name ]");
+  const [userFullName, setUserFullName] = useState("[ Name ]");
   const [profileIncomplete, setProfileIncomplete] = useState(true);
 
   const renderCompleteProfileButton = () => {

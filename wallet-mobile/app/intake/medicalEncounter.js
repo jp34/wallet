@@ -67,7 +67,7 @@ export default function MedicalEncountersScreen() {
             Medical Encounters
           </Heading>
           <Text fontSize="lg" color="#EEE">
-            Please list all your medical encounters.
+            Please list any recent medical encounters.
           </Text>
         </Box>
         <VStack mt="4" space="4">

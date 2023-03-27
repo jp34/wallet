@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useRouter, Link } from "expo-router";
+import { useRouter } from "expo-router";
 import {
   Heading,
   Text,
@@ -52,17 +52,18 @@ export default function AgreementScreen() {
         </Checkbox>
       </Center>
       <Box flex="0.1" alignItems="center" justifyContent="flex-end">
-        <Link href="createAccount" asChild>
-          <Button
-            variant="primary"
-            _text={{
-              fontSize: "lg",
-            }}
-            w="70%"
-          >
-            Continue
-          </Button>
-        </Link>
+        <Button
+          variant="primary"
+          _text={{
+            fontSize: "lg",
+          }}
+          w="70%"
+          onPress={() => {
+            confirm && router.push("createAccount");
+          }}
+        >
+          Continue
+        </Button>
       </Box>
     </Wrapper>
   );

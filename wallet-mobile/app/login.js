@@ -9,7 +9,6 @@ import {
   Pressable,
   Icon,
   Heading,
-  VStack,
   ChevronLeftIcon,
 } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
@@ -31,7 +30,6 @@ export default function LoginScreen() {
   const passInput = useRef(null);
 
   const attemptLogin = async () => {
-    return router.replace("/home");
     try {
       if (identifier === undefined) {
         setErrorMessage("Email or Username is required.");
@@ -53,7 +51,7 @@ export default function LoginScreen() {
         const result = await login(identifier, password);
         if (result) {
           setInvalid(false);
-          return router.replace("/home");
+          return router.replace("");
         } else {
           setErrorMessage("Email / Username or Password is incorrect.");
           setInvalid(true);
@@ -72,10 +70,10 @@ export default function LoginScreen() {
           <ChevronLeftIcon color="#EEE" size="lg" />
         </Pressable>
       </Box>
-      <VStack flex="0.8" justifyContent="center" space={10} px="4">
+      <Box flex="0.8" justifyContent="center" px="4">
         {renderHeading()}
         {renderLoginForm()}
-      </VStack>
+      </Box>
       <Box flex="0.1" alignItems="center" justifyContent="flex-end">
         <Button
           variant="primary"
@@ -106,7 +104,7 @@ export default function LoginScreen() {
 
   function renderLoginForm() {
     return (
-      <Box>
+      <Box mt="4">
         <FormControl isRequired isInvalid={invalid}>
           <FormControl.Label
             _text={{

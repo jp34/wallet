@@ -11,7 +11,7 @@ const Wrapper = ({ children, keyboard }) => {
           style={{ width: "100%" }}
           contentContainerStyle={{ flex: 1 }}
           showsVerticalScrollIndicator={false}
-          extraHeight="1"
+          extraScrollHeight={25}
         >
           {children}
         </KeyboardAwareScrollView>

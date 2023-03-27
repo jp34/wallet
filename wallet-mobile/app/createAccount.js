@@ -10,6 +10,7 @@ import {
   VStack,
   Button,
   Heading,
+  ChevronLeftIcon,
 } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import { createAccount } from "../src/api/strapi-client";
@@ -51,7 +52,7 @@ export default function CreateAccountScreen() {
     /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?])(?=.*[a-zA-Z]).{8,}$/;
 
   const attemptCreateAccount = async () => {
-    if (demo) router.push("createPatient");
+    if (demo) return router.push("createPatient");
     try {
       if (email === undefined) {
         setEmailEM("Email Address is required.");
@@ -117,112 +118,35 @@ export default function CreateAccountScreen() {
   };
 
   return (
-    <Wrapper keyboard header onPress={() => router.back()}>
-      <Box flex="0.1" justifyContent="center" px="4">
-        <Heading fontSize="3xl" color="#EEE">
-          Create Your Account
-        </Heading>
-        <Text fontSize="xl" color="#EEE">
-          Tell us about you.
-        </Text>
+    <Wrapper keyboard>
+      <Box flex="0.1" justifyContent="flex-start">
+        <Pressable onPress={() => router.back()}>
+          <ChevronLeftIcon color="#EEE" size="lg" />
+        </Pressable>
       </Box>
-      <VStack space={4} flex="0.8" px="4" justifyContent="center">
-        <FormControl isRequired isInvalid={emailInvalid}>
-          <FormControl.Label _text={{ color: "#EEE", fontSize: "md" }}>
-            Email Address
-          </FormControl.Label>
-          <Input
-            size="2xl"
-            variant="primary"
-            onChangeText={(text) => setEmail(text)}
-            ref={emailInp}
-            autoCorrect={false}
-            onFocus={() => setEmailInvalid(false)}
-            onSubmitEditing={() => userInp.current.focus()}
-            blurOnSubmit={false}
-          />
-          <FormControl.ErrorMessage>{emailEM}</FormControl.ErrorMessage>
-        </FormControl>
-        <FormControl isRequired isInvalid={userInvalid}>
-          <FormControl.Label _text={{ color: "#EEE", fontSize: "md" }}>
-            Username
-          </FormControl.Label>
-          <Input
-            size="2xl"
-            variant="primary"
-            onChangeText={(text) => setUser(text)}
-            ref={userInp}
-            autoCorrect={false}
-            onFocus={() => setUserInvalid(false)}
-            onSubmitEditing={() => passInp.current.focus()}
-            blurOnSubmit={false}
-          />
-          <FormControl.ErrorMessage>{userEM}</FormControl.ErrorMessage>
-        </FormControl>
-        <FormControl isRequired isInvalid={passInvalid}>
-          <FormControl.Label _text={{ color: "#EEE", fontSize: "md" }}>
-            Password
-          </FormControl.Label>
-          <Input
-            size="2xl"
-            variant="primary"
-            onChangeText={(text) => setPass(text)}
-            ref={passInp}
-            autoCorrect={false}
-            onFocus={() => setPassInvalid(false)}
-            onSubmitEditing={() => passConfirmInp.current.focus()}
-            blurOnSubmit={false}
-            type={showPassword ? "text" : "password"}
-            InputRightElement={
-              <Pressable onPress={() => setShowPassword(!showPassword)}>
-                <Icon
-                  as={Ionicons}
-                  name={showPassword ? "eye-outline" : "eye-off-outline"}
-                  color="#EEE"
-                  size="lg"
-                  mr="3"
-                />
-              </Pressable>
-            }
-          />
-          <FormControl.ErrorMessage>{passEM}</FormControl.ErrorMessage>
-        </FormControl>
-        <FormControl isRequired isInvalid={passConfirmInvalid}>
-          <FormControl.Label _text={{ color: "#EEE", fontSize: "md" }}>
-            Verify Password
-          </FormControl.Label>
-          <Input
-            size="2xl"
-            variant="primary"
-            onChangeText={(text) => setPasswordConfirm(text)}
-            ref={passConfirmInp}
-            autoCorrect={false}
-            onFocus={() => setPassConfirmInvalid(false)}
-            type={showPasswordConfirm ? "text" : "password"}
-            InputRightElement={
-              <Pressable
-                onPress={() => setShowPasswordConfirm(!showPasswordConfirm)}
-              >
-                <Icon
-                  as={Ionicons}
-                  name={showPasswordConfirm ? "eye-outline" : "eye-off-outline"}
-                  color="#EEE"
-                  size="lg"
-                  mr="3"
-                />
-              </Pressable>
-            }
-          />
-          <FormControl.ErrorMessage>{passCEM}</FormControl.ErrorMessage>
-        </FormControl>
-      </VStack>
-      <Box flex="0.1" justifyContent="flex-end">
+      <Box flex="0.8" px="4" justifyContent="center">
+        <Box justifyContent="center">
+          <Heading fontSize="2xl" color="#EEE">
+            Create Your Account
+          </Heading>
+          <Text fontSize="lg" color="#EEE">
+            Tell us about you.
+          </Text>
+        </Box>
+        <VStack space="md" justifyContent="center" mt="6">
+          {renderEmailForm()}
+          {renderUsernameForm()}
+          {renderPasswordForm()}
+          {renderConfirmPasswordForm()}
+        </VStack>
+      </Box>
+      <Box flex="0.1" alignItems="center" justifyContent="flex-end">
         <Button
           variant="primary"
-          size="lg"
-          _text={{ fontSize: "lg" }}
-          width="70%"
-          alignSelf="center"
+          _text={{
+            fontSize: "lg",
+          }}
+          w="70%"
           onPress={() => attemptCreateAccount()}
         >
           Continue
@@ -230,4 +154,109 @@ export default function CreateAccountScreen() {
       </Box>
     </Wrapper>
   );
+
+  function renderConfirmPasswordForm() {
+    return (
+      <FormControl isRequired isInvalid={passConfirmInvalid}>
+        <FormControl.Label _text={{ color: "#EEE", fontSize: "md" }}>
+          Verify Password
+        </FormControl.Label>
+        <Input
+          size="2xl"
+          variant="primary"
+          autoCorrect={false}
+          onFocus={() => setPassConfirmInvalid(false)}
+          onChangeText={(text) => setPasswordConfirm(text)}
+          ref={passConfirmInp}
+          type={showPasswordConfirm ? "text" : "password"}
+          InputRightElement={
+            <Pressable
+              onPress={() => setShowPasswordConfirm(!showPasswordConfirm)}
+            >
+              <Icon
+                as={Ionicons}
+                name={showPasswordConfirm ? "eye-outline" : "eye-off-outline"}
+                color="#EEE"
+                size="lg"
+                mr="3"
+              />
+            </Pressable>
+          }
+        />
+        <FormControl.ErrorMessage>{passCEM}</FormControl.ErrorMessage>
+      </FormControl>
+    );
+  }
+
+  function renderPasswordForm() {
+    return (
+      <FormControl isRequired isInvalid={passInvalid}>
+        <FormControl.Label _text={{ color: "#EEE", fontSize: "md" }}>
+          Password
+        </FormControl.Label>
+        <Input
+          size="2xl"
+          variant="primary"
+          autoCorrect={false}
+          onFocus={() => setPassInvalid(false)}
+          onChangeText={(text) => setPass(text)}
+          ref={passInp}
+          onSubmitEditing={() => passConfirmInp.current.focus()}
+          type={showPassword ? "text" : "password"}
+          InputRightElement={
+            <Pressable onPress={() => setShowPassword(!showPassword)}>
+              <Icon
+                as={Ionicons}
+                name={showPassword ? "eye-outline" : "eye-off-outline"}
+                color="#EEE"
+                size="lg"
+                mr="3"
+              />
+            </Pressable>
+          }
+        />
+        <FormControl.ErrorMessage>{passEM}</FormControl.ErrorMessage>
+      </FormControl>
+    );
+  }
+
+  function renderUsernameForm() {
+    return (
+      <FormControl isRequired isInvalid={userInvalid}>
+        <FormControl.Label _text={{ color: "#EEE", fontSize: "md" }}>
+          Username
+        </FormControl.Label>
+        <Input
+          size="2xl"
+          variant="primary"
+          autoCorrect={false}
+          onFocus={() => setUserInvalid(false)}
+          onChangeText={(text) => setUser(text)}
+          ref={userInp}
+          onSubmitEditing={() => passInp.current.focus()}
+        />
+        <FormControl.ErrorMessage>{userEM}</FormControl.ErrorMessage>
+      </FormControl>
+    );
+  }
+
+  function renderEmailForm() {
+    return (
+      <FormControl isRequired isInvalid={emailInvalid}>
+        <FormControl.Label _text={{ color: "#EEE", fontSize: "md" }}>
+          Email Address
+        </FormControl.Label>
+        <Input
+          size="2xl"
+          variant="primary"
+          autoCorrect={false}
+          onFocus={() => setEmailInvalid(false)}
+          onChangeText={(text) => setEmail(text)}
+          ref={emailInp}
+          onSubmitEditing={() => userInp.current.focus()}
+        />
+        <FormControl.ErrorMessage>{emailEM}</FormControl.ErrorMessage>
+      </FormControl>
+    );
+  }
 }

@@ -26,7 +26,7 @@ export default function StartScreen() {
   function renderButtonFooter() {
     return (
       <VStack space="2">
-        <Link href="splash" asChild>
+        <Link href="./signup/splash" asChild>
           <Button
             variant="primary"
             _text={{
@@ -47,7 +47,7 @@ export default function StartScreen() {
           >
             Already have an account?
           </Text>
-          <Link href="login" asChild>
+          <Link href="./login/userLogin" asChild>
             <Pressable>
               <Text
                 color="secondaryBlue.600"

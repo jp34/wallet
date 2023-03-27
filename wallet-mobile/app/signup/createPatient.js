@@ -8,9 +8,11 @@ import {
   VStack,
   Button,
   Heading,
+  Pressable,
+  ChevronLeftIcon,
 } from "native-base";
-import { createPatient } from "../src/api/strapi-client";
-import Wrapper from "../src/components/Wrapper";
+import { createPatient } from "../../src/api/strapi-client";
+import Wrapper from "../../src/components/Wrapper";
 
 export default function CreatePatientScreen() {
   // Demo for quick navigation purposes.
@@ -100,7 +102,7 @@ export default function CreatePatientScreen() {
         phone.replace(/\D/g, "");
         bday.replace(/\D/g, "");
         const result = await createPatient(fName, mName, lName, phone, bday);
-        if (result) router.replace("home/home");
+        if (result) router.replace("");
       }
     } catch (err) {
       console.error(err);
@@ -109,28 +111,35 @@ export default function CreatePatientScreen() {
 
   return (
     <Wrapper keyboard header onPress={() => router.back()}>
-      <Box flex="0.1" justifyContent="center" px="4">
-        <Heading fontSize="3xl" color="#EEE">
-          Patient Information
-        </Heading>
-        <Text fontSize="xl" color="#EEE">
-          Let's get some more info.
-        </Text>
+      <Box flex="0.1" justifyContent="flex-start">
+        <Pressable onPress={() => router.back()}>
+          <ChevronLeftIcon color="#EEE" size="lg" />
+        </Pressable>
       </Box>
-      <VStack space={2} flex="0.8" justifyContent="center" px="4">
-        {renderFirstNameInput()}
-        {renderMiddleNameInput()}
-        {renderLastNameInput()}
-        {renderPhoneNumberInput()}
-        {renderDateOfBirthInput()}
-      </VStack>
-      <Box flex="0.1" justifyContent="flex-end">
+      <Box flex="0.8" px="4" justifyContent="center">
+        <Box justifyContent="center">
+          <Heading fontSize="2xl" color="#EEE">
+            Patient Information
+          </Heading>
+          <Text fontSize="lg" color="#EEE">
+            Let's get some more info.
+          </Text>
+        </Box>
+        <VStack space="xs" justifyContent="center" mt="4">
+          {renderFirstNameInput()}
+          {renderMiddleNameInput()}
+          {renderLastNameInput()}
+          {renderPhoneNumberInput()}
+          {renderDateOfBirthInput()}
+        </VStack>
+      </Box>
+      <Box flex="0.1" alignItems="center" justifyContent="flex-end">
         <Button
           variant="primary"
-          size="lg"
-          _text={{ fontSize: "lg" }}
-          width="70%"
-          alignSelf="center"
+          _text={{
+            fontSize: "lg",
+          }}
+          w="70%"
           onPress={() => attemptCreatePatient()}
         >
           Finish
@@ -146,8 +155,9 @@ export default function CreatePatientScreen() {
           Date of Birth
         </FormControl.Label>
         <Input
-          size="2xl"
+          size="xl"
           placeholder="MM / DD / YYYY"
+          placeholderTextColor="#CCC"
           variant="primary"
           onChangeText={(text) => setBday(text)}
           ref={bdayInp}
@@ -166,8 +176,9 @@ export default function CreatePatientScreen() {
           Phone Number
         </FormControl.Label>
         <Input
-          size="2xl"
+          size="xl"
           placeholder="123-456-7890"
+          placeholderTextColor="#CCC"
           variant="primary"
           onChangeText={(text) => setPhone(text)}
           ref={phoneInp}
@@ -188,7 +199,7 @@ export default function CreatePatientScreen() {
           Last Name
         </FormControl.Label>
         <Input
-          size="2xl"
+          size="xl"
           variant="primary"
           onChangeText={(text) => setLName(text)}
           ref={lNameInp}
@@ -209,7 +220,7 @@ export default function CreatePatientScreen() {
           Middle Name
         </FormControl.Label>
         <Input
-          size="2xl"
+          size="xl"
           variant="primary"
           onChangeText={(text) => setMName(text)}
           ref={mNameInp}
@@ -230,7 +241,7 @@ export default function CreatePatientScreen() {
           First Name
         </FormControl.Label>
         <Input
-          size="2xl"
+          size="xl"
           variant="primary"
           onChangeText={(text) => setFName(text)}
           ref={fNameInp}

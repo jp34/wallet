@@ -11,7 +11,7 @@ import {
   ChevronLeftIcon,
   Pressable,
 } from "native-base";
-import Wrapper from "../src/components/Wrapper";
+import Wrapper from "../../src/components/Wrapper";
 
 export default function AgreementScreen() {
   const router = useRouter();
@@ -59,7 +59,7 @@ export default function AgreementScreen() {
           }}
           w="70%"
           onPress={() => {
-            confirm && router.push("createAccount");
+            confirm && router.push("./createAccount");
           }}
         >
           Continue

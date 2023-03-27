@@ -12,8 +12,8 @@ import {
   ChevronLeftIcon,
 } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
-import { login } from "../src/api/strapi-client";
-import Wrapper from "../src/components/Wrapper";
+import { login } from "../../src/api/strapi-client";
+import Wrapper from "../../src/components/Wrapper";
 
 export default function LoginScreen() {
   const router = useRouter();
@@ -115,7 +115,7 @@ export default function LoginScreen() {
             Email Address / Username
           </FormControl.Label>
           <Input
-            size="2xl"
+            size="xl"
             variant="primary"
             autoCorrect={false}
             onFocus={() => setInvalid(false)}
@@ -133,7 +133,7 @@ export default function LoginScreen() {
             Password
           </FormControl.Label>
           <Input
-            size="2xl"
+            size="xl"
             variant="primary"
             autoCorrect={false}
             onFocus={() => setInvalid(false)}

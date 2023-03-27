@@ -13,8 +13,8 @@ import {
   ChevronLeftIcon,
 } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
-import { createAccount } from "../src/api/strapi-client";
-import Wrapper from "../src/components/Wrapper";
+import { createAccount } from "../../src/api/strapi-client";
+import Wrapper from "../../src/components/Wrapper";
 
 export default function CreateAccountScreen() {
   // Demo for quick navigation purposes.
@@ -52,7 +52,7 @@ export default function CreateAccountScreen() {
     /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?])(?=.*[a-zA-Z]).{8,}$/;
 
   const attemptCreateAccount = async () => {
-    if (demo) return router.push("createPatient");
+    if (demo) return router.push("./createPatient");
     try {
       if (email === undefined) {
         setEmailEM("Email Address is required.");
@@ -110,7 +110,7 @@ export default function CreateAccountScreen() {
         return;
       } else {
         const result = await createAccount(user, email, pass, confirm);
-        if (result) router.push("createPatient");
+        if (result) router.push("./createPatient");
       }
     } catch (err) {
       console.error(err);
@@ -162,7 +162,7 @@ export default function CreateAccountScreen() {
           Verify Password
         </FormControl.Label>
         <Input
-          size="2xl"
+          size="xl"
           variant="primary"
           autoCorrect={false}
           onFocus={() => setPassConfirmInvalid(false)}
@@ -195,7 +195,7 @@ export default function CreateAccountScreen() {
           Password
         </FormControl.Label>
         <Input
-          size="2xl"
+          size="xl"
           variant="primary"
           autoCorrect={false}
           onFocus={() => setPassInvalid(false)}
@@ -227,7 +227,7 @@ export default function CreateAccountScreen() {
           Username
         </FormControl.Label>
         <Input
-          size="2xl"
+          size="xl"
           variant="primary"
           autoCorrect={false}
           onFocus={() => setUserInvalid(false)}
@@ -247,7 +247,7 @@ export default function CreateAccountScreen() {
           Email Address
         </FormControl.Label>
         <Input
-          size="2xl"
+          size="xl"
           variant="primary"
           autoCorrect={false}
           onFocus={() => setEmailInvalid(false)}

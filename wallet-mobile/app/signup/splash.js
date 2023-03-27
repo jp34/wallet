@@ -8,7 +8,7 @@ import {
   Pressable,
   ChevronLeftIcon,
 } from "native-base";
-import Wrapper from "../src/components/Wrapper";
+import Wrapper from "../../src/components/Wrapper";
 
 export default function SplashScreen() {
   const router = useRouter();
@@ -39,7 +39,7 @@ export default function SplashScreen() {
         </Box>
       </VStack>
       <Box flex="0.1" alignItems="center" justifyContent="flex-end">
-        <Link href="agreement" asChild>
+        <Link href="./agreement" asChild>
           <Button
             variant="primary"
             _text={{

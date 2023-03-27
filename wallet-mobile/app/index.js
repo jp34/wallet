@@ -9,27 +9,47 @@ export default function StartScreen() {
       <Center flex="0.9">
         <Logo lg />
       </Center>
-      <VStack flex="0.1" justifyContent="flex-end" space="2">
+      <Center flex="0.1">{renderButtonFooter()}</Center>
+    </Wrapper>
+  );
+
+  function renderButtonFooter() {
+    return (
+      <VStack space="2">
         <Link href="splash" asChild>
           <Button
             variant="primary"
-            size="lg"
-            _text={{ fontSize: "lg" }}
-            width="70%"
-            alignSelf="center"
+            _text={{
+              fontSize: {
+                base: "lg",
+                sm: "md",
+                lg: "xl",
+              },
+            }}
           >
             Get Started
           </Button>
         </Link>
-        <HStack space="2" alignSelf="center">
-          <Text color="#EEE" fontSize="md">
+        <HStack space="2">
+          <Text
+            color="#EEE"
+            fontSize={{
+              base: "md",
+              sm: "sm",
+              xl: "lg",
+            }}
+          >
             Already have an account?
           </Text>
           <Link href="login" asChild>
             <Pressable>
               <Text
                 color="secondaryBlue.600"
-                fontSize="md"
+                fontSize={{
+                  base: "md",
+                  sm: "sm",
+                  xl: "lg",
+                }}
                 fontWeight="semibold"
               >
                 Log In
@@ -38,6 +58,6 @@ export default function StartScreen() {
           </Link>
         </HStack>
       </VStack>
-    </Wrapper>
-  );
+    );
+  }
 }

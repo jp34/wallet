@@ -15,7 +15,7 @@ export default function SplashScreen() {
 
   return (
     <Wrapper>
-      <Box flex="0.1" justifyContent="center">
+      <Box flex="0.1" justifyContent="flex-start">
         <Pressable onPress={() => router.back()}>
           <ChevronLeftIcon color="#EEE" size="lg" />
         </Pressable>
@@ -45,7 +45,7 @@ export default function SplashScreen() {
             _text={{
               fontSize: "lg",
             }}
-            w="1/2"
+            w="70%"
           >
             Continue
           </Button>

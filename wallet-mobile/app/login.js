@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { useRouter, Link } from "expo-router";
+import { useRouter } from "expo-router";
 import {
   Text,
   Button,
@@ -67,7 +67,7 @@ export default function LoginScreen() {
 
   return (
     <Wrapper keyboard>
-      <Box flex="0.1" justifyContent="center">
+      <Box flex="0.1" justifyContent="flex-start">
         <Pressable onPress={() => router.back()}>
           <ChevronLeftIcon color="#EEE" size="lg" />
         </Pressable>
@@ -82,7 +82,7 @@ export default function LoginScreen() {
           _text={{
             fontSize: "lg",
           }}
-          w="1/2"
+          w="70%"
           onPress={() => attemptLogin()}
         >
           Login

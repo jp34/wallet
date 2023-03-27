@@ -2,9 +2,12 @@ import { Request, Response, NextFunction } from "express";
 import {
     findUsers,
     findUser,
-    updateUser,
+    updateUserEmail,
+    updateUserEnsAddress,
+    updateUserPassword,
     deleteUser
 } from "../service/user.service";
+import { UpdateUserRequest } from "../util/io";
 
 export default class UserController {
 
@@ -21,8 +24,17 @@ export default class UserController {
         }).catch(next);
     }
 
-    public update = async (request: Request, response: Response, next: NextFunction) => {
-
+    public update = async (request: UpdateUserRequest, response: Response, next: NextFunction) => {
+        const id = parseInt(request.params.id);
+        const data = request.body.data;
+        if (!id) throw new Error("Missing or invalid input provided: id");
+        if (!data) throw new Error("Invalid request body provided");
+        if (data.email) await updateUserEmail(id, data.email).catch(next);
+        if (data.ensAddress) await updateUserEnsAddress(id, data.ensAddress).catch(next);
+        if (data.password) await updateUserPassword(id, data.password).catch(next);
+        findUser(id).then(data => {
+            response.status(200).json({ status: "success", data: data });
+        }).catch(next);
     }
 
     public delete = async (request: Request, response: Response, next: NextFunction) => {

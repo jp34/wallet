@@ -2,7 +2,6 @@
 export interface CreateUserRequest extends Express.Request {
     body: {
         data: {
-            username: string,
             email: string,
             ensAddress: string,
             password: string
@@ -11,10 +10,11 @@ export interface CreateUserRequest extends Express.Request {
 }
 
 export interface UpdateUserRequest extends Express.Request {
+    params: {
+        id: string,
+    },
     body: {
         data: {
-            id: number,
-            username: string,
             email: string,
             ensAddress: string,
             password: string

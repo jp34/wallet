@@ -1,7 +1,6 @@
 import bcrypt from "bcrypt";
 import { Request, Response, NextFunction } from "express";
 import {
-    findUserExistsByUsername,
     findUserExistsByEmail,
     findUserExistsByEnsAddress,
     createUser,
@@ -12,32 +11,36 @@ import {
     generateRefreshToken,
     refreshAccessToken
 } from "../service/auth.service";
+import { CreateUserRequest } from "../util/io";
 
 export default class AuthController {
 
-    public signup = async (request: Request, response: Response, next: NextFunction) => {
+    public signup = async (request: CreateUserRequest, response: Response, next: NextFunction) => {
         try {
-            if (!request.body.username) throw new Error("Missing or invalid input provided: username");
-            if (!request.body.email) throw new Error("Missing or invalid input provided: email");
-            if (!request.body.ensAddress) throw new Error("Missing or invalid input provided: ensAddress");
-            if (!request.body.password) throw new Error("Missing or invalid input provided: password");
-            if (await findUserExistsByUsername(request.body.username))
-                throw new Error(`User already exists with username: ${request.body.username}`);
-            if (await findUserExistsByEmail(request.body.email))
-                throw new Error(`User already exists with email: ${request.body.email}`);
-            if (await findUserExistsByEnsAddress(request.body.ensAddress))
-                throw new Error(`User already exists with email: ${request.body.ensAddress}`);
-            const user = await createUser(
-                request.body.username,
-                request.body.email,
-                request.body.ensAddress,
-                request.body.password
-            );
-            const tokens = {
-                access: generateAccessToken(user.id),
-                refresh: generateRefreshToken(user.id)
-            };
-            return response.status(200).json({ status: "success", data: user, tokens: tokens });
+            const data = request.body.data;
+            if (!data) throw new Error("Invalid request body provided");
+            if (!data.email) throw new Error("Missing or invalid input provided: email");
+            if (!data.ensAddress) throw new Error("Missing or invalid input provided: ensAddress");
+            if (!data.password) throw new Error("Missing or invalid input provided: password");
+
+            // Verify username not taken
+            const existsByEmail = await findUserExistsByEmail(data.email);
+            if (existsByEmail) throw new Error(`User already exists with email: ${data.email}`);
+            
+            // Verify username not taken
+            const existsByEns = await findUserExistsByEnsAddress(data.ensAddress);
+            if (existsByEns) throw new Error(`User already exists with ens: ${data.ensAddress}`);
+            
+            const user = await createUser(data.email, data.ensAddress, data.password);
+
+            return response.status(200).json({
+                status: "success",
+                data: user,
+                tokens: {
+                    access: generateAccessToken(user.id),
+                    refresh: generateRefreshToken(user.id)
+                }
+            });
         } catch (err: any) {
             return next(err);
         }
@@ -45,17 +48,26 @@ export default class AuthController {
 
     public login = async (request: Request, response: Response, next: NextFunction) => {
         try {
-            if (!request.body.email) throw new Error("Missing or invalid input provided: email");
-        if (!request.body.password) throw new Error("Missing or invalid input provided: password");
-            const user = await findUserByEmail(request.body.email);
-            if (!user) throw new Error(`User does not exist with email: ${request.body.email}`);
-            const result = await bcrypt.compare(request.body.password, user.password);
+            const data = request.body.data;
+            if (!data) throw new Error("Invalid request body provided");
+            if (!data.email) throw new Error("Missing or invalid input provided: email");
+            if (!data.password) throw new Error("Missing or invalid input provided: password");
+
+            // Find the requested user
+            const user = await findUserByEmail(data.email);
+            if (!user) throw new Error(`User does not exist with email: ${data.email}`);
+            
+            // Validate the provided password
+            const result = await bcrypt.compare(data.password, user.password);
             if (!result) throw new Error(`Invalid credentials provided`);
-            const tokens = {
-                access: generateAccessToken(user.id),
-                refresh: generateRefreshToken(user.id)
-            };
-            return response.status(200).json({ status: "success", tokens: tokens });
+            
+            return response.status(200).json({
+                status: "success",
+                tokens: {
+                    access: generateAccessToken(user.id),
+                    refresh: generateRefreshToken(user.id)
+                }
+            });
         } catch (err: any) {
             return next(err);
         }

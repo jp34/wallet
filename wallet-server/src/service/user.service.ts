@@ -2,7 +2,6 @@ import bcrypt from "bcrypt";
 import prisma from "../config/db";
 
 export const createUser = async (
-    username: string,
     email: string,
     ensAddress: string,
     password: string
@@ -10,7 +9,6 @@ export const createUser = async (
     const hashed = bcrypt.hashSync(password, bcrypt.genSaltSync());
     return await prisma.user.create({
         data: {
-            username: username,
             email: email,
             ensAddress: ensAddress,
             password: hashed
@@ -38,15 +36,6 @@ export const findUserByEmail = async (email: string) => {
     });
 }
 
-export const findUserExistsByUsername = async (username: string) => {
-    const count = await prisma.user.count({
-        where: {
-            username: username
-        }
-    });
-    return count > 0;
-}
-
 export const findUserExistsByEmail = async (email: string) => {
     const count = await prisma.user.count({
         where: {
@@ -65,12 +54,41 @@ export const findUserExistsByEnsAddress = async (ensAddress: string) => {
     return count > 0;
 }
 
-export const updateUser = async (id: number, data: Object) => {
+export const updateUserEmail = async (id: number, email: string) => {
+    const emailExists = await findUserExistsByEmail(email);
+    if (emailExists) throw new Error(`User already exists with email: ${email}`);
     return await prisma.user.update({
         where: {
             id: id
         },
-        data: data
+        data: {
+            email: email
+        }
+    });
+}
+
+export const updateUserEnsAddress = async (id: number, address: string) => {
+    const addressExists = await findUserExistsByEnsAddress(address);
+    if (addressExists) throw new Error(`User already exists with ensAddress: ${address}`);
+    return await prisma.user.update({
+        where: {
+            id: id
+        },
+        data: {
+            ensAddress: address
+        }
+    });
+}
+
+export const updateUserPassword = async (id: number, password: string) => {
+    const hashed = bcrypt.hashSync(password, bcrypt.genSaltSync());
+    return await prisma.user.update({
+        where: {
+            id: id
+        },
+        data: {
+            password: hashed
+        }
     });
 }
 

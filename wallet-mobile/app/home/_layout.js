@@ -40,6 +40,27 @@ export default function Layout() {
         }}
       />
       <Tabs.Screen
+        name="wallet"
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <Center top="4">
+              <Icon
+                name="wallet"
+                as={FontAwesome5}
+                size="8"
+                color={focused ? "secondaryPurple.800" : "purple.300"}
+              />
+              <Text
+                fontSize="xs"
+                color={focused ? "secondaryPurple.800" : "purple.300"}
+              >
+                Wallet
+              </Text>
+            </Center>
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="profile"
         options={{
           tabBarIcon: ({ focused }) => (

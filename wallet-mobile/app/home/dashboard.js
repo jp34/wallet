@@ -1,68 +1,60 @@
 import { useEffect, useState } from "react";
-// import { View, Text, StyleSheet } from "react-native";
-// import { ScreenStyles } from "../../Style";
-// import { SecondaryButton } from "../../../components/Buttons";
-// import { findPatientByUserId } from "../../../api/strapi-client";
+import { Box, Heading, Text, Center } from "native-base";
+import { StyleSheet } from "react-native";
+import { findPatientByUserId } from "../../src/api/strapi-client";
 import Wrapper from "../../src/components/Wrapper";
-import { Box, Heading } from "native-base";
 
 export default function HomeScreen() {
   const [isLoading, setLoading] = useState(true);
   const [patient, setPatient] = useState("");
 
-  //   useEffect(() => {
-  //     findPatientByUserId().then((data) => {
-  //       setPatient(data);
-  //       setLoading(false);
-  //     });
-  //   }, []);
+  // useEffect(() => {
+  //   findPatientByUserId().then((data) => {
+  //     setPatient(data);
+  //     setLoading(false);
+  //   });
+  // }, []);
 
-  //   const renderLoading = () => {
-  //     return (
-  //       <View style={ScreenStyles.container}>
-  //         <Text>Loading...</Text>
-  //       </View>
-  //     );
-  //   };
+  const renderLoading = () => {
+    return (
+      <Box>
+        <Text style={HomeStyles.message}>Loading...</Text>
+      </Box>
+    );
+  };
 
-  //   const renderLoaded = () => {
-  //     return (
-  //       <View style={ScreenStyles.container}>
-  //         <Text style={HomeStyles.message}>
-  //           Welcome {patient.attributes.firstName}
-  //         </Text>
-  //         <SecondaryButton
-  //           label="Complete Account"
-  //           options={{
-  //             onPress: () => {
-  //               return navigation.navigate("IntakeRouter");
-  //             },
-  //           }}
-  //         />
-  //       </View>
-  //     );
-  //   };
-
-  //   return isLoading ? renderLoading() : renderLoaded();
+  const renderLoaded = () => {
+    return (
+      <Box>
+        <Text style={HomeStyles.message}>
+          Welcome {patient.attributes.firstName}
+        </Text>
+      </Box>
+    );
+  };
 
   return (
     <Wrapper>
-      <Box flex="0.2" justifyContent="center">
-        <Heading fontSize="3xl" color="#EEE">
-          Home
-        </Heading>
+      <Box flex="1" px="4">
+        <Box flex="0.1" justifyContent="center">
+          <Heading fontSize="3xl" color="#EEE">
+            Home
+          </Heading>
+        </Box>
+        <Center flex="0.8" bgColor="white" rounded="15">
+          {isLoading ? renderLoading() : renderLoaded()}
+        </Center>
       </Box>
-      <Box flex="0.8" bgColor="#EEE"></Box>
     </Wrapper>
   );
 }
 
-// const HomeStyles = StyleSheet.create({
-//   message: {
-//     fontSize: 22,
-//     fontFamily: "Quicksand-SemiBold",
-//     paddingHorizontal: 8,
-//     paddingVertical: 16,
-//     color: "#0c0c0c",
-//   },
-// });
+const HomeStyles = StyleSheet.create({
+  message: {
+    fontSize: 22,
+    fontFamily: "Quicksand-SemiBold",
+    paddingHorizontal: 8,
+    paddingVertical: 16,
+    color: "#0c0c0c",
+  },
+});

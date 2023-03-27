@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import { Keyboard } from "react-native";
+import { useRouter } from "expo-router";
 import {
   Pressable,
   ChevronLeftIcon,
@@ -10,11 +11,11 @@ import {
   VStack,
   ScrollView,
 } from "native-base";
-import { Link } from "expo-router";
 import Wrapper from "../../src/components/Wrapper";
 import TextInputFormControl from "../../src/components/InputFormControl";
 
 export default function AllergiesIntakeScreen() {
+  const router = useRouter();
   const allergyRef = useRef(null);
   const severityRef = useRef(null);
 
@@ -22,14 +23,12 @@ export default function AllergiesIntakeScreen() {
 
   async function attemptCreateAllergy() {
     try {
+      // Handle save allergies.
       // const result = await createPatientAllergy(patientId, description, severity);
-      // if (result)
-      //   return navigation.navigate("MedicationIntake");
-      // Handle for incorrect logins
+      router.push("./medications");
     } catch (err) {
-      console.log("Create account failed with error");
       console.error(err);
-      return false;
+      return;
     }
   }
 

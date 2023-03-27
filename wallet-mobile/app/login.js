@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { useRouter } from "expo-router";
+import { useRouter, Link } from "expo-router";
 import {
   Text,
   Button,
@@ -10,6 +10,7 @@ import {
   Icon,
   Heading,
   VStack,
+  ChevronLeftIcon,
 } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import { login } from "../src/api/strapi-client";
@@ -66,7 +67,12 @@ export default function LoginScreen() {
 
   return (
     <Wrapper keyboard>
-      <VStack flex="0.9" justifyContent="center" space={10} px="4">
+      <Box flex="0.1" justifyContent="flex-start">
+        <Pressable onPress={() => router.back()}>
+          <ChevronLeftIcon color="#EEE" size="lg" />
+        </Pressable>
+      </Box>
+      <VStack flex="0.8" justifyContent="center" space={10} px="4">
         {renderHeading()}
         {renderLoginForm()}
       </VStack>

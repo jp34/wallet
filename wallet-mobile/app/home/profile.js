@@ -93,51 +93,53 @@ export default function ProfileScreen() {
 
   return (
     <Wrapper>
-      <Center flex="0.35" justifyContent="center" alignItems="center">
-        <Avatar
-          alignSelf="center"
-          size="2xl"
-          shadow="9"
-          source={{
-            uri: profileImage,
-          }}
-        ></Avatar>
-        <Text pt="4" fontSize="xl" fontWeight="semibold" color="white">
-          {userFullName}
-        </Text>
-        {profileIncomplete && renderCompleteProfileButton()}
-      </Center>
-      <Box flex="0.55" bgColor={"#FFF"} rounded="15" px="4" py="2">
-        <FlatList
-          data={data}
-          scrollEnabled={false}
-          renderItem={({ item }) => (
-            <Pressable>
-              <Box p="4">
-                <HStack space="8" alignItems="center">
-                  <Center bgColor="shades.1" rounded="10" p="4">
-                    <Icon
-                      name={item.icon}
-                      color="white"
-                      as={Ionicons}
-                      size="lg"
-                    />
-                  </Center>
-                  <Text
-                    color="secondaryGray.900"
-                    fontSize={20}
-                    fontWeight="semibold"
-                  >
-                    {item.label}
-                  </Text>
-                </HStack>
-              </Box>
-            </Pressable>
-          )}
-          keyExtractor={(item) => item.id}
-        />
+      <Box px="4" flex="1">
+        <Center flex="0.35" justifyContent="center" alignItems="center">
+          <Avatar
+            alignSelf="center"
+            size="2xl"
+            shadow="9"
+            source={{
+              uri: profileImage,
+            }}
+          ></Avatar>
+          <Text pt="4" fontSize="xl" fontWeight="semibold" color="white">
+            {userFullName}
+          </Text>
+          {profileIncomplete && renderCompleteProfileButton()}
+        </Center>
+        <Box flex="0.55" bgColor={"#FFF"} rounded="15" px="4" py="2">
+          <FlatList
+            data={data}
+            scrollEnabled={false}
+            renderItem={({ item }) => (
+              <Pressable>
+                <Box p="4">
+                  <HStack space="8" alignItems="center">
+                    <Center bgColor="shades.1" rounded="10" p="4">
+                      <Icon
+                        name={item.icon}
+                        color="white"
+                        as={Ionicons}
+                        size="lg"
+                      />
+                    </Center>
+                    <Text
+                      color="secondaryGray.900"
+                      fontSize={20}
+                      fontWeight="semibold"
+                    >
+                      {item.label}
+                    </Text>
+                  </HStack>
+                </Box>
+              </Pressable>
+            )}
+            keyExtractor={(item) => item.id}
+          />
+        </Box>
+        <Box flex="0.1" />
       </Box>
-      <Box flex="0.1" />
     </Wrapper>
   );
 }

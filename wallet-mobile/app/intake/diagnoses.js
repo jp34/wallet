@@ -47,7 +47,7 @@ export default function DiagnosesIntakeScreen() {
     try {
       // Handle saving diagnoses
       // const result = await createPatientDiagnosis(patientId, diagnosis);
-      router.push("");
+      router.push("./medicalEncounter");
     } catch (err) {
       console.error(err);
       return;

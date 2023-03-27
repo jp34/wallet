@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "expo-router";
 import {
   Avatar,
   Box,
@@ -72,18 +73,20 @@ export default function ProfileScreen() {
         >
           !
         </Badge>
-        <Button
-          bg="white"
-          _text={{
-            fontSize: "16",
-            color: "secondaryGray.900",
-            fontWeight: "semibold",
-          }}
-          rounded="15"
-          _pressed={{ bgColor: "gray.200" }}
-        >
-          Finish Your Profile
-        </Button>
+        <Link href="../intake/allergies" asChild>
+          <Button
+            bg="white"
+            _text={{
+              fontSize: "16",
+              color: "secondaryGray.900",
+              fontWeight: "semibold",
+            }}
+            rounded="15"
+            _pressed={{ bgColor: "gray.200" }}
+          >
+            Finish Your Profile
+          </Button>
+        </Link>
       </VStack>
     );
   };

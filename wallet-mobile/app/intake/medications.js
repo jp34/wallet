@@ -65,7 +65,7 @@ export default function MedicationsIntakeScreen() {
     try {
       // Handle saving medications
       // const result = await createPatientMedication(patientId, name, dosage, frequency, date, diagnosis);
-      router.push("");
+      router.push("./diagnoses");
     } catch (err) {
       console.error(err);
       return;

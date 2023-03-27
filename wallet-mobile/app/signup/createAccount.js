@@ -17,9 +17,6 @@ import { createAccount } from "../../src/api/strapi-client";
 import Wrapper from "../../src/components/Wrapper";
 
 export default function CreateAccountScreen() {
-  // Demo for quick navigation purposes.
-  const demo = useState(true);
-
   const router = useRouter();
 
   const [showPassword, setShowPassword] = useState(false);
@@ -52,9 +49,8 @@ export default function CreateAccountScreen() {
     /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?])(?=.*[a-zA-Z]).{8,}$/;
 
   const attemptCreateAccount = async () => {
-    if (demo) return router.push("./createPatient");
     try {
-      if (email === undefined) {
+      if (email === "") {
         setEmailEM("Email Address is required.");
         setEmailInvalid(true);
         return;
@@ -66,7 +62,7 @@ export default function CreateAccountScreen() {
         setEmailEM("Must be a valid email address.");
         setEmailInvalid(true);
         return;
-      } else if (user === undefined) {
+      } else if (user === "") {
         setUserEM("Username is required.");
         setUserInvalid(true);
         return;
@@ -80,7 +76,7 @@ export default function CreateAccountScreen() {
         );
         setUserInvalid(true);
         return;
-      } else if (pass === undefined) {
+      } else if (pass === "") {
         setPassEM("Password is required.");
         setPassInvalid(true);
         return;
@@ -92,7 +88,7 @@ export default function CreateAccountScreen() {
         setPassEM("Invalid password.");
         setPassInvalid(true);
         return;
-      } else if (passwordConfirm === undefined) {
+      } else if (passwordConfirm === "") {
         setPassCEM("Verify password is required.");
         setPassConfirmInvalid(true);
         return;

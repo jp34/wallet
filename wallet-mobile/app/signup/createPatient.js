@@ -15,9 +15,6 @@ import { createPatient } from "../../src/api/strapi-client";
 import Wrapper from "../../src/components/Wrapper";
 
 export default function CreatePatientScreen() {
-  // Demo for quick navigation purposes.
-  const demo = useState(true);
-
   const router = useRouter();
 
   const fNameInp = useRef(null);
@@ -49,7 +46,6 @@ export default function CreatePatientScreen() {
   const dateRegex = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/;
 
   const attemptCreatePatient = async () => {
-    if (demo) router.push("home");
     try {
       if (fName === undefined) {
         setFNameEM("First Name is required.");
@@ -102,7 +98,7 @@ export default function CreatePatientScreen() {
         phone.replace(/\D/g, "");
         bday.replace(/\D/g, "");
         const result = await createPatient(fName, mName, lName, phone, bday);
-        if (result) router.replace("");
+        if (true) router.replace("home");
       }
     } catch (err) {
       console.error(err);

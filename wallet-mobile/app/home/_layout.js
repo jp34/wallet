@@ -8,6 +8,7 @@ export default function Layout() {
       screenOptions={{
         headerShown: false,
         tabBarShowLabel: false,
+        gestureEnabled: false,
         tabBarStyle: {
           position: "absolute",
           bottom: 25,

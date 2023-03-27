@@ -30,7 +30,6 @@ export default function LoginScreen() {
   const passInput = useRef(null);
 
   const attemptLogin = async () => {
-    return router.replace("../home");
     try {
       if (identifier === undefined) {
         setErrorMessage("Email or Username is required.");
@@ -52,7 +51,7 @@ export default function LoginScreen() {
         const result = await login(identifier, password);
         if (result) {
           setInvalid(false);
-          return router.replace("");
+          return router.replace("./home");
         } else {
           setErrorMessage("Email / Username or Password is incorrect.");
           setInvalid(true);

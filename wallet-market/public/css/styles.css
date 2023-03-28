@@ -28,7 +28,7 @@ h2 {
   align-items: center;
   padding: 10px;
   color: #fff;
-  background-color: #6030D9;
+  background-color: #6030d9;
   margin-bottom: 10px;
   font-size: 25px;
 }
@@ -154,7 +154,6 @@ h2 {
 
 .cart_button {
   cursor: pointer;
-  display: inline-block;
   text-decoration: none;
   color: var(--clr-neutral-100);
   background-color: var(--clr-neutral-800);

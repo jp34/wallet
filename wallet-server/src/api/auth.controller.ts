@@ -63,6 +63,7 @@ export default class AuthController {
             
             return response.status(200).json({
                 status: "success",
+                data: user,
                 tokens: {
                     access: generateAccessToken(user.id),
                     refresh: generateRefreshToken(user.id)

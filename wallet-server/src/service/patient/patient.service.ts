@@ -38,7 +38,7 @@ export const updatePatientFirstName = async (id: number, name: string) => {
         },
         data: {
             firstName: name,
-            modified: Date.now().toString()
+            modified: new Date(Date.now())
         }
     });
 }
@@ -50,7 +50,7 @@ export const updatePatientMiddleName = async (id: number, name: string) => {
         },
         data: {
             middleName: name,
-            modified: Date.now().toString()
+            modified: new Date(Date.now())
         }
     });
 }
@@ -62,7 +62,7 @@ export const updatePatientLastName = async (id: number, name: string) => {
         },
         data: {
             lastName: name,
-            modified: Date.now().toString()
+            modified: new Date(Date.now())
         }
     });
 }
@@ -74,7 +74,7 @@ export const updatePatientBirthday = async (id: number, birthday: string) => {
         },
         data: {
             birthday: birthday,
-            modified: Date.now().toString()
+            modified: new Date(Date.now())
         }
     });
 }

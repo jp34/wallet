@@ -48,6 +48,7 @@ export default class PatientController {
             if (data.birthday) await updatePatientBirthday(id, data.birthday).catch(next);
             findPatient(id).then(data => {
                 response.status(200).json({ status: "success", data: data });
+                next();
             }).catch(next);
         } catch (err: any) {
             return next(err);

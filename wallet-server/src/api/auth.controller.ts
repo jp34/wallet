@@ -11,7 +11,7 @@ import {
     generateRefreshToken,
     refreshAccessToken
 } from "../service/auth.service";
-import { CreateUserRequest } from "../util/io";
+import { CreateUserRequest } from "../util/io/user.io";
 
 export default class AuthController {
 

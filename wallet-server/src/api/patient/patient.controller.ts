@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { CreatePatientRequest, UpdatePatientRequest } from "../util/io";
+import { CreatePatientRequest, UpdatePatientRequest } from "../../util/io/patient.io";
 import {
     createPatient,
     findPatients,
@@ -9,7 +9,7 @@ import {
     updatePatientLastName,
     updatePatientBirthday,
     deletePatient
-} from "../service/patient.service";
+} from "../../service/patient/patient.service";
 
 export default class PatientController {
 
@@ -38,13 +38,15 @@ export default class PatientController {
 
     public update = async (request: UpdatePatientRequest, response: Response, next: NextFunction) => {
         try {
+            const id = parseInt(request.params.id);
             const data = request.body.data;
+            if (!id) throw new Error("Missing or invalid input provided: id");
             if (!data) throw new Error("Invalid request body provided");
-            if (data.firstName) updatePatientFirstName(data.id, data.firstName).catch(next);
-            if (data.middleName) updatePatientMiddleName(data.id, data.middleName).catch(next);
-            if (data.lastName) updatePatientLastName(data.id, data.lastName).catch(next);
-            if (data.birthday) updatePatientBirthday(data.id, data.birthday).catch(next);
-            findPatient(data.id).then(data => {
+            if (data.firstName) await updatePatientFirstName(id, data.firstName).catch(next);
+            if (data.middleName) await updatePatientMiddleName(id, data.middleName).catch(next);
+            if (data.lastName) await updatePatientLastName(id, data.lastName).catch(next);
+            if (data.birthday) await updatePatientBirthday(id, data.birthday).catch(next);
+            findPatient(id).then(data => {
                 response.status(200).json({ status: "success", data: data });
             }).catch(next);
         } catch (err: any) {

@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-	provider = "sqlite"
+	provider = "postgresql"
 	url      = env("DATABASE_URL")
 }
 
@@ -16,30 +16,31 @@ model User {
 	ensAddress  	String  	@unique
 	password		String
 	earning			Boolean		@default(false)
+	agreement		Boolean		@default(false)
 	patient     	Patient?
 	created			DateTime	@default(now())
 	modified		DateTime	@default(now())
 }
 
 model Patient {
-	id				Int			@id @unique
-	user			User		@relation(fields: [id], references: [id])
+	id				Int						@id @unique
+	user			User					@relation(fields: [id], references: [id])
 	firstName		String
 	middleName		String
 	lastName		String
-	birthday		DateTime
+	birthday		String
 	medications		PatientMedication[]
 	allergies		PatientAllergies[]
 	encounters		MedicalEncounter[]
-	created			DateTime	@default(now())
-	modified		DateTime	@default(now())
+	created			DateTime				@default(now())
+	modified		DateTime				@default(now())
 }
 
 model PatientMedication {
 	patient			Patient		@relation(fields: [patientId], references: [id])
 	patientId		Int			@unique
 	name			String
-	dosage			Int
+	dosage			String
 	frequency		String
 	created			DateTime	@default(now())
 	modified		DateTime	@default(now())

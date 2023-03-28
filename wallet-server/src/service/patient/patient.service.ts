@@ -1,15 +1,15 @@
-import prisma from "../config/db";
+import prisma from "../../config/db";
 
 export const createPatient = async (
-    user: number,
+    id: number,
     firstName: string,
     middleName: string,
     lastName: string,
-    birthday: Date,
+    birthday: string,
 ) => {
     return await prisma.patient.create({
         data: {
-            id: user,
+            id: id,
             firstName: firstName,
             middleName: middleName,
             lastName: lastName,
@@ -19,14 +19,15 @@ export const createPatient = async (
 }
 
 export const findPatients = async () => {
-    return await prisma.patient.findMany();
+    return await prisma.patient.findMany({
+        include: { medications: true }
+    });
 }
 
 export const findPatient = async (id: number) => {
     return await prisma.patient.findUnique({
-        where: {
-            id: id
-        }
+        where: { id: id },
+        include: { medications: true }
     })
 }
 
@@ -66,7 +67,7 @@ export const updatePatientLastName = async (id: number, name: string) => {
     });
 }
 
-export const updatePatientBirthday = async (id: number, birthday: Date) => {
+export const updatePatientBirthday = async (id: number, birthday: string) => {
     return await prisma.patient.update({
         where: {
             id: id

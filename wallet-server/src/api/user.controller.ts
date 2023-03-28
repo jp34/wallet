@@ -7,7 +7,7 @@ import {
     updateUserPassword,
     deleteUser
 } from "../service/user.service";
-import { UpdateUserRequest } from "../util/io";
+import { UpdateUserRequest } from "../util/io/user.io";
 
 export default class UserController {
 

@@ -3,16 +3,16 @@
 ## Links
 
 * [Google Drive](https://drive.google.com/drive/folders/1_yls1vmtaeNswSYSHJ6Jh7a6XzPyydkQ?usp=sharing)
-* System Diagram - [PDF](https://drive.google.com/file/d/1sLEIhkzeQWagdzRdjr6RKAU1GR_z6lz1/view?usp=sharing)
+* System Diagram - [PDF](https://drive.google.com/file/d/1M8lYaPHJd2E1IreHUaZcf_Q6Ky29tgie/view?usp=sharing)
 * Sequence Diagram - [PDF](https://drive.google.com/file/d/1TUsv5Zo4XeQ-Q1PQDEU1BcdmeuRrkwv-/view?usp=sharing)
 * Database Diagram - [PDF](https://drive.google.com/file/d/1G1bUflaVK4TG7XMCwE5DFOzC2usc5DW8/view?usp=share_link)
-* Signup Flow Diagram - [PDF](https://drive.google.com/file/d/1UCT3MScA_dTCGdWfVGxfdtVHPTQ0vImn/view?usp=sharing)
-* UI Wireframe - [Miro](https://miro.com/app/board/uXjVPP5VJak=/?share_link_id=431653755129)
+* UI Wireframe - [Miro](https://miro.com/app/board/uXjVPP5VJak=/?share_link_id=701144025960)
 
 ### Projects
 * [wallet-blockchain](https://github.com/Healthcare-Wallet/wallet/tree/main/wallet-blockchain)
 * [wallet-cms](https://github.com/Healthcare-Wallet/wallet/tree/main/wallet-cms)
 * [wallet-mobile](https://github.com/Healthcare-Wallet/wallet/tree/main/wallet-mobile)
+* [wallet-marketplace](https://github.com/Healthcare-Wallet/wallet/tree/main/wallet-market)
 
 ## Info
 
@@ -33,5 +33,4 @@ and provide uniform and complete medical documents to disease state researchers.
 * Nathan Sivak
 * Connor Estell
 * Ryan Wilcox
-* Azura Cooper
 * Jake Foss

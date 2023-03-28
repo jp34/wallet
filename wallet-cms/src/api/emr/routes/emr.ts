@@ -1,13 +1,13 @@
 export default {
-	routes: [
-		{
-			method: 'POST',
-			path: '/emr',
-			handler: 'emr.upload',
-			config: {
-				policies: [],
-				middlewares: [],
-			},
-		},
-	],
+  routes: [
+    // {
+    //  method: 'GET',
+    //  path: '/emr',
+    //  handler: 'emr.exampleAction',
+    //  config: {
+    //    policies: [],
+    //    middlewares: [],
+    //  },
+    // },
+  ],
 };

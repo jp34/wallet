@@ -18,12 +18,6 @@
     "drg": {
       "type": "string"
     },
-    "patients": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::patient.patient",
-      "mappedBy": "diagnoses"
-    },
     "description": {
       "type": "string"
     },

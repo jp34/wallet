@@ -63,14 +63,10 @@
       "inversedBy": "users",
       "configurable": false
     },
-    "ens_address": {
-      "type": "string"
-    },
-    "patient_id": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::patient.patient",
-      "mappedBy": "username"
+    "agreement": {
+      "type": "boolean",
+      "default": false,
+      "required": true
     }
   }
 }

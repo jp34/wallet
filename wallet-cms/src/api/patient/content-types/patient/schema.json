@@ -12,14 +12,14 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "first_name": {
+    "firstName": {
       "type": "string",
       "required": true
     },
-    "middle_name": {
+    "middleName": {
       "type": "string"
     },
-    "last_name": {
+    "lastName": {
       "type": "string",
       "required": true
     },
@@ -28,40 +28,32 @@
       "required": true,
       "unique": false
     },
-    "birthday": {
-      "type": "date",
-      "required": true
-    },
-    "diagnoses": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::diagnosis.diagnosis",
-      "inversedBy": "patients"
-    },
-    "username": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "plugin::users-permissions.user",
-      "inversedBy": "patient_id",
-      "autoPopulate": true
-    },
-    "medical_encounters": {
+    "medicalEncounters": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::medical-encounter.medical-encounter",
       "mappedBy": "patient"
     },
-    "patient_allergies": {
+    "medications": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::patient-medication.patient-medication",
+      "mappedBy": "patient"
+    },
+    "allergies": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::patient-allergy.patient-allergy",
       "mappedBy": "patient"
     },
-    "patient_medications": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::patient-medication.patient-medication",
-      "mappedBy": "patient"
+    "birthday": {
+      "type": "string",
+      "required": true
+    },
+    "user": {
+      "type": "integer",
+      "required": true,
+      "unique": true
     }
   }
 }

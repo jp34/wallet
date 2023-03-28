@@ -16,12 +16,6 @@
     }
   },
   "attributes": {
-    "patient": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::patient.patient",
-      "inversedBy": "medical_encounters"
-    },
     "medical_provider": {
       "type": "relation",
       "relation": "manyToOne",
@@ -51,6 +45,12 @@
       },
       "type": "date",
       "required": true
+    },
+    "patient": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::patient.patient",
+      "inversedBy": "medicalEncounters"
     }
   }
 }

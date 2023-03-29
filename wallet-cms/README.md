@@ -1,1 +1,0 @@
-# Healthcare Wallet - Strapi CMS

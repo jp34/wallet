@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JustBe Marketplace</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="header__logo">JustBe Marketplace</div>
+        <a id = "cart" href="/cart" class="cart_button">
+            <img src="../img/shoppingCart.jpg" width="25" height="25"></img>
+        </a>
+    </header>
+
+    <div class="wrapper">
+        <div class="market">
+            <% if(info != null) {%>
+            <% info.forEach(function(NFT, index) { %>
+                <div class="cardcontent">
+                    <div class="market__card">
+                        <h2 class="market__card__title">
+                            NFT #<%- index+1 %>
+                        </h2>
+                        <p class="market__card__body"> 
+                            NFT ID: <%- NFT._id %> 
+                        </p>
+                        <a href="/market/<%-NFT._id %>" class="card__button">Learn More</a>
+                        <div id= "<%- NFT._id %>" class = "card__button__img" onclick= "process(this, this.children[0])">
+                            <img id="cardShoppingStatus<%- index %>" src="../img/plusSign.png" width="15" height="15"></img>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+            <% } else { %>
+                No information available.
+            <% } %>
+            
+        </div>
+    </div>
+
+    <script>
+        var selected;
+        var items = [];
+        function process(el, elChild) {
+           if (selected) {
+                el.style.backgroundColor = "#6b6b6b";
+                elChild.src = "../img/plusSign.png";
+                selected = false;
+                removeFromCart(el);
+            } else {
+                el.style.backgroundColor = "#3CB043";
+                elChild.src = "../img/checkmark.png";
+                selected = true;
+                addtoCart(el);
+            }
+        }
+
+        function addtoCart(el) {
+            items.push(el.id);
+            document.getElementById("cart").href = "/cart?id=" + items.toString();
+            console.log(items.toString());
+        }
+
+        function removeFromCart(el) {
+            console.log(el.id)
+            var itemIndex = items.indexOf(el.id);
+            if(itemIndex > -1) {
+                items.splice(itemIndex, 1);
+            }
+            document.getElementById("cart").href = "/cart?id=" + items.toString();
+            console.log(items.toString());
+        }
+    </script>
+</body>
+</html>

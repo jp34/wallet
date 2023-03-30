@@ -10,7 +10,7 @@ import {
   KeyboardAvoidingView,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { signup } from "../api/strapi-client";
+import { signup } from "../api/client";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
 const SignUp = ({ navigation }) => {
@@ -90,18 +90,6 @@ const SignUp = ({ navigation }) => {
                 onChangeText={(text) => setEmail(text)}
                 require
               />
-              {/* Username Group */}
-              <View style={styles.inputGroup}>
-                {/* Username Header */}
-                <Text style={styles.inputHeader}>Username</Text>
-                {/* Username Input */}
-                <TextInput
-                  style={styles.input}
-                  placeholder="johndoe01"
-                  onChangeText={(text) => setUsername(text)}
-                  require
-                />
-              </View>
             </View>
           </View>
           {/* Password Section Header */}

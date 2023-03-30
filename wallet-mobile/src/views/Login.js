@@ -10,12 +10,12 @@ import {
   SafeAreaView,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { login } from "../api/strapi-client";
+import { login } from "../api/client";
 
 const Login = ({ navigation }) => {
   // Boolean control for SecureText
   const [showPassword, setShowPassword] = React.useState(false);
-  const [identifier, setIdentifier] = React.useState();
+  const [email, setEmail] = React.useState();
   const [password, setPassword] = React.useState();
 
   // Renders Sign Up Header
@@ -70,12 +70,12 @@ const Login = ({ navigation }) => {
         <View style={styles.formGroup}>
           {/* Email */}
           <View style={styles.inputGroup}>
-            <Text style={styles.inputHeader}>Email / Username</Text>
+            <Text style={styles.inputHeader}>Email</Text>
             <TextInput
-              id="user-identifier"
+              id="user-email"
               style={styles.input}
               placeholder="myemail@gmail.com"
-              onChangeText={(text) => setIdentifier(text)}
+              onChangeText={(text) => setEmail(text)}
               require
             />
           </View>
@@ -106,7 +106,7 @@ const Login = ({ navigation }) => {
   }
 
   async function attemptLogin() {
-    const result = await login(identifier, password);
+    const result = await login(email, password);
     if (result != false) {
       navigation.navigate("Dashboard");
     } else {

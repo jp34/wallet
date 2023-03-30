@@ -1,8 +1,10 @@
 
 export interface CreatePatientRequest extends Express.Request {
+    params: {
+        id: string
+    },
     body: {
         data: {
-            id: number,
             firstName: string,
             middleName: string,
             lastName: string,

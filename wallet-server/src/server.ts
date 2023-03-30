@@ -8,7 +8,7 @@ import api from "./api/router";
 import prisma from "./config/db";
 
 const app = express();
-const port = process.env.SERVER_PORT;
+const port = process.env.API_SERVER_PORT;
 
 app.use(bodyParser.json());
 app.use(morgan("combined"));

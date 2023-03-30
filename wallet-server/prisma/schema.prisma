@@ -18,6 +18,7 @@ model User {
 	earning			Boolean		@default(false)
 	agreement		Boolean		@default(false)
 	patient     	Patient?
+	emrs			Emr[]
 	created			DateTime	@default(now())
 	modified		DateTime	@default(now())
 }
@@ -65,4 +66,12 @@ model MedicalEncounter {
 	created			DateTime	@default(now())
 	modified		DateTime	@default(now())
 	@@id([patientId, date])
+}
+
+model Emr {
+	cid				String		@id
+	subject			User		@relation(fields: [subjectId], references: [id])
+	subjectId		Int
+	created			DateTime	@default(now())
+	modified		DateTime	@default(now())
 }

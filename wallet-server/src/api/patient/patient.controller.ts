@@ -14,11 +14,10 @@ import {
 export default class PatientController {
 
     public create = async (request: CreatePatientRequest, response: Response, next: NextFunction) => {
+        const id = parseInt(request.params.id);
         const data = request.body.data;
         if (!data) throw new Error("Invalid request body provided");
-        createPatient(
-            data.id, data.firstName, data.middleName, data.lastName, data.birthday,
-        ).then(data => {
+        createPatient(id, data.firstName, data.middleName, data.lastName, data.birthday).then(data => {
             response.status(200).json({ status: "success", data: data });
         }).catch(next);
     }

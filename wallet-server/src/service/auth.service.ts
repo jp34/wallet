@@ -1,9 +1,9 @@
 import jwt from "jsonwebtoken";
 
-const ACCESS_SECRET = process.env.SERVER_ACCESS_SECRET ?? undefined;
-const REFRESH_SECRET = process.env.SERVER_REFRESH_SECRET ?? undefined;
-const ACCESS_EXP = process.env.SERVER_ACCESS_EXP ?? undefined;
-const REFRESH_EXP = process.env.SERVER_REFRESH_EXP ?? undefined;
+const ACCESS_SECRET = process.env.API_SERVER_ACCESS_SECRET ?? undefined;
+const REFRESH_SECRET = process.env.API_SERVER_REFRESH_SECRET ?? undefined;
+const ACCESS_EXP = process.env.API_SERVER_ACCESS_EXP ?? undefined;
+const REFRESH_EXP = process.env.API_SERVER_REFRESH_EXP ?? undefined;
 
 export const generateAccessToken = (id: number) => {
     if (ACCESS_SECRET == undefined) throw new Error("Missing environment variable: ACCESS_SECRET");

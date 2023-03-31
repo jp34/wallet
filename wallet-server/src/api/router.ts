@@ -24,7 +24,7 @@ router.put("/users/:id", authorize, users.update);
 router.delete("/users/:id", authorize, users.delete);
 
 // Patient Endpoints
-router.post("/patients", authorize, patients.create, generateEmr);
+router.post("/patients/:id", authorize, patients.create, generateEmr);
 router.get("/patients", authorize, patients.getMany);
 router.get("/patients/:id", authorize, patients.getOne);
 router.put("/patients/:id", authorize, patients.update, generateEmr);

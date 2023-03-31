@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from "express";
-import { Emr } from "../model/payload.interface";
 import { findOne, findMany, upload } from "../service/ipfs.service";
 
 export default class EmrController {
@@ -13,7 +12,7 @@ export default class EmrController {
          */
     public getOne = async (request: Request, response: Response, next: NextFunction) => {
         try {
-            const id = request.params.id.toString();
+            const id = request.params.id;
             const file = await findOne(id);
             return response.status(200).json({ file: file });
         } catch (error: any) {
@@ -49,15 +48,9 @@ export default class EmrController {
      * @returns Content ID from successful upload
      */
     public create = async (request: Request, response: Response, next: NextFunction) => {
-        try {
-            console.log(request.body.data);
-            const data: Emr = request.body.data;
-            const cid = await upload([data]);
-            return response.status(200).json({ cid: cid });
-        } catch (error: any) {
-            console.log("Failed to upload ipfs document");
-            console.log(error);
-            return next(error);
-        }
+        const data = request.body.data;
+        upload([data]).then(data => {
+            return response.status(200).json({ status: "success", cid: data });
+        }).catch(next);
     };
 }

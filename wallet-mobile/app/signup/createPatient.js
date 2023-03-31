@@ -11,7 +11,7 @@ import {
   Pressable,
   ChevronLeftIcon,
 } from "native-base";
-import { createPatient } from "../../src/api/strapi-client";
+import { createPatient } from "../api";
 import Wrapper from "../../src/components/Wrapper";
 
 export default function CreatePatientScreen() {
@@ -46,103 +46,89 @@ export default function CreatePatientScreen() {
   const dateRegex = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/;
 
   const attemptCreatePatient = async () => {
-    try {
-      if (fName === undefined) {
-        setFNameEM("First Name is required.");
-        setFNameInvalid(true);
-        return;
-      } else if (fName.trim() === "") {
-        setFNameEM("First Name is required.");
-        setFNameInvalid(true);
-        return;
-      } else if (mName === undefined) {
-        setMNameEM("Middle Name is required.");
-        setMNameInvalid(true);
-        return;
-      } else if (mName.trim() === "") {
-        setMNameEM("Middle Name is required.");
-        setMNameInvalid(true);
-        return;
-      } else if (lName === undefined) {
-        setLNameEM("Last Name is required.");
-        setLNameInvalid(true);
-        return;
-      } else if (lName.trim() === "") {
-        setLNameEM("Last Name is required.");
-        setLNameInvalid(true);
-        return;
-      } else if (phone === undefined) {
-        setPhoneEM("Phone Number is required.");
-        setPhoneInvalid(true);
-        return;
-      } else if (phone.trim() === "") {
-        setPhoneEM("Phone Number is required.");
-        setPhoneInvalid(true);
-        return;
-      } else if (!phoneNumberRegex.test(phone)) {
-        setPhoneEM("Phone Number incorrect format, separate by dashes.");
-        setPhoneInvalid("true");
-        return;
-      } else if (bday === undefined) {
-        setBdayEM("Date of Birth is required.");
-        setBdayInvalid("true");
-        return;
-      } else if (bday.trim() === "") {
-        setBdayEM("Date of Birth is required.");
-        setBdayInvalid("true");
-        return;
-      } else if (!dateRegex.test(bday)) {
-        setBdayEM("Date of Birth incorrect format, MM/DD/YYYY.");
-        setBdayInvalid("true");
-      } else {
-        phone.replace(/\D/g, "");
-        bday.replace(/\D/g, "");
+    let valid = validateFirstName();
+    valid = validateMiddleName();
+    valid = validateLastName();
+    valid = validatePhone();
+    valid = validateBirthday();
+    if (valid) {
+      try {
         const result = await createPatient(fName, mName, lName, phone, bday);
-        if (true) router.replace("home");
+        if (result) router.replace("home");
+      } catch (err) {
+        console.error(err);
       }
-    } catch (err) {
-      console.error(err);
     }
   };
 
-  return (
-    <Wrapper keyboard header onPress={() => router.back()}>
-      <Box flex="0.1" justifyContent="flex-start">
-        <Pressable onPress={() => router.back()}>
-          <ChevronLeftIcon color="#EEE" size="lg" />
-        </Pressable>
-      </Box>
-      <Box flex="0.8" px="4" justifyContent="center">
-        <Box justifyContent="center">
-          <Heading fontSize="2xl" color="#EEE">
-            Patient Information
-          </Heading>
-          <Text fontSize="lg" color="#EEE">
-            Let's get some more info.
-          </Text>
-        </Box>
-        <VStack space="xs" justifyContent="center" mt="4">
-          {renderFirstNameInput()}
-          {renderMiddleNameInput()}
-          {renderLastNameInput()}
-          {renderPhoneNumberInput()}
-          {renderDateOfBirthInput()}
-        </VStack>
-      </Box>
-      <Box flex="0.1" alignItems="center" justifyContent="flex-end">
-        <Button
-          variant="primary"
-          _text={{
-            fontSize: "lg",
-          }}
-          w="70%"
-          onPress={() => attemptCreatePatient()}
-        >
-          Finish
-        </Button>
-      </Box>
-    </Wrapper>
-  );
+  const validateFirstName = () => {
+    try {
+      if (!fName) throw "First Name is required";
+      if (fName.trim() === "") throw "First Name is required";
+      setFNameInvalid(false);
+      return true;
+    } catch (message) {
+      setFNameEM(message);
+      setFNameInvalid(true);
+      return false;
+    }
+  }
+
+  const validateMiddleName = () => {
+    try {
+      if (!mName) throw "Middle Name is required";
+      if (mName.trim() === "") throw "Middle Name is required";
+      setMNameInvalid(false);
+      return true;
+    } catch (message) {
+      setMNameEM(message);
+      setMNameInvalid(true);
+      return false;
+    }
+  }
+
+  const validateLastName = () => {
+    try {
+      if (!lName) throw "Last Name is required";
+      if (lName.trim() === "") throw "Last Name is required";
+      setLNameInvalid(false);
+      return true;
+    } catch (message) {
+      setLNameEM(message);
+      setLNameInvalid(true);
+      return false;
+    }
+  }
+
+  const validatePhone = () => {
+    try {
+      if (!phone) throw "Date of Birth is required";
+      if (phone.trim() === "") throw "Date of Birth is required";
+      if (!phoneNumberRegex.test(phone)) throw "Phone Number incorrect format, separate by dashes";
+      setBdayInvalid(false);
+      phone.replace(/\D/g, "");
+      return true;
+    } catch (message) {
+      setBdayEM(message);
+      setBdayInvalid(true);
+      return false;
+    }
+  }
+
+  const validateBirthday = () => {
+    try {
+      if (!bday) throw "Date of Birth is required";
+      if (bday.trim() === "") throw "Date of Birth is required";
+      if (!dateRegex.test(bday)) throw "Date of Birth incorrect format, MM/DD/YYYY";
+      setBdayInvalid(false);
+      bday.replace(/\D/g, "");
+      return true;
+    } catch (message) {
+      setBdayEM(message);
+      setBdayInvalid(true);
+      return false;
+    }
+  }
 
   function renderDateOfBirthInput() {
     return (
@@ -250,4 +236,43 @@ export default function CreatePatientScreen() {
       </FormControl>
     );
   }
+
+  return (
+    <Wrapper keyboard header onPress={() => router.back()}>
+      <Box flex="0.1" justifyContent="flex-start">
+        <Pressable onPress={() => router.back()}>
+          <ChevronLeftIcon color="#EEE" size="lg" />
+        </Pressable>
+      </Box>
+      <Box flex="0.8" px="4" justifyContent="center">
+        <Box justifyContent="center">
+          <Heading fontSize="2xl" color="#EEE">
+            Patient Information
+          </Heading>
+          <Text fontSize="lg" color="#EEE">
+            Let's get some more info.
+          </Text>
+        </Box>
+        <VStack space="xs" justifyContent="center" mt="4">
+          {renderFirstNameInput()}
+          {renderMiddleNameInput()}
+          {renderLastNameInput()}
+          {renderPhoneNumberInput()}
+          {renderDateOfBirthInput()}
+        </VStack>
+      </Box>
+      <Box flex="0.1" alignItems="center" justifyContent="flex-end">
+        <Button
+          variant="primary"
+          _text={{
+            fontSize: "lg",
+          }}
+          w="70%"
+          onPress={() => attemptCreatePatient()}
+        >
+          Finish
+        </Button>
+      </Box>
+    </Wrapper>
+  );
 }

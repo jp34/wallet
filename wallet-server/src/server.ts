@@ -15,7 +15,7 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(cors({
-    origin: false
+    origin: "http://localhost:19000"
 }));
 app.use(morgan("combined"));
 

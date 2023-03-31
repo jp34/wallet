@@ -29,6 +29,7 @@ model Patient {
 	firstName		String
 	middleName		String
 	lastName		String
+	phone			String					@default("")
 	birthday		String
 	medications		PatientMedication[]
 	allergies		PatientAllergies[]

@@ -89,12 +89,12 @@ export const getUser = async () => {
 
 // Patient Methods
 
-export const createPatient = async (firstName, middleName, lastName, birthday) => {
-    return await postRequest('/api/patients', {
-        id: session.user.id,
+export const createPatient = async (firstName, middleName, lastName, phone, birthday) => {
+    return await postRequest(`/api/patients/${session.user.id}`, {
         firstName: firstName,
         middleName: middleName,
         lastName: lastName,
+        phone: phone,
         birthday: birthday
     });
 }

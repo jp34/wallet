@@ -13,7 +13,7 @@ import {
   ChevronLeftIcon,
 } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
-import { createAccount } from "../../src/api/strapi-client";
+import { signup } from "../api";
 import Wrapper from "../../src/components/Wrapper";
 
 export default function CreateAccountScreen() {
@@ -21,17 +21,11 @@ export default function CreateAccountScreen() {
 
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
-  const confirm = useState(true);
 
   const emailInp = useRef(null);
   const [emailInvalid, setEmailInvalid] = useState(false);
   const [email, setEmail] = useState("");
   const [emailEM, setEmailEM] = useState("");
-
-  const userInp = useRef(null);
-  const [userInvalid, setUserInvalid] = useState(false);
-  const [user, setUser] = useState("");
-  const [userEM, setUserEM] = useState("");
 
   const passInp = useRef(null);
   const [passInvalid, setPassInvalid] = useState(false);
@@ -40,8 +34,8 @@ export default function CreateAccountScreen() {
 
   const passConfirmInp = useRef(null);
   const [passConfirmInvalid, setPassConfirmInvalid] = useState(false);
-  const [passwordConfirm, setPasswordConfirm] = useState("");
-  const [passCEM, setPassCEM] = useState("");
+  const [passConfirm, setPassConfirm] = useState("");
+  const [passConfirmEM, setPassConfirmEM] = useState("");
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const userRegex = /^[a-zA-Z0-9._-]{3,20}$/;
@@ -49,137 +43,75 @@ export default function CreateAccountScreen() {
     /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?])(?=.*[a-zA-Z]).{8,}$/;
 
   const attemptCreateAccount = async () => {
-    try {
-      if (email === "") {
-        setEmailEM("Email Address is required.");
-        setEmailInvalid(true);
-        return;
-      } else if (email.trim() === "") {
-        setEmailEM("Email Address is required.");
-        setEmailInvalid(true);
-        return;
-      } else if (!emailRegex.test(email)) {
-        setEmailEM("Must be a valid email address.");
-        setEmailInvalid(true);
-        return;
-      } else if (user === "") {
-        setUserEM("Username is required.");
-        setUserInvalid(true);
-        return;
-      } else if (user.trim() === "") {
-        setUserEM("Username is required.");
-        setUserInvalid(true);
-        return;
-      } else if (!userRegex.test(user)) {
-        setUserEM(
-          "Username is invalid. Must be 3 - 20 characters. No special characters other than _, -, . or numbers."
-        );
-        setUserInvalid(true);
-        return;
-      } else if (pass === "") {
-        setPassEM("Password is required.");
-        setPassInvalid(true);
-        return;
-      } else if (pass.trim() === "") {
-        setPassEM("Password is required.");
-        setPassInvalid(true);
-        return;
-      } else if (!passwordRegex.test(pass)) {
-        setPassEM("Invalid password.");
-        setPassInvalid(true);
-        return;
-      } else if (passwordConfirm === "") {
-        setPassCEM("Verify password is required.");
-        setPassConfirmInvalid(true);
-        return;
-      } else if (passwordConfirm.trim() === "") {
-        setPassCEM("Verify password is required.");
-        setPassConfirmInvalid(true);
-        return;
-      } else if (!passwordRegex.test(passwordConfirm)) {
-        setPassCEM("Invalid password.");
-        setPassConfirmInvalid(true);
-        return;
-      } else if (pass != passwordConfirm) {
-        setPassCEM("Passwords do not match.");
-        setPassConfirmInvalid(true);
-        return;
-      } else {
-        const result = await createAccount(user, email, pass, confirm);
+    if (validateEmail() && validatePassword() && validatePasswordConfirm()) {
+      try {
+        const result = await signup(email, pass);
         if (result) router.push("./createPatient");
+      } catch (err) {
+        console.error(err);
       }
-    } catch (err) {
-      console.error(err);
     }
   };
 
-  return (
-    <Wrapper keyboard>
-      <Box flex="0.1" justifyContent="flex-start">
-        <Pressable onPress={() => router.back()}>
-          <ChevronLeftIcon color="#EEE" size="lg" />
-        </Pressable>
-      </Box>
-      <Box flex="0.8" px="4" justifyContent="center">
-        <Box justifyContent="center">
-          <Heading fontSize="2xl" color="#EEE">
-            Create Your Account
-          </Heading>
-          <Text fontSize="lg" color="#EEE">
-            Tell us about you.
-          </Text>
-        </Box>
-        <VStack space="md" justifyContent="center" mt="6">
-          {renderEmailForm()}
-          {renderUsernameForm()}
-          {renderPasswordForm()}
-          {renderConfirmPasswordForm()}
-        </VStack>
-      </Box>
-      <Box flex="0.1" alignItems="center" justifyContent="flex-end">
-        <Button
-          variant="primary"
-          _text={{
-            fontSize: "lg",
-          }}
-          w="70%"
-          onPress={() => attemptCreateAccount()}
-        >
-          Continue
-        </Button>
-      </Box>
-    </Wrapper>
-  );
+  const validateEmail = () => {
+    try {
+      if (email === "") throw "Email Address is required";
+      if (email.trim() === "") throw "Email Address is required";
+      if (!emailRegex.test(email)) throw "Not an email address";
+      setEmailInvalid(false);
+      return true;
+    } catch (message) {
+      setEmailEM(message);
+      setEmailInvalid(true);
+      return false;
+    }
+  }
 
-  function renderConfirmPasswordForm() {
+  const validatePassword = () => {
+    try {
+      if (pass === "") throw "Password is required";
+      if (pass.trim() === "") throw "Password is required";
+      if (!passwordRegex.test(pass)) throw "Invalid Password";
+      setPassInvalid(false);
+      return true;
+    } catch (message) {
+      setPassEM(message);
+      setPassInvalid(true);
+      return false;
+    }
+  }
+
+  const validatePasswordConfirm = () => {
+    try {
+      if (passConfirm === "") throw "Password confirmation is required";
+      if (passConfirm.trim() === "") throw "Password confirmation is required";
+      if (!passwordRegex.test(pass)) throw "Invalid Password";
+      if (pass != passConfirm) throw "Passwords do not match";
+      setPassConfirmInvalid(false);
+      return true;
+    } catch (message) {
+      setPassConfirmEM(message);
+      setPassConfirmInvalid(true);
+      return false;
+    }
+  }
+
+  function renderEmailForm() {
     return (
-      <FormControl isRequired isInvalid={passConfirmInvalid}>
+      <FormControl isRequired isInvalid={emailInvalid}>
         <FormControl.Label _text={{ color: "#EEE", fontSize: "md" }}>
-          Verify Password
+          Email Address
         </FormControl.Label>
         <Input
           size="xl"
           variant="primary"
           autoCorrect={false}
-          onFocus={() => setPassConfirmInvalid(false)}
-          onChangeText={(text) => setPasswordConfirm(text)}
-          ref={passConfirmInp}
-          type={showPasswordConfirm ? "text" : "password"}
-          InputRightElement={
-            <Pressable
-              onPress={() => setShowPasswordConfirm(!showPasswordConfirm)}
-            >
-              <Icon
-                as={Ionicons}
-                name={showPasswordConfirm ? "eye-outline" : "eye-off-outline"}
-                color="#EEE"
-                size="lg"
-                mr="3"
-              />
-            </Pressable>
-          }
+          onFocus={() => setEmailInvalid(false)}
+          onChangeText={(text) => setEmail(text)}
+          ref={emailInp}
+          onSubmitEditing={() => userInp.current.focus()}
         />
-        <FormControl.ErrorMessage>{passCEM}</FormControl.ErrorMessage>
+        <FormControl.ErrorMessage>{emailEM}</FormControl.ErrorMessage>
       </FormControl>
     );
   }
@@ -216,43 +148,73 @@ export default function CreateAccountScreen() {
     );
   }
 
-  function renderUsernameForm() {
+  function renderConfirmPasswordForm() {
     return (
-      <FormControl isRequired isInvalid={userInvalid}>
+      <FormControl isRequired isInvalid={passConfirmInvalid}>
         <FormControl.Label _text={{ color: "#EEE", fontSize: "md" }}>
-          Username
+          Confirm Password
         </FormControl.Label>
         <Input
           size="xl"
           variant="primary"
           autoCorrect={false}
-          onFocus={() => setUserInvalid(false)}
-          onChangeText={(text) => setUser(text)}
-          ref={userInp}
-          onSubmitEditing={() => passInp.current.focus()}
+          onFocus={() => setPassConfirmInvalid(false)}
+          onChangeText={(text) => setPassConfirm(text)}
+          ref={passConfirmInp}
+          type={showPasswordConfirm ? "text" : "password"}
+          InputRightElement={
+            <Pressable
+              onPress={() => setShowPasswordConfirm(!showPasswordConfirm)}
+            >
+              <Icon
+                as={Ionicons}
+                name={showPasswordConfirm ? "eye-outline" : "eye-off-outline"}
+                color="#EEE"
+                size="lg"
+                mr="3"
+              />
+            </Pressable>
+          }
         />
-        <FormControl.ErrorMessage>{userEM}</FormControl.ErrorMessage>
+        <FormControl.ErrorMessage>{passConfirmEM}</FormControl.ErrorMessage>
       </FormControl>
     );
   }
 
-  function renderEmailForm() {
-    return (
-      <FormControl isRequired isInvalid={emailInvalid}>
-        <FormControl.Label _text={{ color: "#EEE", fontSize: "md" }}>
-          Email Address
-        </FormControl.Label>
-        <Input
-          size="xl"
+  return (
+    <Wrapper keyboard>
+      <Box flex="0.1" justifyContent="flex-start">
+        <Pressable onPress={() => router.back()}>
+          <ChevronLeftIcon color="#EEE" size="lg" />
+        </Pressable>
+      </Box>
+      <Box flex="0.8" px="4" justifyContent="center">
+        <Box justifyContent="center">
+          <Heading fontSize="2xl" color="#EEE">
+            Create Your Account
+          </Heading>
+          <Text fontSize="lg" color="#EEE">
+            Tell us about you.
+          </Text>
+        </Box>
+        <VStack space="md" justifyContent="center" mt="6">
+          {renderEmailForm()}
+          {renderPasswordForm()}
+          {renderConfirmPasswordForm()}
+        </VStack>
+      </Box>
+      <Box flex="0.1" alignItems="center" justifyContent="flex-end">
+        <Button
           variant="primary"
-          autoCorrect={false}
-          onFocus={() => setEmailInvalid(false)}
-          onChangeText={(text) => setEmail(text)}
-          ref={emailInp}
-          onSubmitEditing={() => userInp.current.focus()}
-        />
-        <FormControl.ErrorMessage>{emailEM}</FormControl.ErrorMessage>
-      </FormControl>
-    );
-  }
+          _text={{
+            fontSize: "lg",
+          }}
+          w="70%"
+          onPress={() => attemptCreateAccount()}
+        >
+          Continue
+        </Button>
+      </Box>
+    </Wrapper>
+  );
 }

@@ -12,16 +12,16 @@ import {
   ChevronLeftIcon,
 } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
-import { login } from "../../src/api/strapi-client";
+import { login } from "../api";
 import Wrapper from "../../src/components/Wrapper";
 
 export default function LoginScreen() {
   const router = useRouter();
 
-  const [invalid, setInvalid] = useState(false);
+  const [valid, setValid] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
 
-  const [identifier, setIdentifier] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const [errorMessage, setErrorMessage] = useState("");
@@ -30,38 +30,36 @@ export default function LoginScreen() {
   const passInput = useRef(null);
 
   const attemptLogin = async () => {
-    try {
-      if (identifier === undefined) {
-        setErrorMessage("Email or Username is required.");
-        setInvalid(true);
-        return;
-      } else if (identifier.trim() === "") {
-        setErrorMessage("Email or Username is required.");
-        setInvalid(true);
-        return;
-      } else if (password === undefined) {
-        setErrorMessage("Password is required.");
-        setInvalid(true);
-        return;
-      } else if (password.trim() === "") {
-        setErrorMessage("Password is required.");
-        setInvalid(true);
-        return;
-      } else {
-        const result = await login(identifier, password);
+    if (validateForm()) {
+      try {
+        const result = await login(email, password);
         if (result) {
-          setInvalid(false);
+          setValid(true);
           return router.replace("./home");
         } else {
-          setErrorMessage("Email / Username or Password is incorrect.");
-          setInvalid(true);
+          setValid(false);
+          setErrorMessage("Invalid logins provided");
         }
+      } catch (err) {
+        console.log(err);
       }
-    } catch (err) {
-      console.error(err);
-      return;
     }
   };
+
+  const validateForm = () => {
+    try {
+      if (!email) throw "Email is required";
+      if (email.trim() === "") throw "Email is required";
+      if (!password) throw "Password is required";
+      if (password.trim() === "") throw "Password is required";
+      setValid(true);
+      return true;
+    } catch (message) {
+      setValid(false);
+      setErrorMessage(message);
+      return false;
+    }
+  }
 
   return (
     <Wrapper keyboard>
@@ -105,21 +103,21 @@ export default function LoginScreen() {
   function renderLoginForm() {
     return (
       <Box mt="4">
-        <FormControl isRequired isInvalid={invalid}>
+        <FormControl isRequired isInvalid={!valid}>
           <FormControl.Label
             _text={{
               color: "#EEE",
               fontSize: "md",
             }}
           >
-            Email Address / Username
+            Email Address
           </FormControl.Label>
           <Input
             size="xl"
             variant="primary"
             autoCorrect={false}
-            onFocus={() => setInvalid(false)}
-            onChangeText={(text) => setIdentifier(text)}
+            onFocus={() => setValid(true)}
+            onChangeText={(text) => setEmail(text)}
             ref={userInput}
             onSubmitEditing={() => passInput.current.focus()}
           />
@@ -136,7 +134,7 @@ export default function LoginScreen() {
             size="xl"
             variant="primary"
             autoCorrect={false}
-            onFocus={() => setInvalid(false)}
+            onFocus={() => setValid(true)}
             onChangeText={(text) => setPassword(text)}
             ref={passInput}
             type={showPassword ? "text" : "password"}

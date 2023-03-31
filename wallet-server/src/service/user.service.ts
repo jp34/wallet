@@ -3,14 +3,12 @@ import prisma from "../config/db";
 
 export const createUser = async (
     email: string,
-    ensAddress: string,
     password: string
 ) => {
     const hashed = bcrypt.hashSync(password, bcrypt.genSaltSync());
     return await prisma.user.create({
         data: {
             email: email,
-            ensAddress: ensAddress,
             password: hashed
         }
     });

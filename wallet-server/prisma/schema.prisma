@@ -13,7 +13,7 @@ datasource db {
 model User {
 	id          	Int     	@id @default(autoincrement())
 	email       	String  	@unique
-	ensAddress  	String  	@unique
+	ensAddress  	String?  	@unique
 	password		String
 	earning			Boolean		@default(false)
 	agreement		Boolean		@default(false)

@@ -3,7 +3,6 @@ export interface CreateUserRequest extends Express.Request {
     body: {
         data: {
             email: string,
-            ensAddress: string,
             password: string
         }
     }

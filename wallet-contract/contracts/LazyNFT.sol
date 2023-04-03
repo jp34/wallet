@@ -3,6 +3,7 @@ pragma solidity ^0.8.0;
 pragma abicoder v2; // required to accept structs as function parameters
 
 import "hardhat/console.sol";
+import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/access/AccessControl.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
@@ -13,6 +14,12 @@ contract LazyNFT is ERC721URIStorage, EIP712, AccessControl {
   bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
   string private constant SIGNING_DOMAIN = "LazyNFT-Voucher";
   string private constant SIGNATURE_VERSION = "1";
+
+  using Counters for Counters.Counter;
+    //_tokenIds variable has the most recent minted tokenId
+    Counters.Counter private _tokenIds;
+    //Keeps track of the number of items sold on the marketplace
+    Counters.Counter private _itemsSold;
 
   mapping (address => uint256) pendingWithdrawals;
 
@@ -36,6 +43,22 @@ contract LazyNFT is ERC721URIStorage, EIP712, AccessControl {
     /// @notice the EIP-712 signature of all other fields in the NFTVoucher struct. For a voucher to be valid, it must be signed by an account with the MINTER_ROLE.
     bytes signature;
   }
+
+  struct ListedToken {
+        uint256 tokenId;
+        address payable owner;
+        address payable seller;
+        uint256 price;
+    }
+
+  event TokenListedSuccess (
+        uint256 indexed tokenId,
+        address owner,
+        address seller,
+        uint256 price
+    );
+
+    mapping(uint256 => ListedToken) private idToListedToken;
 
 
   /// @notice Redeems an NFTVoucher for an actual NFT, creating it in the process.
@@ -61,8 +84,18 @@ contract LazyNFT is ERC721URIStorage, EIP712, AccessControl {
     // record payment to signer's withdrawal balance
     pendingWithdrawals[signer] += msg.value;
 
+    // increment items sold counter
+    _itemsSold.increment();
+
+    // Record NFT Details
+    idToListedToken[voucher.tokenId] = ListedToken(voucher.tokenId, payable(redeemer), payable(signer), voucher.minPrice);
+    emit TokenListedSuccess(voucher.tokenId, payable(redeemer), signer, voucher.minPrice);
     return voucher.tokenId;
   }
+
+  function getListedTokenForId(uint256 tokenId) public view returns (ListedToken memory) {
+        return idToListedToken[tokenId];
+    }
 
   /// @notice Transfers all pending withdrawal balance to the caller. Reverts if the caller is not an authorized minter.
   function withdraw() public {
@@ -116,4 +149,30 @@ contract LazyNFT is ERC721URIStorage, EIP712, AccessControl {
   function supportsInterface(bytes4 interfaceId) public view virtual override (AccessControl, ERC721) returns (bool) {
     return ERC721.supportsInterface(interfaceId) || AccessControl.supportsInterface(interfaceId);
   }
+
+  function getMyNFTs() public view returns (ListedToken[] memory) {
+        uint totalItemCount = _itemsSold.current();
+        uint itemCount = 0;
+        uint currentIndex = 0;
+        uint currentId;
+        //Important to get a count of all the NFTs that belong to the user before we can make an array for them
+        for(uint i=0; i < totalItemCount; i++)
+        {
+            if(idToListedToken[i+1].owner == msg.sender || idToListedToken[i+1].seller == msg.sender){
+                itemCount += 1;
+            }
+        }
+
+        //Once you have the count of relevant NFTs, create an array then store all the NFTs in it
+        ListedToken[] memory items = new ListedToken[](itemCount);
+        for(uint i=0; i < totalItemCount; i++) {
+            if(idToListedToken[i+1].owner == msg.sender || idToListedToken[i+1].seller == msg.sender) {
+                currentId = i+1;
+                ListedToken storage currentItem = idToListedToken[currentId];
+                items[currentIndex] = currentItem;
+                currentIndex += 1;
+            }
+        }
+        return items;
+    }
 }

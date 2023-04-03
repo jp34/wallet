@@ -515,8 +515,8 @@
       ]
     },
     "C:\\Users\\rjand\\OneDrive\\Documents\\work\\mainRepo\\wallet\\wallet-contract\\contracts\\LazyNFT.sol": {
-      "lastModificationDate": 1680481059493,
-      "contentHash": "afef374dcb098f43c50e4aed4eb0be10",
+      "lastModificationDate": 1680483658883,
+      "contentHash": "cec71642aa83d8c01b65f8c659dc4cb2",
       "sourceName": "contracts/LazyNFT.sol",
       "solcConfig": {
         "version": "0.8.4",
@@ -543,6 +543,7 @@
       },
       "imports": [
         "hardhat/console.sol",
+        "@openzeppelin/contracts/utils/Counters.sol",
         "@openzeppelin/contracts/access/AccessControl.sol",
         "@openzeppelin/contracts/token/ERC721/ERC721.sol",
         "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol",

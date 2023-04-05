@@ -2,10 +2,10 @@
     "name": "wallet-web3",
     "version": "1.0.0",
     "description": "",
-    "main": "build/server.js",
+    "main": "./build/server.js",
     "scripts": {
         "build": "npx tsc",
-        "start": "node build/server.js"
+        "start": "node ./build/server.js"
     },
     "author": "",
     "license": "ISC",

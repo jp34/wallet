@@ -1,0 +1,78 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+	provider = "prisma-client-js"
+}
+
+datasource db {
+	provider = "postgresql"
+	url      = env("DATABASE_URL")
+}
+
+model User {
+	id          	Int     	@id @default(autoincrement())
+	email       	String  	@unique
+	ensAddress  	String?  	@unique
+	password		String
+	earning			Boolean		@default(false)
+	agreement		Boolean		@default(false)
+	patient     	Patient?
+	emrs			Emr[]
+	created			DateTime	@default(now())
+	modified		DateTime	@default(now())
+}
+
+model Patient {
+	id				Int						@id @unique
+	user			User					@relation(fields: [id], references: [id])
+	firstName		String
+	middleName		String
+	lastName		String
+	phone			String					@default("")
+	birthday		String
+	medications		PatientMedication[]
+	allergies		PatientAllergies[]
+	encounters		MedicalEncounter[]
+	created			DateTime				@default(now())
+	modified		DateTime				@default(now())
+}
+
+model PatientMedication {
+	patient			Patient		@relation(fields: [patientId], references: [id])
+	patientId		Int			@unique
+	name			String
+	dosage			String
+	frequency		String
+	created			DateTime	@default(now())
+	modified		DateTime	@default(now())
+	@@id([patientId, name])
+}
+
+model PatientAllergies {
+	patient			Patient		@relation(fields: [patientId], references: [id])
+	patientId		Int			@unique
+	name			String
+	severity		Int
+	created			DateTime	@default(now())
+	modified		DateTime	@default(now())
+	@@id([patientId, name])
+}
+
+model MedicalEncounter {
+	patient			Patient		@relation(fields: [patientId], references: [id])
+	patientId		Int			@unique
+	provider		String
+	date			DateTime
+	created			DateTime	@default(now())
+	modified		DateTime	@default(now())
+	@@id([patientId, date])
+}
+
+model Emr {
+	cid				String		@id
+	subject			User		@relation(fields: [subjectId], references: [id])
+	subjectId		Int
+	created			DateTime	@default(now())
+	modified		DateTime	@default(now())
+}

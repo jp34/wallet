@@ -1,11 +1,8 @@
-
 # Node
 node_modules/
 dist/
 build/
 package-lock.json
-metro.config.js
-babel.config.js
 
 # Yarn
 .cache/

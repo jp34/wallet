@@ -1,9 +1,9 @@
 import { View, SafeAreaView, Text, KeyboardAvoidingView } from "react-native";
-import Header from "../../components/Header";
+import Header from "../../../components/Header";
 import { LinearGradient } from "expo-linear-gradient";
 import { Gradients, TextStyles, ScreenStyles } from "../../Style";
-import { Input } from "../../components/Inputs";
-import { PrimaryButton } from "../../components/Buttons";
+import { Input } from "../../../components/Inputs";
+import { PrimaryButton } from "../../../components/Buttons";
 
 const EncountersIntakeScreen = ({ navigation }) => {
   return (

@@ -13,6 +13,7 @@ import {
 } from "native-base";
 import Wrapper from "../../src/components/Wrapper";
 import TextInputFormControl from "../../src/components/InputFormControl";
+import { createPatientAllergy } from "../api";
 
 export default function AllergiesIntakeScreen() {
   const router = useRouter();
@@ -24,7 +25,7 @@ export default function AllergiesIntakeScreen() {
   async function attemptCreateAllergy() {
     try {
       // Handle save allergies.
-      // const result = await createPatientAllergy(patientId, description, severity);
+      // const result = await createPatientAllergy(allergies[0].allergy, allergies[0].severity);
       router.push("./medications");
     } catch (err) {
       console.error(err);

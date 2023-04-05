@@ -20,14 +20,14 @@ export const createPatient = async (
 
 export const findPatients = async () => {
     return await prisma.patient.findMany({
-        include: { medications: true }
+        include: { medications: true, allergies: true, encounters: true }
     });
 }
 
 export const findPatient = async (id: number) => {
     return await prisma.patient.findUnique({
         where: { id: id },
-        include: { medications: true }
+        include: { medications: true, allergies: true, encounters: true }
     })
 }
 

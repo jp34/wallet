@@ -52,3 +52,51 @@ export interface UpdatePatientMedicationRequest extends Express.Request {
         }
     }
 }
+
+export interface CreatePatientAllergyRequest extends Express.Request {
+    params: {
+        id: string
+    },
+    body: {
+        data: {
+            name: string,
+            severity: number
+        }
+    }
+}
+
+export interface UpdatePatientAllergyRequest extends Express.Request {
+    params: {
+        id: string,
+        name: string
+    },
+    body: {
+        data: {
+            severity: number,
+        }
+    }
+}
+
+export interface CreateMedicalEncounterRequest extends Express.Request {
+    params: {
+        id: string
+    },
+    body: {
+        data: {
+            date: string,
+            provider: string
+        }
+    }
+}
+
+export interface UpdateMedicalEncounterRequest extends Express.Request {
+    params: {
+        id: string,
+        date: string
+    },
+    body: {
+        data: {
+            provider: string,
+        }
+    }
+}

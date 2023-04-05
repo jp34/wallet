@@ -87,7 +87,7 @@ export const getUser = async () => {
     return await getRequest(`/api/users/${session.user.id}`);
 }
 
-// Patient Methods
+// Patient
 
 export const createPatient = async (firstName, middleName, lastName, phone, birthday) => {
     return await postRequest(`/api/patients/${session.user.id}`, {
@@ -103,10 +103,29 @@ export const getPatient = async () => {
     return await getRequest(`/api/patients/${session.user.id}`);
 }
 
+// Patient Medication
+
+export const createPatientMedication = async (name, dosage, frequency) => {
+    return await postRequest(`/api/patients/${session.user.id}/medications`, {
+        name: name,
+        dosage: dosage,
+        frequency: frequency
+    });
+}
+
 export const getPatientMedications = async () => {
     return await getRequest(`/api/patients/${session.user.id}/medications`);
 }
 
 export const getPatientMedication = async (name) => {
     return await getRequest(`/api/patients/${session.user.id}/medications/${name}`);
+}
+
+// Patient Allergy
+
+export const createPatientAllergy = async (name, severity) => {
+    return await postRequest(`/api/patients/${session.user.id}/allergies`, {
+        name: name,
+        severity: severity
+    });
 }

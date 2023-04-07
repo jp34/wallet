@@ -6,7 +6,7 @@ const WEB3_SERVER_HOST = process.env.WEB3_SERVER_HOST;
 const WEB3_SERVER_PORT = process.env.WEB3_SERVER_PORT;
 const WEB3_SERVER_URL = `http://${WEB3_SERVER_HOST}:${WEB3_SERVER_PORT}/api`;
 
-export const createEmr = async (id: number) => {
+export const createProduct = async (id: number) => {
     try {
         // Fetch patient data
         const patient = await prisma.patient.findUnique({
@@ -26,8 +26,8 @@ export const createEmr = async (id: number) => {
         });
         if (result.status != 200) throw new Error("Received error from web3-listener");
 
-        // Store record of emr creation
-        const receipt = await prisma.emr.create({
+        // Store new product
+        const receipt = await prisma.product.create({
             data: {
                 cid: result.data.cid,
                 subjectId: patient.id,

@@ -18,7 +18,7 @@ model User {
 	earning			Boolean		@default(false)
 	agreement		Boolean		@default(false)
 	patient     	Patient?
-	emrs			Emr[]
+	products		Product[]
 	created			DateTime	@default(now())
 	modified		DateTime	@default(now())
 }
@@ -69,10 +69,26 @@ model MedicalEncounter {
 	@@id([patientId, date])
 }
 
-model Emr {
-	cid				String		@id
+model Product {
+	id				Int			@id @default(autoincrement())
+	cid				String		@unique
 	subject			User		@relation(fields: [subjectId], references: [id])
 	subjectId		Int
+	voucher			String?
+	buyerId			Int?
+	sold			Boolean		@default(false)
+	dateSold		DateTime?
 	created			DateTime	@default(now())
 	modified		DateTime	@default(now())
 }
+
+// Int ProductId (same as tokenId),
+// int patientId,
+// string voucher,
+// int price, 
+// bool isSold,
+// Int BuyerId,
+// string receipt,
+// date timeSold,
+// int amountDue,
+// Bool hasBeenWithdrawn

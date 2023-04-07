@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { createProduct } from "../service/product.service";
+import { createProduct } from "../service/product/product.service";
 import logger from "../util/logger";
 
 export const syncProduct = async (request: Request, response: Response, next: NextFunction) => {

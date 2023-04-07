@@ -1,10 +1,6 @@
-import axios from "axios";
-import prisma from "../config/db";
-import logger from "../util/logger";
-
-const WEB3_SERVER_HOST = process.env.WEB3_SERVER_HOST;
-const WEB3_SERVER_PORT = process.env.WEB3_SERVER_PORT;
-const WEB3_SERVER_URL = `http://${WEB3_SERVER_HOST}:${WEB3_SERVER_PORT}/api`;
+import prisma from "../../config/db";
+import logger from "../../util/logger";
+import { uploadDocument } from "./ipfs.service";
 
 export const createProduct = async (id: number) => {
     try {
@@ -18,18 +14,17 @@ export const createProduct = async (id: number) => {
         logger.info(`Generating new EMR for patient: ${patient.id}`);
 
         // Send patient data to Web3-Listener
-        const result = await axios.post(WEB3_SERVER_URL.concat('/emr'), {
+        const cid = await uploadDocument([{
             meta: {
                 subject: patient.id
             },
             data: patient
-        });
-        if (result.status != 200) throw new Error("Received error from web3-listener");
-
+        }]);
+        
         // Store new product
         const receipt = await prisma.product.create({
             data: {
-                cid: result.data.cid,
+                cid: cid,
                 subjectId: patient.id,
             }
         });

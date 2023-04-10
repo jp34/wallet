@@ -6,45 +6,16 @@ services:
     container_name: wallet-db
     image: postgres:15.2
     ports:
-     - "8432:5432"
-    environment:
-     - POSTGRES_USER=~
-     - POSTGRES_PASSWORD=~
-     - POSTGRES_DB=~
+      - "8432:5432"
+    env_file:
+      - ./production.env
 
-  wallet-cms:
-    container_name: wallet-cms
-    build: ./wallet-cms    
+  wallet-server:
+    container_name: wallet-server
+    build: ./wallet-server
     depends_on:
       - "wallet-db"
     ports:
-      - "8081:8080"
-    environment:
-     - NODE_ENV=~
-     - STRAPI_HOST=~
-     - STRAPI_PORT=~
-     - STRAPI_URL=~
-     - STRAPI_SECRET=~
-     - STRAPI_APP_KEY_1=~
-     - STRAPI_APP_KEY_2=~
-     - STRAPI_DB_USER=~
-     - STRAPI_DB_PASS=~
-     - STRAPI_DB_HOST=~
-     - STRAPI_DB_PORT=~
-     - STRAPI_DB_NAME=~
-     - STRAPI_DB_SCHEMA=~
-
-  wallet-blockchain:
-    container_name: wallet-blockchain
-    build: ./wallet-blockchain
-    depends_on:
-     - "wallet-db"
-     - "wallet-cms"
-    ports:
-     - "8082:8080"
-    environment:
-     - NODE_ENV=~
-     - WEB3_SERVER_PORT=~
-     - WEB3_PROVIDER_HOST=~
-     - WEB3_PROVIDER_PORT=~
-     - WEB3_IPFS_TOKEN=~
+      - "8000:8000"
+    env_file:
+      - ./production.env

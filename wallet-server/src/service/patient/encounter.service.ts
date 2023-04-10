@@ -1,15 +1,27 @@
 import prisma from "../../config/db";
+import { CreateMedicalEncounter } from "../../util/io/patient.io";
 
 export const createMedicalEncounter = async (
     patient: number,
-    date: string,
+    reason: string,
     provider: string
 ) => {
     return await prisma.medicalEncounter.create({
         data: {
             patientId: patient,
-            date: date,
+            reason: reason,
             provider: provider
+        }
+    });
+}
+
+export const createMedicalEncounters = async (patient: number, encounters: CreateMedicalEncounter[]) => {
+    encounters.forEach(async (encounter) => {
+        await createMedicalEncounter(patient, encounter.reason, encounter.provider);
+    });
+    return await prisma.medicalEncounter.findMany({
+        where: {
+            patientId: patient
         }
     });
 }
@@ -18,23 +30,23 @@ export const findMedicalEncounters = async () => {
     return await prisma.medicalEncounter.findMany();
 }
 
-export const findMedicalEncounter = async (id: number, date: string) => {
+export const findMedicalEncounter = async (id: number, reason: string) => {
     return await prisma.medicalEncounter.findUnique({
         where: {
-            patientId_date: {
+            patientId_reason: {
                 patientId: id,
-                date: date
+                reason: reason
             }
         }
     });
 }
 
-export const updateMedicalEncounterProvider = async (id: number, date: string, provider: string) => {
+export const updateMedicalEncounterProvider = async (id: number, reason: string, provider: string) => {
     return await prisma.medicalEncounter.update({
         where: {
-            patientId_date: {
+            patientId_reason: {
                 patientId: id,
-                date: date
+                reason: reason
             }
         },
         data: {
@@ -44,12 +56,12 @@ export const updateMedicalEncounterProvider = async (id: number, date: string, p
     });
 }
 
-export const deleteMedicalEncounter = async (id: number, date: string) => {
+export const deleteMedicalEncounter = async (id: number, reason: string) => {
     return await prisma.medicalEncounter.delete({
         where: {
-            patientId_date: {
+            patientId_reason: {
                 patientId: id,
-                date: date
+                reason: reason
             }
         }
     });

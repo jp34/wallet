@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
-import { CreateMedicalEncounterRequest, UpdateMedicalEncounterRequest } from "../../util/io/patient.io";
+import { CreateManyMedicalEncounterRequest, UpdateMedicalEncounterRequest } from "../../util/io/patient.io";
 import {
-    createMedicalEncounter,
+    createMedicalEncounters,
     findMedicalEncounter,
     findMedicalEncounters,
     updateMedicalEncounterProvider,
@@ -10,12 +10,12 @@ import {
 
 export default class MedicalEncounterController {
 
-    public create = async (request: CreateMedicalEncounterRequest, response: Response, next: NextFunction) => {
+    public create = async (request: CreateManyMedicalEncounterRequest, response: Response, next: NextFunction) => {
         const id = parseInt(request.params.id);
         const data = request.body.data;
         if (!id) throw new Error("Missing or invalid input provided: id");
         if (!data) throw new Error("Invalid request body provided");
-        createMedicalEncounter(id, data.date, data.provider).then(data => {
+        createMedicalEncounters(id, data).then(data => {
             response.status(200).json({ status: "success", data: data });
             next();
         }).catch(next);

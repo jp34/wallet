@@ -44,6 +44,7 @@ model PatientMedication {
 	name			String
 	dosage			String
 	frequency		String
+	date			String
 	created			DateTime	@default(now())
 	modified		DateTime	@default(now())
 	@@id([patientId, name])
@@ -53,7 +54,7 @@ model PatientAllergy {
 	patient			Patient		@relation(fields: [patientId], references: [id])
 	patientId		Int
 	name			String
-	severity		Int
+	severity		String
 	created			DateTime	@default(now())
 	modified		DateTime	@default(now())
 	@@id([patientId, name])
@@ -63,15 +64,15 @@ model MedicalEncounter {
 	patient			Patient		@relation(fields: [patientId], references: [id])
 	patientId		Int
 	provider		String
-	date			String
+	reason			String
 	created			DateTime	@default(now())
 	modified		DateTime	@default(now())
-	@@id([patientId, date])
+	@@id([patientId, reason])
 }
 
 model Product {
 	id				Int			@id @default(autoincrement())
-	cid				String		@unique
+	cid				String
 	subject			User		@relation(fields: [subjectId], references: [id])
 	subjectId		Int
 	voucher			String?
@@ -81,14 +82,3 @@ model Product {
 	created			DateTime	@default(now())
 	modified		DateTime	@default(now())
 }
-
-// Int ProductId (same as tokenId),
-// int patientId,
-// string voucher,
-// int price, 
-// bool isSold,
-// Int BuyerId,
-// string receipt,
-// date timeSold,
-// int amountDue,
-// Bool hasBeenWithdrawn

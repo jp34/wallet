@@ -13,6 +13,7 @@ import {
 } from "native-base";
 import Wrapper from "../../src/components/Wrapper";
 import TextInputFormControl from "../../src/components/InputFormControl";
+import { createPatientMedications } from "../api";
 
 export default function MedicationsIntakeScreen() {
   const router = useRouter();
@@ -21,28 +22,41 @@ export default function MedicationsIntakeScreen() {
   const dosageRef = useRef(null);
   const frequencyRef = useRef(null);
   const dateRef = useRef(null);
-  const diagnosisRef = useRef(null);
 
   const [medications, setMedications] = useState([]);
+
+  async function attemptCreateMedication() {
+    try {
+      // Handle saving medications
+      if (medications.length > 0) {
+        const result = await createPatientMedications(medications);
+        if (result) router.push("./medicalEncounter");
+      } else {
+        router.push("./medicalEncounter");
+      }
+      
+    } catch (err) {
+      console.error(err);
+      return;
+    }
+  }
 
   const handleAddMedication = () => {
     const name = nameRef.current.getValue();
     const dosage = dosageRef.current.getValue();
     const frequency = frequencyRef.current.getValue();
     const date = dateRef.current.getValue();
-    const diagnosis = diagnosisRef.current.getValue();
 
     if (
       name === "" ||
       dosage === "" ||
       frequency === "" ||
-      date === "" ||
-      diagnosis === ""
+      date === ""
     ) {
       return;
     }
 
-    const newMedication = { name, dosage, frequency, date, diagnosis };
+    const newMedication = { name, dosage, frequency, date };
 
     setMedications([...medications, newMedication]);
 
@@ -50,7 +64,6 @@ export default function MedicationsIntakeScreen() {
     dosageRef.current.clear();
     frequencyRef.current.clear();
     dateRef.current.clear();
-    diagnosisRef.current.clear();
     Keyboard.dismiss();
   };
 
@@ -60,17 +73,6 @@ export default function MedicationsIntakeScreen() {
     );
     setMedications(newMedications);
   };
-
-  async function attemptCreateMedication() {
-    try {
-      // Handle saving medications
-      // const result = await createPatientMedication(patientId, name, dosage, frequency, date, diagnosis);
-      router.push("./diagnoses");
-    } catch (err) {
-      console.error(err);
-      return;
-    }
-  }
 
   return (
     <Wrapper keyboard>
@@ -107,14 +109,9 @@ export default function MedicationsIntakeScreen() {
           <TextInputFormControl
             label="Date Prescribed"
             ref={dateRef}
-            onSubmitEditing={() => diagnosisRef.current.focus()}
+            onSubmitEditing={() => Keyboard.dismiss()}
             keyboardType="numeric"
             returnKeyType="done"
-          />
-          <TextInputFormControl
-            label="Diagnosis"
-            ref={diagnosisRef}
-            onSubmitEditing={() => Keyboard.dismiss()}
           />
           <Button
             alignSelf="center"
@@ -148,8 +145,7 @@ export default function MedicationsIntakeScreen() {
                       fontWeight="semibold"
                     >
                       {medication.name} - {medication.dosage} -{" "}
-                      {medication.frequency} - {medication.date} -{" "}
-                      {medication.diagnosis}
+                      {medication.frequency} - {medication.date}
                     </Text>
                     <Box>
                       <Button

@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
-import { CreatePatientMedicationRequest, UpdatePatientMedicationRequest } from "../../util/io/patient.io";
+import { CreateManyPatientMedicationRequest, UpdatePatientMedicationRequest } from "../../util/io/patient.io";
 import {
-    createPatientMedication,
+    createPatientMedications,
     findPatientMedications,
     findPatientMedication,
     updatePatientMedicationDosage,
@@ -11,12 +11,12 @@ import {
 
 export default class PatientMedicationController {
 
-    public create = async (request: CreatePatientMedicationRequest, response: Response, next: NextFunction) => {
+    public create = async (request: CreateManyPatientMedicationRequest, response: Response, next: NextFunction) => {
         const id = parseInt(request.params.id);
         const data = request.body.data;
         if (!id) throw new Error("Missing or invalid input provided: id");
         if (!data) throw new Error("Invalid request body provided");
-        createPatientMedication(id, data.name, data.dosage, data.frequency).then(data => {
+        createPatientMedications(id, data).then(data => {
             response.status(200).json({ status: "success", data: data });
             next();
         }).catch(next);

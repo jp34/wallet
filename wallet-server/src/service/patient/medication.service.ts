@@ -1,17 +1,37 @@
 import prisma from "../../config/db";
+import { CreatePatientMedication } from "../../util/io/patient.io";
 
 export const createPatientMedication = async (
     patient: number,
     name: string,
     dosage: string,
-    frequency: string
+    frequency: string,
+    date: string
 ) => {
     return await prisma.patientMedication.create({
         data: {
             patientId: patient,
             name: name,
             dosage: dosage,
-            frequency: frequency
+            frequency: frequency,
+            date: date
+        }
+    });
+}
+
+export const createPatientMedications = async (patient: number, medications: CreatePatientMedication[]) => {
+    medications.forEach(async (medication) => {
+        await createPatientMedication(
+            patient,
+            medication.name,
+            medication.dosage,
+            medication.frequency,
+            medication.date
+        );
+    });
+    return await prisma.patientMedication.findMany({
+        where: {
+            patientId: patient
         }
     });
 }

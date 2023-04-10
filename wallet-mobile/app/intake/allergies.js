@@ -13,7 +13,7 @@ import {
 } from "native-base";
 import Wrapper from "../../src/components/Wrapper";
 import TextInputFormControl from "../../src/components/InputFormControl";
-import { createPatientAllergy } from "../api";
+import { createPatientAllergies } from "../api";
 
 export default function AllergiesIntakeScreen() {
   const router = useRouter();
@@ -25,8 +25,12 @@ export default function AllergiesIntakeScreen() {
   async function attemptCreateAllergy() {
     try {
       // Handle save allergies.
-      // const result = await createPatientAllergy(allergies[0].allergy, allergies[0].severity);
-      router.push("./medications");
+      if (allergies.length > 0) {
+        const result = await createPatientAllergies(allergies);
+        if (result) router.push("./medications");
+      } else {
+        router.push("./medications");
+      }
     } catch (err) {
       console.error(err);
       return;
@@ -38,7 +42,7 @@ export default function AllergiesIntakeScreen() {
     const severity = severityRef.current.getValue();
 
     if (allergy === "" || severity === "") return;
-    const newAllergy = { allergy, severity };
+    const newAllergy = { name: allergy, severity: severity };
 
     setAllergies([...allergies, newAllergy]);
 
@@ -114,7 +118,7 @@ export default function AllergiesIntakeScreen() {
                       fontSize="lg"
                       fontWeight="semibold"
                     >
-                      {allergy.allergy} - {allergy.severity}
+                      {allergy.name} - {allergy.severity}
                     </Text>
                     <Box>
                       <Button

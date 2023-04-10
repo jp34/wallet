@@ -1,7 +1,10 @@
 import { Request, Response, NextFunction } from "express";
-import { CreatePatientAllergyRequest, UpdatePatientAllergyRequest } from "../../util/io/patient.io";
 import {
-    createPatientAllergy,
+    CreateManyPatientAllergyRequest,
+    UpdatePatientAllergyRequest
+} from "../../util/io/patient.io";
+import {
+    createPatientAllergies,
     findPatientAllergies,
     findPatientAllergy,
     updatePatientAllergySeverity,
@@ -10,12 +13,12 @@ import {
 
 export default class PatientAllergyController {
 
-    public create = async (request: CreatePatientAllergyRequest, response: Response, next: NextFunction) => {
+    public create = async (request: CreateManyPatientAllergyRequest, response: Response, next: NextFunction) => {
         const id = parseInt(request.params.id);
         const data = request.body.data;
         if (!id) throw new Error("Missing or invalid input provided: id");
         if (!data) throw new Error("Invalid request body provided");
-        createPatientAllergy(id, data.name, data.severity).then(data => {
+        createPatientAllergies(id, data).then(data => {
             response.status(200).json({ status: "success", data: data });
             next();
         }).catch(next);

@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const host = "localhost";
-const port = "8000";
-const url = `http://${host}:${port}`;
+const port = "8443";
+const url = `https://${host}:${port}`;
 
 var session = {
     user: {},
@@ -18,7 +18,7 @@ export const login = async (email, password) => {
                 email: email,
                 password: password
             }
-        }, { mode: 'no-cors' });
+        });
         if (response.status != 200) throw Error("Server responded with error");
         session.user = response.data.data;
         session.tokens = response.data.tokens;
@@ -36,7 +36,7 @@ export const signup = async (email, password) => {
                 email: email,
                 password: password
             }
-        }, { mode: 'no-cors' });
+        });
         if (response.status != 200) throw Error("Server responded with error");
         session.user = response.data.data;
         session.tokens = response.data.tokens;
@@ -53,7 +53,6 @@ const getRequest = async (path) => {
     try {
         if (!session.user) throw new Error("User has not authenticated yet");
         const response = await axios.get(url.concat(path), {
-            mode: 'no-cors',
             headers: {
                 Authorization: `Bearer ${session.tokens.access}`
             } 
@@ -69,7 +68,6 @@ const postRequest = async (path, data) => {
     try {
         if (!session.user) throw new Error("User has not authenticated yet");
         const response = await axios.post(url.concat(path), { data: data }, {
-            mode: 'no-cors',
             headers: {
                 Authorization: `Bearer ${session.tokens.access}`
             } 
@@ -126,6 +124,5 @@ export const createPatientAllergies = async (allergies) => {
 // Medical Encounter
 
 export const createMedicalEncounters = async (encounters) => {
-    console.log(encounters);
     return await postRequest(`/api/patients/${session.user.id}/encounters`, encounters);
 }

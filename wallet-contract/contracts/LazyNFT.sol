@@ -15,6 +15,7 @@ contract LazyNFT is ERC721URIStorage, EIP712, AccessControl {
   string private constant SIGNING_DOMAIN = "LazyNFT-Voucher";
   string private constant SIGNATURE_VERSION = "1";
 
+  // Counters from openzeppelin to keep track of tokens.
   using Counters for Counters.Counter;
     //_tokenIds variable has the most recent minted tokenId
     Counters.Counter private _tokenIds;
@@ -29,6 +30,14 @@ contract LazyNFT is ERC721URIStorage, EIP712, AccessControl {
       _setupRole(MINTER_ROLE, minter);
     }
 
+  function transferEther(address payable seller, uint256 amount) public payable returns(uint256) {
+        require(hasRole(MINTER_ROLE, msg.sender), "Only the Admin can transfer funds");
+        require(msg.value >= amount, "Insufficient balance");
+        // Transfer from admin to seller account
+        seller.transfer(amount);
+        return amount;
+    }
+  
   /// @notice Represents an un-minted NFT, which has not yet been recorded into the blockchain. A signed voucher can be redeemed for a real NFT using the redeem function.
   struct NFTVoucher {
     /// @notice The id of the token to be redeemed. Must be unique - if another token with this ID already exists, the redeem function will revert.

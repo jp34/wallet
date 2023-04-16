@@ -2,7 +2,7 @@
 require("@nomiclabs/hardhat-waffle");
 require("@nomiclabs/hardhat-ethers");
 require('dotenv').config();
-const { MNEMONIC, PROJECT_ID, GANACHE_MC } = process.env;
+const { MNEMONIC, INFURA_LINK, GANACHE_MC } = process.env;
 
 task("accounts", "Prints the list of accounts", async () => {
   const accounts = await ethers.getSigners();
@@ -26,7 +26,7 @@ module.exports = {
       }
     },
     goerli: {
-      url: PROJECT_ID,
+      url: INFURA_LINK,
       accounts: {
         mnemonic: MNEMONIC,
       },

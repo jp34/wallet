@@ -2,6 +2,7 @@ loginModal = new bootstrap.Modal(document.getElementById('login-modal'))
 infoModal = new bootstrap.Modal(document.getElementById('info-modal'))
 bidModal = new bootstrap.Modal(document.getElementById('bid-modal'))
 const signinButton = document.getElementById('signin-button')
+let currAccount
 
 function openInfo(id) {
   let i = id.match("[0-9]+");
@@ -58,6 +59,7 @@ async function getAccount() {
     activeAccount = accounts[0];
   }
   replaceSignupButton(activeAccount);
+  setHiddenField(activeAccount);
   loggedIn = true;
 }
 
@@ -73,4 +75,8 @@ async function getChainId() {
 function replaceSignupButton(name) {
   document.getElementById('signin-button').style.display = "none"
   document.getElementById('username-display').innerText = "Hi " + name
+}
+
+function setHiddenField(value) {
+  document.getElementById('walletID').value = value;
 }

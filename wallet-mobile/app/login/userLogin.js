@@ -35,7 +35,7 @@ export default function LoginScreen() {
         const result = await login(email, password);
         if (result) {
           setValid(true);
-          return router.replace("./home");
+          return router.replace("home");
         } else {
           setValid(false);
           setErrorMessage("Invalid logins provided");

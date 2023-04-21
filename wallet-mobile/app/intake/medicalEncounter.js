@@ -12,6 +12,7 @@ import {
 } from "native-base";
 import Wrapper from "../../src/components/Wrapper";
 import TextInputFormControl from "../../src/components/InputFormControl";
+import { createMedicalEncounters } from "../api";
 
 export default function MedicalEncountersScreen() {
   const router = useRouter();
@@ -20,12 +21,18 @@ export default function MedicalEncountersScreen() {
   const reasonRef = useRef(null);
   const diagnosisRef = useRef(null);
 
-  const [encounterList, setEncounterList] = useState([]);
+  const [encounters, setEncounterList] = useState([]);
 
   async function attemptCreateEncounter() {
     try {
       // Handle saving medical encounters
-      router.push("../home");
+      if (encounters.length > 0) {
+        const result = await createMedicalEncounters(encounters);
+        if (result) router.push("../home");
+      } else {
+        router.push("../home");
+      }
+      
     } catch (err) {
       console.error(err);
       return;
@@ -39,8 +46,8 @@ export default function MedicalEncountersScreen() {
 
     if (provider === "" || reason === "") return;
 
-    const newEncounter = { provider, reason, diagnosis };
-    setEncounterList([...encounterList, newEncounter]);
+    const newEncounter = { provider, reason };
+    setEncounterList([...encounters, newEncounter]);
 
     providerRef.current.clear();
     reasonRef.current.clear();
@@ -48,7 +55,7 @@ export default function MedicalEncountersScreen() {
   };
 
   const handleRemoveEncounter = (indexToRemove) => {
-    const newEncounterList = encounterList.filter(
+    const newEncounterList = encounters.filter(
       (_, index) => index !== indexToRemove
     );
     setEncounterList(newEncounterList);
@@ -99,12 +106,12 @@ export default function MedicalEncountersScreen() {
           </Button>
           <Box bgColor="secondaryViolet.600" rounded="15" mt="6">
             <ScrollView maxH="32" p="2" my="2">
-              {encounterList.length === 0 ? (
+              {encounters.length === 0 ? (
                 <Text color="#EEE" fontSize="lg" fontWeight="semibold" mx="2">
                   No Medical Encounters
                 </Text>
               ) : (
-                encounterList.map((encounter, index) => (
+                encounters.map((encounter, index) => (
                   <Box
                     key={index}
                     flexDirection="row"

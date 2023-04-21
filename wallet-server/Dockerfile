@@ -1,6 +1,6 @@
 FROM node:14.21.1
 
-WORKDIR /usr/src/wallet/wallet-blockchain
+WORKDIR /usr/src/wallet/wallet-server
 COPY . .
 
 RUN npm install

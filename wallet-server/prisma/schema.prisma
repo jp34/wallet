@@ -18,7 +18,7 @@ model User {
 	earning			Boolean		@default(false)
 	agreement		Boolean		@default(false)
 	patient     	Patient?
-	emrs			Emr[]
+	products		Product[]
 	created			DateTime	@default(now())
 	modified		DateTime	@default(now())
 }
@@ -32,7 +32,7 @@ model Patient {
 	phone			String					@default("")
 	birthday		String
 	medications		PatientMedication[]
-	allergies		PatientAllergies[]
+	allergies		PatientAllergy[]
 	encounters		MedicalEncounter[]
 	created			DateTime				@default(now())
 	modified		DateTime				@default(now())
@@ -40,20 +40,21 @@ model Patient {
 
 model PatientMedication {
 	patient			Patient		@relation(fields: [patientId], references: [id])
-	patientId		Int			@unique
+	patientId		Int
 	name			String
 	dosage			String
 	frequency		String
+	date			String
 	created			DateTime	@default(now())
 	modified		DateTime	@default(now())
 	@@id([patientId, name])
 }
 
-model PatientAllergies {
+model PatientAllergy {
 	patient			Patient		@relation(fields: [patientId], references: [id])
-	patientId		Int			@unique
+	patientId		Int
 	name			String
-	severity		Int
+	severity		String
 	created			DateTime	@default(now())
 	modified		DateTime	@default(now())
 	@@id([patientId, name])
@@ -61,18 +62,23 @@ model PatientAllergies {
 
 model MedicalEncounter {
 	patient			Patient		@relation(fields: [patientId], references: [id])
-	patientId		Int			@unique
+	patientId		Int
 	provider		String
-	date			DateTime
+	reason			String
 	created			DateTime	@default(now())
 	modified		DateTime	@default(now())
-	@@id([patientId, date])
+	@@id([patientId, reason])
 }
 
-model Emr {
-	cid				String		@id
+model Product {
+	id				Int			@id @default(autoincrement())
+	cid				String
 	subject			User		@relation(fields: [subjectId], references: [id])
 	subjectId		Int
+	voucher			String?
+	buyerId			Int?
+	sold			Boolean		@default(false)
+	dateSold		DateTime?
 	created			DateTime	@default(now())
 	modified		DateTime	@default(now())
 }

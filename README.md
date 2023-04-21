@@ -1,18 +1,19 @@
 # Healthcare Wallet
 
-## Links
+### Wiki
+* [wallet-contract](https://github.com/Healthcare-Wallet/wallet/tree/main/wallet-contract) - Solidity contracts and deployment
+* [wallet-server](https://github.com/Healthcare-Wallet/wallet/tree/main/wallet-server) - Node.js REST api
+* [wallet-web3](https://github.com/Healthcare-Wallet/wallet/tree/main/wallet-web3) - Node.js web3 listener
+* [wallet-mobile](https://github.com/Healthcare-Wallet/wallet/tree/main/wallet-mobile) - React Native mobile app
+* [wallet-market](https://github.com/Healthcare-Wallet/wallet/tree/main/wallet-market) - NFT Marketplace
+
+## Diagrams
 
 * [Google Drive](https://drive.google.com/drive/folders/1_yls1vmtaeNswSYSHJ6Jh7a6XzPyydkQ?usp=sharing)
 * System Diagram - [PDF](https://drive.google.com/file/d/1M8lYaPHJd2E1IreHUaZcf_Q6Ky29tgie/view?usp=sharing)
 * Sequence Diagram - [PDF](https://drive.google.com/file/d/1TUsv5Zo4XeQ-Q1PQDEU1BcdmeuRrkwv-/view?usp=sharing)
 * Database Diagram - [PDF](https://drive.google.com/file/d/1G1bUflaVK4TG7XMCwE5DFOzC2usc5DW8/view?usp=share_link)
 * UI Wireframe - [Miro](https://miro.com/app/board/uXjVPP5VJak=/?share_link_id=701144025960)
-
-### Projects
-* [wallet-blockchain](https://github.com/Healthcare-Wallet/wallet/tree/main/wallet-blockchain)
-* [wallet-cms](https://github.com/Healthcare-Wallet/wallet/tree/main/wallet-cms)
-* [wallet-mobile](https://github.com/Healthcare-Wallet/wallet/tree/main/wallet-mobile)
-* [wallet-marketplace](https://github.com/Healthcare-Wallet/wallet/tree/main/wallet-market)
 
 ## Info
 

@@ -23,7 +23,7 @@ function generateRandomAuctions() {
     { size: startingPrices.length },
     function (data) {
       data.forEach((elem, idx) => {
-        document.querySelector("#auction-" + idx + " > div > h5").innerHTML = elem.name;
+        document.querySelector("#auction-" + idx + " > div > span").innerHTML = elem.name;
         titles.push(elem.name);
       });
     }
@@ -204,8 +204,8 @@ function generateAuctionCard(i) {
   body.classList.add("card-body");
   card.appendChild(body);
 
-  let title = document.createElement("h5");
-  title.classList.add("title");
+  let title = document.createElement("span");
+  title.classList.add("badge", "badge-pill", "badge-dark");
   title.innerText = titles[i];
   body.appendChild(title);
 

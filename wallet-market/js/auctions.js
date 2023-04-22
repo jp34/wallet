@@ -172,7 +172,7 @@ function placeBid() {
         }, 1000);
       } else {
         amountElement.classList.add("is-invalid")
-        feedback.innerText = "You must bid at least £" + (currentBid + 1).toFixed(2) + "!"
+        feedback.innerText = "You must bid at least " + (currentBid + 1).toFixed(2) + " ETH!"
         modalBidButton.removeAttribute('disabled', '');
       }
     });

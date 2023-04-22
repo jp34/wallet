@@ -101,3 +101,12 @@ p {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding-bottom: 1rem;
+  color: white;
+  text-align: center;
+}

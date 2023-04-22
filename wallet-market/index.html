@@ -124,6 +124,62 @@
       </div>
     </div>
   </div>
+
+  <!-- Patient Portal modal -->
+  <div id="portal-modal" class="modal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 id="portal-modal-title" class="modal-title">
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p id="portal-modal-desc"></p>
+          <form>
+            <div class="form-group" id="PatientPortalForm">
+              <label for="InputUser1">Username</label>
+              <input type="text" class="form-control" id="InputUser1" placeholder="Enter username">              
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Password</label>
+              <input type="password" class="form-control" id="InputPassword1" placeholder="Password">
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">I am a Customer</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Submit bid"
+            onclick="openExitModal()">Link Accounts</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Patient Exit modal -->
+  <div id="exit-portal-modal" class="modal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 id="exit-portal-modal-title" class="modal-title"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p id="exit-portal-modal-desc"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <button type="submit" class="btn btn-primary" onclick="openPortal()" style="float: right">Patient Portal</button>
+  </div>
+
+
   <!-- Custom JS -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   <script src="./js/auctions.js"></script>

@@ -19,10 +19,7 @@ export default class PatientController {
         if (!data) throw new Error("Invalid request body provided");
         createPatient(id, data.firstName, data.middleName, data.lastName, data.birthday).then(data => {
             response.status(200).json({ status: "success", data: data });
-<<<<<<< HEAD
-=======
             next();
->>>>>>> main
         }).catch(next);
     }
 
@@ -62,10 +59,7 @@ export default class PatientController {
         if (!request.params.id) throw new Error("Missing or invalid input provided: id");
         deletePatient(parseInt(request.params.id)).then(data => {
             response.status(200).json({ status: "success", data: data });
-<<<<<<< HEAD
-=======
             next();
->>>>>>> main
         }).catch(next);
     }
 }

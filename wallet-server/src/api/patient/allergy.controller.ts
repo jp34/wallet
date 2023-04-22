@@ -25,7 +25,9 @@ export default class PatientAllergyController {
     }
 
     public getMany = async (request: Request, response: Response, next: NextFunction) => {
-        findPatientAllergies().then(data => {
+        const id = parseInt(request.params.id);
+        if (!id) throw new Error("Missing or invalid input provided: id");
+        findPatientAllergies(id).then(data => {
             response.status(200).json({ status: "success", data: data });
         }).catch(next);
     }

@@ -1,13 +1,7 @@
 import { Request, Response, NextFunction } from "express";
-<<<<<<< HEAD
-import { CreatePatientMedicationRequest, UpdatePatientMedicationRequest } from "../../util/io/patient.io";
-import {
-    createPatientMedication,
-=======
 import { CreateManyPatientMedicationRequest, UpdatePatientMedicationRequest } from "../../util/io/patient.io";
 import {
     createPatientMedications,
->>>>>>> main
     findPatientMedications,
     findPatientMedication,
     updatePatientMedicationDosage,
@@ -17,28 +11,21 @@ import {
 
 export default class PatientMedicationController {
 
-<<<<<<< HEAD
-    public create = async (request: CreatePatientMedicationRequest, response: Response, next: NextFunction) => {
-=======
     public create = async (request: CreateManyPatientMedicationRequest, response: Response, next: NextFunction) => {
->>>>>>> main
         const id = parseInt(request.params.id);
         const data = request.body.data;
         if (!id) throw new Error("Missing or invalid input provided: id");
         if (!data) throw new Error("Invalid request body provided");
-<<<<<<< HEAD
-        createPatientMedication(id, data.name, data.dosage, data.frequency).then(data => {
-            response.status(200).json({ status: "success", data: data });
-=======
         createPatientMedications(id, data).then(data => {
             response.status(200).json({ status: "success", data: data });
             next();
->>>>>>> main
         }).catch(next);
     }
 
     public getMany = async (request: Request, response: Response, next: NextFunction) => {
-        findPatientMedications().then(data => {
+        const id = parseInt(request.params.id);
+        if (!id) throw new Error("Missing or invalid input provided: id");
+        findPatientMedications(id).then(data => {
             response.status(200).json({ status: "success", data: data });
         }).catch(next);
     }
@@ -64,10 +51,7 @@ export default class PatientMedicationController {
             if (data.frequency) await updatePatientMedicationFrequency(id, name, data.frequency).catch(next);
             findPatientMedication(id, name).then(data => {
                 response.status(200).json({ status: "success", data: data });
-<<<<<<< HEAD
-=======
                 next();
->>>>>>> main
             }).catch(next);
         } catch (err: any) {
             return next(err);
@@ -80,10 +64,7 @@ export default class PatientMedicationController {
         if (!id) throw new Error("Missing or invalid input provided: id");
         deletePatientMedication(id, name).then(data => {
             response.status(200).json({ status: "success", data: data });
-<<<<<<< HEAD
-=======
             next();
->>>>>>> main
         }).catch(next);
     }
 }

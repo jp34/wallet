@@ -3,11 +3,8 @@ import { Web3Storage, File } from "web3.storage";
 const token = process.env.API_IPFS_TOKEN ?? "undefined";
 const client = new Web3Storage({ token: token });
 
-<<<<<<< HEAD:wallet-web3/src/service/ipfs.service.ts
-=======
 // Local helper functions
 
->>>>>>> main:wallet-server/src/service/product/ipfs.service.ts
 const buildFileBuffer = (emr: Object) => {
     const buffer = Buffer.from(JSON.stringify(emr));
     const fileName = 'emr';
@@ -37,11 +34,7 @@ export const getAllDocuments = async () => {
     return uploads;
 };
 
-<<<<<<< HEAD:wallet-web3/src/service/ipfs.service.ts
 export const upload = async (emrArray: Object[]) => {
-=======
-export const uploadDocument = async (emrArray: Object[]) => {
->>>>>>> main:wallet-server/src/service/product/ipfs.service.ts
     const files = buildFileBuffers(emrArray);
     const cid = await client.put(files);
     console.log(

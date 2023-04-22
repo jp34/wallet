@@ -1,28 +1,18 @@
 import prisma from "../../config/db";
-<<<<<<< HEAD
-=======
 import { CreatePatientMedication } from "../../util/io/patient.io";
->>>>>>> main
 
 export const createPatientMedication = async (
     patient: number,
     name: string,
     dosage: string,
-<<<<<<< HEAD
-    frequency: string
-=======
     frequency: string,
     date: string
->>>>>>> main
 ) => {
     return await prisma.patientMedication.create({
         data: {
             patientId: patient,
             name: name,
             dosage: dosage,
-<<<<<<< HEAD
-            frequency: frequency
-=======
             frequency: frequency,
             date: date
         }
@@ -42,13 +32,16 @@ export const createPatientMedications = async (patient: number, medications: Cre
     return await prisma.patientMedication.findMany({
         where: {
             patientId: patient
->>>>>>> main
         }
     });
 }
 
-export const findPatientMedications = async () => {
-    return await prisma.patientMedication.findMany();
+export const findPatientMedications = async (id: number) => {
+    return await prisma.patientMedication.findMany({
+        where: {
+            patientId: id
+        }
+    });
 }
 
 export const findPatientMedication = async (id: number, name: string) => {

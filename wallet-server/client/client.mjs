@@ -1,4 +1,4 @@
-const axios = require("axios");
+import axios from "axios";
 
 const host = "localhost";
 const port = "8000";
@@ -11,14 +11,14 @@ var session = {
 
 // Authorization Methods
 
-const login = async (email, password) => {
+export const login = async (email, password) => {
     try {
         const response = await axios.post(url.concat('/api/auth/login'), {
             data: {
                 email: email,
                 password: password
             }
-        }, { mode: 'no-cors' });
+        });
         if (response.status != 200) throw Error("Server responded with error");
         session.user = response.data.data;
         session.tokens = response.data.tokens;
@@ -29,15 +29,14 @@ const login = async (email, password) => {
     }
 }
 
-const signup = async (email, ensAddress, password) => {
+export const signup = async (email, password) => {
     try {
         const response = await axios.post(url.concat('/api/auth/signup'), {
             data: {
                 email: email,
-                ensAddress: ensAddress,
                 password: password
             }
-        }, { mode: 'no-cors' });
+        });
         if (response.status != 200) throw Error("Server responded with error");
         session.user = response.data.data;
         session.tokens = response.data.tokens;
@@ -54,7 +53,6 @@ const getRequest = async (path) => {
     try {
         if (!session.user) throw new Error("User has not authenticated yet");
         const response = await axios.get(url.concat(path), {
-            mode: 'no-cors',
             headers: {
                 Authorization: `Bearer ${session.tokens.access}`
             } 
@@ -70,7 +68,6 @@ const postRequest = async (path, data) => {
     try {
         if (!session.user) throw new Error("User has not authenticated yet");
         const response = await axios.post(url.concat(path), { data: data }, {
-            mode: 'no-cors',
             headers: {
                 Authorization: `Bearer ${session.tokens.access}`
             } 
@@ -84,38 +81,74 @@ const postRequest = async (path, data) => {
 
 // User Methods
 
-const getUser = async () => {
+export const getUser = async () => {
     return await getRequest(`/api/users/${session.user.id}`);
 }
 
-// Patient Methods
+// Patient
 
-const createPatient = async (firstName, middleName, lastName, birthday) => {
-    return await postRequest('/api/patients', {
-        id: session.user.id,
+export const createPatient = async (firstName, middleName, lastName, phone, birthday) => {
+    return await postRequest(`/api/patients/${session.user.id}`, {
         firstName: firstName,
         middleName: middleName,
         lastName: lastName,
+        phone: phone,
         birthday: birthday
     });
 }
 
-const getPatient = async () => {
+export const getPatient = async () => {
     return await getRequest(`/api/patients/${session.user.id}`);
 }
 
-const getPatientMedications = async () => {
+// Patient Medication
+
+export const createPatientMedications = async (medications) => {
+    return await postRequest(`/api/patients/${session.user.id}/medications`, medications);
+}
+
+export const getPatientMedications = async () => {
     return await getRequest(`/api/patients/${session.user.id}/medications`);
 }
 
-const getPatientMedication = async (name) => {
+export const getPatientMedication = async (name) => {
     return await getRequest(`/api/patients/${session.user.id}/medications/${name}`);
 }
 
+// Patient Allergy
+
+export const createPatientAllergies = async (allergies) => {
+    return await postRequest(`/api/patients/${session.user.id}/allergies`, allergies);
+}
+
+// Medical Encounter
+
+export const createMedicalEncounters = async (encounters) => {
+    return await postRequest(`/api/patients/${session.user.id}/encounters`, encounters);
+}
+
+// Market
+
+export const getProducts = async () => {
+    return await getRequest('/api/products');
+}
+
+export const getProductAdvertising = async () => {
+    return await getRequest('/api/advertisements');
+}
+
 const main = async () => {
-    await login("testing@test.com", "password");
-    const result = await getPatientMedications();
-    console.log(result);
+    const loginResult = await login("test@gmail.com", "Password123!");
+    if (!loginResult) {
+        console.log("Login failed");
+        return;
+    }
+    const advertising = await getProductAdvertising();
+    if (!advertising) {
+        console.log("Advertising data failed");
+        return;
+    }
+    console.log(advertising);
 }
 
 main();

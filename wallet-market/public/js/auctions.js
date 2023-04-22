@@ -8,38 +8,19 @@ let details = []; //"Detail 1", "Detail 2", "Detail 3"
 let secondaryImages = [];
 let startingPrices = [55, 60, 20, 0, 4, 0, 99, 0, 12, 6, 3, 7];
 let endTimes = []; // Make sure to fix these to UTC time so they don't change with the users timezone // Date.now(), Date.now(), Date.now()
+let ads = [];
 
-// Random auction information
-function generateRandomAuctions() {
-  // Random cat images
-  document.querySelectorAll(".card > img").forEach(img => {
-    img.src = "https://api.thecatapi.com/v1/images/search"
-    primaryImages.push(img.src);
-    secondaryImages.push(img.src);
+function getAdvertising() {
+  $.ajax({
+      dataType: "json",
+      type: "GET",
+      url: "https://localhost:8443/api/advertisements",
+      headers: { "mode": "no-cors" },
+      success: (data) => {
+          ads = data.data;
+      },
+      async: false
   });
-  // Random cat names
-  $.getJSON(
-    "https://random-data-api.com/api/name/random_name",
-    { size: startingPrices.length },
-    function (data) {
-      data.forEach((elem, idx) => {
-        document.querySelector("#auction-" + idx + " > div > span").innerHTML = elem.name;
-        titles.push(elem.name);
-      });
-    }
-  );
-  // Random lorem ipsum cat descriptions
-  $.getJSON(
-    "https://random-data-api.com/api/lorem_ipsum/random_lorem_ipsum",
-    { size: startingPrices.length },
-    function (data) {
-      data.forEach((elem, idx) => {
-        document.querySelector("#auction-" + idx + " > div > p").innerHTML = elem.short_sentence;
-        subtitles.push(elem.short_sentence);
-        details.push(elem.very_long_sentence);
-      });
-    }
-  );
 }
 
 // Initial state of auction, used for resetting database
@@ -73,35 +54,6 @@ function timeBetween(start, end) {
   if (m) { _string = _string + m + "m " }
   if (s) { _string = _string + s + "s " }
   return _string.trim()
-}
-
-// Set time on HTML clocks
-function setClocks() {
-  let now = new Date();
-  let nowTime = now.getTime();
-  for (i = 0; i < startingPrices.length; i++) {
-    let timer = document.getElementById("time-left-" + i)
-    // remove finished auction after 5 minutes
-    if (endTimes[i] - nowTime < -300) {
-      document.getElementById("auction-" + i).parentElement.style.display = "none"
-      if (demoAuction) {
-        endTimes[i] = new Date(endTimes[i]).setDate(now.getDate() + 1) // add 1 day
-        document.getElementById("auction-" + i).parentElement.remove()
-        resetLive(i);
-        resetStore(i);
-        auctionGrid = document.getElementById("auction-grid");
-        auctionCard = generateAuctionCard(i);
-        auctionGrid.appendChild(auctionCard);
-      }
-      // disable bidding on finished auctions
-    } else if (endTimes[i] - nowTime < 0) {
-      timer.innerHTML = "Auction Complete";
-      document.getElementById("bid-button-" + i).setAttribute('disabled', '')
-    } else {
-      timer.innerHTML = timeBetween(nowTime, endTimes[i]);
-    }
-  }
-  setTimeout(setClocks, 1000);
 }
 
 // Place a bid on an item
@@ -204,15 +156,18 @@ function generateAuctionCard(i) {
   body.classList.add("card-body");
   card.appendChild(body);
 
-  let title = document.createElement("span");
-  title.classList.add("badge", "badge-pill", "badge-dark");
-  title.innerText = titles[i];
-  body.appendChild(title);
+  let tags = ads[i].tags;
+  for (var t = 0; t < tags.length; t++) {
+    let title = document.createElement("span");
+    title.classList.add("badge", "badge-pill", "badge-dark");
+    title.innerText = tags[t];
+    body.appendChild(title);
+  }
 
-  let subtitle = document.createElement("p");
-  subtitle.classList.add("card-subtitle");
-  subtitle.innerText = subtitles[i];
-  body.appendChild(subtitle);
+  // let subtitle = document.createElement("p");
+  // subtitle.classList.add("card-subtitle");
+  // subtitle.innerText = subtitles[i];
+  // body.appendChild(subtitle);
 
   // Auction status
   let statusTable = document.createElement("table");
@@ -275,13 +230,12 @@ function generateAuctionCard(i) {
 
 // Generatively populate the websire with auctions
 function populateAuctionGrid() {
+  getAdvertising();
   auctionGrid = document.getElementById("auction-grid");
-  let endingSoonest = argsort(endTimes);
-  endingSoonest.forEach((i) => {
+  for (var i = 0; i < ads.length; i++) {
     auctionCard = generateAuctionCard(i);
     auctionGrid.appendChild(auctionCard);
-  });
-  if (demoAuction) { generateRandomAuctions() };
+  }
 }
 
 function numberWithCommas(x) {

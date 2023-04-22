@@ -5,6 +5,7 @@ portalModal = new bootstrap.Modal(document.getElementById('portal-modal'))
 exitModal = new bootstrap.Modal(document.getElementById('exit-portal-modal'))
 const signinButton = document.getElementById('signin-button')
 let currAccount
+let loggedIn = false
 //import {useRouter} from "expo-router"
 //const router = require("@expo-router")
 
@@ -27,7 +28,7 @@ function openBid(id) {
     bidModal.show()
     document.getElementById("amount-input").focus()
   } else {
-    openLogin()
+    getAccount()
   }
 }
 
@@ -128,7 +129,7 @@ async function getPatientAccount() {
 async function openPortal(id) {
   const logCheck = await getPatientAccount();
   if(loggedIn) {
-    document.getElementById('portal-modal-title').innerHTML = "Sign in with your Cardinal Wallet(TM) Mobile App credentials <h6><small>FOR MOBILE APP USERS ONLY</h6>"
+    document.getElementById('portal-modal-title').innerHTML = "Sign in with your Cardinal Wallet™ Mobile App <h6><small>FOR MOBILE APP USERS ONLY</h6>"
     document.getElementById('portal-modal-desc').innerHTML = "This will link your wallet and mobile account so you can earn $$$!"
     portalModal.show()
   }

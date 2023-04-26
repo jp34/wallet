@@ -6,7 +6,7 @@ let titles = []; //"Title 1", "Title 2", "Title 3"
 let subtitles = []; //"SubTitle 1", "SubTitle 2", "SubTitle 3"
 let details = []; //"Detail 1", "Detail 2", "Detail 3"
 let secondaryImages = [];
-let startingPrices = [55, 60, 20, 0, 4, 0, 99, 0, 12, 6, 3, 7];
+let startingPrices = [55, 60, 20, 0, 4, 0, 99, 0];
 let endTimes = []; // Make sure to fix these to UTC time so they don't change with the users timezone // Date.now(), Date.now(), Date.now()
 let ads = [];
 
@@ -21,6 +21,32 @@ function getAdvertising() {
       },
       async: false
   });
+<<<<<<< HEAD:wallet-market/js/auctions.js
+  // Random cat names
+  $.getJSON(
+    "https://random-data-api.com/api/name/random_name",
+    { size: startingPrices.length },
+    function (data) {
+      data.forEach((elem, idx) => {
+        document.querySelector("#auction-" + idx + " > div > span").innerHTML = elem.name;
+        titles.push(elem.name);
+      });
+    }
+  );
+  // Random lorem ipsum cat descriptions
+  $.getJSON(
+    "https://random-data-api.com/api/lorem_ipsum/random_lorem_ipsum",
+    { size: startingPrices.length },
+    function (data) {
+      data.forEach((elem, idx) => {
+        document.querySelector("#auction-" + idx + " > div > p").innerHTML = elem.short_sentence;
+        subtitles.push(elem.short_sentence);
+        details.push(elem.very_long_sentence);
+      });
+    }
+  );
+=======
+>>>>>>> main:wallet-market/public/js/auctions.js
 }
 
 // Initial state of auction, used for resetting database
@@ -56,6 +82,38 @@ function timeBetween(start, end) {
   return _string.trim()
 }
 
+<<<<<<< HEAD:wallet-market/js/auctions.js
+// // Set time on HTML clocks
+// function setClocks() {
+//   let now = new Date();
+//   let nowTime = now.getTime();
+//   for (i = 0; i < startingPrices.length; i++) {
+//     let timer = document.getElementById("time-left-" + i)
+//     // remove finished auction after 5 minutes
+//     if (endTimes[i] - nowTime < -300) {
+//       document.getElementById("auction-" + i).parentElement.style.display = "none"
+//       if (demoAuction) {
+//         endTimes[i] = new Date(endTimes[i]).setDate(now.getDate() + 1) // add 1 day
+//         document.getElementById("auction-" + i).parentElement.remove()
+//         resetLive(i);
+//         resetStore(i);
+//         auctionGrid = document.getElementById("auction-grid");
+//         // auctionCard = generateAuctionCard(i);
+//         auctionGrid.appendChild(auctionCard);
+//       }
+//       // disable bidding on finished auctions
+//     } else if (endTimes[i] - nowTime < 0) {
+//       timer.innerHTML = "Auction Complete";
+//       document.getElementById("bid-button-" + i).setAttribute('disabled', '')
+//     } else {
+//       timer.innerHTML = timeBetween(nowTime, endTimes[i]);
+//     }
+//   }
+//   setTimeout(setClocks, 1000);
+// }
+
+=======
+>>>>>>> main:wallet-market/public/js/auctions.js
 // Place a bid on an item
 function placeBid() {
   let nowTime = new Date().getTime();
@@ -156,6 +214,12 @@ function generateAuctionCard(i) {
   body.classList.add("card-body");
   card.appendChild(body);
 
+<<<<<<< HEAD:wallet-market/js/auctions.js
+  let title = document.createElement("span");
+  title.classList.add("badge", "badge-pill", "badge-dark");
+  title.innerText = titles[i];
+  body.appendChild(title);
+=======
   let tags = ads[i].tags;
   for (var t = 0; t < tags.length; t++) {
     let title = document.createElement("span");
@@ -163,6 +227,7 @@ function generateAuctionCard(i) {
     title.innerText = tags[t];
     body.appendChild(title);
   }
+>>>>>>> main:wallet-market/public/js/auctions.js
 
   // let subtitle = document.createElement("p");
   // subtitle.classList.add("card-subtitle");
@@ -207,6 +272,15 @@ function generateAuctionCard(i) {
   buttonGroup.classList.add("buttons");
   card.appendChild(buttonGroup)
 
+  let bidButton = document.createElement("button");
+  bidButton.type = "button"
+  bidButton.href = "#";
+  bidButton.classList.add("btn", "btn-primary", "mr-auto")
+  bidButton.innerText = "Submit bid";
+  bidButton.onclick = function () { openBid(this.id); }
+  bidButton.id = "bid-button-" + i
+  buttonGroup.appendChild(bidButton);
+
   let infoButton = document.createElement("button");
   infoButton.type = "button"
   infoButton.href = "#";
@@ -215,15 +289,6 @@ function generateAuctionCard(i) {
   infoButton.onclick = function () { openInfo(this.id); }
   infoButton.id = "info-button-" + i
   buttonGroup.appendChild(infoButton);
-
-  let bidButton = document.createElement("button");
-  bidButton.type = "button"
-  bidButton.href = "#";
-  bidButton.classList.add("btn", "btn-primary")
-  bidButton.innerText = "Submit bid";
-  bidButton.onclick = function () { openBid(this.id); }
-  bidButton.id = "bid-button-" + i
-  buttonGroup.appendChild(bidButton);
 
   return col
 }

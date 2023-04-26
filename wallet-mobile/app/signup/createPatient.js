@@ -72,7 +72,7 @@ export default function CreatePatientScreen() {
       setFNameInvalid(true);
       return false;
     }
-  }
+  };
 
   const validateMiddleName = () => {
     try {
@@ -85,7 +85,7 @@ export default function CreatePatientScreen() {
       setMNameInvalid(true);
       return false;
     }
-  }
+  };
 
   const validateLastName = () => {
     try {
@@ -98,13 +98,14 @@ export default function CreatePatientScreen() {
       setLNameInvalid(true);
       return false;
     }
-  }
+  };
 
   const validatePhone = () => {
     try {
       if (!phone) throw "Date of Birth is required";
       if (phone.trim() === "") throw "Date of Birth is required";
-      if (!phoneNumberRegex.test(phone)) throw "Phone Number incorrect format, separate by dashes";
+      if (!phoneNumberRegex.test(phone))
+        throw "Phone Number incorrect format, separate by dashes";
       setBdayInvalid(false);
       phone.replace(/\D/g, "");
       return true;
@@ -113,13 +114,14 @@ export default function CreatePatientScreen() {
       setBdayInvalid(true);
       return false;
     }
-  }
+  };
 
   const validateBirthday = () => {
     try {
       if (!bday) throw "Date of Birth is required";
       if (bday.trim() === "") throw "Date of Birth is required";
-      if (!dateRegex.test(bday)) throw "Date of Birth incorrect format, MM/DD/YYYY";
+      if (!dateRegex.test(bday))
+        throw "Date of Birth incorrect format, MM/DD/YYYY";
       setBdayInvalid(false);
       bday.replace(/\D/g, "");
       return true;
@@ -128,7 +130,7 @@ export default function CreatePatientScreen() {
       setBdayInvalid(true);
       return false;
     }
-  }
+  };
 
   function renderDateOfBirthInput() {
     return (

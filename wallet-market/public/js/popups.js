@@ -16,7 +16,7 @@ function openBid(id) {
     bidModal.show()
     document.getElementById("amount-input").focus()
   } else {
-    openLogin()
+    getAccount()
   }
 }
 

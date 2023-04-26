@@ -65,7 +65,7 @@ export default function CreateAccountScreen() {
       setEmailInvalid(true);
       return false;
     }
-  }
+  };
 
   const validatePassword = () => {
     try {
@@ -79,7 +79,7 @@ export default function CreateAccountScreen() {
       setPassInvalid(true);
       return false;
     }
-  }
+  };
 
   const validatePasswordConfirm = () => {
     try {
@@ -94,7 +94,7 @@ export default function CreateAccountScreen() {
       setPassConfirmInvalid(true);
       return false;
     }
-  }
+  };
 
   function renderEmailForm() {
     return (

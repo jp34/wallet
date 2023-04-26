@@ -5,16 +5,18 @@
     "dotenv": "^16.0.3",
     "ethereum-waffle": "^4.0.10",
     "fs": "^0.0.1-security",
-    "hardhat": "^2.13.0"
+    "hardhat": "^2.13.0",
+    "mocha": "^10.2.0"
   },
   "name": "wallet-contract",
-  "description": "This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a script that deploys that contract.",
+  "description": "Lazy Minting NFT Marketplace.",
   "version": "1.0.0",
-  "main": "hardhat.config.js",
+  "main": "index.js",
   "directories": {
     "test": "test"
   },
   "dependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.2.2",
     "@openzeppelin/contracts": "^4.8.2",
     "abort-controller": "^3.0.0",
     "abstract-level": "^1.0.3",
@@ -29,6 +31,7 @@
     "argparse": "^2.0.1",
     "async": "^2.6.4",
     "async-eventemitter": "^0.2.4",
+    "axios": "^1.3.4",
     "balanced-match": "^1.0.2",
     "base-x": "^3.0.9",
     "base64-js": "^1.5.1",
@@ -82,6 +85,7 @@
     "ethereum-cryptography": "^1.2.0",
     "ethereumjs-abi": "^0.6.8",
     "ethereumjs-util": "^6.2.1",
+    "ethers": "^5.7.2",
     "ethjs-util": "^0.1.6",
     "event-target-shim": "^5.0.1",
     "evp_bytestokey": "^1.0.3",

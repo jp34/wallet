@@ -5,17 +5,6 @@ portalModal = new bootstrap.Modal(document.getElementById('portal-modal'))
 exitModal = new bootstrap.Modal(document.getElementById('exit-portal-modal'))
 const signinButton = document.getElementById('signin-button')
 let currAccount
-//import {useRouter} from "expo-router"
-//const router = require("@expo-router")
-
-function openInfo(id) {
-  let i = id.match("[0-9]+");
-  document.getElementById('info-modal-title').innerText = titles[i]
-  document.getElementById('info-modal-desc').innerHTML = details[i]
-  document.getElementById('info-modal-img').src = secondaryImages[i];
-  document.querySelector("#info-modal > div > div > div.modal-footer > button.btn.btn-primary").id = "info-modal-submit-bid-btn-" + i
-  infoModal.show()
-}
 
 function openBid(id) {
   let i = id.match('[0-9]+');

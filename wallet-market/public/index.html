@@ -37,9 +37,9 @@
     </div>
   </nav>
 
-  <!-- Grid of auction items -->
+  <!-- Grid of items -->
   <div id="auction-container" class="container">
-    <div id="auction-grid" class="row row-cols-1 row-cols-md-4 g-4"></div>
+    <div id="auction-grid" class="row row-cols-1 row-cols-lg-4 g-4"></div>
   </div>
 
   <!-- Login popup -->
@@ -148,7 +148,7 @@
             </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">I am a Customer</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close" onclick="getAccount()">I am a Customer</button>
           <button type="button" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Submit bid"
             onclick="openExitModal()">Link Accounts</button>
           </form>
@@ -187,7 +187,7 @@
   <script src="./js/popups.js"></script>
   <!-- Create anonymous account -->
   <script>
-    populateAuctionGrid();
+    populateGrid();
   </script>
 </body>
 

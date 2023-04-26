@@ -11,7 +11,6 @@ import { findPatientByUserId } from "../../src/api/strapi-client";
 import Wrapper from "../../src/components/Wrapper";
 
 export default function HomeScreen() {
-
   const [isLoading, setLoading] = useState(true);
   const [patient, setPatient] = useState("");
   const router = useRouter();
@@ -47,7 +46,10 @@ export default function HomeScreen() {
         <Text style={styles.title}>Dashboard</Text>
       </View>
       <View style={styles.greeting}>
-        <Text style={styles.greetingText}>Welcome Back, {patient.attributes.firstName}</Text>
+        <Text style={styles.greetingText}>
+          {/* Welcome Back, {patient.attributes.firstName} */}
+          Welcome Back, [Name]
+        </Text>
         <View style={{ marginVertical: 10 }}></View>
         <TouchableOpacity style={styles.button}>
           <Text
@@ -126,6 +128,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     paddingVertical: 16,
     color: "#0c0c0c",
+  },
   header: {
     flexDirection: "row",
     alignItems: "center",

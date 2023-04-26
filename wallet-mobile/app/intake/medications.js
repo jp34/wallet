@@ -34,7 +34,6 @@ export default function MedicationsIntakeScreen() {
       } else {
         router.push("./medicalEncounter");
       }
-      
     } catch (err) {
       console.error(err);
       return;
@@ -47,12 +46,7 @@ export default function MedicationsIntakeScreen() {
     const frequency = frequencyRef.current.getValue();
     const date = dateRef.current.getValue();
 
-    if (
-      name === "" ||
-      dosage === "" ||
-      frequency === "" ||
-      date === ""
-    ) {
+    if (name === "" || dosage === "" || frequency === "" || date === "") {
       return;
     }
 

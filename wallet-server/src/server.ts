@@ -14,9 +14,7 @@ const PORT = process.env.API_SERVER_PORT;
 const app = express();
 
 app.use(bodyParser.json());
-app.use(cors({
-    origin: "http://localhost:19000"
-}));
+app.use(cors());
 app.use(morgan("combined"));
 
 app.use("/api", api);

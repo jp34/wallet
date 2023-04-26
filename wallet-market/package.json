@@ -2,13 +2,19 @@
   "name": "wallet-market",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./src/index.js",
   "scripts": {
+    "start": "node ./src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+<<<<<<< HEAD
     "expo-router": "^1.5.3"
+=======
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2"
+>>>>>>> main
   }
 }

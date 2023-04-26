@@ -22,7 +22,9 @@ export default class MedicalEncounterController {
     }
 
     public getMany = async (request: Request, response: Response, next: NextFunction) => {
-        findMedicalEncounters().then(data => {
+        const id = parseInt(request.params.id);
+        if (!id) throw new Error("Missing or invalid input provided: id");
+        findMedicalEncounters(id).then(data => {
             response.status(200).json({ status: "success", data: data });
         }).catch(next);
     }

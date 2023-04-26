@@ -26,8 +26,12 @@ export const createMedicalEncounters = async (patient: number, encounters: Creat
     });
 }
 
-export const findMedicalEncounters = async () => {
-    return await prisma.medicalEncounter.findMany();
+export const findMedicalEncounters = async (id: number) => {
+    return await prisma.medicalEncounter.findMany({
+        where: {
+            patientId: id
+        }
+    });
 }
 
 export const findMedicalEncounter = async (id: number, reason: string) => {

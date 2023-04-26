@@ -26,8 +26,12 @@ export const createPatientAllergies = async (patient: number, allergies: CreateP
     });
 }
 
-export const findPatientAllergies = async () => {
-    return await prisma.patientAllergy.findMany();
+export const findPatientAllergies = async (id: number) => {
+    return await prisma.patientAllergy.findMany({
+        where: {
+            patientId: id
+        }
+    });
 }
 
 export const findPatientAllergy = async (id: number, name: string) => {

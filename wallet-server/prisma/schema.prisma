@@ -72,7 +72,7 @@ model MedicalEncounter {
 
 model Product {
 	id				Int			@id @default(autoincrement())
-	cid				String
+	cid				String		@unique
 	subject			User		@relation(fields: [subjectId], references: [id])
 	subjectId		Int
 	voucher			String?

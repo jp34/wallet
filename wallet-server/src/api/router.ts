@@ -4,30 +4,28 @@ import AuthController from "./auth.controller";
 import UserController from "./user.controller";
 import PatientController from "./patient/patient.controller";
 import PatientMedicationController from "./patient/medication.controller";
-<<<<<<< HEAD
-import { generateEmr } from "../middleware/emr";
-=======
 import { syncProduct } from "../middleware/product";
 import PatientAllergyController from "./patient/allergy.controller";
 import MedicalEncounterController from "./patient/encounter.controller";
->>>>>>> main
+import MarketController from "./market.controller";
 
 const router = Router();
 const auth = new AuthController();
 const users = new UserController();
 const patients = new PatientController();
-<<<<<<< HEAD
-const patientMedications = new PatientMedicationController();
-=======
 const patientAllergies = new PatientAllergyController();
 const patientMedications = new PatientMedicationController();
 const medicalEncounters = new MedicalEncounterController();
->>>>>>> main
+const market = new MarketController();
 
 // Auth Endpoints
 router.post("/auth/signup", auth.signup);
 router.post("/auth/login", auth.login);
 router.post("/auth/refresh", auth.refresh);
+
+// Market Endpoints
+router.get("/products", market.getProducts);
+router.get("/advertisements", market.getAdvertisements);
 
 // User Endpoints
 router.get("/users", authorize, users.getMany);
@@ -36,20 +34,6 @@ router.put("/users/:id", authorize, users.update);
 router.delete("/users/:id", authorize, users.delete);
 
 // Patient Endpoints
-<<<<<<< HEAD
-router.post("/patients/:id", authorize, patients.create, generateEmr);
-router.get("/patients", authorize, patients.getMany);
-router.get("/patients/:id", authorize, patients.getOne);
-router.put("/patients/:id", authorize, patients.update, generateEmr);
-router.delete("/patients/:id", authorize, patients.delete);
-
-// Patient Medication Endpoints
-router.post("/patients/:id/medications", authorize, patientMedications.create, generateEmr);
-router.get("/patients/:id/medications", authorize, patientMedications.getMany);
-router.get("/patients/:id/medications/:name", authorize, patientMedications.getOne);
-router.put("/patients/:id/medications/:name", authorize, patientMedications.update, generateEmr);
-router.delete("/patients/:id/medications/:name", authorize, patientMedications.delete);
-=======
 router.post("/patients/:id", authorize, patients.create, syncProduct);
 router.get("/patients", authorize, patients.getMany);
 router.get("/patients/:id", authorize, patients.getOne);
@@ -76,6 +60,5 @@ router.get("/patients/:id/encounters", authorize, medicalEncounters.getMany);
 router.get("/patients/:id/encounters/:date", authorize, medicalEncounters.getOne);
 router.put("/patients/:id/encounters/:date", authorize, medicalEncounters.update, syncProduct);
 router.delete("/patients/:id/encounters/:date", authorize, medicalEncounters.delete, syncProduct);
->>>>>>> main
 
 export default router;

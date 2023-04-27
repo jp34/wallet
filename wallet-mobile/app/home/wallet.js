@@ -6,7 +6,7 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
-import Wrapper from "../../src/components/Wrapper";
+import Wrapper from "../components/Wrapper";
 
 export default function CryptoWallet() {
   // const attemptCreateWallet = async () => {

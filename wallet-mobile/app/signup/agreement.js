@@ -11,7 +11,7 @@ import {
   ChevronLeftIcon,
   Pressable,
 } from "native-base";
-import Wrapper from "../../src/components/Wrapper";
+import Wrapper from "../components/Wrapper";
 
 export default function AgreementScreen() {
   const router = useRouter();

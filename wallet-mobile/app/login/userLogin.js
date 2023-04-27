@@ -13,7 +13,7 @@ import {
 } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import { login } from "../api";
-import Wrapper from "../../src/components/Wrapper";
+import Wrapper from "../components/Wrapper";
 
 export default function LoginScreen() {
   const router = useRouter();

@@ -8,8 +8,8 @@ import {
   Pressable,
   Box,
 } from "native-base";
-import { Logo } from "../src/components/Logo";
-import Wrapper from "../src/components/Wrapper";
+import { Logo } from "./components/Logo";
+import Wrapper from "./components/Wrapper";
 
 export default function StartScreen() {
   return (

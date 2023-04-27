@@ -8,7 +8,7 @@ import {
   Pressable,
   ChevronLeftIcon,
 } from "native-base";
-import Wrapper from "../../src/components/Wrapper";
+import Wrapper from "../components/Wrapper";
 
 export default function SplashScreen() {
   const router = useRouter();

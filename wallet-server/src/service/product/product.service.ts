@@ -4,6 +4,8 @@ import { findPatientAllergies } from "../patient/allergy.service";
 import { findMedicalEncounters } from "../patient/encounter.service";
 import { findPatientMedications } from "../patient/medication.service";
 import { upload } from "./ipfs.service";
+import ContractHandler from "../contract/ContractHandler";
+import  { ethers }  from "ethers";
 
 export const findProducts = async () => {
     return await prisma.product.findMany();
@@ -53,6 +55,13 @@ export const productExistsByCid = async (cid: string) => {
     return (count > 0);
 }
 
+const createVoucher = async (cid: string) => {
+    const contractHandler: ContractHandler = new ContractHandler();
+    const uri = 'ipfs://' + cid;
+    const price: ethers.BigNumberish = ethers.parseEther('1');
+    return await contractHandler.makeVoucher(cid, uri, price);
+}
+
 export const createProduct = async (id: number) => {
     try {
         // Fetch patient data
@@ -74,12 +83,16 @@ export const createProduct = async (id: number) => {
 
         const exists = await productExistsByCid(cid);
         if (exists) return;
-        
+
+        // Create NFT voucher
+        const voucher = await createVoucher(cid);
+
         // Store new product
         const receipt = await prisma.product.create({
             data: {
                 cid: cid,
                 subjectId: patient.id,
+                voucher: JSON.stringify(voucher)
             }
         });
         if (!receipt) throw new Error("Unable to store EMR transaction receipt");

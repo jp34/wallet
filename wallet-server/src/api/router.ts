@@ -24,7 +24,10 @@ router.post("/auth/login", auth.login);
 router.post("/auth/refresh", auth.refresh);
 
 // Market Endpoints
+router.post("/products", market.purchaseProduct);
 router.get("/products", market.getProducts);
+router.get("/products/:id", market.getProduct);
+router.get("/payments/:id", market.getPaymentSum);
 router.get("/advertisements", market.getAdvertisements);
 
 // User Endpoints

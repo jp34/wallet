@@ -102,3 +102,40 @@ export const createProduct = async (id: number) => {
         throw err;
     }
 }
+
+export const purchaseProduct = async (id: number, buyer: string) => {
+    // Mark product as purchased
+    const product = await prisma.product.update({
+        where: {
+            id: id
+        },
+        data: {
+            buyerAddress: buyer,
+            sold: true
+        }
+    });
+
+    // Create new payment object
+    const fee = (product.price * 0.05);
+    const payment = await prisma.payment.create({
+        data: {
+            subject: product.subjectId,
+            amount: product.price - fee
+        }
+    });
+    if (!payment) throw new Error("Unable to record new payment");
+    return product;
+}
+
+export const findPaymentSum = async (subjectId: number) => {
+    const payments = await prisma.payment.findMany({
+        where: {
+            subject: subjectId
+        }
+    });
+    let sum = 0;
+    for (var i = 0; i < payments.length; i++) {
+        sum += payments[i].amount;
+    }
+    return sum;
+}

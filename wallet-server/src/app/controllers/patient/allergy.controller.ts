@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import {
     CreateManyPatientAllergyRequest,
     UpdatePatientAllergyRequest
-} from "../../../models/io";
+} from "../../../config/io";
 import {
     createPatientAllergies,
     findPatientAllergies,

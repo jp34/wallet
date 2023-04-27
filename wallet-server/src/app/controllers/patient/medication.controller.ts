@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { CreateManyPatientMedicationRequest, UpdatePatientMedicationRequest } from "../../../models/io";
+import { CreateManyPatientMedicationRequest, UpdatePatientMedicationRequest } from "../../../config/io";
 import {
     createPatientMedications,
     findPatientMedications,

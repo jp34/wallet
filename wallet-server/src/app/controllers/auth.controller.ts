@@ -11,7 +11,7 @@ import {
     generateRefreshToken,
     refreshAccessToken
 } from "../../service/auth.service";
-import { CreateUserRequest } from "../../models/io";
+import { CreateUserRequest } from "../../config/io";
 
 export default class AuthController {
 

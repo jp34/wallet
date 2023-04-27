@@ -59,7 +59,7 @@ export default function LoginScreen() {
       setErrorMessage(message);
       return false;
     }
-  }
+  };
 
   return (
     <Wrapper keyboard>

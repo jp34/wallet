@@ -84,7 +84,6 @@
           <img id="info-modal-img"></img>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
           <button type="button" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Submit bid"
             onclick="openBid(this.id)">Submit bid</button>
         </div>
@@ -98,6 +97,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 id="bid-modal-title" class="modal-title">Place your bid</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <p>You are about to place a bid on <strong id="bid-modal-subtitle"></strong></p>
@@ -122,7 +122,6 @@
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Cancel">Cancel</button>
           <button type="submit" class="btn btn-primary" onclick="placeBid()">Submit bid</button>
         </div>
       </div>

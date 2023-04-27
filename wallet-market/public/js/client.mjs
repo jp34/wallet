@@ -136,19 +136,3 @@ export const getProducts = async () => {
 export const getProductAdvertising = async () => {
     return await getRequest('/api/advertisements');
 }
-
-const main = async () => {
-    const loginResult = await login("test@gmail.com", "Password123!");
-    if (!loginResult) {
-        console.log("Login failed");
-        return;
-    }
-    const advertising = await getProductAdvertising();
-    if (!advertising) {
-        console.log("Advertising data failed");
-        return;
-    }
-    console.log(advertising);
-}
-
-main();

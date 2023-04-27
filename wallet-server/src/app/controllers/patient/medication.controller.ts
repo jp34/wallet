@@ -1,24 +1,22 @@
 import { Request, Response, NextFunction } from "express";
+import { CreateManyPatientMedicationRequest, UpdatePatientMedicationRequest } from "../../../models/io";
 import {
-    CreateManyPatientAllergyRequest,
-    UpdatePatientAllergyRequest
-} from "../../util/io/patient.io";
-import {
-    createPatientAllergies,
-    findPatientAllergies,
-    findPatientAllergy,
-    updatePatientAllergySeverity,
-    deletePatientAllergy
-} from "../../service/patient/allergy.service";
+    createPatientMedications,
+    findPatientMedications,
+    findPatientMedication,
+    updatePatientMedicationDosage,
+    updatePatientMedicationFrequency,
+    deletePatientMedication
+} from "../../../service/patient/medication.service";
 
-export default class PatientAllergyController {
+export default class PatientMedicationController {
 
-    public create = async (request: CreateManyPatientAllergyRequest, response: Response, next: NextFunction) => {
+    public create = async (request: CreateManyPatientMedicationRequest, response: Response, next: NextFunction) => {
         const id = parseInt(request.params.id);
         const data = request.body.data;
         if (!id) throw new Error("Missing or invalid input provided: id");
         if (!data) throw new Error("Invalid request body provided");
-        createPatientAllergies(id, data).then(data => {
+        createPatientMedications(id, data).then(data => {
             response.status(200).json({ status: "success", data: data });
             next();
         }).catch(next);
@@ -27,7 +25,7 @@ export default class PatientAllergyController {
     public getMany = async (request: Request, response: Response, next: NextFunction) => {
         const id = parseInt(request.params.id);
         if (!id) throw new Error("Missing or invalid input provided: id");
-        findPatientAllergies(id).then(data => {
+        findPatientMedications(id).then(data => {
             response.status(200).json({ status: "success", data: data });
         }).catch(next);
     }
@@ -36,12 +34,12 @@ export default class PatientAllergyController {
         const id = parseInt(request.params.id);
         const name = request.params.name;
         if (!id) throw new Error("Missing or invalid input provided: id");
-        findPatientAllergy(id, name).then(data => {
+        findPatientMedication(id, name).then(data => {
             response.status(200).json({ status: "success", data: data });
         }).catch(next);
     }
 
-    public update = async (request: UpdatePatientAllergyRequest, response: Response, next: NextFunction) => {
+    public update = async (request: UpdatePatientMedicationRequest, response: Response, next: NextFunction) => {
         try {
             const id = parseInt(request.params.id);
             const name = request.params.name;
@@ -49,8 +47,9 @@ export default class PatientAllergyController {
             if (!id) throw new Error("Missing or invalid input provided: id");
             if (!name) throw new Error("Missing or invalid input provided: name");
             if (!data) throw new Error("Invalid request body provided");
-            if (data.severity) await updatePatientAllergySeverity(id, name, data.severity).catch(next);
-            findPatientAllergy(id, name).then(data => {
+            if (data.dosage) await updatePatientMedicationDosage(id, name, data.dosage).catch(next);
+            if (data.frequency) await updatePatientMedicationFrequency(id, name, data.frequency).catch(next);
+            findPatientMedication(id, name).then(data => {
                 response.status(200).json({ status: "success", data: data });
                 next();
             }).catch(next);
@@ -63,7 +62,7 @@ export default class PatientAllergyController {
         const id = parseInt(request.params.id);
         const name = request.params.name;
         if (!id) throw new Error("Missing or invalid input provided: id");
-        deletePatientAllergy(id, name).then(data => {
+        deletePatientMedication(id, name).then(data => {
             response.status(200).json({ status: "success", data: data });
             next();
         }).catch(next);

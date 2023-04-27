@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { CreatePatientRequest, UpdatePatientRequest } from "../../util/io/patient.io";
+import { CreatePatientRequest, UpdatePatientRequest } from "../../../models/io";
 import {
     createPatient,
     findPatients,
@@ -9,7 +9,7 @@ import {
     updatePatientLastName,
     updatePatientBirthday,
     deletePatient
-} from "../../service/patient/patient.service";
+} from "../../../service/patient/patient.service";
 
 export default class PatientController {
 

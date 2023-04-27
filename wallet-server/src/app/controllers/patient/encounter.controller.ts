@@ -1,22 +1,21 @@
 import { Request, Response, NextFunction } from "express";
-import { CreateManyPatientMedicationRequest, UpdatePatientMedicationRequest } from "../../util/io/patient.io";
+import { CreateManyMedicalEncounterRequest, UpdateMedicalEncounterRequest } from "../../../models/io";
 import {
-    createPatientMedications,
-    findPatientMedications,
-    findPatientMedication,
-    updatePatientMedicationDosage,
-    updatePatientMedicationFrequency,
-    deletePatientMedication
-} from "../../service/patient/medication.service";
+    createMedicalEncounters,
+    findMedicalEncounter,
+    findMedicalEncounters,
+    updateMedicalEncounterProvider,
+    deleteMedicalEncounter
+} from "../../../service/patient/encounter.service";
 
-export default class PatientMedicationController {
+export default class MedicalEncounterController {
 
-    public create = async (request: CreateManyPatientMedicationRequest, response: Response, next: NextFunction) => {
+    public create = async (request: CreateManyMedicalEncounterRequest, response: Response, next: NextFunction) => {
         const id = parseInt(request.params.id);
         const data = request.body.data;
         if (!id) throw new Error("Missing or invalid input provided: id");
         if (!data) throw new Error("Invalid request body provided");
-        createPatientMedications(id, data).then(data => {
+        createMedicalEncounters(id, data).then(data => {
             response.status(200).json({ status: "success", data: data });
             next();
         }).catch(next);
@@ -25,31 +24,30 @@ export default class PatientMedicationController {
     public getMany = async (request: Request, response: Response, next: NextFunction) => {
         const id = parseInt(request.params.id);
         if (!id) throw new Error("Missing or invalid input provided: id");
-        findPatientMedications(id).then(data => {
+        findMedicalEncounters(id).then(data => {
             response.status(200).json({ status: "success", data: data });
         }).catch(next);
     }
 
     public getOne = async (request: Request, response: Response, next: NextFunction) => {
         const id = parseInt(request.params.id);
-        const name = request.params.name;
+        const date = request.params.date;
         if (!id) throw new Error("Missing or invalid input provided: id");
-        findPatientMedication(id, name).then(data => {
+        findMedicalEncounter(id, date).then(data => {
             response.status(200).json({ status: "success", data: data });
         }).catch(next);
     }
 
-    public update = async (request: UpdatePatientMedicationRequest, response: Response, next: NextFunction) => {
+    public update = async (request: UpdateMedicalEncounterRequest, response: Response, next: NextFunction) => {
         try {
             const id = parseInt(request.params.id);
-            const name = request.params.name;
+            const date = request.params.date;
             const data = request.body.data;
             if (!id) throw new Error("Missing or invalid input provided: id");
-            if (!name) throw new Error("Missing or invalid input provided: name");
+            if (!date) throw new Error("Missing or invalid input provided: name");
             if (!data) throw new Error("Invalid request body provided");
-            if (data.dosage) await updatePatientMedicationDosage(id, name, data.dosage).catch(next);
-            if (data.frequency) await updatePatientMedicationFrequency(id, name, data.frequency).catch(next);
-            findPatientMedication(id, name).then(data => {
+            if (data.provider) await updateMedicalEncounterProvider(id, date, data.provider).catch(next);
+            findMedicalEncounter(id, date).then(data => {
                 response.status(200).json({ status: "success", data: data });
                 next();
             }).catch(next);
@@ -60,9 +58,9 @@ export default class PatientMedicationController {
 
     public delete = async (request: Request, response: Response, next: NextFunction) => {
         const id = parseInt(request.params.id);
-        const name = request.params.name;
+        const date = request.params.date;
         if (!id) throw new Error("Missing or invalid input provided: id");
-        deletePatientMedication(id, name).then(data => {
+        deleteMedicalEncounter(id, date).then(data => {
             response.status(200).json({ status: "success", data: data });
             next();
         }).catch(next);

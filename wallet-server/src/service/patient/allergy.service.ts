@@ -1,5 +1,5 @@
 import prisma from "../../config/db";
-import { CreatePatientAllergy } from "../../util/io/patient.io";
+import { CreatePatientAllergy } from "../../models/io";
 
 export const createPatientAllergy = async (
     patient: number,

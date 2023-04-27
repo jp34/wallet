@@ -1,10 +1,10 @@
 import prisma from "../../config/db";
-import logger from "../../util/logger";
+import logger from "../../config/logger";
 import { findPatientAllergies } from "../patient/allergy.service";
 import { findMedicalEncounters } from "../patient/encounter.service";
 import { findPatientMedications } from "../patient/medication.service";
 import { upload } from "./ipfs.service";
-import ContractHandler from "../contract/ContractHandler";
+import ContractHandler from "../../app/contract/ContractHandler";
 import  { ethers }  from "ethers";
 
 export const findProducts = async () => {

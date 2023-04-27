@@ -9,7 +9,7 @@ import {
 } from "ethers";
 import LazyMinter from "./LazyMinter";
 import LazyNFT from "./LazyNFT.json";
-import logger from "../../util/logger";
+import logger from "../../config/logger";
 
 const PROVIDER_LINK = process.env.PROVIDER_LINK ?? "undefined";
 const SIGNER_PK = process.env.SIGNER_PK ?? "undefined";

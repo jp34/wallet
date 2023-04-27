@@ -1,5 +1,11 @@
 import { Request, Response, NextFunction } from "express";
-import { findAdvertisements, findProducts, findProduct, purchaseProduct, findPaymentSum } from "../service/product/product.service";
+import {
+    findAdvertisements,
+    findProducts,
+    findProduct,
+    purchaseProduct,
+    findPaymentSum
+} from "../../service/product/product.service";
 
 export default class MarketController {
 

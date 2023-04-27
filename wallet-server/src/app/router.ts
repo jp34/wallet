@@ -1,13 +1,17 @@
 import { Router } from "express";
-import { authorize } from "../middleware/auth";
-import AuthController from "./auth.controller";
-import UserController from "./user.controller";
-import PatientController from "./patient/patient.controller";
-import PatientMedicationController from "./patient/medication.controller";
-import { syncProduct } from "../middleware/product";
-import PatientAllergyController from "./patient/allergy.controller";
-import MedicalEncounterController from "./patient/encounter.controller";
-import MarketController from "./market.controller";
+
+// Import Controllers
+import AuthController from "./controllers/auth.controller";
+import UserController from "./controllers/user.controller";
+import PatientController from "./controllers/patient/patient.controller";
+import PatientMedicationController from "./controllers/patient/medication.controller";
+import PatientAllergyController from "./controllers/patient/allergy.controller";
+import MedicalEncounterController from "./controllers/patient/encounter.controller";
+import MarketController from "./controllers/market.controller";
+
+// Import Middleware
+import { authorize } from "./middleware/auth";
+import { syncProduct } from "./middleware/product";
 
 const router = Router();
 const auth = new AuthController();

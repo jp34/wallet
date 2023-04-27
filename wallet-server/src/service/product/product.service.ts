@@ -9,10 +9,10 @@ export const findProducts = async () => {
     return await prisma.product.findMany();
 }
 
-export const findProduct = async (cid: string) => {
+export const findProduct = async (id: number) => {
     return await prisma.product.findUnique({
         where: {
-            cid: cid
+            id: id
         }
     });
 }

@@ -72,10 +72,10 @@ model MedicalEncounter {
 
 model Product {
 	id				Int			@id @default(autoincrement())
-	cid				String		@unique
+	cid				String
 	subject			User		@relation(fields: [subjectId], references: [id])
 	subjectId		Int
-	voucher			String
+	voucher			String?
 	buyerAddress	String?
 	price			Float		@default(50.0)
 	sold			Boolean		@default(false)

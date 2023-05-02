@@ -129,26 +129,22 @@ export const createMedicalEncounters = async (encounters) => {
 
 // Market
 
+export const purchaseProduct = async (productId, buyer) => {
+    return await postRequest(`/api/products`, { id: productId, buyer: buyer });
+}
+
 export const getProducts = async () => {
     return await getRequest('/api/products');
+}
+
+export const getProduct = async (productId) => {
+    return await getRequest(`/api/products/${productId}`);
 }
 
 export const getProductAdvertising = async () => {
     return await getRequest('/api/advertisements');
 }
 
-const main = async () => {
-    const loginResult = await login("test@gmail.com", "Password123!");
-    if (!loginResult) {
-        console.log("Login failed");
-        return;
-    }
-    const advertising = await getProductAdvertising();
-    if (!advertising) {
-        console.log("Advertising data failed");
-        return;
-    }
-    console.log(advertising);
+export const getPaymentSum = async () => {
+    return await getRequest(`/api/payments/${session.user.id}`);
 }
-
-main();

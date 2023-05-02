@@ -72,13 +72,22 @@ model MedicalEncounter {
 
 model Product {
 	id				Int			@id @default(autoincrement())
-	cid				String		@unique
+	cid				String
 	subject			User		@relation(fields: [subjectId], references: [id])
 	subjectId		Int
 	voucher			String?
-	buyerId			Int?
+	buyerAddress	String?
+	price			Float		@default(50.0)
 	sold			Boolean		@default(false)
-	dateSold		DateTime?
+	created			DateTime	@default(now())
+	modified		DateTime	@default(now())
+}
+
+model Payment {
+	id				Int			@id @default(autoincrement())
+	subject			Int
+	amount			Float
+	paid			Boolean		@default(false)
 	created			DateTime	@default(now())
 	modified		DateTime	@default(now())
 }

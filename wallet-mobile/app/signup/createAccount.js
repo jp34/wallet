@@ -14,7 +14,7 @@ import {
 } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import { signup } from "../api";
-import Wrapper from "../../src/components/Wrapper";
+import Wrapper from "../components/Wrapper";
 
 export default function CreateAccountScreen() {
   const router = useRouter();

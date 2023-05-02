@@ -7,8 +7,8 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useRouter } from "expo-router";
-import { findPatientByUserId } from "../../src/api/strapi-client";
-import Wrapper from "../../src/components/Wrapper";
+import { findPatientByUserId } from "../api";
+import Wrapper from "../components/Wrapper";
 
 export default function HomeScreen() {
   const [isLoading, setLoading] = useState(true);

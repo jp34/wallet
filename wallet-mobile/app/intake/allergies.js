@@ -11,8 +11,8 @@ import {
   VStack,
   ScrollView,
 } from "native-base";
-import Wrapper from "../../src/components/Wrapper";
-import TextInputFormControl from "../../src/components/InputFormControl";
+import Wrapper from "../components/Wrapper";
+import TextInputFormControl from "../components/InputFormControl";
 import { createPatientAllergies } from "../api";
 
 export default function AllergiesIntakeScreen() {

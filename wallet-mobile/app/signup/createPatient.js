@@ -12,7 +12,7 @@ import {
   ChevronLeftIcon,
 } from "native-base";
 import { createPatient } from "../api";
-import Wrapper from "../../src/components/Wrapper";
+import Wrapper from "../components/Wrapper";
 
 export default function CreatePatientScreen() {
   const router = useRouter();

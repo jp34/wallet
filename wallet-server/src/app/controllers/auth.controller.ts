@@ -5,13 +5,13 @@ import {
     findUserExistsByEnsAddress,
     createUser,
     findUserByEmail
-} from "../service/user.service";
+} from "../../service/user.service";
 import {
     generateAccessToken,
     generateRefreshToken,
     refreshAccessToken
-} from "../service/auth.service";
-import { CreateUserRequest } from "../util/io/user.io";
+} from "../../service/auth.service";
+import { CreateUserRequest } from "../../config/io";
 
 export default class AuthController {
 

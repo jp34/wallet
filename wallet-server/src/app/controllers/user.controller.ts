@@ -6,8 +6,8 @@ import {
     updateUserEnsAddress,
     updateUserPassword,
     deleteUser
-} from "../service/user.service";
-import { UpdateUserRequest } from "../util/io/user.io";
+} from "../../service/user.service";
+import { UpdateUserRequest } from "../../config/io";
 
 export default class UserController {
 

@@ -1,11 +1,11 @@
 import dotenv from "dotenv";
 dotenv.config();
 import cors from "cors";
-import logger from "./util/logger";
+import logger from "./config/logger";
 import express from "express";
 import bodyParser from "body-parser";
 import morgan from "morgan";
-import api from "./api/router";
+import api from "./app/router";
 import prisma from "./config/db";
 
 const HOST = process.env.API_SERVER_HOST;

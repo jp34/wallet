@@ -105,21 +105,22 @@ function numberWithCommas(x) {
 }
 
 // function search() {
-//     var input, filter, newCard, grid;    
-//     input = document.getElementById("form1");
-//     filter = input.value;
-//     grid = document.getElementById("auction-grid");
-//     const stdCols = document.getElementsByClassName("col");
+//   var input, filter, newCard, grid;    
+//   input = document.getElementById("form1");
+//   filter = input.value;
+//   grid = document.getElementById("auction-grid");
+//   const stdCols = document.getElementsByClassName("col");
 
-//     for (i = 0; i < stdCols.length; i++) {
-//         col = stdCols[i];        
-//         for(const child of col.firstChild.firstChild.nextSibling.children) {
-//           if (!child.innerText.includes(filter)) {
-//             col.remove();
-//           } else {
-//             newCard = generateCard(i);
-//             grid.appendChild(newCard);
-//           }
-//         }
+//   for (i = 0; i < stdCols.length; i++) {
+//     col = stdCols[i];        
+//     for(const child of col.firstChild.firstChild.nextSibling.children) {
+//       if (!child.innerText.includes(filter)) {
+//         col.firsChild.remove();
+//          col.appendChild(col.nextSibling.firsChild);            
+//       } else {
+//         newCard = generateCard(i);
+//          grid.appendChild(newCard);
+//       }
 //     }
+//   }
 // }

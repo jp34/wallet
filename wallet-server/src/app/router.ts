@@ -31,8 +31,8 @@ router.post("/auth/refresh", auth.refresh);
 router.post("/products", market.purchaseProduct);
 router.get("/products", market.getProducts);
 router.get("/products/:id", market.getProduct);
-router.get("/payments/:id", market.getPaymentSum);
 router.get("/advertisements", market.getAdvertisements);
+router.get("/payments/:id", market.getPaymentSum);
 
 // User Endpoints
 router.get("/users", authorize, users.getMany);

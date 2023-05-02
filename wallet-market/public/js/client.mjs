@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const host = "localhost";
-const port = "8000";
-const url = `http://${host}:${port}`;
+const port = "8443";
+const url = `https://${host}:${port}`;
 
 var session = {
     user: {},
@@ -129,10 +129,22 @@ export const createMedicalEncounters = async (encounters) => {
 
 // Market
 
+export const purchaseProduct = async (productId, buyer) => {
+    return await postRequest(`/api/products`, { id: productId, buyer: buyer });
+}
+
 export const getProducts = async () => {
     return await getRequest('/api/products');
 }
 
+export const getProduct = async (productId) => {
+    return await getRequest(`/api/products/${productId}`);
+}
+
 export const getProductAdvertising = async () => {
     return await getRequest('/api/advertisements');
+}
+
+export const getPaymentSum = async () => {
+    return await getRequest(`/api/payments/${session.user.id}`);
 }

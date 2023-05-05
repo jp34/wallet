@@ -68,7 +68,7 @@ async function getChainId() {
 
 function replaceSignupButton(name) {
   
-  document.getElementById('username-display').innerText = "Welcome! " + name;
+  document.getElementById('username-display').innerText = "Welcome! ";
 
   let nav = document.getElementsByClassName('navbar');
 

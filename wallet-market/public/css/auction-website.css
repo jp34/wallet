@@ -28,6 +28,12 @@ body {
   color: var(--clr-neutral-100);
 }
 
+.navbar-welcome {
+  color: var(--clr-neutral-100);
+  margin-left: auto;
+  font-size: 1.25rem;
+}
+
 .navbar-brand:hover {
   color: var(--clr-neutral-100);
 }
@@ -104,6 +110,12 @@ p {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.form-outline {
+  min-width: 50ch;
+  margin-left: auto; 
+  margin-right: 5px;
 }
 
 .footer {

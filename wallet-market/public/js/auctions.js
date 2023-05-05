@@ -90,7 +90,7 @@ function generateCard(i) {
   return col
 }
 
-// Generatively populate the websire with NFTs
+// Generatively populate the website with NFTs
 function populateGrid() {
   getAdvertising();
   auctionGrid = document.getElementById("auction-grid");
@@ -103,3 +103,24 @@ function populateGrid() {
 function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
+
+// function search() {
+//   var input, filter, newCard, grid;    
+//   input = document.getElementById("form1");
+//   filter = input.value;
+//   grid = document.getElementById("auction-grid");
+//   const stdCols = document.getElementsByClassName("col");
+
+//   for (i = 0; i < stdCols.length; i++) {
+//     col = stdCols[i];        
+//     for(const child of col.firstChild.firstChild.nextSibling.children) {
+//       if (!child.innerText.includes(filter)) {
+//         col.firsChild.remove();
+//          col.appendChild(col.nextSibling.firsChild);            
+//       } else {
+//         newCard = generateCard(i);
+//          grid.appendChild(newCard);
+//       }
+//     }
+//   }
+// }

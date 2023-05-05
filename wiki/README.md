@@ -1,4 +1,4 @@
-# Healthcare Wallet - Wiki
+# Healthcare Wallet / Wiki
 
 Welcome to the Healthcare Wallet Wiki, below you can find links to each of our projects, user guides, and external resources.
 

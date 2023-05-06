@@ -26,7 +26,7 @@ This guide will demonstrate a full deployment of the Healthcare Wallet system. I
 
 > This is our marketplace website that allows end customers to purchase our NFT products.
 
-## Steps
+# Steps
 
 **_NOTE:_** Each of the following steps should be run on your Linux server
 
@@ -42,21 +42,21 @@ The production.env file is a sample environment that defines all the required va
 
 Database Configuration
 ```
-POSTGRES_USER=""        // Database User
-POSTGRES_PASSWORD=""    // Database Password
-POSTGRES_DB=""          // Database Name
+POSTGRES_USER               // Database User
+POSTGRES_PASSWORD           // Database Password
+POSTGRES_DB                 // Database Name
 ```
 
 API Configuration
 ```
-API_SERVER_HOST=""
-API_SERVER_PORT=""
-API_SERVER_ACCESS_SECRET=""     // Secret used for signing access tokens
-API_SERVER_REFRESH_SECRET=""    // Secret used for signing refresh tokens
-API_SERVER_ACCESS_EXP=""        // Lifespan of access tokens (12h)
-API_SERVER_REFRESH_EXP=""       // Lifespan of refresh tokens (1h)
-API_IPFS_TOKEN=""               // Token from web3.storage account
-DATABASE_URL=""                 // PostgreSQL connection string
+API_SERVER_HOST
+API_SERVER_PORT
+API_SERVER_ACCESS_SECRET    // Secret used for signing access tokens
+API_SERVER_REFRESH_SECRET   // Secret used for signing refresh tokens
+API_SERVER_ACCESS_EXP       // Lifespan of access tokens (12h)
+API_SERVER_REFRESH_EXP      // Lifespan of refresh tokens (1h)
+API_IPFS_TOKEN              // Token from web3.storage account
+DATABASE_URL                // PostgreSQL connection string
 ```
 
 **_NOTE:_** The PostgreSQL connection must reflect that the database is running in a separate docker container (The database hostname is the name of the docker container).

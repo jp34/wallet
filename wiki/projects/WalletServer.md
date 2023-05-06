@@ -7,14 +7,6 @@ This project is a REST api server as part of the larger Healthcare Wallet projec
 * Postman - [Suite](https://solar-robot-553185.postman.co/workspace/HealthcareWallet~5c32121d-1a2f-41a9-8e71-b2777d4ca75e/overview?ctx=settings) | [Invite](https://app.getpostman.com/join-team?invite_code=73f482e8b415f088198fa71e98d3b3a0&target_code=d43c921445a3143426480b792569e8ca)
 * Docker - [Image]()
 
-## Steps to Run Locally
-
-N/A
-
-## Steps to Run Docker container
-
-N/A
-
 ## Endpoints
 
 ### Auth

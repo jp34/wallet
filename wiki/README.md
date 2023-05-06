@@ -4,10 +4,10 @@ Welcome to the Healthcare Wallet Wiki, below you can find links to each of our p
 
 ## Projects
 
-* [wallet-server](https://github.com/Healthcare-Wallet/wallet/tree/main/projects/WalletServer.md) - Node.js REST api
-* [wallet-mobile](https://github.com/Healthcare-Wallet/wallet/tree/main/projects/WalletMobile.md) - React Native mobile app
-* [wallet-market](https://github.com/Healthcare-Wallet/wallet/tree/main/projects/WalletMarket.md) - NFT Marketplace
-* [wallet-contract](https://github.com/Healthcare-Wallet/wallet/tree/main/projects/WalletContract.md) - Solidity contracts and deployment
+* [wallet-server](https://github.com/Healthcare-Wallet/wallet/tree/main/wiki/projects/WalletServer.md) - Node.js REST api
+* [wallet-mobile](https://github.com/Healthcare-Wallet/wallet/tree/main/wiki/projects/WalletMobile.md) - React Native mobile app
+* [wallet-market](https://github.com/Healthcare-Wallet/wallet/tree/main/wiki/projects/WalletMarket.md) - NFT Marketplace
+* [wallet-contract](https://github.com/Healthcare-Wallet/wallet/tree/main/wiki/projects/WalletContract.md) - Solidity contracts and deployment
 
 ## Guides
 

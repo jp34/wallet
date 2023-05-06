@@ -2,6 +2,9 @@
 
 Welcome to the Healthcare Wallet Wiki, below you can find links to each of our projects, user guides, and external resources.
 
+* [System Overview](https://github.com/Healthcare-Wallet/wallet/tree/main/wiki/SystemOverview.md)
+* [Database Overview](https://github.com/Healthcare-Wallet/wallet/tree/main/wiki/DatabaseOverview.md)
+
 ## [Projects](https://github.com/Healthcare-Wallet/wallet/tree/main/wiki/projects)
 
 * [wallet-server](https://github.com/Healthcare-Wallet/wallet/tree/main/wiki/projects/WalletServer.md) - Node.js REST api

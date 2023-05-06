@@ -1,6 +1,6 @@
 # [Healthcare Wallet](https://github.com/Healthcare-Wallet/wallet/tree/main) / [Wiki](https://github.com/Healthcare-Wallet/wallet/tree/main/wiki) / [Projects](https://github.com/Healthcare-Wallet/wallet/tree/main/wiki/projects) / wallet-contract
 
-### Repo Link: [wallet-server](https://github.com/Healthcare-Wallet/wallet/tree/main/wallet-server)
+### Repo Link: [wallet-contract](https://github.com/Healthcare-Wallet/wallet/tree/main/wallet-contract)
 
 ## Description
 

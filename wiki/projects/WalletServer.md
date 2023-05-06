@@ -1,11 +1,13 @@
-# wallet-server
+# [Healthcare Wallet](https://github.com/Healthcare-Wallet/wallet/tree/main) / [Wiki](https://github.com/Healthcare-Wallet/wallet/tree/main/wiki) / [Projects](https://github.com/Healthcare-Wallet/wallet/tree/main/wiki/projects) / wallet-server
+
+### Repo Link: [wallet-server](https://github.com/Healthcare-Wallet/wallet/tree/main/wallet-server)
 
 This project is a REST api server as part of the larger Healthcare Wallet project. This api manages interactions with our database and provides CRUD functionality on all datatypes. This api can be tested using the postman suite which is linked below. A list of available endpoints is also available below.
 
 ## Links
 
-* Postman - [Suite](https://solar-robot-553185.postman.co/workspace/HealthcareWallet~5c32121d-1a2f-41a9-8e71-b2777d4ca75e/overview?ctx=settings) | [Invite](https://app.getpostman.com/join-team?invite_code=73f482e8b415f088198fa71e98d3b3a0&target_code=d43c921445a3143426480b792569e8ca)
-* Docker - [Image]()
+* [Full Deployment](https://github.com/Healthcare-Wallet/wallet/tree/main/wiki/guides/FullDeployment.md)
+* [Postman Workspace](https://solar-robot-553185.postman.co/workspace/HealthcareWallet~5c32121d-1a2f-41a9-8e71-b2777d4ca75e/overview?ctx=settings)
 
 ## Endpoints
 
